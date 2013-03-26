@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 
 # Setup database usage
 group :production, :test do
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 group :development, :test do
