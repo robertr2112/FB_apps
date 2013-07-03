@@ -1,5 +1,4 @@
 module ApplicationHelper
-<<<<<<< HEAD
 
   # Return a title on a per-page basis
   def title
@@ -14,6 +13,4 @@ module ApplicationHelper
   def logo
     image_tag("logo.png", :alt => "Sample App", :class => "round")
   end
-=======
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 end

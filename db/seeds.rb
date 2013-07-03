@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-<<<<<<< HEAD
 print "Adding Admin user...\n"
 admin = User.new do |u|
   u.name = "Admin"
@@ -16,5 +15,3 @@ admin = User.new do |u|
 end
 
 admin.save!
-=======
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3

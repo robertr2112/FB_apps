@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 FBApps::Application.configure do
-=======
-FirstApp1::Application.configure do
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -19,11 +15,7 @@ FirstApp1::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-<<<<<<< HEAD
   config.assets.compile = true
-=======
-  config.assets.compile = false
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 
   # Generate digests for assets URLs
   config.assets.digest = true

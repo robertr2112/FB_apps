@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 FBApps::Application.configure do
-=======
-FirstApp1::Application.configure do
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on

@@ -4,8 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-<<<<<<< HEAD
 FBApps::Application.load_tasks
-=======
-FirstApp1::Application.load_tasks
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3

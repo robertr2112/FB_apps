@@ -1,17 +1,13 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-<<<<<<< HEAD
 gem 'gravatar_image_tag', '0.1.0'
 gem 'will_paginate'
-=======
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Setup database usage
-<<<<<<< HEAD
 group :production, :staging do
   gem 'pg'
 end
@@ -28,14 +24,6 @@ group :test do
   gem 'webrat'
   gem 'spork-rails'
   gem 'factory_girl_rails'
-=======
-group :production, :test do
-  gem 'pg'
-end
-
-group :development, :test do
-  gem 'sqlite3'
->>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 end
 
 # Gems used only for assets and not required
