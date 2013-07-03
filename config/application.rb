@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
+<<<<<<< HEAD
 # Pick the frameworks you want:
 #require 'rails/all'
 require "active_record/railtie"
@@ -8,6 +9,9 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+=======
+require 'rails/all'
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -16,10 +20,14 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+<<<<<<< HEAD
 require File.expand_path('../boot', __FILE__)
 
 
 module FBApps
+=======
+module FirstApp1
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -49,9 +57,12 @@ module FBApps
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+<<<<<<< HEAD
     # Use precompiled assets
     config.assets.precompile += %w( *.js *.css )
 
+=======
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
@@ -71,6 +82,7 @@ module FBApps
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+<<<<<<< HEAD
 
     # Configure RSPEC
 #   config.generators do |g|
@@ -95,3 +107,7 @@ module FBApps
 end
 
 
+=======
+  end
+end
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3

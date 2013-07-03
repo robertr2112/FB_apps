@@ -17,7 +17,10 @@ log/*.log
 tmp/**/*
 tmp/*
 
+<<<<<<< HEAD
 public/assets/*
+=======
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 doc/api
 doc/app
 *.swp

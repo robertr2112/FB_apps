@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 FBApps::Application.routes.draw do
   get "sessions/new"
 
@@ -12,6 +13,9 @@ FBApps::Application.routes.draw do
   match '/help',     :to => 'pages#help'
   root :to => 'pages#home'
 
+=======
+FirstApp1::Application.routes.draw do
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

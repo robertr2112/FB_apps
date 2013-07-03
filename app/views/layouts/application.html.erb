@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
   <head>
     <title><%= title %></title>
     <%= csrf_meta_tags %>
@@ -19,4 +20,17 @@
       <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
+=======
+<head>
+  <title>FirstApp1</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+>>>>>>> 616ac7b0183417780c535a52353333211d63cdb3
 </html>
