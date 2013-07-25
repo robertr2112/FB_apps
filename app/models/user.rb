@@ -15,6 +15,10 @@
 require 'digest'
 
 class User < ActiveRecord::Base
+
+  has_many :pools, :through => :pool_memberships, :dependent => :destroy
+  has_many :pool_memberships
+
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
 

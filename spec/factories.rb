@@ -7,6 +7,13 @@ FactoryGirl.define  do
     user.password_confirmation  "foobar"
   end
 
+  factory :pool do |pool|
+    pool.name                   "Pool1"
+    pool.poolType               "2"
+    pool.isPublic               "t"
+    pool.password               "foobar"
+  end
+
   sequence :email do |n|
     "person-#{n}@example.com"
   end

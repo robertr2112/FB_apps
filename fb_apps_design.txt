@@ -39,7 +39,7 @@ Models
 ------
 class User < ActiveRecord::Base
 
-  has_many :pools through: :pool_memberships
+  has_many :pools, :through => :pool_memberships
   has_many :pool_memberships
 
   attr_accessor :password
@@ -49,7 +49,7 @@ end
 
 class Pool < ActiveRecord::Base
 
-  has_many :users through: :pool_memberships
+  has_many :users, :through => :pool_memberships
   has_many :pool_memberships
 
   attr_accessible :name, :type, :isPublic, :password

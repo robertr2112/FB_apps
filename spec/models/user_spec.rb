@@ -163,4 +163,41 @@ describe User do
       @user.should be_admin
     end
   end
+
+  describe "pool associations" do
+    before(:each) do
+      @user1 = User.create(@attr)
+      @pool1 = @user1.pools.create(:name => "Pool 1", :poolType => 2,
+                                   :isPublic => true)
+      @pool2 = @user1.pools.create(:name => "Pool 2", :poolType => 0,
+                                   :isPublic => true)
+    end
+
+    it "should have a pools attribute" do
+      @user1.should respond_to(:pools)
+    end
+  end
+
+  describe "destroy" do
+
+    before(:each) do
+      @user1 = User.create(@attr)
+      @pool1 = @user1.pools.create(:name => "Pool 1", :poolType => 2,
+                                   :isPublic => true)
+      @pool2 = @user1.pools.create(:name => "Pool 2", :poolType => 0,
+                                   :isPublic => true)
+    end
+
+    it "should destroy associated pools" do
+      @user1.destroy
+      [@pool1, @pool2].each do |pool|
+        Pool.find_by_id(pool.id).should be_nil
+      end
+    end
+
+    it "should destroy associated pool_memberships" do
+      @user1.destroy
+      PoolMembership.find_by_user_id(@user1.id).should be_nil
+    end
+  end
 end
