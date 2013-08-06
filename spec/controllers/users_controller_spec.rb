@@ -17,14 +17,13 @@ describe UsersController do
     describe "for signed-in users" do
       before(:each) do
         admin_user = FactoryGirl.create(:user, :admin => true)
-        second = FactoryGirl.create(:user, :email=> "another@example.com")
-        third = FactoryGirl.create(:user, :email=> "another@example.net")
+        second = FactoryGirl.create(:user)
+        third = FactoryGirl.create(:user)
         test_sign_in(second)
 
         @users = [admin_user, second, third]
         30.times do
-          @users << FactoryGirl.create(:user,
-                                       :email => FactoryGirl.generate(:email))
+          @users << FactoryGirl.create(:user)
         end
       end
 

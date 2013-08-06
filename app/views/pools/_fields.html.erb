@@ -1,0 +1,27 @@
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <% if @pool_edit_flag %>
+      <strong>Pool Type</strong><br />
+      <%= render 'show_type', :pool => @pool %>
+    <% else %>
+      <%= f.label :poolType, "Pool Type" %><br />
+      <%= f.select(:poolType, [['PickEm', 0], ['PickEmSpread', 1],
+                               ['Survivor', 2], ['SUP', 3]]) %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :isPublic, "Status" %><br />
+    <%= f.radio_button :isPublic, true %>
+    <%= f.label :isPublic, "Public" %>
+    <%= f.radio_button :isPublic, false %>
+    <%= f.label :isPublic, "Private" %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </div>

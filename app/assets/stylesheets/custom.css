@@ -187,3 +187,9 @@ ul.users {
 ul.users li {
   list-style: none;
 }
+ul.pools {
+  margin-top: 1em;
+}
+ul.pools li {
+  list-style: none;
+}

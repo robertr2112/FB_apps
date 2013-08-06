@@ -1,0 +1,9 @@
+<h1>Edit Pool</h1>
+pool.id: <%= @pool.id %>
+<%= form_for(@pool) do |f| %>
+  <%= render 'fields', :f => f %>
+  <div class="actions">
+    <%= f.submit "Edit pool" %>
+  </div>
+<% end %>
+

@@ -1,0 +1,15 @@
+<h1>All Pools</h1>
+
+<%= will_paginate %>
+
+<div  class="pools">
+<table border = "1"> 
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Status</th>
+  </tr>
+  <%= render @pools %>
+</table>
+
+<%= will_paginate %>

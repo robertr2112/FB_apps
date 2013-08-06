@@ -1,0 +1,11 @@
+
+1) Pools aren't deleted when owner of pool is deleted.  Need to figure
+   out a way to get the pools to be deleted.  Maybe an after_delete method.
+
+2) The find() methods return an unrecoverable error when record not found.  Need 
+   to either figure out how to use the rescue_from function or rewrite code to
+   use find_by_id() and check for NULL fields.
+
+3) Fix main page header and footer to be FB_app specific.
+
+4) Add a pool/new link somewhere on main page.

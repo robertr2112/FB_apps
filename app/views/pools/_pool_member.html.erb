@@ -1,0 +1,9 @@
+<li>
+  <% if pool.isOwner?(user) %>
+    <%= gravatar_for user, :size => 30 %>
+    <%= link_to "* #{user.name}", user %>
+  <% else %>
+    <%= gravatar_for user, :size => 30 %>
+    <%= link_to user.name, user %>
+  <% end %>
+</li>

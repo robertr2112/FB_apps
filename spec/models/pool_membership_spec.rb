@@ -70,4 +70,17 @@ describe PoolMembership do
       @pool_membership.owner.should == true
     end
   end
+
+  describe "Deleting a new pool" do
+
+    before(:each) do
+      @pool1 = @user1.pools.create(@pool_attr)
+    end
+
+    it "should remove an entry from pool_memberships" do
+      @pool1.destroy
+      @pool_membership = PoolMembership.last
+      @pool_membership.should == nil
+    end
+  end
 end

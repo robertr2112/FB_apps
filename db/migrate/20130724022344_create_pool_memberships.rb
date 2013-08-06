@@ -3,7 +3,7 @@ class CreatePoolMemberships < ActiveRecord::Migration
     create_table :pool_memberships do |t|
       t.integer :user_id
       t.integer :pool_id
-      t.boolean :owner
+      t.boolean :owner, :null => false, :default => false
 
       t.timestamps
     end
