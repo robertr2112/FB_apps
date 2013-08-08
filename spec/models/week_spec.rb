@@ -38,7 +38,7 @@ describe Week do
       @week.should respond_to(:pool)
     end
 
-    it "should have the right associated user" do
+    it "should have the right associated pool_id" do
       @pool_id = @week.pool_id
       @pool_id.should == @pool.id
     end
@@ -49,4 +49,30 @@ describe Week do
       @week = @pool.weeks.build(:state => 3).should_not be_valid
     end
   end
+
+# describe "game attributes" do
+#   before(:each) do
+#     @attr = { :state => Week::STATES[:pend], 
+#               :games_attributes => {
+#                 :homeTeamIndex => 0, :awayTeamIndex => 1, :spread => -3.5 
+#             }}
+#     @week = @pool.weeks.create!(@attr)
+#   end
+
+#   it "should have created a game" do
+#     @week.games.should_not be_empty
+#   end
+
+#   it "should have set the proper homeTeamIndex" do
+#     @week.games.first.homeTeamIndex.should == 0
+#   end
+
+#   it "should have set the proper awayTeamIndex" do
+#     @week.games.first.awayTeamIndex.should == 1
+#   end
+
+#   it "should have set the proper spread" do
+#     @week.games.first.spread.should == -3.5
+#   end
+# end
 end

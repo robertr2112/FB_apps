@@ -14,9 +14,12 @@ class Week < ActiveRecord::Base
   STATES = { Pend: 0, Open: 1, Closed: 2 }
 
   belongs_to :pool
+  has_many   :games, :dependent => :destroy
 
   attr_accessible :state
 
   validates :state, :inclusion => { :in => 0..2 }
+
+  accepts_nested_attributes_for :games
 
 end
