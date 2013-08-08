@@ -7,11 +7,10 @@
   <div class="field">
     <% if @pool_edit_flag %>
       <strong>Pool Type</strong><br />
-      <%= render 'show_type', :pool => @pool %>
+      <%= render 'show_type', :pool => @pool %> <br />
     <% else %>
       <%= f.label :poolType, "Pool Type" %><br />
-      <%= f.select(:poolType, [['PickEm', 0], ['PickEmSpread', 1],
-                               ['Survivor', 2], ['SUP', 3]]) %>
+      <%= f.select(:poolType, Pool::POOL_TYPES) %>
     <% end %>
   </div>
   <div class="field">

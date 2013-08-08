@@ -1,14 +1,6 @@
 <tr>
   <td><%= link_to pool.name, pool %></td>
-  <% if pool.poolType == 0 %>
-    <td>PickEm</td>
-  <% elsif pool.poolType == 1 %>
-    <td>PickEmSpread</td>
-  <% elsif pool.poolType == 2 %>
-    <td>Survivor</td>
-  <% else %>
-    <td>SUP</td>
-  <% end %>
+  <td><%= render 'show_type', :pool => pool %></td>
   <% if pool.isPublic %>
     <td>Public</td>
   <% else %>

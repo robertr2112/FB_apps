@@ -11,7 +11,7 @@ class PoolsController < ApplicationController
     @pool = current_user.pools.create(params[:pool])
     if @pool.id
       # Handle a successful save
-      flash[:success] = "Pool #{@pool.name} was created successfully!"
+      flash[:success] = "Pool '#{@pool.name}' was created successfully!"
       # Set the ownership in PoolMembership.owner
       @pool.setOwner(current_user, true)
       redirect_to @pool
@@ -25,11 +25,11 @@ class PoolsController < ApplicationController
     # Test to make sure User is not already a member of this pool
     @pool = Pool.find(params[:id])
     if @pool.isMember?(current_user)
-      flash[:notice] = "Already a member of Pool #{@pool.name}!"
+      flash[:notice] = "Already a member of Pool '#{@pool.name}'!"
       redirect_to @pool
     else
       @pool.addUser(current_user)
-      flash[:success] = "Successfully added to Pool #{@pool.name}!"
+      flash[:success] = "Successfully added to Pool '#{@pool.name}'!"
       redirect_to @pool
     end
   end
@@ -40,11 +40,11 @@ class PoolsController < ApplicationController
       flash[:error] = "Owner cannot leave the pool!"
       redirect_to @pool
     elsif !@pool.isMember?(current_user)
-      flash[:error] = "Not a member of Pool #{@pool.name}!"
+      flash[:error] = "Not a member of Pool '#{@pool.name}'!"
       redirect_to pools_path
     else
       @pool.removeUser(current_user)
-      flash[:success] = "Successfully removed from Pool #{@pool.name}!"
+      flash[:success] = "Successfully removed from Pool '#{@pool.name}'!"
       redirect_to pools_path
     end
   end
@@ -97,7 +97,7 @@ class PoolsController < ApplicationController
     @pool = Pool.find(params[:id])
     if @pool.isOwner?(current_user)
       @pool.destroy
-      flash[:success] = "Successfully deleted Pool #{@pool.name}!"
+      flash[:success] = "Successfully deleted Pool '#{@pool.name}'!"
       redirect_to pools_path
     else
       flash[:error] = "Only the onwer can delete the pool!"

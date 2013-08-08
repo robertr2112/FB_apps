@@ -267,7 +267,7 @@ describe PoolsController do
     it "should show the 'update pool' message if owner" do
       test_sign_in(@user1)
       get :show, :id => @poolType0
-      response.should have_selector("a", :content => "Update pool")
+      response.should have_selector("a", :content => "Edit pool")
     end
 
     it "should show the 'join pool' message if not a member" do
