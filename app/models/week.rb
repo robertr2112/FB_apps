@@ -1,20 +1,22 @@
 # == Schema Information
 #
-# Table name: pool_memberships
+# Table name: weeks
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer
+#  state      :integer
 #  pool_id    :integer
-#  owner      :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class PoolMembership < ActiveRecord::Base
+class Week < ActiveRecord::Base
 
-  belongs_to :user
+  STATES = { Pend: 0, Open: 1, Closed: 2 }
+
   belongs_to :pool
 
-  attr_accessible :pool_id, :owner
+  attr_accessible :state
+
+  validates :state, :inclusion => { :in => 0..2 }
 
 end

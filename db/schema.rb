@@ -11,23 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724022344) do
+ActiveRecord::Schema.define(:version => 20130808171832) do
 
   create_table "pool_memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "pool_id"
-    t.boolean  "owner"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "owner",      :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "pools", :force => true do |t|
     t.string   "name"
     t.integer  "poolType"
-    t.boolean  "isPublic"
+    t.boolean  "isPublic",           :default => true
     t.string   "encrypted_password"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -41,5 +41,12 @@ ActiveRecord::Schema.define(:version => 20130724022344) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  create_table "weeks", :force => true do |t|
+    t.integer  "state"
+    t.integer  "pool_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

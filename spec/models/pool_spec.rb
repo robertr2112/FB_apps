@@ -5,7 +5,7 @@
 #  id                 :integer          not null, primary key
 #  name               :string(255)
 #  poolType           :integer
-#  isPublic           :boolean
+#  isPublic           :boolean          default(TRUE)
 #  encrypted_password :string(255)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -62,7 +62,7 @@ describe Pool do
     end
 
     it "should reject invalid poolType" do
-      @user.pools.build(@pool_attr.merge(:poolType => 4))
+      @user.pools.build(@pool_attr.merge(:poolType => 4)).should_not be_valid
     end
 
     it "should reject invalid isPublic boolean" do
