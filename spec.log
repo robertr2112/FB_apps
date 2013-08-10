@@ -1,0 +1,1397 @@
+DEPRECATION WARNING: The following options in your User.has_many :pool_memberships declaration are deprecated: :include. Please use a scope block instead. For example, the following:
+
+    has_many :spam_comments, conditions: { spam: true }, class_name: 'Comment'
+
+should be rewritten as the following:
+
+    has_many :spam_comments, -> { where spam: true }, class_name: 'Comment'
+. (called from <class:User> at /home/robertr/rails_projects/FB_apps/app/models/user.rb:20)
+FFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_pools_show_html_erb___300577204_104931880 at /home/robertr/rails_projects/FB_apps/app/views/pools/show.html.erb:28)
+FDEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_pools_show_html_erb___300577204_104931880 at /home/robertr/rails_projects/FB_apps/app/views/pools/show.html.erb:28)
+FFFFFFFFFFFFFFFFFFFF.FFFFFFFF.FFFFFFFFFFFFFFFFFFFFDEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+DEPRECATION WARNING: :confirm option is deprecated and will be removed from Rails 4.1. Use 'data: { confirm: 'Text' }' instead. (called from _app_views_users__user_html_erb___173724539_103722770 at /home/robertr/rails_projects/FB_apps/app/views/users/_user.html.erb:5)
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+
+Failures:
+
+  1) LayoutLinks should have a Contact page at '/contact'
+     Failure/Error: response.should have_selector('title', :content => "Contact")
+     NoMethodError:
+       undefined method `should' for #<ActionDispatch::TestResponse:0xc02bd70>
+     # ./spec/requests/layout_links_spec.rb:11:in `block (2 levels) in <top (required)>'
+
+  2) LayoutLinks should have a Help page at '/help'
+     Failure/Error: response.should have_selector('title', :content => "Help")
+     NoMethodError:
+       undefined method `should' for #<ActionDispatch::TestResponse:0x99c10f4>
+     # ./spec/requests/layout_links_spec.rb:21:in `block (2 levels) in <top (required)>'
+
+  3) LayoutLinks should have a Home page at '/'
+     Failure/Error: response.should have_selector('title', :content => "Home")
+     NoMethodError:
+       undefined method `should' for #<ActionDispatch::TestResponse:0xa3011dc>
+     # ./spec/requests/layout_links_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  4) LayoutLinks should have a About page at '/about'
+     Failure/Error: response.should have_selector('title', :content => "About")
+     NoMethodError:
+       undefined method `should' for #<ActionDispatch::TestResponse:0xa389d5c>
+     # ./spec/requests/layout_links_spec.rb:16:in `block (2 levels) in <top (required)>'
+
+  5) LayoutLinks should have the right links on the layout
+     Failure/Error: response.should have_selector('title', :content => "About")
+     NoMethodError:
+       undefined method `should' for nil:NilClass
+     # ./spec/requests/layout_links_spec.rb:27:in `block (2 levels) in <top (required)>'
+
+  6) LayoutLinks when not signed in should have a signin link
+     Failure/Error: response.should have_selector("a", :href => signin_path,
+     NoMethodError:
+       undefined method `should' for nil:NilClass
+     # ./spec/requests/layout_links_spec.rb:41:in `block (3 levels) in <top (required)>'
+
+  7) LayoutLinks when signed in should have a signout link
+     Failure/Error: fill_in :email,    :with => @user.email
+     Capybara::ElementNotFound:
+       Unable to find field :email
+     # ./spec/requests/layout_links_spec.rb:51:in `block (3 levels) in <top (required)>'
+
+  8) LayoutLinks when signed in should have a profile link
+     Failure/Error: fill_in :email,    :with => @user.email
+     Capybara::ElementNotFound:
+       Unable to find field :email
+     # ./spec/requests/layout_links_spec.rb:51:in `block (3 levels) in <top (required)>'
+
+  9) Pool user associations should have a users attribute
+     Failure/Error: @pool.should respond_to(:users)
+     NoMethodError:
+       undefined method `should' for #<Pool:0xbac1d30>
+     # ./spec/models/pool_spec.rb:40:in `block (3 levels) in <top (required)>'
+
+  10) Pool user associations should have the right associated user
+     Failure/Error: @user_id.should == @user_id
+     NoMethodError:
+       undefined method `should' for 1:Fixnum
+     # ./spec/models/pool_spec.rb:45:in `block (3 levels) in <top (required)>'
+
+  11) Pool validations should require nonblank content
+     Failure/Error: @user.pools.build(:name => "  ").should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Pool:0xbf214fc>
+     # ./spec/models/pool_spec.rb:57:in `block (3 levels) in <top (required)>'
+
+  12) Pool validations should reject invalid poolType
+     Failure/Error: @user.pools.build(@pool_attr.merge(:poolType => 4)).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Pool:0xbf41540>
+     # ./spec/models/pool_spec.rb:65:in `block (3 levels) in <top (required)>'
+
+  13) Pool validations should require a unique name
+     Failure/Error: pool_with_duplicate_name.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Pool:0xbf99d08>
+     # ./spec/models/pool_spec.rb:53:in `block (3 levels) in <top (required)>'
+
+  14) Pool validations should reject long content
+     Failure/Error: @user.pools.build(:name => "a" * 31).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Pool:0xbfd4f84>
+     # ./spec/models/pool_spec.rb:61:in `block (3 levels) in <top (required)>'
+
+  15) Pool validations should reject invalid isPublic boolean
+     Failure/Error: @user.pools.build(@pool_attr.merge(:isPublic => nil)).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Pool:0xc0050f8>
+     # ./spec/models/pool_spec.rb:69:in `block (3 levels) in <top (required)>'
+
+  16) PoolsController POST 'create' failure should not create the pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xc028c38>
+     # ./spec/controllers/pools_controller_spec.rb:477:in `block (4 levels) in <top (required)>'
+
+  17) PoolsController POST 'create' failure should have the right title
+     Failure/Error: post :create, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:11:in `create'
+     # ./spec/controllers/pools_controller_spec.rb:483:in `block (4 levels) in <top (required)>'
+
+  18) PoolsController POST 'create' failure should render the 'new' page
+     Failure/Error: post :create, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:11:in `create'
+     # ./spec/controllers/pools_controller_spec.rb:488:in `block (4 levels) in <top (required)>'
+
+  19) PoolsController POST 'create' success should create a pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc24870c>
+     # ./spec/controllers/pools_controller_spec.rb:499:in `block (4 levels) in <top (required)>'
+
+  20) PoolsController POST 'create' success should redirect to the pool show page
+     Failure/Error: post :create, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:11:in `create'
+     # ./spec/controllers/pools_controller_spec.rb:505:in `block (4 levels) in <top (required)>'
+
+  21) PoolsController POST 'create' success should have a created success message
+     Failure/Error: post :create, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:11:in `create'
+     # ./spec/controllers/pools_controller_spec.rb:510:in `block (4 levels) in <top (required)>'
+
+  22) PoolsController for non-signed-in users should deny access to 'show'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc300334>
+     # ./spec/controllers/pools_controller_spec.rb:28:in `block (3 levels) in <top (required)>'
+
+  23) PoolsController for non-signed-in users should deny access to 'index'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc15b4fc>
+     # ./spec/controllers/pools_controller_spec.rb:22:in `block (3 levels) in <top (required)>'
+
+  24) PoolsController for non-signed-in users should deny access to 'edit'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc18fcfc>
+     # ./spec/controllers/pools_controller_spec.rb:51:in `block (3 levels) in <top (required)>'
+
+  25) PoolsController for non-signed-in users should deny access to 'create'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc13bef4>
+     # ./spec/controllers/pools_controller_spec.rb:45:in `block (3 levels) in <top (required)>'
+
+  26) PoolsController for non-signed-in users should deny access to 'destroy'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc1117f8>
+     # ./spec/controllers/pools_controller_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+  27) PoolsController for non-signed-in users should deny access to 'join'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3a18c4>
+     # ./spec/controllers/pools_controller_spec.rb:34:in `block (3 levels) in <top (required)>'
+
+  28) PoolsController for non-signed-in users should deny access to 'update'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3d5afc>
+     # ./spec/controllers/pools_controller_spec.rb:57:in `block (3 levels) in <top (required)>'
+
+  29) PoolsController for non-signed-in users should deny access to 'new'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc4128a8>
+     # ./spec/controllers/pools_controller_spec.rb:40:in `block (3 levels) in <top (required)>'
+
+  30) PoolsController GET 'leave' should remove the pool_membership for user/pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc4e689c>
+     # ./spec/controllers/pools_controller_spec.rb:397:in `block (3 levels) in <top (required)>'
+
+  31) PoolsController GET 'leave' should redirect to the pools_path upon success
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc4f3c7c>
+     # ./spec/controllers/pools_controller_spec.rb:404:in `block (3 levels) in <top (required)>'
+
+  32) PoolsController GET 'leave' should not work if owner of pool
+     Failure/Error: response.should redirect_to(pool_path(assigns(:pool)))
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc572d60>
+     # ./spec/controllers/pools_controller_spec.rb:392:in `block (3 levels) in <top (required)>'
+
+  33) PoolsController GET 'leave' should fail if not a member of the pool
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5eb760>
+     # ./spec/controllers/pools_controller_spec.rb:410:in `block (3 levels) in <top (required)>'
+
+  34) PoolsController PUT 'update' failure should render the 'edit' page
+     Failure/Error: put :update, :id => @pool, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:82:in `update'
+     # ./spec/controllers/pools_controller_spec.rb:583:in `block (4 levels) in <top (required)>'
+
+  35) PoolsController PUT 'update' failure should have the right title
+     Failure/Error: put :update, :id => @pool, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:82:in `update'
+     # ./spec/controllers/pools_controller_spec.rb:589:in `block (4 levels) in <top (required)>'
+
+  36) PoolsController PUT 'update' failure should not update if user not owner
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xa28b824>
+     # ./spec/controllers/pools_controller_spec.rb:596:in `block (4 levels) in <top (required)>'
+
+  37) PoolsController PUT 'update' success should change the pool's attributes
+     Failure/Error: put :update, :id => @pool, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:82:in `update'
+     # ./spec/controllers/pools_controller_spec.rb:608:in `block (4 levels) in <top (required)>'
+
+  38) PoolsController PUT 'update' success should redirect to the pool show page
+     Failure/Error: put :update, :id => @pool, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:82:in `update'
+     # ./spec/controllers/pools_controller_spec.rb:615:in `block (4 levels) in <top (required)>'
+
+  39) PoolsController PUT 'update' success should have flash message
+     Failure/Error: put :update, :id => @pool, :pool => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/pools_controller.rb:82:in `update'
+     # ./spec/controllers/pools_controller_spec.rb:620:in `block (4 levels) in <top (required)>'
+
+  40) PoolsController DELETE 'destroy' as non-owner should not delete the pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xc1d34fc>
+     # ./spec/controllers/pools_controller_spec.rb:650:in `block (4 levels) in <top (required)>'
+
+  41) PoolsController DELETE 'destroy' as non-owner should redirect to the pools page and show error
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc1d0540>
+     # ./spec/controllers/pools_controller_spec.rb:657:in `block (4 levels) in <top (required)>'
+
+  42) PoolsController DELETE 'destroy' as owner should delete the pool_memberships for creator of pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc155444>
+     # ./spec/controllers/pools_controller_spec.rb:681:in `block (4 levels) in <top (required)>'
+
+  43) PoolsController DELETE 'destroy' as owner should delete the pool_memberships for creator and joiner of pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc13f6f8>
+     # ./spec/controllers/pools_controller_spec.rb:687:in `block (4 levels) in <top (required)>'
+
+  44) PoolsController DELETE 'destroy' as owner should delete the pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc3b1bd4>
+     # ./spec/controllers/pools_controller_spec.rb:675:in `block (4 levels) in <top (required)>'
+
+  45) PoolsController DELETE 'destroy' as owner should redirect to the pools page
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3baf90>
+     # ./spec/controllers/pools_controller_spec.rb:694:in `block (4 levels) in <top (required)>'
+
+  46) PoolsController GET 'join' with failure should not allow a current member to join again
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xc4fbfd0>
+     # ./spec/controllers/pools_controller_spec.rb:332:in `block (4 levels) in <top (required)>'
+
+  47) PoolsController GET 'join' with failure should show an error message if already a member
+     Failure/Error: response.should redirect_to(pool_path(assigns(:pool)))
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc4f90dc>
+     # ./spec/controllers/pools_controller_spec.rb:340:in `block (4 levels) in <top (required)>'
+
+  48) PoolsController GET 'join' with success Should add the signed in user to pool
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc5bebac>
+     # ./spec/controllers/pools_controller_spec.rb:348:in `block (4 levels) in <top (required)>'
+
+  49) PoolsController GET 'join' with success should show redirect to the pool show page
+     Failure/Error: response.should redirect_to(pool_path(assigns(:pool)))
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5c30bc>
+     # ./spec/controllers/pools_controller_spec.rb:355:in `block (4 levels) in <top (required)>'
+
+  50) PoolsController GET 'join' with success should show a succesful message ater joining
+     Failure/Error: flash[:success].should =~ /successfully added to pool/i
+     NoMethodError:
+       undefined method `should' for "Successfully added to Pool 'Pool 1'!":String
+     # ./spec/controllers/pools_controller_spec.rb:360:in `block (4 levels) in <top (required)>'
+
+  51) PoolsController GET 'new' should have the right title
+     Failure/Error: response.should have_selector("title", :content => "Create pool")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc6a17f4>
+     # ./spec/controllers/pools_controller_spec.rb:432:in `block (3 levels) in <top (required)>'
+
+  52) PoolsController GET 'new' should have an poolType field
+     Failure/Error: response.should have_selector("select[name='pool[poolType]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc70108c>
+     # ./spec/controllers/pools_controller_spec.rb:442:in `block (3 levels) in <top (required)>'
+
+  53) PoolsController GET 'new' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc72129c>
+     # ./spec/controllers/pools_controller_spec.rb:427:in `block (3 levels) in <top (required)>'
+
+  54) PoolsController GET 'new' should have a name field
+     Failure/Error: response.should have_selector("input[name='pool[name]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc7413d0>
+     # ./spec/controllers/pools_controller_spec.rb:437:in `block (3 levels) in <top (required)>'
+
+  55) PoolsController GET 'new' should have an isPublic field
+     Failure/Error: response.should have_selector("input[name='pool[isPublic]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc7615f4>
+     # ./spec/controllers/pools_controller_spec.rb:447:in `block (3 levels) in <top (required)>'
+
+  56) PoolsController GET 'new' should have a password field
+     Failure/Error: response.should have_selector("input[name='pool[password]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc781804>
+     # ./spec/controllers/pools_controller_spec.rb:452:in `block (3 levels) in <top (required)>'
+
+  57) PoolsController GET 'show' should include the pool owners name
+     Failure/Error: response.should have_selector("a", :content => @user1.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc7a167c>
+     # ./spec/controllers/pools_controller_spec.rb:248:in `block (3 levels) in <top (required)>'
+
+  58) PoolsController GET 'show' should show Private for Private pool
+     Failure/Error: response.should have_selector("td", :content => "Private")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc88d504>
+     # ./spec/controllers/pools_controller_spec.rb:238:in `block (3 levels) in <top (required)>'
+
+  59) PoolsController GET 'show' should redirect to pools_path if pool is not found
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0x94c4a60>
+     # ./spec/controllers/pools_controller_spec.rb:290:in `block (3 levels) in <top (required)>'
+
+  60) PoolsController GET 'show' should show PickEm for poolType 0
+     Failure/Error: response.should have_selector("td", :content => "PickEm")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xb26ba8c>
+     # ./spec/controllers/pools_controller_spec.rb:218:in `block (3 levels) in <top (required)>'
+
+  61) PoolsController GET 'show' should show Public for a Public pool
+     Failure/Error: response.should have_selector("td", :content => "Public")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbf8c554>
+     # ./spec/controllers/pools_controller_spec.rb:243:in `block (3 levels) in <top (required)>'
+
+  62) PoolsController GET 'show' should show Survivor for poolType 2
+     Failure/Error: response.should have_selector("td", :content => "Survivor")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc2ab370>
+     # ./spec/controllers/pools_controller_spec.rb:228:in `block (3 levels) in <top (required)>'
+
+  63) PoolsController GET 'show' should show SUP for poolType 3
+     Failure/Error: response.should have_selector("td", :content => "SUP")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc13fb6c>
+     # ./spec/controllers/pools_controller_spec.rb:233:in `block (3 levels) in <top (required)>'
+
+  64) PoolsController GET 'show' should show the 'join pool' message if not a member
+     Failure/Error: response.should have_selector("a", :content => "Join Pool")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc41010c>
+     # ./spec/controllers/pools_controller_spec.rb:275:in `block (3 levels) in <top (required)>'
+
+  65) PoolsController GET 'show' should find the right pool
+     Failure/Error: assigns(:pool).should == @poolType0
+     NoMethodError:
+       undefined method `should' for #<Pool:0xc5ab908>
+     # ./spec/controllers/pools_controller_spec.rb:208:in `block (3 levels) in <top (required)>'
+
+  66) PoolsController GET 'show' should show PickEmSpread for poolType 1
+     Failure/Error: response.should have_selector("td", :content => "PickEmSpread")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5eae78>
+     # ./spec/controllers/pools_controller_spec.rb:223:in `block (3 levels) in <top (required)>'
+
+  67) PoolsController GET 'show' should not show the 'join pool' message if already a member
+     Failure/Error: response.should_not have_selector("a", :content => "Join Pool")
+     NoMethodError:
+       undefined method `should_not' for #<ActionController::TestResponse:0xc6b2950>
+     # ./spec/controllers/pools_controller_spec.rb:285:in `block (3 levels) in <top (required)>'
+
+  68) PoolsController GET 'show' should paginate pools
+     Failure/Error: response.should have_selector("div.pagination")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc741024>
+     # ./spec/controllers/pools_controller_spec.rb:300:in `block (3 levels) in <top (required)>'
+
+  69) PoolsController GET 'show' should show the 'update pool' message if owner
+     Failure/Error: response.should have_selector("a", :content => "Edit pool")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc985934>
+     # ./spec/controllers/pools_controller_spec.rb:270:in `block (3 levels) in <top (required)>'
+
+  70) PoolsController GET 'show' should show the 'delete pool' message if owner
+     Failure/Error: response.should have_selector("a", :content => "Delete pool")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xb285630>
+     # ./spec/controllers/pools_controller_spec.rb:264:in `block (3 levels) in <top (required)>'
+
+  71) PoolsController GET 'show' should have the right title
+     Failure/Error: response.should have_selector("title", :content => @poolType0.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbfb10d4>
+     # ./spec/controllers/pools_controller_spec.rb:213:in `block (3 levels) in <top (required)>'
+
+  72) PoolsController GET 'show' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc2c5338>
+     # ./spec/controllers/pools_controller_spec.rb:203:in `block (3 levels) in <top (required)>'
+
+  73) PoolsController GET 'show' should include the joined user's name
+     Failure/Error: response.should have_selector("a", :content => @user2.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc10be70>
+     # ./spec/controllers/pools_controller_spec.rb:258:in `block (3 levels) in <top (required)>'
+
+  74) PoolsController GET 'show' should show the 'leave pool' message if a member/not owner
+     Failure/Error: response.should have_selector("a", :content => "Leave Pool")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc434b24>
+     # ./spec/controllers/pools_controller_spec.rb:280:in `block (3 levels) in <top (required)>'
+
+  75) PoolsController GET 'show' should show an * next to the User's name for ownership 
+     Failure/Error: response.should have_selector("a", :content => "*")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc53076c>
+     # ./spec/controllers/pools_controller_spec.rb:253:in `block (3 levels) in <top (required)>'
+
+  76) PoolsController GET 'edit' as non-owner should redirect to the pools page and show error
+     Failure/Error: response.should redirect_to(pools_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc611064>
+     # ./spec/controllers/pools_controller_spec.rb:536:in `block (4 levels) in <top (required)>'
+
+  77) PoolsController GET 'edit' as owner should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc65ec74>
+     # ./spec/controllers/pools_controller_spec.rb:551:in `block (4 levels) in <top (required)>'
+
+  78) PoolsController GET 'edit' as owner should have the right title
+     Failure/Error: response.should have_selector("title", :content => "Edit pool")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc6ddfb0>
+     # ./spec/controllers/pools_controller_spec.rb:556:in `block (4 levels) in <top (required)>'
+
+  79) PoolsController GET 'index' should paginate pools
+     Failure/Error: response.should have_selector("div.pagination")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc724014>
+     # ./spec/controllers/pools_controller_spec.rb:162:in `block (3 levels) in <top (required)>'
+
+  80) PoolsController GET 'index' should show PickemSpread for poolType 1
+     Failure/Error: response.should have_selector("td", :content => "PickEmSpread")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc9cfb74>
+     # ./spec/controllers/pools_controller_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  81) PoolsController GET 'index' should have the Private status for private pools
+     Failure/Error: response.should have_selector("td", :content => "Private")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xa28f21c>
+     # ./spec/controllers/pools_controller_spec.rb:126:in `block (3 levels) in <top (required)>'
+
+  82) PoolsController GET 'index' returns http success
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbe8c2d0>
+     # ./spec/controllers/pools_controller_spec.rb:104:in `block (3 levels) in <top (required)>'
+
+  83) PoolsController GET 'index' should show SUP for poolType 3
+     Failure/Error: response.should have_selector("td", :content => "SUP")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc1e5364>
+     # ./spec/controllers/pools_controller_spec.rb:146:in `block (3 levels) in <top (required)>'
+
+  84) PoolsController GET 'index' should not show the pool if owner user is deleted
+     Failure/Error: response.should_not have_selector("a", :content => @poolUser2.name)
+     NoMethodError:
+       undefined method `should_not' for #<ActionController::TestResponse:0xc12ae88>
+     # ./spec/controllers/pools_controller_spec.rb:152:in `block (3 levels) in <top (required)>'
+
+  85) PoolsController GET 'index' should have the Public status for public pools
+     Failure/Error: response.should have_selector("td", :content => "Public")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc403560>
+     # ./spec/controllers/pools_controller_spec.rb:121:in `block (3 levels) in <top (required)>'
+
+  86) PoolsController GET 'index' should show Pickem for poolType 0
+     Failure/Error: response.should have_selector("td", :content => "PickEm")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc512ac8>
+     # ./spec/controllers/pools_controller_spec.rb:131:in `block (3 levels) in <top (required)>'
+
+  87) PoolsController GET 'index' should show Survivor for poolType 2
+     Failure/Error: response.should have_selector("td", :content => "Survivor")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5f8564>
+     # ./spec/controllers/pools_controller_spec.rb:141:in `block (3 levels) in <top (required)>'
+
+  88) PoolsController GET 'index' should have an element for each pool
+     Failure/Error: response.should have_selector("td", :content => pool.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc6e43ec>
+     # ./spec/controllers/pools_controller_spec.rb:115:in `block (4 levels) in <top (required)>'
+     # ./spec/controllers/pools_controller_spec.rb:114:in `each'
+     # ./spec/controllers/pools_controller_spec.rb:114:in `block (3 levels) in <top (required)>'
+
+  89) PoolsController GET 'index' should have the right title
+     Failure/Error: response.should have_selector("title", :content => "All pools")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc767850>
+     # ./spec/controllers/pools_controller_spec.rb:109:in `block (3 levels) in <top (required)>'
+
+  90) Game pool associations should have a pools attribute
+     Failure/Error: @game.should respond_to(:week)
+     NoMethodError:
+       undefined method `should' for #<Game:0xc928bf8>
+     # ./spec/models/game_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  91) Game pool associations should have the right associated week_id
+     Failure/Error: @week_id.should == @week.id
+     NoMethodError:
+       undefined method `should' for 1:Fixnum
+     # ./spec/models/game_spec.rb:35:in `block (3 levels) in <top (required)>'
+
+  92) Game validations should reject an invalid homeTeamIndex
+     Failure/Error: @game = @week.games.build(:homeTeamIndex => 101).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Game:0xc9792ec>
+     # ./spec/models/game_spec.rb:41:in `block (3 levels) in <top (required)>'
+
+  93) Game validations should reject an invalid awayTeamIndex
+     Failure/Error: @game = @week.games.build(:awayTeamIndex => 101).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Game:0xc99189c>
+     # ./spec/models/game_spec.rb:45:in `block (3 levels) in <top (required)>'
+
+  94) Users signup failure should not make a new user
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xc995a78>
+     # ./spec/requests/users_spec.rb:10:in `block (4 levels) in <top (required)>'
+
+  95) Users signup success should make a new user
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc99a884>
+     # ./spec/requests/users_spec.rb:26:in `block (4 levels) in <top (required)>'
+
+  96) Users sign in/out failure should not sign a user in
+     Failure/Error: integration_sign_in(user)
+     Capybara::ElementNotFound:
+       Unable to find field :email
+     # ./spec/requests/users_spec.rb:46:in `block (4 levels) in <top (required)>'
+
+  97) Users sign in/out success should sign a user in and out
+     Failure/Error: integration_sign_in(user)
+     Capybara::ElementNotFound:
+       Unable to find field :email
+     # ./spec/requests/users_spec.rb:54:in `block (4 levels) in <top (required)>'
+
+  98) Week pool associations should have a pools attribute
+     Failure/Error: @week.should respond_to(:pool)
+     NoMethodError:
+       undefined method `should' for #<Week:0xb1d4a74>
+     # ./spec/models/week_spec.rb:38:in `block (3 levels) in <top (required)>'
+
+  99) Week pool associations should have the right associated pool_id
+     Failure/Error: @pool_id.should == @pool.id
+     NoMethodError:
+       undefined method `should' for 1:Fixnum
+     # ./spec/models/week_spec.rb:43:in `block (3 levels) in <top (required)>'
+
+  100) Week validations should reject an invalid state
+     Failure/Error: @week = @pool.weeks.build(:state => 3).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<Week:0xbe6ba1c>
+     # ./spec/models/week_spec.rb:49:in `block (3 levels) in <top (required)>'
+
+  101) FriendlyForwardings should forward to the requested page after signin
+     Failure/Error: fill_in :email,      :with => user.email
+     Capybara::ElementNotFound:
+       Unable to find field :email
+     # ./spec/requests/friendly_forwardings_spec.rb:9:in `block (2 levels) in <top (required)>'
+
+  102) PoolMembership joining a pool should not add a new pool entry
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xbfd75b8>
+     # ./spec/models/pool_membership_spec.rb:50:in `block (3 levels) in <top (required)>'
+
+  103) PoolMembership joining a pool should add an entry in pool_memberships
+     Failure/Error: @pool2.id.should == @pool_membership.pool_id
+     NoMethodError:
+       undefined method `should' for 2:Fixnum
+     # ./spec/models/pool_membership_spec.rb:58:in `block (3 levels) in <top (required)>'
+
+  104) PoolMembership set_owner method should be able to set owner flag to true
+     Failure/Error: @pool_membership.owner.should == true
+     NoMethodError:
+       undefined method `should' for true:TrueClass
+     # ./spec/models/pool_membership_spec.rb:70:in `block (3 levels) in <top (required)>'
+
+  105) PoolMembership Creating a new pool should add an entry in pool_memberships
+     Failure/Error: @pool1.id.should == @pool_membership.pool_id
+     NoMethodError:
+       undefined method `should' for 1:Fixnum
+     # ./spec/models/pool_membership_spec.rb:38:in `block (3 levels) in <top (required)>'
+
+  106) PoolMembership Deleting a new pool should remove an entry from pool_memberships
+     Failure/Error: @pool_membership.should == nil
+     NoMethodError:
+       undefined method `should' for nil:NilClass
+     # ./spec/models/pool_membership_spec.rb:83:in `block (3 levels) in <top (required)>'
+
+  107) UsersController GET 'show' should find the right user
+     Failure/Error: assigns(:user).should == @user
+     NoMethodError:
+       undefined method `should' for #<User:0xc1261f8>
+     # ./spec/controllers/users_controller_spec.rb:84:in `block (3 levels) in <top (required)>'
+
+  108) UsersController GET 'show' should include the user's name
+     Failure/Error: response.should have_selector("h1", :content => @user.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc18c3f4>
+     # ./spec/controllers/users_controller_spec.rb:94:in `block (3 levels) in <top (required)>'
+
+  109) UsersController GET 'show' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc13b134>
+     # ./spec/controllers/users_controller_spec.rb:79:in `block (3 levels) in <top (required)>'
+
+  110) UsersController GET 'show' should have the right title
+     Failure/Error: response.should have_selector("title", :content => @user.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc10d284>
+     # ./spec/controllers/users_controller_spec.rb:89:in `block (3 levels) in <top (required)>'
+
+  111) UsersController GET 'show' should have a profile image
+     Failure/Error: response.should have_selector("h1>img", :class => "gravatar")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3940e8>
+     # ./spec/controllers/users_controller_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  112) UsersController GET 'index' for non-signed-in users should deny access
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3c20d8>
+     # ./spec/controllers/users_controller_spec.rb:12:in `block (4 levels) in <top (required)>'
+
+  113) UsersController GET 'index' for signed-in users should have the right title
+     Failure/Error: response.should have_selector("title", :content => "All users")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3d60c4>
+     # ./spec/controllers/users_controller_spec.rb:37:in `block (4 levels) in <top (required)>'
+
+  114) UsersController GET 'index' for signed-in users should not have the delete link for non-admin users
+     Failure/Error: response.should_not have_selector("a", :href => "/users/1",
+     NoMethodError:
+       undefined method `should_not' for #<ActionController::TestResponse:0xc6313c8>
+     # ./spec/controllers/users_controller_spec.rb:49:in `block (4 levels) in <top (required)>'
+
+  115) UsersController GET 'index' for signed-in users should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc7a3a58>
+     # ./spec/controllers/users_controller_spec.rb:32:in `block (4 levels) in <top (required)>'
+
+  116) UsersController GET 'index' for signed-in users should have an element for each user
+     Failure/Error: response.should have_selector("li", :content => user.name)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xae10f8c>
+     # ./spec/controllers/users_controller_spec.rb:43:in `block (5 levels) in <top (required)>'
+     # ./spec/controllers/users_controller_spec.rb:42:in `each'
+     # ./spec/controllers/users_controller_spec.rb:42:in `block (4 levels) in <top (required)>'
+
+  117) UsersController GET 'index' for signed-in users should paginate users
+     Failure/Error: response.should have_selector("div.pagination")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc2f9480>
+     # ./spec/controllers/users_controller_spec.rb:55:in `block (4 levels) in <top (required)>'
+
+  118) UsersController GET 'index' for signed-in users should have the delete link for admin users
+     Failure/Error: response.should have_selector("a", :href => "/users/1",
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc4f246c>
+     # ./spec/controllers/users_controller_spec.rb:66:in `block (4 levels) in <top (required)>'
+
+  119) UsersController PUT 'update' failure should render the 'edit' page
+     Failure/Error: put :update, :id => @user, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:43:in `update'
+     # ./spec/controllers/users_controller_spec.rb:228:in `block (4 levels) in <top (required)>'
+
+  120) UsersController PUT 'update' failure should have the right title
+     Failure/Error: put :update, :id => @user, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:43:in `update'
+     # ./spec/controllers/users_controller_spec.rb:233:in `block (4 levels) in <top (required)>'
+
+  121) UsersController PUT 'update' success should change the user's attributes
+     Failure/Error: put :update, :id => @user, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:43:in `update'
+     # ./spec/controllers/users_controller_spec.rb:246:in `block (4 levels) in <top (required)>'
+
+  122) UsersController PUT 'update' success should redirect to the user show page
+     Failure/Error: put :update, :id => @user, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:43:in `update'
+     # ./spec/controllers/users_controller_spec.rb:253:in `block (4 levels) in <top (required)>'
+
+  123) UsersController PUT 'update' success should have flash message
+     Failure/Error: put :update, :id => @user, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:43:in `update'
+     # ./spec/controllers/users_controller_spec.rb:258:in `block (4 levels) in <top (required)>'
+
+  124) UsersController GET 'edit' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbd8605c>
+     # ./spec/controllers/users_controller_spec.rb:197:in `block (3 levels) in <top (required)>'
+
+  125) UsersController GET 'edit' should have the right title
+     Failure/Error: response.should have_selector("title", :content => "Edit user")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbf219d4>
+     # ./spec/controllers/users_controller_spec.rb:202:in `block (3 levels) in <top (required)>'
+
+  126) UsersController GET 'edit' should have a link to change the Gravatar
+     Failure/Error: response.should have_selector("a", :href => gravatar_url,
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbfb182c>
+     # ./spec/controllers/users_controller_spec.rb:208:in `block (3 levels) in <top (required)>'
+
+  127) UsersController DELETE 'destroy' as a non-signed-in user should deny access
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc042bb0>
+     # ./spec/controllers/users_controller_spec.rb:311:in `block (4 levels) in <top (required)>'
+
+  128) UsersController DELETE 'destroy' as a non-admin user should protect the page
+     Failure/Error: response.should redirect_to(root_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc1e6ee4>
+     # ./spec/controllers/users_controller_spec.rb:319:in `block (4 levels) in <top (required)>'
+
+  129) UsersController DELETE 'destroy' as an admin user should destroy the user
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc2389ec>
+     # ./spec/controllers/users_controller_spec.rb:331:in `block (4 levels) in <top (required)>'
+
+  130) UsersController DELETE 'destroy' as an admin user should redirect to the users page
+     Failure/Error: response.should redirect_to(users_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc249bac>
+     # ./spec/controllers/users_controller_spec.rb:338:in `block (4 levels) in <top (required)>'
+
+  131) UsersController DELETE 'destroy' as an admin user should protect user from deleting themselves
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xc317e80>
+     # ./spec/controllers/users_controller_spec.rb:342:in `block (4 levels) in <top (required)>'
+
+  132) UsersController GET 'new' should have the right title
+     Failure/Error: response.should have_selector("title", :content => "Sign up")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc31485c>
+     # ./spec/controllers/users_controller_spec.rb:111:in `block (3 levels) in <top (required)>'
+
+  133) UsersController GET 'new' should have an email field
+     Failure/Error: response.should have_selector("input[name='user[email]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc15f034>
+     # ./spec/controllers/users_controller_spec.rb:121:in `block (3 levels) in <top (required)>'
+
+  134) UsersController GET 'new' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc193a00>
+     # ./spec/controllers/users_controller_spec.rb:106:in `block (3 levels) in <top (required)>'
+
+  135) UsersController GET 'new' should have a name field
+     Failure/Error: response.should have_selector("input[name='user[name]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc13881c>
+     # ./spec/controllers/users_controller_spec.rb:116:in `block (3 levels) in <top (required)>'
+
+  136) UsersController GET 'new' should have a password field
+     Failure/Error: response.should have_selector("input[name='user[password]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc1116f4>
+     # ./spec/controllers/users_controller_spec.rb:126:in `block (3 levels) in <top (required)>'
+
+  137) UsersController GET 'new' should have a password confirmation field
+     Failure/Error: response.should have_selector("input[name='user[password_confirmation]']")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3a30ac>
+     # ./spec/controllers/users_controller_spec.rb:131:in `block (3 levels) in <top (required)>'
+
+  138) UsersController authentication of edit/update pages for non-signed-in users should deny access to 'edit'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3d6e20>
+     # ./spec/controllers/users_controller_spec.rb:273:in `block (4 levels) in <top (required)>'
+
+  139) UsersController authentication of edit/update pages for non-signed-in users should deny access to 'update'
+     Failure/Error: response.should redirect_to(signin_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc3f07f8>
+     # ./spec/controllers/users_controller_spec.rb:278:in `block (4 levels) in <top (required)>'
+
+  140) UsersController authentication of edit/update pages for signed-in users should require matching users for 'edit'
+     Failure/Error: response.should redirect_to(root_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc411354>
+     # ./spec/controllers/users_controller_spec.rb:291:in `block (4 levels) in <top (required)>'
+
+  141) UsersController authentication of edit/update pages for signed-in users should require matching users for 'update'
+     Failure/Error: response.should redirect_to(root_path)
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc44acf8>
+     # ./spec/controllers/users_controller_spec.rb:296:in `block (4 levels) in <top (required)>'
+
+  142) UsersController POST 'create' failure should not create a user
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should_not' for #<Proc:0xc47b524>
+     # ./spec/controllers/users_controller_spec.rb:143:in `block (4 levels) in <top (required)>'
+
+  143) UsersController POST 'create' failure should have the right title
+     Failure/Error: post :create, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:14:in `create'
+     # ./spec/controllers/users_controller_spec.rb:149:in `block (4 levels) in <top (required)>'
+
+  144) UsersController POST 'create' failure should render the 'new' page
+     Failure/Error: post :create, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:14:in `create'
+     # ./spec/controllers/users_controller_spec.rb:154:in `block (4 levels) in <top (required)>'
+
+  145) UsersController POST 'create' success should sign the user in
+     Failure/Error: post :create, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:14:in `create'
+     # ./spec/controllers/users_controller_spec.rb:172:in `block (4 levels) in <top (required)>'
+
+  146) UsersController POST 'create' success should redirect to the user show page
+     Failure/Error: post :create, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:14:in `create'
+     # ./spec/controllers/users_controller_spec.rb:177:in `block (4 levels) in <top (required)>'
+
+  147) UsersController POST 'create' success should create a user
+     Failure/Error: lambda do
+     NoMethodError:
+       undefined method `should' for #<Proc:0xc4f8164>
+     # ./spec/controllers/users_controller_spec.rb:166:in `block (4 levels) in <top (required)>'
+
+  148) UsersController POST 'create' success should have a welcome message
+     Failure/Error: post :create, :user => @attr
+     ActiveModel::ForbiddenAttributesError:
+       ActiveModel::ForbiddenAttributesError
+     # ./app/controllers/users_controller.rb:14:in `create'
+     # ./spec/controllers/users_controller_spec.rb:182:in `block (4 levels) in <top (required)>'
+
+  149) StaticPagesController GET 'contact' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc519cb0>
+     # ./spec/controllers/static_pages_controller_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  150) StaticPagesController GET 'contact' should have the right title
+     Failure/Error: response.should have_selector("title",
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc531bd0>
+     # ./spec/controllers/static_pages_controller_spec.rb:35:in `block (3 levels) in <top (required)>'
+
+  151) StaticPagesController GET 'about' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc549208>
+     # ./spec/controllers/static_pages_controller_spec.rb:43:in `block (3 levels) in <top (required)>'
+
+  152) StaticPagesController GET 'about' should have the right title
+     Failure/Error: response.should have_selector("title",
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc564850>
+     # ./spec/controllers/static_pages_controller_spec.rb:48:in `block (3 levels) in <top (required)>'
+
+  153) StaticPagesController GET 'home' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc589fec>
+     # ./spec/controllers/static_pages_controller_spec.rb:17:in `block (3 levels) in <top (required)>'
+
+  154) StaticPagesController GET 'home' should have the right title
+     Failure/Error: response.should have_selector("title",
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5a37f8>
+     # ./spec/controllers/static_pages_controller_spec.rb:22:in `block (3 levels) in <top (required)>'
+
+  155) StaticPagesController GET 'help' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5bdfcc>
+     # ./spec/controllers/static_pages_controller_spec.rb:56:in `block (3 levels) in <top (required)>'
+
+  156) StaticPagesController GET 'help' should have the right title
+     Failure/Error: response.should have_selector("title",
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc5d4c04>
+     # ./spec/controllers/static_pages_controller_spec.rb:61:in `block (3 levels) in <top (required)>'
+
+  157) User should require a name
+     Failure/Error: no_name_user.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc5fbf5c>
+     # ./spec/models/user_spec.rb:34:in `block (2 levels) in <top (required)>'
+
+  158) User should reject invalid email addresses
+     Failure/Error: invalid_email_user.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc6080f4>
+     # ./spec/models/user_spec.rb:60:in `block (3 levels) in <top (required)>'
+     # ./spec/models/user_spec.rb:58:in `each'
+     # ./spec/models/user_spec.rb:58:in `block (2 levels) in <top (required)>'
+
+  159) User should accept valid email addresses
+     Failure/Error: valid_email_user.should be_valid
+     NoMethodError:
+       undefined method `should' for #<User:0xc611154>
+     # ./spec/models/user_spec.rb:52:in `block (3 levels) in <top (required)>'
+     # ./spec/models/user_spec.rb:50:in `each'
+     # ./spec/models/user_spec.rb:50:in `block (2 levels) in <top (required)>'
+
+  160) User should reject email addresses identical up to case
+     Failure/Error: user_with_duplicate_email.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc620794>
+     # ./spec/models/user_spec.rb:75:in `block (2 levels) in <top (required)>'
+
+  161) User should require an email address
+     Failure/Error: no_email_user.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc6298f8>
+     # ./spec/models/user_spec.rb:39:in `block (2 levels) in <top (required)>'
+
+  162) User should reject duplicate email addresses
+     Failure/Error: user_with_duplicate_email.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc638ac4>
+     # ./spec/models/user_spec.rb:68:in `block (2 levels) in <top (required)>'
+
+  163) User should reject names that are too long
+     Failure/Error: long_name_user.should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc641ac0>
+     # ./spec/models/user_spec.rb:45:in `block (2 levels) in <top (required)>'
+
+  164) User password encryption should have an ecrypted password attribute
+     Failure/Error: @user.should respond_to(:encrypted_password)
+     NoMethodError:
+       undefined method `should' for #<User:0xc64a47c>
+     # ./spec/models/user_spec.rb:110:in `block (3 levels) in <top (required)>'
+
+  165) User password encryption should set the encrypted password
+     Failure/Error: @user.encrypted_password.should_not be_blank
+     NoMethodError:
+       undefined method `should_not' for #<String:0xc6666cc>
+     # ./spec/models/user_spec.rb:114:in `block (3 levels) in <top (required)>'
+
+  166) User password encryption has_password? method should be true if the passwords match
+     Failure/Error: @user.has_password?(@attr[:password]).should be_true
+     NoMethodError:
+       undefined method `should' for true:TrueClass
+     # ./spec/models/user_spec.rb:120:in `block (4 levels) in <top (required)>'
+
+  167) User password encryption has_password? method should be false if the passwords don't match
+     Failure/Error: @user.has_password?("invalid").should be_false
+     NoMethodError:
+       undefined method `should' for false:FalseClass
+     # ./spec/models/user_spec.rb:124:in `block (4 levels) in <top (required)>'
+
+  168) User password encryption authenticate method should return nil on email/password mismatch
+     Failure/Error: wrong_password_user.should be_nil
+     NoMethodError:
+       undefined method `should' for nil:NilClass
+     # ./spec/models/user_spec.rb:132:in `block (4 levels) in <top (required)>'
+
+  169) User password encryption authenticate method should return nil for an email address with no user
+     Failure/Error: nonexistent_user.should be_nil
+     NoMethodError:
+       undefined method `should' for nil:NilClass
+     # ./spec/models/user_spec.rb:137:in `block (4 levels) in <top (required)>'
+
+  170) User password encryption authenticate method should return the user on email/password match
+     Failure/Error: matching_user.should == @user
+     NoMethodError:
+       undefined method `should' for #<User:0xc6d4140>
+     # ./spec/models/user_spec.rb:142:in `block (4 levels) in <top (required)>'
+
+  171) User pool associations should have a pools attribute
+     Failure/Error: @user1.should respond_to(:pools)
+     NoMethodError:
+       undefined method `should' for #<User:0xc6dccdc>
+     # ./spec/models/user_spec.rb:177:in `block (3 levels) in <top (required)>'
+
+  172) User password validations should require a matching password confirmation
+     Failure/Error: User.new(@attr.merge(:password_confirmation => "invalid")).
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc709264>
+     # ./spec/models/user_spec.rb:86:in `block (3 levels) in <top (required)>'
+
+  173) User password validations should reject short passwords
+     Failure/Error: User.new(hash).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc70e318>
+     # ./spec/models/user_spec.rb:93:in `block (3 levels) in <top (required)>'
+
+  174) User password validations should require a password
+     Failure/Error: User.new(@attr.merge(:password => "", :password_confirmation => "")).
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc7134d0>
+     # ./spec/models/user_spec.rb:81:in `block (3 levels) in <top (required)>'
+
+  175) User password validations should reject long passwords
+     Failure/Error: User.new(hash).should_not be_valid
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc71062c>
+     # ./spec/models/user_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  176) User admin attribute Should respond to admin
+     Failure/Error: @user.should respond_to(:admin)
+     NoMethodError:
+       undefined method `should' for #<User:0xc715578>
+     # ./spec/models/user_spec.rb:154:in `block (3 levels) in <top (required)>'
+
+  177) User admin attribute should not be and admin by default
+     Failure/Error: @user.should_not be_admin
+     NoMethodError:
+       undefined method `should_not' for #<User:0xc71d6ec>
+     # ./spec/models/user_spec.rb:158:in `block (3 levels) in <top (required)>'
+
+  178) User admin attribute should be convertible to an admin
+     Failure/Error: @user.should be_admin
+     NoMethodError:
+       undefined method `should' for #<User:0xc724d48>
+     # ./spec/models/user_spec.rb:163:in `block (3 levels) in <top (required)>'
+
+  179) User destroy should destroy associated pools
+     Failure/Error: Pool.find_by_id(pool.id).should be_nil
+     NoMethodError:
+       undefined method `should' for #<Pool:0xc757130>
+     # ./spec/models/user_spec.rb:194:in `block (4 levels) in <top (required)>'
+     # ./spec/models/user_spec.rb:193:in `each'
+     # ./spec/models/user_spec.rb:193:in `block (3 levels) in <top (required)>'
+
+  180) User destroy should destroy associated pool_memberships
+     Failure/Error: PoolMembership.find_by_user_id(@user1.id).should be_nil
+     NoMethodError:
+       undefined method `should' for nil:NilClass
+     # ./spec/models/user_spec.rb:200:in `block (3 levels) in <top (required)>'
+
+  181) SessionsController GET 'new' should be successful
+     Failure/Error: response.should be_success
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xc77ed20>
+     # ./spec/controllers/sessions_controller_spec.rb:10:in `block (3 levels) in <top (required)>'
+
+  182) SessionsController GET 'new' should have the right title
+     Failure/Error: response.should have_selector("title", :content => "Sign in")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0x9a98158>
+     # ./spec/controllers/sessions_controller_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  183) SessionsController POST 'create' invalid signin should render the 'new' page
+     Failure/Error: response.should render_template('new')
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xa322878>
+     # ./spec/controllers/sessions_controller_spec.rb:28:in `block (4 levels) in <top (required)>'
+
+  184) SessionsController POST 'create' invalid signin should have the right title
+     Failure/Error: response.should have_selector("title", :content => "Sign in")
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xaf0bef0>
+     # ./spec/controllers/sessions_controller_spec.rb:33:in `block (4 levels) in <top (required)>'
+
+  185) SessionsController POST 'create' invalid signin should have a flash.now message
+     Failure/Error: flash.now[:error].should =~ /invalid/i
+     NoMethodError:
+       undefined method `should' for "Invalid email/password combination.":String
+     # ./spec/controllers/sessions_controller_spec.rb:38:in `block (4 levels) in <top (required)>'
+
+  186) SessionsController POST 'create' with valid email and password should sign the user in
+     Failure/Error: controller.current_user.should == @user
+     NoMethodError:
+       undefined method `should' for #<User:0xbac3f2c>
+     # ./spec/controllers/sessions_controller_spec.rb:50:in `block (4 levels) in <top (required)>'
+
+  187) SessionsController POST 'create' with valid email and password should redirect to the user show page
+     Failure/Error: response.should redirect_to(user_path(@user))
+     NoMethodError:
+       undefined method `should' for #<ActionController::TestResponse:0xbd38b18>
+     # ./spec/controllers/sessions_controller_spec.rb:56:in `block (4 levels) in <top (required)>'
+
+  188) SessionsController DELETE 'destroy' should sign a user out
+     Failure/Error: controller.should_not be_signed_in
+     NoMethodError:
+       undefined method `should_not' for #<SessionsController:0xbe8f4bc>
+     # ./spec/controllers/sessions_controller_spec.rb:65:in `block (3 levels) in <top (required)>'
+
+Finished in 5.19 seconds
+192 examples, 188 failures
+
+Failed examples:
+
+rspec ./spec/requests/layout_links_spec.rb:9 # LayoutLinks should have a Contact page at '/contact'
+rspec ./spec/requests/layout_links_spec.rb:19 # LayoutLinks should have a Help page at '/help'
+rspec ./spec/requests/layout_links_spec.rb:4 # LayoutLinks should have a Home page at '/'
+rspec ./spec/requests/layout_links_spec.rb:14 # LayoutLinks should have a About page at '/about'
+rspec ./spec/requests/layout_links_spec.rb:24 # LayoutLinks should have the right links on the layout
+rspec ./spec/requests/layout_links_spec.rb:39 # LayoutLinks when not signed in should have a signin link
+rspec ./spec/requests/layout_links_spec.rb:56 # LayoutLinks when signed in should have a signout link
+rspec ./spec/requests/layout_links_spec.rb:62 # LayoutLinks when signed in should have a profile link
+rspec ./spec/models/pool_spec.rb:39 # Pool user associations should have a users attribute
+rspec ./spec/models/pool_spec.rb:43 # Pool user associations should have the right associated user
+rspec ./spec/models/pool_spec.rb:56 # Pool validations should require nonblank content
+rspec ./spec/models/pool_spec.rb:64 # Pool validations should reject invalid poolType
+rspec ./spec/models/pool_spec.rb:50 # Pool validations should require a unique name
+rspec ./spec/models/pool_spec.rb:60 # Pool validations should reject long content
+rspec ./spec/models/pool_spec.rb:68 # Pool validations should reject invalid isPublic boolean
+rspec ./spec/controllers/pools_controller_spec.rb:476 # PoolsController POST 'create' failure should not create the pool
+rspec ./spec/controllers/pools_controller_spec.rb:482 # PoolsController POST 'create' failure should have the right title
+rspec ./spec/controllers/pools_controller_spec.rb:487 # PoolsController POST 'create' failure should render the 'new' page
+rspec ./spec/controllers/pools_controller_spec.rb:498 # PoolsController POST 'create' success should create a pool
+rspec ./spec/controllers/pools_controller_spec.rb:504 # PoolsController POST 'create' success should redirect to the pool show page
+rspec ./spec/controllers/pools_controller_spec.rb:509 # PoolsController POST 'create' success should have a created success message
+rspec ./spec/controllers/pools_controller_spec.rb:26 # PoolsController for non-signed-in users should deny access to 'show'
+rspec ./spec/controllers/pools_controller_spec.rb:20 # PoolsController for non-signed-in users should deny access to 'index'
+rspec ./spec/controllers/pools_controller_spec.rb:49 # PoolsController for non-signed-in users should deny access to 'edit'
+rspec ./spec/controllers/pools_controller_spec.rb:43 # PoolsController for non-signed-in users should deny access to 'create'
+rspec ./spec/controllers/pools_controller_spec.rb:61 # PoolsController for non-signed-in users should deny access to 'destroy'
+rspec ./spec/controllers/pools_controller_spec.rb:32 # PoolsController for non-signed-in users should deny access to 'join'
+rspec ./spec/controllers/pools_controller_spec.rb:55 # PoolsController for non-signed-in users should deny access to 'update'
+rspec ./spec/controllers/pools_controller_spec.rb:38 # PoolsController for non-signed-in users should deny access to 'new'
+rspec ./spec/controllers/pools_controller_spec.rb:396 # PoolsController GET 'leave' should remove the pool_membership for user/pool
+rspec ./spec/controllers/pools_controller_spec.rb:402 # PoolsController GET 'leave' should redirect to the pools_path upon success
+rspec ./spec/controllers/pools_controller_spec.rb:389 # PoolsController GET 'leave' should not work if owner of pool
+rspec ./spec/controllers/pools_controller_spec.rb:408 # PoolsController GET 'leave' should fail if not a member of the pool
+rspec ./spec/controllers/pools_controller_spec.rb:581 # PoolsController PUT 'update' failure should render the 'edit' page
+rspec ./spec/controllers/pools_controller_spec.rb:587 # PoolsController PUT 'update' failure should have the right title
+rspec ./spec/controllers/pools_controller_spec.rb:593 # PoolsController PUT 'update' failure should not update if user not owner
+rspec ./spec/controllers/pools_controller_spec.rb:607 # PoolsController PUT 'update' success should change the pool's attributes
+rspec ./spec/controllers/pools_controller_spec.rb:614 # PoolsController PUT 'update' success should redirect to the pool show page
+rspec ./spec/controllers/pools_controller_spec.rb:619 # PoolsController PUT 'update' success should have flash message
+rspec ./spec/controllers/pools_controller_spec.rb:649 # PoolsController DELETE 'destroy' as non-owner should not delete the pool
+rspec ./spec/controllers/pools_controller_spec.rb:655 # PoolsController DELETE 'destroy' as non-owner should redirect to the pools page and show error
+rspec ./spec/controllers/pools_controller_spec.rb:680 # PoolsController DELETE 'destroy' as owner should delete the pool_memberships for creator of pool
+rspec ./spec/controllers/pools_controller_spec.rb:686 # PoolsController DELETE 'destroy' as owner should delete the pool_memberships for creator and joiner of pool
+rspec ./spec/controllers/pools_controller_spec.rb:674 # PoolsController DELETE 'destroy' as owner should delete the pool
+rspec ./spec/controllers/pools_controller_spec.rb:692 # PoolsController DELETE 'destroy' as owner should redirect to the pools page
+rspec ./spec/controllers/pools_controller_spec.rb:330 # PoolsController GET 'join' with failure should not allow a current member to join again
+rspec ./spec/controllers/pools_controller_spec.rb:337 # PoolsController GET 'join' with failure should show an error message if already a member
+rspec ./spec/controllers/pools_controller_spec.rb:347 # PoolsController GET 'join' with success Should add the signed in user to pool
+rspec ./spec/controllers/pools_controller_spec.rb:353 # PoolsController GET 'join' with success should show redirect to the pool show page
+rspec ./spec/controllers/pools_controller_spec.rb:358 # PoolsController GET 'join' with success should show a succesful message ater joining
+rspec ./spec/controllers/pools_controller_spec.rb:430 # PoolsController GET 'new' should have the right title
+rspec ./spec/controllers/pools_controller_spec.rb:440 # PoolsController GET 'new' should have an poolType field
+rspec ./spec/controllers/pools_controller_spec.rb:425 # PoolsController GET 'new' should be successful
+rspec ./spec/controllers/pools_controller_spec.rb:435 # PoolsController GET 'new' should have a name field
+rspec ./spec/controllers/pools_controller_spec.rb:445 # PoolsController GET 'new' should have an isPublic field
+rspec ./spec/controllers/pools_controller_spec.rb:450 # PoolsController GET 'new' should have a password field
+rspec ./spec/controllers/pools_controller_spec.rb:246 # PoolsController GET 'show' should include the pool owners name
+rspec ./spec/controllers/pools_controller_spec.rb:236 # PoolsController GET 'show' should show Private for Private pool
+rspec ./spec/controllers/pools_controller_spec.rb:288 # PoolsController GET 'show' should redirect to pools_path if pool is not found
+rspec ./spec/controllers/pools_controller_spec.rb:216 # PoolsController GET 'show' should show PickEm for poolType 0
+rspec ./spec/controllers/pools_controller_spec.rb:241 # PoolsController GET 'show' should show Public for a Public pool
+rspec ./spec/controllers/pools_controller_spec.rb:226 # PoolsController GET 'show' should show Survivor for poolType 2
+rspec ./spec/controllers/pools_controller_spec.rb:231 # PoolsController GET 'show' should show SUP for poolType 3
+rspec ./spec/controllers/pools_controller_spec.rb:273 # PoolsController GET 'show' should show the 'join pool' message if not a member
+rspec ./spec/controllers/pools_controller_spec.rb:206 # PoolsController GET 'show' should find the right pool
+rspec ./spec/controllers/pools_controller_spec.rb:221 # PoolsController GET 'show' should show PickEmSpread for poolType 1
+rspec ./spec/controllers/pools_controller_spec.rb:283 # PoolsController GET 'show' should not show the 'join pool' message if already a member
+rspec ./spec/controllers/pools_controller_spec.rb:293 # PoolsController GET 'show' should paginate pools
+rspec ./spec/controllers/pools_controller_spec.rb:267 # PoolsController GET 'show' should show the 'update pool' message if owner
+rspec ./spec/controllers/pools_controller_spec.rb:261 # PoolsController GET 'show' should show the 'delete pool' message if owner
+rspec ./spec/controllers/pools_controller_spec.rb:211 # PoolsController GET 'show' should have the right title
+rspec ./spec/controllers/pools_controller_spec.rb:201 # PoolsController GET 'show' should be successful
+rspec ./spec/controllers/pools_controller_spec.rb:256 # PoolsController GET 'show' should include the joined user's name
+rspec ./spec/controllers/pools_controller_spec.rb:278 # PoolsController GET 'show' should show the 'leave pool' message if a member/not owner
+rspec ./spec/controllers/pools_controller_spec.rb:251 # PoolsController GET 'show' should show an * next to the User's name for ownership 
+rspec ./spec/controllers/pools_controller_spec.rb:534 # PoolsController GET 'edit' as non-owner should redirect to the pools page and show error
+rspec ./spec/controllers/pools_controller_spec.rb:549 # PoolsController GET 'edit' as owner should be successful
+rspec ./spec/controllers/pools_controller_spec.rb:554 # PoolsController GET 'edit' as owner should have the right title
+rspec ./spec/controllers/pools_controller_spec.rb:155 # PoolsController GET 'index' should paginate pools
+rspec ./spec/controllers/pools_controller_spec.rb:134 # PoolsController GET 'index' should show PickemSpread for poolType 1
+rspec ./spec/controllers/pools_controller_spec.rb:124 # PoolsController GET 'index' should have the Private status for private pools
+rspec ./spec/controllers/pools_controller_spec.rb:102 # PoolsController GET 'index' returns http success
+rspec ./spec/controllers/pools_controller_spec.rb:144 # PoolsController GET 'index' should show SUP for poolType 3
+rspec ./spec/controllers/pools_controller_spec.rb:149 # PoolsController GET 'index' should not show the pool if owner user is deleted
+rspec ./spec/controllers/pools_controller_spec.rb:119 # PoolsController GET 'index' should have the Public status for public pools
+rspec ./spec/controllers/pools_controller_spec.rb:129 # PoolsController GET 'index' should show Pickem for poolType 0
+rspec ./spec/controllers/pools_controller_spec.rb:139 # PoolsController GET 'index' should show Survivor for poolType 2
+rspec ./spec/controllers/pools_controller_spec.rb:112 # PoolsController GET 'index' should have an element for each pool
+rspec ./spec/controllers/pools_controller_spec.rb:107 # PoolsController GET 'index' should have the right title
+rspec ./spec/models/game_spec.rb:29 # Game pool associations should have a pools attribute
+rspec ./spec/models/game_spec.rb:33 # Game pool associations should have the right associated week_id
+rspec ./spec/models/game_spec.rb:40 # Game validations should reject an invalid homeTeamIndex
+rspec ./spec/models/game_spec.rb:44 # Game validations should reject an invalid awayTeamIndex
+rspec ./spec/requests/users_spec.rb:9 # Users signup failure should not make a new user
+rspec ./spec/requests/users_spec.rb:25 # Users signup success should make a new user
+rspec ./spec/requests/users_spec.rb:44 # Users sign in/out failure should not sign a user in
+rspec ./spec/requests/users_spec.rb:52 # Users sign in/out success should sign a user in and out
+rspec ./spec/models/week_spec.rb:37 # Week pool associations should have a pools attribute
+rspec ./spec/models/week_spec.rb:41 # Week pool associations should have the right associated pool_id
+rspec ./spec/models/week_spec.rb:48 # Week validations should reject an invalid state
+rspec ./spec/requests/friendly_forwardings_spec.rb:5 # FriendlyForwardings should forward to the requested page after signin
+rspec ./spec/models/pool_membership_spec.rb:49 # PoolMembership joining a pool should not add a new pool entry
+rspec ./spec/models/pool_membership_spec.rb:55 # PoolMembership joining a pool should add an entry in pool_memberships
+rspec ./spec/models/pool_membership_spec.rb:67 # PoolMembership set_owner method should be able to set owner flag to true
+rspec ./spec/models/pool_membership_spec.rb:36 # PoolMembership Creating a new pool should add an entry in pool_memberships
+rspec ./spec/models/pool_membership_spec.rb:80 # PoolMembership Deleting a new pool should remove an entry from pool_memberships
+rspec ./spec/controllers/users_controller_spec.rb:82 # UsersController GET 'show' should find the right user
+rspec ./spec/controllers/users_controller_spec.rb:92 # UsersController GET 'show' should include the user's name
+rspec ./spec/controllers/users_controller_spec.rb:77 # UsersController GET 'show' should be successful
+rspec ./spec/controllers/users_controller_spec.rb:87 # UsersController GET 'show' should have the right title
+rspec ./spec/controllers/users_controller_spec.rb:97 # UsersController GET 'show' should have a profile image
+rspec ./spec/controllers/users_controller_spec.rb:10 # UsersController GET 'index' for non-signed-in users should deny access
+rspec ./spec/controllers/users_controller_spec.rb:35 # UsersController GET 'index' for signed-in users should have the right title
+rspec ./spec/controllers/users_controller_spec.rb:47 # UsersController GET 'index' for signed-in users should not have the delete link for non-admin users
+rspec ./spec/controllers/users_controller_spec.rb:30 # UsersController GET 'index' for signed-in users should be successful
+rspec ./spec/controllers/users_controller_spec.rb:40 # UsersController GET 'index' for signed-in users should have an element for each user
+rspec ./spec/controllers/users_controller_spec.rb:53 # UsersController GET 'index' for signed-in users should paginate users
+rspec ./spec/controllers/users_controller_spec.rb:63 # UsersController GET 'index' for signed-in users should have the delete link for admin users
+rspec ./spec/controllers/users_controller_spec.rb:227 # UsersController PUT 'update' failure should render the 'edit' page
+rspec ./spec/controllers/users_controller_spec.rb:232 # UsersController PUT 'update' failure should have the right title
+rspec ./spec/controllers/users_controller_spec.rb:245 # UsersController PUT 'update' success should change the user's attributes
+rspec ./spec/controllers/users_controller_spec.rb:252 # UsersController PUT 'update' success should redirect to the user show page
+rspec ./spec/controllers/users_controller_spec.rb:257 # UsersController PUT 'update' success should have flash message
+rspec ./spec/controllers/users_controller_spec.rb:195 # UsersController GET 'edit' should be successful
+rspec ./spec/controllers/users_controller_spec.rb:200 # UsersController GET 'edit' should have the right title
+rspec ./spec/controllers/users_controller_spec.rb:205 # UsersController GET 'edit' should have a link to change the Gravatar
+rspec ./spec/controllers/users_controller_spec.rb:309 # UsersController DELETE 'destroy' as a non-signed-in user should deny access
+rspec ./spec/controllers/users_controller_spec.rb:316 # UsersController DELETE 'destroy' as a non-admin user should protect the page
+rspec ./spec/controllers/users_controller_spec.rb:330 # UsersController DELETE 'destroy' as an admin user should destroy the user
+rspec ./spec/controllers/users_controller_spec.rb:336 # UsersController DELETE 'destroy' as an admin user should redirect to the users page
+rspec ./spec/controllers/users_controller_spec.rb:341 # UsersController DELETE 'destroy' as an admin user should protect user from deleting themselves
+rspec ./spec/controllers/users_controller_spec.rb:109 # UsersController GET 'new' should have the right title
+rspec ./spec/controllers/users_controller_spec.rb:119 # UsersController GET 'new' should have an email field
+rspec ./spec/controllers/users_controller_spec.rb:104 # UsersController GET 'new' should be successful
+rspec ./spec/controllers/users_controller_spec.rb:114 # UsersController GET 'new' should have a name field
+rspec ./spec/controllers/users_controller_spec.rb:124 # UsersController GET 'new' should have a password field
+rspec ./spec/controllers/users_controller_spec.rb:129 # UsersController GET 'new' should have a password confirmation field
+rspec ./spec/controllers/users_controller_spec.rb:271 # UsersController authentication of edit/update pages for non-signed-in users should deny access to 'edit'
+rspec ./spec/controllers/users_controller_spec.rb:276 # UsersController authentication of edit/update pages for non-signed-in users should deny access to 'update'
+rspec ./spec/controllers/users_controller_spec.rb:289 # UsersController authentication of edit/update pages for signed-in users should require matching users for 'edit'
+rspec ./spec/controllers/users_controller_spec.rb:294 # UsersController authentication of edit/update pages for signed-in users should require matching users for 'update'
+rspec ./spec/controllers/users_controller_spec.rb:142 # UsersController POST 'create' failure should not create a user
+rspec ./spec/controllers/users_controller_spec.rb:148 # UsersController POST 'create' failure should have the right title
+rspec ./spec/controllers/users_controller_spec.rb:153 # UsersController POST 'create' failure should render the 'new' page
+rspec ./spec/controllers/users_controller_spec.rb:171 # UsersController POST 'create' success should sign the user in
+rspec ./spec/controllers/users_controller_spec.rb:176 # UsersController POST 'create' success should redirect to the user show page
+rspec ./spec/controllers/users_controller_spec.rb:165 # UsersController POST 'create' success should create a user
+rspec ./spec/controllers/users_controller_spec.rb:181 # UsersController POST 'create' success should have a welcome message
+rspec ./spec/controllers/static_pages_controller_spec.rb:28 # StaticPagesController GET 'contact' should be successful
+rspec ./spec/controllers/static_pages_controller_spec.rb:33 # StaticPagesController GET 'contact' should have the right title
+rspec ./spec/controllers/static_pages_controller_spec.rb:41 # StaticPagesController GET 'about' should be successful
+rspec ./spec/controllers/static_pages_controller_spec.rb:46 # StaticPagesController GET 'about' should have the right title
+rspec ./spec/controllers/static_pages_controller_spec.rb:15 # StaticPagesController GET 'home' should be successful
+rspec ./spec/controllers/static_pages_controller_spec.rb:20 # StaticPagesController GET 'home' should have the right title
+rspec ./spec/controllers/static_pages_controller_spec.rb:54 # StaticPagesController GET 'help' should be successful
+rspec ./spec/controllers/static_pages_controller_spec.rb:59 # StaticPagesController GET 'help' should have the right title
+rspec ./spec/models/user_spec.rb:32 # User should require a name
+rspec ./spec/models/user_spec.rb:56 # User should reject invalid email addresses
+rspec ./spec/models/user_spec.rb:48 # User should accept valid email addresses
+rspec ./spec/models/user_spec.rb:71 # User should reject email addresses identical up to case
+rspec ./spec/models/user_spec.rb:37 # User should require an email address
+rspec ./spec/models/user_spec.rb:64 # User should reject duplicate email addresses
+rspec ./spec/models/user_spec.rb:42 # User should reject names that are too long
+rspec ./spec/models/user_spec.rb:109 # User password encryption should have an ecrypted password attribute
+rspec ./spec/models/user_spec.rb:113 # User password encryption should set the encrypted password
+rspec ./spec/models/user_spec.rb:119 # User password encryption has_password? method should be true if the passwords match
+rspec ./spec/models/user_spec.rb:123 # User password encryption has_password? method should be false if the passwords don't match
+rspec ./spec/models/user_spec.rb:130 # User password encryption authenticate method should return nil on email/password mismatch
+rspec ./spec/models/user_spec.rb:135 # User password encryption authenticate method should return nil for an email address with no user
+rspec ./spec/models/user_spec.rb:140 # User password encryption authenticate method should return the user on email/password match
+rspec ./spec/models/user_spec.rb:176 # User pool associations should have a pools attribute
+rspec ./spec/models/user_spec.rb:85 # User password validations should require a matching password confirmation
+rspec ./spec/models/user_spec.rb:90 # User password validations should reject short passwords
+rspec ./spec/models/user_spec.rb:80 # User password validations should require a password
+rspec ./spec/models/user_spec.rb:96 # User password validations should reject long passwords
+rspec ./spec/models/user_spec.rb:153 # User admin attribute Should respond to admin
+rspec ./spec/models/user_spec.rb:157 # User admin attribute should not be and admin by default
+rspec ./spec/models/user_spec.rb:161 # User admin attribute should be convertible to an admin
+rspec ./spec/models/user_spec.rb:191 # User destroy should destroy associated pools
+rspec ./spec/models/user_spec.rb:198 # User destroy should destroy associated pool_memberships
+rspec ./spec/controllers/sessions_controller_spec.rb:8 # SessionsController GET 'new' should be successful
+rspec ./spec/controllers/sessions_controller_spec.rb:13 # SessionsController GET 'new' should have the right title
+rspec ./spec/controllers/sessions_controller_spec.rb:26 # SessionsController POST 'create' invalid signin should render the 'new' page
+rspec ./spec/controllers/sessions_controller_spec.rb:31 # SessionsController POST 'create' invalid signin should have the right title
+rspec ./spec/controllers/sessions_controller_spec.rb:36 # SessionsController POST 'create' invalid signin should have a flash.now message
+rspec ./spec/controllers/sessions_controller_spec.rb:48 # SessionsController POST 'create' with valid email and password should sign the user in
+rspec ./spec/controllers/sessions_controller_spec.rb:54 # SessionsController POST 'create' with valid email and password should redirect to the user show page
+rspec ./spec/controllers/sessions_controller_spec.rb:62 # SessionsController DELETE 'destroy' should sign a user out
+
+Randomized with seed 65451
+

@@ -15,12 +15,11 @@ class Pool < ActiveRecord::Base
 
   POOL_TYPES = { PickEm: 0, PickEmSpread: 1, Survivor: 2, SUP: 3 }
 
-  has_many :users, :through => :pool_memberships, :dependent => :destroy
-  has_many :pool_memberships, :dependent => :destroy
-  has_many :weeks, :dependent => :destroy
+  has_many :users, through: :pool_memberships, dependent: :destroy
+  has_many :pool_memberships, dependent: :destroy
+  has_many :weeks, dependent: :destroy
 
   attr_accessor :password
-  attr_accessible  :name, :poolType, :isPublic, :password
 
   validates :name,     :presence     => true,
                        :length       => { :maximum => 30 },

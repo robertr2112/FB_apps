@@ -12,65 +12,33 @@
 #  admin              :boolean          default(FALSE)
 #
 
-require 'digest'
-
 class User < ActiveRecord::Base
-
   has_many :pools, :through => :pool_memberships
   has_many :pool_memberships, :include => :pool,  :dependent => :destroy
 
-  attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  before_save { email.downcase! }
+# before_create :create_remember_token
 
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :name,  presence: true, length: { :maximum => 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+  validates :password, length: { minimum: 6 }
 
-  validates :name,     :presence     => true,
-                       :length       => { :maximum => 50 }
-  validates :email,    :presence     => true,
-                       :format       => { :with => email_regex },
-                       :uniqueness    => { :case_sensitive => false }
+  has_secure_password
 
-  # Automatically  create the virtual attribute 'password_confirmation'
-  validates :password, :presence     =>true,
-                       :confirmation => true,
-                       :length       => { :within => 6..40 }
-
-  before_save :encrypt_password
-
-  # Return true if the user's password matches the submitted password.
-  def has_password?(submitted_password)
-    # Compare encrypted_password with the encrypted version of
-    # submitted_password
-    encrypted_password == encrypt(submitted_password)
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
   end
 
-  def self.authenticate(email, submitted_password)
-    user = find_by_email(email)
-    return nil if user.nil?
-    return user if user.has_password?(submitted_password)
-  end
-
-  def self.authenticate_with_salt(id, cookie_salt)
-    user = find_by_id(id)
-    (user && user.salt == cookie_salt) ? user : nil
+  def User.encrypt(string)
+    Digest::SHA1.hexdigest(token.to_s)
   end
 
   private
-  
-    def encrypt_password
-      self.salt = make_salt if new_record?
-      self.encrypted_password = encrypt(password)
+
+    def create_remember_token
+      self.remember_token = User.encrypt(User.new_remember_token)
     end
 
-    def encrypt(string)
-      secure_hash("#{salt}--#{string}")
-    end
-
-    def make_salt
-      secure_hash("#{Time.now.utc}--#{password}")
-    end
-
-    def secure_hash(string)
-      Digest::SHA2.hexdigest(string)
-    end
 end

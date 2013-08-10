@@ -6,19 +6,17 @@ class UsersController < ApplicationController
   def new
     redirect_to(root_path) unless !signed_in?
     @user = User.new
-    @title = "Sign up"
   end
 
   def create
     redirect_to(root_path) unless !signed_in?
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       # Handle a successful save
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
-      @title = "Sign up"
       @user.password = ""
       @user.password_confirmation = ""
       render 'new'
@@ -61,6 +59,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation)
+    end
 
     def authenticate
       deny_access unless signed_in?
