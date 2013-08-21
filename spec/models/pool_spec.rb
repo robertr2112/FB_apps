@@ -19,9 +19,9 @@ describe Pool do
   before do
     # This code is not idiomatically correct.
     @pool = user.pools.build(name: "Pool 1", 
-                             poolType: Pool::Pool_TYPES[:pickEm],
+                             poolType: 0,
                              isPublic: true,
-                             pasword: "foobar")
+                             password: "foobar")
   end
  
   subject { @pool }
@@ -55,9 +55,7 @@ describe Pool do
       @pool = @user.pools.create(@pool_attr)
     end
 
-    it "should have a users attribute" do
-      @pool.should respond_to(:users)
-    end
+    it { should respond_to(:users) }
 
     it "should have the right associated user" do
       @user_id = @pool.users.last.id
