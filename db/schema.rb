@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808175633) do
+ActiveRecord::Schema.define(version: 20130819024938) do
 
   create_table "games", force: true do |t|
     t.integer  "homeTeamIndex"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20130808175633) do
   create_table "pools", force: true do |t|
     t.string   "name"
     t.integer  "poolType"
-    t.boolean  "isPublic",           default: true
-    t.string   "encrypted_password"
+    t.boolean  "isPublic",        default: true
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,9 +46,11 @@ ActiveRecord::Schema.define(version: 20130808175633) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.boolean  "admin",           default: false
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
   create_table "weeks", force: true do |t|
     t.integer  "state"

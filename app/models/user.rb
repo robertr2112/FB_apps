@@ -13,11 +13,11 @@
 #
 
 class User < ActiveRecord::Base
-  has_many :pools, :through => :pool_memberships
-  has_many :pool_memberships, :include => :pool,  :dependent => :destroy
+  has_many :pools, through: :pool_memberships, dependent: :destroy
+  has_many :pool_memberships, dependent: :destroy
 
   before_save { email.downcase! }
-# before_create :create_remember_token
+  before_create :create_remember_token
 
   validates :name,  presence: true, length: { :maximum => 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def User.encrypt(string)
+  def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 

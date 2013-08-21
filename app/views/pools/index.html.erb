@@ -1,5 +1,6 @@
 <h1>All Pools</h1>
 
+<% if @pools.count != 0 %>
 <%= will_paginate %>
 
 <div  class="pools">
@@ -13,3 +14,6 @@
 </table>
 
 <%= will_paginate %>
+<% else %>
+  <p> There are no pools available!</p>
+<% end %>

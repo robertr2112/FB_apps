@@ -4,7 +4,7 @@ class CreatePools < ActiveRecord::Migration
       t.string :name
       t.integer :poolType
       t.boolean :isPublic, :default => true
-      t.string :encrypted_password
+      t.string :password_digest
 
       t.timestamps
     end

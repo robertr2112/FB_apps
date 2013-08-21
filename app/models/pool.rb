@@ -21,15 +21,11 @@ class Pool < ActiveRecord::Base
 
   attr_accessor :password
 
-  validates :name,     :presence     => true,
-                       :length       => { :maximum => 30 },
-                       :uniqueness    => { :case_sensitive => false }
-  validates :poolType, :inclusion => { :in => 0..3 }
-  validates :isPublic, :inclusion => { :in => [true, false] }
-
-  # Need to look at copying the password mgmt from User class.  Also, need to look
-  # at how to include the function definitions in both without having a copy in both
-  #before_save :encrypt_password
+  validates :name,     presence:   true,
+                       length:     { :maximum => 30 },
+                       uniqueness: { :case_sensitive => false }
+  validates :poolType, inclusion:  { in: 0..3 }
+  validates :isPublic, inclusion:  { in: [true, false] }
 
   def isMember?(user)
     self.pool_memberships.find_by_user_id(user.id)

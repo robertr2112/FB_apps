@@ -4,7 +4,6 @@ class PoolsController < ApplicationController
   def new
     @pool = current_user.pools.new
     @pool_edit_flag = false
-    @title = "Create pool"
   end
 
   def create
@@ -16,7 +15,6 @@ class PoolsController < ApplicationController
       @pool.setOwner(current_user, true)
       redirect_to @pool
     else
-      @title = "Create pool"
       render 'new'
     end
   end
@@ -50,7 +48,6 @@ class PoolsController < ApplicationController
   end
 
   def index
-    @title = "All pools"
     @pools = Pool.paginate(:page => params[:page])
   end
 
@@ -60,7 +57,6 @@ class PoolsController < ApplicationController
       flash[:notice] = 'The pool you tried to access does not exist'
       redirect_to pools_path
     else
-      @title = @pool.name
       @pools = @pool.users.paginate(:page => params[:page])
     end
   end
@@ -69,7 +65,6 @@ class PoolsController < ApplicationController
     @pool = Pool.find(params[:id])
     if @pool.isOwner?(current_user)
       @pool_edit_flag = true
-      @title = "Edit pool"
     else
       flash[:error] = "Only the owner can edit the pool!"
       redirect_to pools_path
@@ -83,12 +78,10 @@ class PoolsController < ApplicationController
         flash[:success] = "Pool updated."
         redirect_to @pool
       else
-        @title = "Edit pool"
         render 'edit'
       end
     else
       flash[:error] = "Only the owner can edit the pool!"
-      @title = "Edit pool"
       redirect_to pools_path
     end
   end
