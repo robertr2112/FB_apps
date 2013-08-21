@@ -6,8 +6,8 @@
 #  user_id    :integer
 #  pool_id    :integer
 #  owner      :boolean          default(FALSE), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class PoolMembership < ActiveRecord::Base

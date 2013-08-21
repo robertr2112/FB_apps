@@ -2,36 +2,18 @@
 #
 # Table name: pools
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  poolType           :integer
-#  isPublic           :boolean          default(TRUE)
-#  encrypted_password :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  poolType        :integer
+#  isPublic        :boolean          default(TRUE)
+#  password_digest :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 require 'spec_helper'
 
 describe Pool do
-
-  let(:user) { FactoryGirl.create(:user) }
-  before do
-    # This code is not idiomatically correct.
-    @pool = user.pools.build(name: "Pool 1", 
-                             poolType: 0,
-                             isPublic: true,
-                             password: "foobar")
-  end
- 
-  subject { @pool }
-
-  it { should respond_to(:name) }
-  it { should respond_to(:poolType) }
-  it { should respond_to(:isPublic) }
-  it { should respond_to(:password_digest) }
-  it { should respond_to(:password) }
-  it { should respond_to(:password_confirmation) }
 
   before do
     @user_attr = {
@@ -43,47 +25,54 @@ describe Pool do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 
                    :isPublic => true }
     @user = User.create(@user_attr)
+    @pool = @user.pools.create(@pool_attr)
   end
 
-  it "should create a new instance given valid attributes" do
-    @user.pools.create!(@pool_attr)
+  subject { @pool }
+
+  it { should respond_to(:name) }
+  it { should respond_to(:poolType) }
+  it { should respond_to(:isPublic) }
+  it { should respond_to(:password_digest) }
+  it { should respond_to(:password) }
+  it { should respond_to(:users) }
+  it { should respond_to(:pool_memberships) }
+  it { should respond_to(:weeks) }
+  it { should respond_to(:isMember?) }
+  it { should respond_to(:isOwner?) }
+  it { should respond_to(:setOwner) }
+  it { should respond_to(:addUser) }
+  it { should respond_to(:removeUser) }
+
+  it { should be_valid }
+
+  it "should have the right associated user" do
+    @user_id = @pool.users.last.id
+    expect(@user_id).to eq @user.id
   end
 
-  describe "user associations" do
-
-    before(:each) do
-      @pool = @user.pools.create(@pool_attr)
-    end
-
-    it { should respond_to(:users) }
-
-    it "should have the right associated user" do
-      @user_id = @pool.users.last.id
-      @user_id.should == @user_id
-    end
+  it "when pool name is already taken" do
+    pool_with_duplicate_name = @user.pools.build(@pool_attr)
+    expect(pool_with_duplicate_name).to_not be_valid
   end
 
-  describe "validations" do
-    it "should require a unique name" do
-      @user.pools.create!(@pool_attr)
-      pool_with_duplicate_name = @user.pools.build(@pool_attr)
-      pool_with_duplicate_name.should_not be_valid
-    end
+  describe "when name is not present" do
+    before { @pool.name =  " " }
+    it { should_not be_valid }
+  end
 
-    it "should require nonblank content" do
-      @user.pools.build(:name => "  ").should_not be_valid
-    end
+  describe "when name is too long" do
+    before { @pool.name =  "a" * 31 }
+    it { should_not be_valid }
+  end
 
-    it "should reject long content" do
-      @user.pools.build(:name => "a" * 31).should_not be_valid
-    end
+  describe "when poolType is invalid" do
+    before { @pool.poolType = 4 }
+    it { should_not be_valid }
+  end
 
-    it "should reject invalid poolType" do
-      @user.pools.build(@pool_attr.merge(:poolType => 4)).should_not be_valid
-    end
-
-    it "should reject invalid isPublic boolean" do
-      @user.pools.build(@pool_attr.merge(:isPublic => nil)).should_not be_valid
-    end
+  describe "when isPublic is invalid" do
+    before { @pool.isPublic = nil }
+    it { should_not be_valid }
   end
 end

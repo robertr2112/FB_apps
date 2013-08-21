@@ -2,13 +2,13 @@
 #
 # Table name: pools
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  poolType           :integer
-#  isPublic           :boolean          default(TRUE)
-#  encrypted_password :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  poolType        :integer
+#  isPublic        :boolean          default(TRUE)
+#  password_digest :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 class Pool < ActiveRecord::Base
