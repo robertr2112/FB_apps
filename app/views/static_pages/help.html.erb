@@ -1,8 +1,36 @@
 <% provide(:title, 'Help') %>
 <h1>Help</h1>
 <p>
-  Get help on the Ruby on Rails Tutorial at the
-  <a href="http://railstutorial.org/help">Rails Tutorial help page</a>.
-  To get help on this sample app, see the
-  <a href="http://railstutorial.org/book">Rails Tutorial book</a>.
+Currently there are four types of pools that can be run on this site. Three pools
+are NFL based pools: PickEm, PickEmSpread, and Survivor. And one is an NCAA college
+football pool: SUP.
+</p>
+<h3><u>PickEm</u></h3>
+<p>
+The PickEm pool that lets you pick every NFL game each week for the whole season. Each
+week each user in the pool picks every NFL game, straight up, that is available for 
+that week. The picks must be entered by NOON the day before the first game that week. 
+It displays weekly totals (Wins, Ties, and Losses) as well as the Season totals for 
+each user. The season totals also includes how many weeks were won/tied by each user.
+</p>
+<h3><u>PickEmSpread</u></h3>
+<p>
+The PickEmSpread pool is exactly the same as the PickEm pool but the picks are made
+against the spread. All other details are the same as the PickEm pool.
+</p>
+<h3><u>Survivor</u></h3>
+<p>
+The Survivor pool allows a user to pick ONE NFL team each week. And each team can 
+only be picked one time during the season. If the team picked by the user wins then
+that user moves on in the pool.  If the team picked by the user loses then that user
+is out of the pool for the season. The winner of the pool is the last user standing.
+</p>
+<h3><u>SUP</u></h3>
+<p>
+The Stupid Underdog Pool(SUP) is a NCAA college football picking game.  Each week a
+user picks an underdog, against the spread, and if that underdog WINS THE GAME
+OUTRIGHT then the user gets the number of points of the spread. For example, if the
+Texas Longhorns are playing the Oklahoma Sooners and the Sooners are favored by +5,
+then a user who picks the Longhorns would get 5 points for the Longhorns winning the
+game outright. It is not enough for the team to win against the spread.
 </p>
