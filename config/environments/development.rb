@@ -24,4 +24,14 @@ FBApps::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
+
+  # Setup mailer
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.sendmail_settings = {
+    location: '/usr/sbin/exim4',
+    arguments: '-i -t'
+  }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 end

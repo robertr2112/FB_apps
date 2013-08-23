@@ -3,17 +3,21 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_tag sessions_path do %>
+    <%= form_tag(sessions_path, class: 'form_signin') do %>
 
-      <%= label_tag :email %>
-      <%= text_field_tag :email, params[:email] %>
+      <%= text_field_tag :email, params[:email],
+          class: 'input-block-level', placeholder: "Email Address"%>
 
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
+      <%= password_field_tag :password, nil,
+          class: 'input-block-level', placeholder: "Password"%>
+      <p><%= link_to "Don't remember password?", new_password_reset_path %> </p>
+
+      <%= check_box_tag :remember_me, 1, params[:remember_me], 
+        class: 'checkbox' %>&nbsp;Remember me<br /><br />
 
       <%= submit_tag "Sign in", class: "btn btn-large btn-primary" %>
     <% end %>
 
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
   </div>
-</div>

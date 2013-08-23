@@ -78,4 +78,7 @@ FBApps::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Setup mailer
+  config.action_mailer.default_url_options = { host: "fb-apps_heroku_app.com" }
 end

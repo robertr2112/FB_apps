@@ -9,3 +9,9 @@
 3) Fix main page header and footer to be FB_app specific.
 
 4) Add a pool/new link somewhere on main page.
+
+5) Update Week/Game models to validate the parent Id's are present.
+
+6) Change the tests for testing parent Id is set propersly using the its
+   method as shown in chapter 10.
+

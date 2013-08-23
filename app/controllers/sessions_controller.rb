@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email].downcase)
     if user && user.authenticate(params[:password])
       # Sign the user in and redirect to the page requested.
-      sign_in user
+      sign_in(user, params[:remember_me])
       redirect_back_or user
     else
       # Error message for invalid user email ID

@@ -1,11 +1,13 @@
 module SessionsHelper
   # Handle all of the Sign in functions
-  def sign_in(user)
+  def sign_in(user, remember_me)
     remember_token = User.new_remember_token
     #  Use of cookies to save a session for longer than browser duration
-    cookies.permanent[:remember_token] = remember_token
-    #  Use session to have a session end when browser closes
-#   session[:user_id] = user.id
+    if remember_me
+      cookies.permanent[:remember_token] = remember_token
+    else
+      cookies[:remember_token] = remember_token
+    end
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
   end
@@ -18,8 +20,6 @@ module SessionsHelper
     #  Use of cookies to save a session for longer than browser duration
     remember_token = User.encrypt(cookies[:remember_token])
     @current_user ||= User.find_by(remember_token: remember_token)
-    #  Use session to have a session end when browser closes
-#   @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def signed_in?
@@ -30,8 +30,6 @@ module SessionsHelper
     self.current_user = nil
     #  Use of cookies to save a session for longer than browser duration
     cookies.delete(:remember_token)
-    #  Use session to have a session end when browser closes
-#   session[:user_id] = nil
   end
 
   def current_user?(user)
