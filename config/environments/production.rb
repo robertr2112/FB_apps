@@ -80,5 +80,5 @@ FBApps::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Setup mailer
-  config.action_mailer.default_url_options = { host: "fb-apps_heroku_app.com" }
+  config.action_mailer.default_url_options = { host: "fb-pools.herokuapp.com" }
 end
