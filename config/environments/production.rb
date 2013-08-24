@@ -83,8 +83,11 @@ FBApps::Application.configure do
   config.action_mailer.default_url_options = { host: "fb-pools.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = { 
-      address: "smtp.att.yahoo.net", port: 465,
-      user_name: "robertr2112", password: "m0ntes", 
-      authentication: :login
+      address: "smtp.sendgrid..net", 
+      port: 587,
+      authentication: :plain,
+      user_name: ENV['SENDGRID_USERNAME'], 
+      password: ENV['SENDGRID_PASSWORD'], 
+      domain: 'heroku.com'
   }
 end
