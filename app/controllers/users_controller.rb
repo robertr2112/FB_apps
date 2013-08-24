@@ -14,7 +14,8 @@ class UsersController < ApplicationController
     if @user.save
       # Handle a successful save
       sign_in(@user, 0)
-      flash[:success] = "Welcome to the Sample App!"
+      @user.send_user_confirm
+      flash[:success] = "Welcome to Football Pool Mania!"
       redirect_to @user
     else
       @user.password = ""
@@ -32,6 +33,25 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+
+  def confirm
+    @user = User.find_by_confirmation_token!(params[:confirmation_token])
+    if @user
+      @user.update_attribute(:confirmed, true)
+      redirect_to root_url, notice: "User account has been confirmed!"
+    else
+      render :edit
+    end
+  end
+
+  def resend_confirm
+      if current_user.confirmed?
+        redirect_to root_url, notice: "User account has already been confirmed!"
+      else
+        current_user.send_user_confirm
+      redirect_to root_url, notice: "Confirm message has been resent!"
+      end
   end
 
   def update

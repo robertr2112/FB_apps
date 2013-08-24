@@ -16,6 +16,10 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_user %></li>
                 <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                <% if !current_user.confirmed? %>
+                  <li><%= link_to "Resend Confirmation", 
+                                   resend_confirm_path(current_user) %></li>
+                <% end %>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Sign out", signout_path, method: "delete" %>

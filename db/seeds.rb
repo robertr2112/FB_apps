@@ -9,6 +9,7 @@ print "Adding Admin user...\n"
 admin = User.new do |u|
   u.name = "Admin"
   u.admin = true
+  u.confirmed = true
   u.email = "admin@example.com"
   u.password = "password"
   u.password_confirmation = "password"

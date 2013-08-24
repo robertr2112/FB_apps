@@ -6,6 +6,13 @@
     friends.
 
   </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  <% if !signed_in? %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  <% elsif !current_user.confirmed? %>
+    <p>This user account needs to be confirmed before you can use this site.
+    Please look for the email with the subject <i>"Confirm Registration" </i>from
+       info@fbpm.com and click the Confirmation URL.  
+    </p>
+  <% end %>
 </div>
 

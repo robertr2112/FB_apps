@@ -6,12 +6,18 @@
    to either figure out how to use the rescue_from function or rewrite code to
    use find_by_id() and check for NULL fields.
 
-3) Fix main page header and footer to be FB_app specific.
+3) Fix main page header and footer to be FB_app specific.(DONE!)
 
 4) Add a pool/new link somewhere on main page.
 
 5) Update Week/Game models to validate the parent Id's are present.
 
-6) Change the tests for testing parent Id is set propersly using the its
+6) Change the tests for testing parent Id is set properly using the its
    method as shown in chapter 10.
+
+7) Change the confirm and password_reset emails to not send the encrypted token.
+   Instead send the unencrypted token and convert it in the code.
+
+8) Add all of the testing needed to test the password_reset, remember_me, and
+   user_confirmations.
 
