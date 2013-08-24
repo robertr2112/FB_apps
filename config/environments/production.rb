@@ -82,8 +82,9 @@ FBApps::Application.configure do
   # Setup mailer
   config.action_mailer.default_url_options = { host: "fb-pools.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
-  Action::Base.smtp_settings = { address: "smtp.att.yahoo.net", port: 465,
-       user_name: "robertr2112", password: "m0ntes", 
+  ActionMailer::Base.smtp_settings = { 
+      address: "smtp.att.yahoo.net", port: 465,
+      user_name: "robertr2112", password: "m0ntes", 
       authentication: :login
   }
 end
