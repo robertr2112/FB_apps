@@ -10,8 +10,12 @@
   </aside>
 </div>
 <% if !current_user.confirmed? %>
-  <p>This user account needs to be confirmed before you can use this site.
-  Please look for the email with the subject <i>"Confirm Registration" </i>from
-     info@fbpm.com and click the Confirmation URL.  
-  </p>
+<div class="row">
+  <div class="span6">
+    <p>This user account needs to be confirmed before you can use this site.
+       Please look for the email with the subject <i>"Confirm Registration" </i>from
+       info@fbpm.com and click the Confirmation URL.  
+    </p>
+  </div>
+</div>
 <% end %>

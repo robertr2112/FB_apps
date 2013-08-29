@@ -7,7 +7,7 @@ class PoolsController < ApplicationController
   end
 
   def create
-    @pool = current_user.pools.create(params[:pool])
+    @pool = current_user.pools.create(pool_params)
     if @pool.id
       # Handle a successful save
       flash[:success] = "Pool '#{@pool.name}' was created successfully!"
@@ -47,8 +47,12 @@ class PoolsController < ApplicationController
     end
   end
 
+  def my_pools
+    @pools = current_user.pools.paginate(page: params[:page])
+  end
+
   def index
-    @pools = Pool.paginate(:page => params[:page])
+    @pools = Pool.paginate(page: params[:page])
   end
 
   def show
@@ -74,10 +78,11 @@ class PoolsController < ApplicationController
   def update
     @pool = Pool.find(params[:id])
     if @pool.isOwner?(current_user)
-      if @pool.update_attributes(params[:pool])
+      if @pool.update_attributes(pool_params)
         flash[:success] = "Pool updated."
         redirect_to @pool
       else
+        @pool_edit_flag = true
         render 'edit'
       end
     else
@@ -99,6 +104,10 @@ class PoolsController < ApplicationController
   end
   
   private
+
+    def pool_params
+      params.require(:pool).permit(:name, :poolType, :isPublic, :password)
+    end
 
     def authenticate
       deny_access unless signed_in?

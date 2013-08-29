@@ -1,7 +1,7 @@
-<% provide(:title, 'Pool index') %>
-<h1>All Pools</h1>
+<% provide(:title, 'My Pool index') %>
+<h1>My Pools</h1>
 
-<% if @pools.any? %>
+<% if current_user.pools.any? %>
 <%= will_paginate %>
 
 <div  class="pools">
@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-  <%= render @pools %>
+    <%= render @pools %>
   </tbody>
 </table>
 

@@ -1,0 +1,19 @@
+  <%= render 'shared/error_messages', :object => f.object %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <% if @pool_edit_flag %>
+      <strong>Pool Type</strong><br />
+      <%= render 'show_type', :pool => @pool %> <br />
+    <% else %>
+      <%= f.label :poolType, "Pool Type" %>
+      <%= f.select(:poolType, Pool::POOL_TYPES, class: 'select') %>
+    <% end %>
+
+    <%= f.label :isPublic, "Status" %>
+    <%= f.radio_button :isPublic, true, class: 'radio' %>Public&nbsp&nbsp
+    <%= f.radio_button :isPublic, false, class: 'radio' %>Private<br /><br />
+
+    <%= f.label :password %>
+    <%= f.text_field :password %>
