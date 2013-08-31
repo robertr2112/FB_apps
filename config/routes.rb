@@ -3,10 +3,6 @@ FBApps::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
-  resources :pools do
-    resources :weeks, only: [:new, :create]
-  end
-
 
   root  'static_pages#home'
   match '/signup',          to: 'users#new',                    via: 'get'
@@ -23,4 +19,9 @@ FBApps::Application.routes.draw do
                             to: 'users#confirm', as: :confirm,  via: 'get'
   match 'users/resend_confirm/:id',  to: 'users#resend_confirm', 
                        as: :resend_confirm,     via: 'get'
+  resources :pools do
+    resources :weeks, only: [:new, :create]
+  end
+  resources :weeks, only: [:index, :show, :edit, :update, :destroy]
+
 end
