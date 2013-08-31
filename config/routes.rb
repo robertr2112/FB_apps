@@ -19,9 +19,9 @@ FBApps::Application.routes.draw do
                             to: 'users#confirm', as: :confirm,  via: 'get'
   match 'users/resend_confirm/:id',  to: 'users#resend_confirm', 
                        as: :resend_confirm,     via: 'get'
+
   resources :pools do
     resources :weeks, only: [:new, :create]
   end
-  resources :weeks, only: [:index, :show, :edit, :update, :destroy]
 
 end
