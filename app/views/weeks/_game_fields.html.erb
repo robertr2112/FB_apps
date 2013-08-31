@@ -1,0 +1,16 @@
+  <%= render 'shared/error_messages', :object => f.object %>
+  <%= f.fields_for :games do |builder| %>
+    <fieldset>
+      <%= f.label :homeTeamIndex, "Home Team" %>
+      <%= f.collection_select(:homeTeamIndex,
+                              NflTeam.all, :id, :name,
+                              class: 'select') %>
+      <%= f.label :awayTeamIndex, "Away Team" %>
+      <%= f.collection_select(:awayTeamIndex,
+                              NflTeam.all, :id, :name,
+                              class: 'select') %>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to "remove", '#', class: "remove_fields" %>
+    </fieldset>
+  <% end %>
+

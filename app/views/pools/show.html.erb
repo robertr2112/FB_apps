@@ -2,48 +2,60 @@
 <div class="row">
   <aside class="span8">
     <section>
-      <h1>
-        <%= @pool.name %>
-      </h1>
-    </section>
-      <h2>Members</h2>
-      <%= will_paginate %>
-
-      <% for user in @pool.users %>
-        <ul class="pools">
-          <%= render 'pool_member', user: user, pool: @pool %>
-        </ul>
+      <h1> <%= @pool.name %> </h1>
+      <strong>Pool Type</strong> 
+      <%= render 'show_type', pool: @pool %><br />
+      <strong>Status</strong> 
+      <% if @pool.isPublic %>
+        Public<br />
+      <% else %>
+        Private<br />
       <% end %>
+      <% if !@pool.isMember?(current_user) %>
+      <div class="JoinPool">
+        <%= link_to "Join Pool", join_path(@pool.id), id: @pool.id %>
+      </div>
+      <% elsif !@pool.isOwner?(current_user) %>
+        <%= link_to "Leave Pool", leave_path(@pool.id), id: @pool.id %>
+      <% end %>
+      <% if @pool.isOwner?(current_user) %>
+        <%= link_to "Edit pool", edit_pool_path(@pool) %><br />
+        <%= link_to "Delete pool", @pool, :method => :delete, 
+                :confirm => "Are you sure?", :title => "Delete#{@pool.name}" %>
+      <% end %>
+    </section>
 
-      <%= will_paginate %>
-
-      <br /><p>There are no results for this week!</p>
     <section>
+      <br \><p>There are no results for this week!</p>
     </section>
   </aside>
   <div class="span4">
-    <strong>Name</strong> <%= @pool.name %><br />
-    <strong>Pool Type</strong> 
-    <%= render 'show_type', :pool => @pool %><br />
-    <strong>Status</strong> 
-    <% if @pool.isPublic %>
-      Public<br />
-    <% else %>
-      Private<br />
-    <% end %>
-    <br />
-    <% if !@pool.isMember?(current_user) %>
-    <div class="JoinPool">
-      <%= link_to "Join Pool", join_path(@pool.id), id: @pool.id %>
-    </div>
-    <% elsif !@pool.isOwner?(current_user) %>
-      <%= link_to "Leave Pool", leave_path(@pool.id), id: @pool.id %>
-    <% end %>
+    <h3>Weeks</h3>
     <% if @pool.isOwner?(current_user) %>
-      <%= link_to "Edit pool", edit_pool_path(@pool) %><br />
-      <%= link_to "Delete pool", @pool, :method => :delete, 
-              :confirm => "Are you sure?", :title => "Delete#{@pool.name}" %>
+      <%= link_to "Create week", new_pool_week_path(@pool) %><br /><br />
     <% end %>
+    <% week_number = 1 %>
+    <% for week in @pool.weeks %>
+      <%= link_to "Week #{week_number}", "#" %>
+      <% if week_number % 3 == 0 %>
+        <br />
+      <% end %>
+      <% week_number += 1 %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="span6">
+    <h3>Members</h3>
+    <%= will_paginate %>
+
+    <% for user in @pool.users %>
+      <ul class="pools">
+        <%= render 'pool_member', user: user, pool: @pool %>
+      </ul>
+    <% end %>
+
+    <%= will_paginate %>
   </div>
 </div>
 

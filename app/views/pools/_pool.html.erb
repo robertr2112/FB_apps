@@ -8,6 +8,8 @@
     <% end %>
     <% if !pool.isMember?(current_user) %>
       <td><%= link_to "Join", join_path(pool.id) %></td>
+    <% elsif pool.isOwner?(current_user) %>
+      <td>Owner</td>
     <% else %>
       <td>Member</td>
     <% end %>

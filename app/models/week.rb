@@ -16,8 +16,13 @@ class Week < ActiveRecord::Base
   belongs_to :pool
   has_many   :games, :dependent => :destroy
 
-  validates :state, :inclusion => { :in => 0..2 }
+  #validates :state, :inclusion => { :in => 0..2 }
 
   accepts_nested_attributes_for :games
+
+  def setState(state)
+    self.state = state
+    self.save
+  end
 
 end

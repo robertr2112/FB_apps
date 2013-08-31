@@ -36,9 +36,15 @@ module SessionsHelper
     user == current_user
   end
 
-  def deny_access
-    store_location
-    redirect_to signin_path, :notice => "Please sign in to access this page."
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
+
+  def confirmed_user
+     redirect_to root_url unless current_user.confirmed?
   end
 
   def redirect_back_or(default)

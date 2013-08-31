@@ -1,5 +1,6 @@
 class PoolsController < ApplicationController
-  before_filter :authenticate
+  before_action :signed_in_user
+  before_action :confirmed_user
 
   def new
     @pool = current_user.pools.new
