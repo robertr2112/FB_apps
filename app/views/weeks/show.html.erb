@@ -8,31 +8,20 @@
     <section>
 
       <% gameNum = 0 %>
-        homeTeamIndex: <%= @games[gameNum].homeTeamIndex %>
-        awayTeamIndex: <%= @games[gameNum].awayTeamIndex %><br />
-        <%= @NflTeams[@games[gameNum].homeTeamIndex].name %>
-        <%= @NflTeams[@games[gameNum].awayTeamIndex].name %><br />
-      <% gameNum = 1 %>
-        homeTeamIndex: <%= @games[gameNum].homeTeamIndex %>
-        awayTeamIndex: <%= @games[gameNum].awayTeamIndex %><br />
-        <%= @NflTeams[@games[gameNum].homeTeamIndex].name %>
-        <%= @NflTeams[@games[gameNum].awayTeamIndex].name %><br />
-      <% (0..@games.count).each do |gameNum| %>
-        gameNum: <%= gameNum %>
-        homeTeamIndex: <%= @games[gameNum].homeTeamIndex %>
-        awayTeamIndex: <%#= @games[gameNum].awayTeamIndex %> <br />
-        <%#= @NflTeams[@games[gameNum].homeTeamIndex].name %>
-        <%#= @NflTeams[@games[gameNum].awayTeamIndex].name %>
-
-        <%#  <strong>Game <%= gameNum+1  </strong> <br />  %>
-        <%#= image_tag(@NflTeams[@games[gameNum].homeTeamIndex].imagePath,
+      <% (@games).each do |game| %>
+        <strong>Game <%= gameNum+1 %>  </strong> <br />
+        <%= game.homeTeamIndex %>
+        <%= @NflTeams[game.homeTeamIndex] %>
+        <%= @NflTeams[game.homeTeamIndex].imagePath %>
+        <%#= image_tag(imagePath,
                       size: "40") %>
-        <%#= @NflTeams[@games[gameNum].homeTeamIndex].name %>
-        <%#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VS %>
-        <%# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %>
-        <%#= image_tag(@NflTeams[@games[gameNum].awayTeamIndex].imagePath,
-                      size: "40") %>
-        <%#= @NflTeams[@games[gameNum].awayTeamIndex].name  <br /> %>
+        <%#= @NflTeams[game.homeTeamIndex].name %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VS
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= image_tag(@NflTeams[game.awayTeamIndex].imagePath,
+                      size: "35") %>
+        <%= @NflTeams[game.awayTeamIndex].name %> <br />
+        <% gameNum += 1 %>
       <% end %>
     </section>
   </aside>
