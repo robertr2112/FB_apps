@@ -1,0 +1,41 @@
+<% provide(:title, 'Current Games') %>
+<div class="row">
+  <aside class="span8">
+    <section>
+      <h1>Current Games</h1>
+    </section>
+
+    <section>
+
+      <% gameNum = 0 %>
+        homeTeamIndex: <%= @games[gameNum].homeTeamIndex %>
+        awayTeamIndex: <%= @games[gameNum].awayTeamIndex %><br />
+        <%= @NflTeams[@games[gameNum].homeTeamIndex].name %>
+        <%= @NflTeams[@games[gameNum].awayTeamIndex].name %><br />
+      <% gameNum = 1 %>
+        homeTeamIndex: <%= @games[gameNum].homeTeamIndex %>
+        awayTeamIndex: <%= @games[gameNum].awayTeamIndex %><br />
+        <%= @NflTeams[@games[gameNum].homeTeamIndex].name %>
+        <%= @NflTeams[@games[gameNum].awayTeamIndex].name %><br />
+      <% (0..@games.count).each do |gameNum| %>
+        gameNum: <%= gameNum %>
+        homeTeamIndex: <%= @games[gameNum].homeTeamIndex %>
+        awayTeamIndex: <%#= @games[gameNum].awayTeamIndex %> <br />
+        <%#= @NflTeams[@games[gameNum].homeTeamIndex].name %>
+        <%#= @NflTeams[@games[gameNum].awayTeamIndex].name %>
+
+        <%#  <strong>Game <%= gameNum+1  </strong> <br />  %>
+        <%#= image_tag(@NflTeams[@games[gameNum].homeTeamIndex].imagePath,
+                      size: "40") %>
+        <%#= @NflTeams[@games[gameNum].homeTeamIndex].name %>
+        <%#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VS %>
+        <%# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %>
+        <%#= image_tag(@NflTeams[@games[gameNum].awayTeamIndex].imagePath,
+                      size: "40") %>
+        <%#= @NflTeams[@games[gameNum].awayTeamIndex].name  <br /> %>
+      <% end %>
+    </section>
+  </aside>
+  <div class="span4">
+  </div>
+</div>

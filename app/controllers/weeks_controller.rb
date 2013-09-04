@@ -30,6 +30,12 @@ class WeeksController < ApplicationController
   def edit
   end
 
+  def show
+    @week = Week.find(params[:id])
+    @games = @week.games
+    @NflTeams = NflTeam.all
+  end
+
   private
     def week_params
       params.require(:week).permit(:state, :pool_id,

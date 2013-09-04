@@ -24,4 +24,10 @@ FBApps::Application.routes.draw do
     resources :weeks, only: [:new, :create]
   end
 
+  resources :weeks do
+    member do
+      get :picks
+      put :create_picks
+    end
+  end
 end
