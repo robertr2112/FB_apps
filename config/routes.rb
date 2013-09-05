@@ -14,7 +14,6 @@ FBApps::Application.routes.draw do
   match 'pools/join/:id',   to: 'pools#join',    as: :join,     via: 'get'
   match 'pools/leave/:id',  to: 'pools#leave',   as: :leave,    via: 'get'
   match 'pools/my_pools',   to: 'pools#my_pools',as: :my_pools, via: 'get'
-  match 'weeks/edit/:id',   to: 'weeks#edit',    as: :edit_week,via: 'post'
   match 'users/confirm/:confirmation_token',
                             to: 'users#confirm', as: :confirm,  via: 'get'
   match 'users/resend_confirm/:id',  to: 'users#resend_confirm', 
@@ -24,7 +23,7 @@ FBApps::Application.routes.draw do
     resources :weeks, only: [:new, :create]
   end
 
-  resources :weeks do
+  resources :weeks, only: [:edit, :update, :show, :destroy] do
     member do
       get :picks
       put :create_picks

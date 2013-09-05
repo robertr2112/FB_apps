@@ -17,7 +17,7 @@ end
 
 admin.save!
 
-print "Adding NFL teams..."
+print "Adding NFL teams...\n"
     NflTeam.create name: "Arizona Cardinals", 
                                       imagePath: "nfl_teams/nfcw/ari.jpeg"
     NflTeam.create name: "Atlanta Falcons", 
@@ -37,7 +37,7 @@ print "Adding NFL teams..."
     NflTeam.create name: "Dallas Cowboys", 
                                       imagePath: "nfl_teams/nfce/dal.jpeg"
     NflTeam.create name: "Denver Broncos", 
-                                      imagePath: "nfl_teams/afcw/dev.jpeg"
+                                      imagePath: "nfl_teams/afcw/den.jpeg"
     NflTeam.create name: "Detroit Lions", 
                                       imagePath: "nfl_teams/nfcn/det.jpeg"
     NflTeam.create name: "Green Bay Packers", 

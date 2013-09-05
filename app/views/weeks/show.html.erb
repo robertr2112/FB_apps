@@ -1,26 +1,27 @@
-<% provide(:title, 'Current Games') %>
+<% provide(:title, 'Week #{@week.weekNumber} Games') %>
 <div class="row">
   <aside class="span8">
     <section>
-      <h1>Current Games</h1>
+      <h1> Week <%= @week.weekNumber %> Games</h1>
+      <% if @pool.isOwner?(current_user) %>
+        <%= link_to "Edit week", edit_week_path(@week) %>
+        <%= link_to "Delete week", @week, :method => :delete, 
+                    :confirm => "Are you sure?", 
+                    :title => "Delete week #{@week.weekNumber}" %>
+      <% end %>
     </section>
 
     <section>
-
       <% gameNum = 0 %>
       <% (@games).each do |game| %>
-        <strong>Game <%= gameNum+1 %>  </strong> <br />
-        <%= game.homeTeamIndex %>
-        <%= @NflTeams[game.homeTeamIndex] %>
-        <%= @NflTeams[game.homeTeamIndex].imagePath %>
-        <%#= image_tag(imagePath,
-                      size: "40") %>
-        <%#= @NflTeams[game.homeTeamIndex].name %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VS
+        <% team = NflTeam.find(game.awayTeamIndex) %>
+        <%= image_tag(team.imagePath, size: "40") %>
+        <%= team.name %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AT
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= image_tag(@NflTeams[game.awayTeamIndex].imagePath,
-                      size: "35") %>
-        <%= @NflTeams[game.awayTeamIndex].name %> <br />
+        <% team = NflTeam.find(game.homeTeamIndex) %>
+        <%= image_tag(team.imagePath, size: "40") %>
+        <%= team.name %> <br />
         <% gameNum += 1 %>
       <% end %>
     </section>

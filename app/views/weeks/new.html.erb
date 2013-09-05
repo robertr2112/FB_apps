@@ -3,7 +3,10 @@
 <div class="row">
   <div class="span6 offset2">
     <%= form_for([@pool, @week], html: { class: 'form-inline' }) do |f| %>
-      <%= render 'game_fields', f: f %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%= f.fields_for :games do |builder| %>
+        <%= render 'game_fields', f: f %>
+      <% end %>
       <div class="control-group">
         <div class = "controls">
           <%= link_to_add_fields "Add New Game", f, :games %><br /><br />

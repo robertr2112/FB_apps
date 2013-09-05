@@ -16,9 +16,11 @@ class WeeksController < ApplicationController
   def create
     @pool = Pool.find(params[:pool_id])
     @week = @pool.weeks.new(week_params)
+    @week.weekNumber = @week_number
     if @week.save
       # Handle a successful save
-      flash[:success] = "Week '#{@week_number}' for '#{@pool.name}' was created successfully!"
+      flash[:success] = 
+          "Week '@week.weekNumber}' for '#{@pool.name}' was created successfully!"
       # Set the state to Pend
       @week.setState(Week::STATES[:Pend])
       redirect_to @pool
@@ -28,17 +30,31 @@ class WeeksController < ApplicationController
   end
 
   def edit
+    @week = Week.find(params[:id])
+    @games = @week.games
+  end
+
+  def update
+    @week = Week.find(params[:id])
+    if @week.update_attributes(week_params)
+      redirect_to @week, notice: "Successfully updated week #{@week.weekNumber}."
+    else
+      render :edit
+    end
   end
 
   def show
     @week = Week.find(params[:id])
+    @pool = Pool.find(@week.pool_id)
     @games = @week.games
-    @NflTeams = NflTeam.all
+  end
+
+  def destroy
   end
 
   private
     def week_params
-      params.require(:week).permit(:state, :pool_id,
+      params.require(:week).permit(:state, :pool_id, :weekNumber,
                                    games_attributes: [:id, :week_id,
                                                      :homeTeamIndex, 
                                                      :awayTeamIndex, 

@@ -1,0 +1,20 @@
+<% provide(:title, 'Edit Week @week_number') %>
+<div class="row">
+  <div class="span6 offset2">
+    <h1>Edit Week <%= @week.weekNumber %></h1>
+    <%= form_for(@week, html: { class: 'form-inline' }) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%= f.fields_for :games do |builder| %>
+        <%= render 'game_fields', f: builder %>
+      <% end %>
+      <div class="control-group">
+        <div class = "controls">
+          <%= link_to_add_fields "Add New Game", f, :games %><br /><br />
+          <%= f.submit "Change week #{@week_number}", 
+                                   class: "btn btn-large btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

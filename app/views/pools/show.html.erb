@@ -36,7 +36,7 @@
     <% end %>
     <% week_number = 1 %>
     <% for week in @pool.weeks %>
-      <%= link_to "Week #{week_number}", "#" %>
+      <%= link_to "Week #{week_number}", week_path(week) %>
       <% if week_number % 3 == 0 %>
         <br />
       <% end %>
