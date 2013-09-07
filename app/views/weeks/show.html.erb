@@ -1,4 +1,4 @@
-<% provide(:title, 'Week #{@week.weekNumber} Games') %>
+<% provide(:title, "Week #{@week.weekNumber} Games") %>
 <div class="row">
   <aside class="span8">
     <section>
@@ -12,17 +12,9 @@
     </section>
 
     <section>
-      <% gameNum = 0 %>
+      <% @teams = NflTeam.all %>
       <% (@games).each do |game| %>
-        <% team = NflTeam.find(game.awayTeamIndex) %>
-        <%= image_tag(team.imagePath, size: "40") %>
-        <%= team.name %>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AT
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <% team = NflTeam.find(game.homeTeamIndex) %>
-        <%= image_tag(team.imagePath, size: "40") %>
-        <%= team.name %> <br />
-        <% gameNum += 1 %>
+        <%= render 'shared/games', teams: @teams, game: game %>
       <% end %>
     </section>
   </aside>

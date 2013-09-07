@@ -1,0 +1,8 @@
+<% team = teams[game.awayTeamIndex-1] %>
+<%= image_tag(team.imagePath, size: "40") %>
+<%= team.name %>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AT
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<% team = teams[game.homeTeamIndex-1] %>
+<%= image_tag(team.imagePath, size: "40") %>
+<%= team.name %> <br />

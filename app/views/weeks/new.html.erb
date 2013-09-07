@@ -1,16 +1,16 @@
-<% provide(:title, 'Create Week') %>
-<%= raw "<h1>Create Week #{@week_number}</h1>" %>
+<% provide(:title, "Create Week #{@week.weekNumber}") %>
+<%= raw "<h1>Create Week #{@week.weekNumber}</h1>" %>
 <div class="row">
   <div class="span6 offset2">
     <%= form_for([@pool, @week], html: { class: 'form-inline' }) do |f| %>
-      <%= render 'shared/error_messages', :object => f.object %>
+      <%= render 'shared/error_messages', object: f.object %>
       <%= f.fields_for :games do |builder| %>
-        <%= render 'game_fields', f: f %>
+        <%= render 'game_fields', f: builder %>
       <% end %>
       <div class="control-group">
         <div class = "controls">
           <%= link_to_add_fields "Add New Game", f, :games %><br /><br />
-          <%= f.submit "Create week #{@week_number}", 
+          <%= f.submit "Create week #{@week.weekNumber}", 
                                    class: "btn btn-large btn-primary" %>
         </div>
       </div>

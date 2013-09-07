@@ -1,4 +1,4 @@
-<% provide(:title, 'Edit Week @week_number') %>
+<% provide(:title, "Edit Week #{@week.weekNumber}") %>
 <div class="row">
   <div class="span6 offset2">
     <h1>Edit Week <%= @week.weekNumber %></h1>
@@ -10,7 +10,7 @@
       <div class="control-group">
         <div class = "controls">
           <%= link_to_add_fields "Add New Game", f, :games %><br /><br />
-          <%= f.submit "Change week #{@week_number}", 
+          <%= f.submit "Change week #{@week.weekNumber}", 
                                    class: "btn btn-large btn-primary" %>
         </div>
       </div>

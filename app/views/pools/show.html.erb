@@ -26,7 +26,7 @@
     </section>
 
     <section>
-      <br \><p>There are no results for this week!</p>
+      <h1>Current Week Results</h>
     </section>
   </aside>
   <div class="span4">
@@ -35,12 +35,15 @@
       <%= link_to "Create week", new_pool_week_path(@pool) %><br /><br />
     <% end %>
     <% week_number = 1 %>
-    <% for week in @pool.weeks %>
-      <%= link_to "Week #{week_number}", week_path(week) %>
-      <% if week_number % 3 == 0 %>
-        <br />
+    <% @pool.weeks.each do |week| %>
+      <% if @week != week %>
+        <%= link_to "Week #{week.weekNumber}", week_path(week) %>
+        <% if week.weekNumber % 3 == 0 %>
+          <br />
+        <% end %>
+      <% else %>
+        Week <%= week.weekNumber %>
       <% end %>
-      <% week_number += 1 %>
     <% end %>
   </div>
 </div>

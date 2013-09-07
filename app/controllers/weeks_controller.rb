@@ -6,9 +6,10 @@ class WeeksController < ApplicationController
     @pool = Pool.find(params[:pool_id])
     if !@pool.nil?
       @week = @pool.weeks.new
-      @week_number = @pool.weeks.count + 1
+      @game = @week.games.new
+      @week.weekNumber = @pool.weeks.count + 1
     else
-      flash[:error] = "Cannot create week. Pool with id:#{params[:id]} does not exist!"
+      flash[:error] = "Cannot create week. Pool with id:#{params[:pool_id]} does not exist!"
       redirect_to pools_path
     end
   end
@@ -16,11 +17,11 @@ class WeeksController < ApplicationController
   def create
     @pool = Pool.find(params[:pool_id])
     @week = @pool.weeks.new(week_params)
-    @week.weekNumber = @week_number
+    @week.weekNumber = @pool.weeks.count + 1
     if @week.save
       # Handle a successful save
       flash[:success] = 
-          "Week '@week.weekNumber}' for '#{@pool.name}' was created successfully!"
+          "Week #{@week.weekNumber} for '#{@pool.name}' was created successfully!"
       # Set the state to Pend
       @week.setState(Week::STATES[:Pend])
       redirect_to @pool
@@ -50,6 +51,16 @@ class WeeksController < ApplicationController
   end
 
   def destroy
+    @week = Week.find(params[:id])
+    @pool = Pool.find(@week.pool_id)
+    if @pool.isOwner?(current_user)
+      @week.destroy
+      flash[:success] = "Successfully deleted Week '#{@week.weekNumber}'!"
+      redirect_to pool_path(@pool)
+    else
+      flash[:error] = "Only the onwer of the pool can delete weeks!"
+      redirect_to pools_path
+    end
   end
 
   private
