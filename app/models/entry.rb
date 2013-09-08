@@ -1,4 +1,4 @@
-class Pick < ActiveRecord::Base
+class Entry < ActiveRecord::Base
 
   belongs_to :week
   has_many :game_picks, dependent: :destroy

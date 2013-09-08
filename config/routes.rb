@@ -24,9 +24,9 @@ FBApps::Application.routes.draw do
   end
 
   resources :weeks, only: [:edit, :update, :show, :destroy] do
-    resources :picks, only: [:new, :create]
+    resources :entries, only: [:new, :create]
   end
 
-  resources :picks, only: [:edit, :update, :destroy]
+  resources :entries, only: [:edit, :update, :destroy]
 
 end

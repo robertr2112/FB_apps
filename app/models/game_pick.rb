@@ -1,5 +1,5 @@
 class GamePick < ActiveRecord::Base
 
-  belongs_to :picks
+  belongs_to :entry
 
 end

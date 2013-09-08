@@ -15,7 +15,7 @@ class Week < ActiveRecord::Base
 
   belongs_to :pool
   has_many   :games, dependent: :destroy
-  has_many   :picks, dependent: :destroy
+  has_many   :entries, dependent: :destroy
 
   accepts_nested_attributes_for :games
 
@@ -47,9 +47,9 @@ class Week < ActiveRecord::Base
     return select_teams
   end
 
-  def madePicks?(user)
-    self.picks.each do |pick|
-      if pick.user_id == user.id
+  def madeEntry?(user)
+    self.entries.each do |entry|
+      if entry.user_id == user.id
         return true
       end
     end

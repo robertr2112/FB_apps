@@ -1,6 +1,6 @@
-class CreatePicks < ActiveRecord::Migration
+class CreateEntries < ActiveRecord::Migration
   def change
-    create_table :picks do |t|
+    create_table :entries do |t|
       t.integer :user_id
       t.integer :week_id
       t.integer :total_score
@@ -9,6 +9,6 @@ class CreatePicks < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :picks, :user_id
+    add_index :entries, :user_id
   end
 end
