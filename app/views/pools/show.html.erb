@@ -14,14 +14,18 @@
       <% else %>
         Private<br />
       <% end %>
-      <strong>State</strong>
-      <%= render 'show_week_state', week: @week %>
+      <% if !@week.nil? %>
+        <strong>State</strong>
+        <%= render 'show_week_state', week: @week %>
+      <% end %>
     </section>
 
     <section>
       <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
         <h1>Current Board</h1>
-        <%= render 'show_board', pool: @pool, week: @week %>
+        <% if !@week.nil? %>
+          <%= render 'show_board', pool: @pool, week: @week %>
+        <% end %>
       <% end %>
     </section>
   </aside>

@@ -12,6 +12,7 @@
 #
 
 class Pool < ActiveRecord::Base
+  #before_create   :pool_valid?
 
   POOL_TYPES = { PickEm: 0, PickEmSpread: 1, Survivor: 2, SUP: 3 }
 
@@ -56,5 +57,21 @@ class Pool < ActiveRecord::Base
     pool_membership = self.pool_memberships.find_by_user_id(user.id)
     pool_membership.destroy
   end
+
+  private
+
+    def pool_valid?
+      if self.poolType != Pool::POOL_TYPES[:Survivor]
+        if self.poolType == Pool::POOL_TYPES[:PickEm]
+          type = "PickEm"
+        elsif self.poolType == Pool::POOL_TYPES[:PickEmSpread]
+          type = "PickEmSpread"
+        else
+          type = "SUP"
+        end
+        return true
+      end
+      return false
+    end
 
 end

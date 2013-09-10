@@ -32,20 +32,22 @@
         </a>
         <ul class="dropdown-menu">
           <li><%= link_to "Create week", new_pool_week_path(pool) %></li>
-          <li><%= link_to "Edit week", edit_week_path(week) %></li>
-          <li>
-            <%= link_to "Delete week", week, :method => :delete, 
-                      :confirm => "Are you sure?", 
-                      :title => "Delete week #{week.weekNumber}" %>
-          </li>
-          <li class="divider"></li>
-          <li><%= link_to "Mark week open", open_path(week) %></li>
-          <li><%= link_to "Mark week closed", closed_path(week) %></li>
-          <li><%= link_to "Mark week final", final_path(week) %></li>
+          <% if !pool.weeks.empty? %>
+            <li><%= link_to "Edit week", edit_week_path(week) %></li>
+            <li>
+              <%= link_to "Delete week", week, :method => :delete, 
+                        :confirm => "Are you sure?", 
+                        :title => "Delete week #{week.weekNumber}" %>
+            </li>
+            <li class="divider"></li>
+            <li><%= link_to "Mark week open", open_path(week) %></li>
+            <li><%= link_to "Mark week closed", closed_path(week) %></li>
+            <li><%= link_to "Mark week final", final_path(week) %></li>
+          <% end %>
         </ul>
       </li>
     <% end %>
-    <% if pool.isMember?(current_user) %>
+    <% if pool.isMember?(current_user) && !week.nil? %>
       <li class="dropdown">
         <a class="dropdown-toggle"
            data-toggle="dropdown"
