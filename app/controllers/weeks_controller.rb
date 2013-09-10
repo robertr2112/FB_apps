@@ -63,6 +63,29 @@ class WeeksController < ApplicationController
     end
   end
 
+  def open
+    @week = Week.find(params[:id])
+    @pool = Pool.find(@week.pool_id)
+    @week.setState(Week::STATES[:Open]) unless @week.nil?
+    redirect_to @pool
+  end
+
+  def closed
+    @week = Week.find(params[:id])
+    @pool = Pool.find(@week.pool_id)
+    @week.setState(Week::STATES[:Closed]) unless @week.nil?
+    redirect_to @pool
+  end
+
+  def final
+    @week = Week.find(params[:id])
+    @pool = Pool.find(@week.pool_id)
+    @week.setState(Week::STATES[:Final]) unless @week.nil?
+    @week.markUserEntries
+    flash[:notice] = "Week #{@week.weekNumber} is marked final!"
+    redirect_to @pool
+  end
+
   private
     def week_params
       params.require(:week).permit(:state, :pool_id, :weekNumber,

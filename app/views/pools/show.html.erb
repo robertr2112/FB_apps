@@ -1,4 +1,7 @@
 <% provide(:title, @pool.name) %>
+<div class = "row">
+  <%= render 'mgmt_menu', pool: @pool, week: @week %>
+</div>
 <div class="row">
   <aside class="span8">
     <section>
@@ -11,38 +14,26 @@
       <% else %>
         Private<br />
       <% end %>
-      <% if !@pool.isMember?(current_user) %>
-      <div class="JoinPool">
-        <%= link_to "Join Pool", join_path(@pool.id), id: @pool.id %>
-      </div>
-      <% elsif !@pool.isOwner?(current_user) %>
-        <%= link_to "Leave Pool", leave_path(@pool.id), id: @pool.id %>
-      <% end %>
-      <% if @pool.isOwner?(current_user) %>
-        <%= link_to "Edit pool", edit_pool_path(@pool) %><br />
-        <%= link_to "Delete pool", @pool, :method => :delete, 
-                :confirm => "Are you sure?", :title => "Delete#{@pool.name}" %>
-      <% end %>
+      <strong>State</strong>
+      <%= render 'show_week_state', week: @week %>
     </section>
 
     <section>
-      <h1>Current Week Results</h>
+      <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
+        <h1>Current Board</h1>
+        <%= render 'show_board', pool: @pool, week: @week %>
+      <% end %>
     </section>
   </aside>
   <div class="span4">
     <h3>Weeks</h3>
     <% if @pool.isOwner?(current_user) %>
-      <%= link_to "Create week", new_pool_week_path(@pool) %><br /><br />
     <% end %>
     <% week_number = 1 %>
     <% @pool.weeks.each do |week| %>
-      <% if @week != week %>
-        <%= link_to "Week #{week.weekNumber}", week_path(week) %>
-        <% if week.weekNumber % 3 == 0 %>
-          <br />
-        <% end %>
-      <% else %>
-        Week <%= week.weekNumber %>
+      <%= link_to "Week #{week.weekNumber}", week_path(week) %>
+      <% if week.weekNumber % 3 == 0 %>
+        <br />
       <% end %>
     <% end %>
   </div>

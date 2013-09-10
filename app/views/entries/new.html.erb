@@ -1,11 +1,10 @@
 <% provide(:title, "Make Entry") %>
-<%= raw "<h1>Make Entry for Week #{@week.weekNumber}</h1>" %>
 <div class="row">
-  <div class="span6 offset2">
+  <h1>Make Entry for Week <%=@week.weekNumber%></h1>
+  <div class="span6 offset3">
       <% @teams = NflTeam.all %>
-      <% (@week.games).each do |game| %>
-        <%= render 'shared/games', teams: @teams, game: game %>
-      <% end %>
+      <%= render 'shared/games', week: @week, games: @week.games %>
+    <br />
     <%= form_for([@week, @entry], html: { class: 'form-inline' }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.fields_for :game_picks do |builder| %>

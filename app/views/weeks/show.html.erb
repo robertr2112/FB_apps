@@ -3,6 +3,7 @@
   <aside class="span8">
     <section>
       <h1> Week <%= @week.weekNumber %> Games</h1>
+      <%= link_to "Pool Page", @pool %>
       <% if @pool.isOwner?(current_user) %>
         <%= link_to "Edit week", edit_week_path(@week) %>
         <%= link_to "Delete week", @week, :method => :delete, 
@@ -12,10 +13,7 @@
     </section>
 
     <section>
-      <% @teams = NflTeam.all %>
-      <% (@games).each do |game| %>
-        <%= render 'shared/games', teams: @teams, game: game %>
-      <% end %>
+        <%= render 'shared/games', week: @week, games: @games %>
     </section>
   </aside>
   <div class="span4">

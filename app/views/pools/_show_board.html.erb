@@ -1,0 +1,46 @@
+<table class="table table-striped table-bordered table-condensed table-hover">
+  <tr>
+    <td></td>
+    <% @pool.weeks.each do |week| %>
+      <td>
+        <%= "Week #{week.weekNumber}" %> 
+      </td>
+    <% end %>
+  </tr>
+  <% teams = NflTeam.all %>
+  <% old_nickname = "" %>
+  <% entryNum = 1 %>
+  <% @pool.users.each do |user| %>
+    <tr>
+      <% nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0] %>
+      <% if nickname == old_nickname %>
+        <% nickname += entryNum %>
+        <% entryNum += 1 %>
+      <% end %>
+      <td class="entry_name"><%= nickname %></td>
+      <% old_nickname = nickname %>
+      <% @pool.weeks.each do |week| %>
+        <% @entries = week.entries.where(user_id: user.id) %>
+        <% if @entries.empty? %>
+          <% if week.checkStateFinal %>
+            <td class="entry_out">Out</td>
+          <% else %>
+            <td></td>
+          <% end %>
+        <% else %>
+          <% @entries.each do |entry| %>
+            <% game = entry.game_picks.first %>
+            <% team_nickname = teams[game.chosenTeamIndex-1].name.split(" ").last %>
+            <% if !@week.checkStateFinal %>
+              <td class="entry_base"><%= team_nickname %></td>
+            <% elsif entry.survivor_status %>
+              <td class="entry_success"><%= team_nickname %></td>
+            <% else %>
+              <td class="entry_error"><%= team_nickname %></td>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

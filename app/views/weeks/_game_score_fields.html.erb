@@ -1,0 +1,7 @@
+<fieldset>
+  <%= NflTeam.find(f.object.send(:awayTeamIndex)).name %>
+  <%= f.number_field(:awayTeamScore, size: 2, class: 'number_field') %>
+  <%= NflTeam.find(f.object.send(:homeTeamIndex)).name %>
+  <%= f.number_field(:homeTeamScore, size: 2, class: 'number_field') %>
+</fieldset>
+

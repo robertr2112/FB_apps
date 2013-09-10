@@ -1,8 +1,41 @@
-<% team = teams[game.awayTeamIndex-1] %>
-<%= image_tag(team.imagePath, size: "40") %>
-<%= team.name %>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AT
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<% team = teams[game.homeTeamIndex-1] %>
-<%= image_tag(team.imagePath, size: "40") %>
-<%= team.name %> <br />
+<% teams = NflTeam.all %>
+<table class = "table table-condensed">
+  <tbody>
+    <% games.each do |game| %>
+      <tr>
+        <% team = teams[game.awayTeamIndex-1] %>
+        <td>
+        <%= image_tag(team.imagePath, size: "40") %>
+        <% if week.checkStateFinal %>
+          <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
+          <% if awayTeamWon %>
+            <strong><%= team.name %></strong>
+            &nbsp;&nbsp;<%= game.awayTeamScore %>
+          <% else %>
+            <%= team.name %>
+            &nbsp;&nbsp;<%= game.awayTeamScore %>
+          <% end %>
+        <% else %>
+            <%= team.name %>
+        <% end %>
+        </td>
+        <td>AT</td>
+        <% team = teams[game.homeTeamIndex-1] %>
+        <td>
+        <%= image_tag(team.imagePath, size: "40") %>
+        <% if week.checkStateFinal %>
+          <% if !awayTeamWon %>
+            <strong><%= team.name %></strong>
+            &nbsp;&nbsp;<%= game.homeTeamScore %>
+          <% else %>
+            <%= team.name %>
+            &nbsp;&nbsp;<%= game.homeTeamScore %>
+          <% end %>
+        <% else %>
+          <%= team.name %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

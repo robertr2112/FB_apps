@@ -1,10 +1,10 @@
 <fieldset>
-  <%= f.label :homeTeamIndex, "Home Team" %>
-  <%= f.collection_select(:homeTeamIndex,
-                          NflTeam.all, :id, :name,
-                          class: 'select') %>
   <%= f.label :awayTeamIndex, "Away Team" %>
   <%= f.collection_select(:awayTeamIndex,
+                          NflTeam.all, :id, :name,
+                          class: 'select') %>
+  <%= f.label :homeTeamIndex, "Home Team" %>
+  <%= f.collection_select(:homeTeamIndex,
                           NflTeam.all, :id, :name,
                           class: 'select') %>
   <%= f.hidden_field :_destroy %>

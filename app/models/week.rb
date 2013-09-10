@@ -11,7 +11,7 @@
 
 class Week < ActiveRecord::Base
 
-  STATES = { Pend: 0, Open: 1, Closed: 2 }
+  STATES = { Pend: 0, Open: 1, Closed: 2, Final: 3 }
 
   belongs_to :pool
   has_many   :games, dependent: :destroy
@@ -36,6 +36,18 @@ class Week < ActiveRecord::Base
     self.state == Week::STATES[:Closed]
   end
 
+  def checkStateFinal
+    self.state == Week::STATES[:Final]
+  end
+
+  def open?
+    checkStateOpen
+  end
+
+  def closed?
+    checkStateClosed
+  end
+
   def buildSelectTeams
     select_teams = Array.new
     self.games.each do |game|
@@ -47,6 +59,25 @@ class Week < ActiveRecord::Base
     return select_teams
   end
 
+  def markUserEntries
+    winning_teams = self.getWinningTeams
+    entries = self.entries
+    entries.each do |entry|
+      game_pick = entry.game_picks.first
+      found_team = false
+      winning_teams.each do |team|
+        if game_pick.chosenTeamIndex == team 
+          found_team = true
+        end
+      end
+      if !found_team 
+        entry.update_attribute(:survivor_status, false)
+        entry.save
+      end
+    end
+    return true
+  end
+
   def madeEntry?(user)
     self.entries.each do |entry|
       if entry.user_id == user.id
@@ -55,4 +86,34 @@ class Week < ActiveRecord::Base
     end
     return false
   end
+
+  def entryValid?(user)
+    entries = Entry.where(user_id: user.id)
+    if entries.empty? 
+      return false
+    end
+    entry = entries.last
+    if entry.survivor_status 
+      return true
+    else
+      return false
+    end
+  end
+
+  def getWinningTeams
+    winning_teams = Array.new
+    games = self.games
+    games.each do |game|
+      if ((game.awayTeamScore-game.homeTeamScore) > 0)
+        puts "game.awayTeamIndex: #{game.awayTeamIndex}"
+        winning_teams << game.awayTeamIndex
+      else
+        puts "game.homeTeamIndex: #{game.homeTeamIndex}"
+        winning_teams << game.homeTeamIndex
+      end
+    end
+    return winning_teams
+  end
+
+  private
 end

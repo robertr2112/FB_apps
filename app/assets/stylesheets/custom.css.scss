@@ -10,6 +10,10 @@ $grayMediumLight: #eaeaea;
   box-sizing: border-box;
 }
 
+@mixin table_width {
+  width: 300px;
+}
+
 
 /* universal */
 
@@ -152,7 +156,6 @@ aside {
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
-/*  padding: 10px; */
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -184,6 +187,38 @@ input {
     &:last-child {
       border-bottom: 1px solid $grayLighter;
     }
+  }
+}
+
+.entry_name {
+  .td {
+    @include table_width;
+  }
+}
+
+.entry_out {
+  .td {
+    @include table_width;
+  }
+}
+
+.entry_base {
+  .td {
+    @include table_width;
+  }
+}
+
+.entry_success {
+  .td {
+    color: red;
+    @include table_width;
+  }
+}
+
+.entry_error {
+  .td {
+    color: green;
+    @include table_width;
   }
 }
 

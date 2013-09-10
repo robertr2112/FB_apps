@@ -3,9 +3,9 @@ class CreateEntries < ActiveRecord::Migration
     create_table :entries do |t|
       t.integer :user_id
       t.integer :week_id
-      t.integer :total_score
-      t.boolean :survivor_status
-      t.integer :sup_points
+      t.integer :total_score, default: 0
+      t.boolean :survivor_status, default: true
+      t.integer :sup_points, default: 0
 
       t.timestamps
     end

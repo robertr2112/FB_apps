@@ -6,20 +6,33 @@ class EntriesController < ApplicationController
     @week = Week.find(params[:week_id])
     if !@week.nil?
       @pool = Pool.find(@week.pool_id)
-      if @week.checkStateOpen
-        if @week.madeEntry?(current_user)
-          flash[:error] = 
-            "You have already made your entry for Week #{@week.weekNumber}!"
-          redirect_to @pool
-        else
-          @entry = @week.entries.new
-          @game_pick = @entry.game_picks.new
-        end
-      else
-        flash[:error] = 
-          "Cannot do your entry. Week #{@week.weekNumber} is already closed!"
+      if message = entryErrorCheck(@week)
+        flash[:error] = message
         redirect_to @pool
+      else
+        @entry = @week.entries.new
+        @game_pick = @entry.game_picks.new
       end
+
+#      if @week.open?
+#        if @week.madeEntry?(current_user)
+#          flash[:error] = 
+#            "You have already made your entry for Week #{@week.weekNumber}!"
+#          redirect_to @pool
+#        else
+#          @entry = @week.entries.new
+#          @game_pick = @entry.game_picks.new
+#        end
+#      else
+#        if @week.closed?
+#          flash[:error] = 
+#            "You're too late! Week #{@week.weekNumber} is already closed!"
+#        else
+#          flash[:error] = 
+#            "Week #{@week.weekNumber} is not open for entries yet!"
+#        end
+#        redirect_to @pool
+#      end
     else
       flash[:error] = 
         "Cannot do your entry. Week with id:#{params[:week_id]} does not exist!"
@@ -49,4 +62,22 @@ class EntriesController < ApplicationController
                                    game_picks_attributes: [:id, :entry_id,
                                                      :chosenTeamIndex] )
     end
+
+    def entryErrorCheck(week)
+      if week.open?
+        if week.madeEntry?(current_user)
+          message = 
+             "You have already made your entry for Week #{week.weekNumber}!"
+        elsif week.entryValid?
+          message =
+            "You have been knocked out of the pool!
+        end
+      elsif week.closed?
+        message = 
+             "You're too late! Week #{week.weekNumber} is already closed!"
+      else
+        message = "Week #{week.weekNumber} is not open for entries yet!"
+      end
+    end
+
 end
