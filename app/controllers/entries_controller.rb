@@ -68,9 +68,9 @@ class EntriesController < ApplicationController
         if week.madeEntry?(current_user)
           message = 
              "You have already made your entry for Week #{week.weekNumber}!"
-        elsif week.entryValid?
+        elsif week.entryValid?(current_user)
           message =
-            "You have been knocked out of the pool!
+            "You have been knocked out of the pool!"
         end
       elsif week.closed?
         message = 

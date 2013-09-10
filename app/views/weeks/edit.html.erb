@@ -1,4 +1,4 @@
-  <% provide(:title, "Edit Week #{@week.weekNumber}") %>
+<% provide(:title, "Edit Week #{@week.weekNumber}") %>
 <% if @week.checkStatePend %>
   <div class="row">
     <div class="span6 offset2">
@@ -37,5 +37,7 @@
       <% end %>
     </div>
   </div>
+<% else %>
+  <p>Can't Edit the week once it has gone final!</p>
 <% end %>
 
