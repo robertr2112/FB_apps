@@ -11,26 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906232711) do
+ActiveRecord::Schema.define(version: 20130911180054) do
 
   create_table "entries", force: true do |t|
+    t.integer  "pool_id"
     t.integer  "user_id"
-    t.integer  "week_id"
-    t.integer  "total_score"
-    t.boolean  "survivor_status"
-    t.integer  "sup_points"
+    t.string   "name"
+    t.boolean  "survivorStatusIn", default: true
+    t.integer  "supTotalPoints",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "entries", ["pool_id"], name: "index_entries_on_pool_id"
   add_index "entries", ["user_id"], name: "index_entries_on_user_id"
 
   create_table "game_picks", force: true do |t|
-    t.integer  "entry_id"
+    t.integer  "pick_id"
     t.integer  "chosenTeamIndex"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "pick_id"
   end
 
   create_table "games", force: true do |t|
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 20130906232711) do
     t.datetime "updated_at"
   end
 
+  create_table "picks", force: true do |t|
+    t.integer  "week_id"
+    t.integer  "entry_id"
+    t.integer  "weekNumber"
+    t.integer  "totalScore", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "picks", ["entry_id"], name: "index_picks_on_entry_id"
+
   create_table "pool_memberships", force: true do |t|
     t.integer  "user_id"
     t.integer  "pool_id"
@@ -62,6 +73,7 @@ ActiveRecord::Schema.define(version: 20130906232711) do
   create_table "pools", force: true do |t|
     t.string   "name"
     t.integer  "poolType"
+    t.boolean  "allowMulti",      default: false
     t.boolean  "isPublic",        default: true
     t.string   "password_digest"
     t.datetime "created_at"

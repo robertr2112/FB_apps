@@ -10,6 +10,10 @@ class PoolsController < ApplicationController
   def create
     @pool = current_user.pools.create(pool_params)
     if @pool.id
+      # create entry for owner of pool
+      entry_name = @pool.getEntryName(current_user)
+      new_entry_params = { name: entry_name }
+      @pool.entries.create(new_entry_params.merge(user_id: current_user.id))
       # Handle a successful save
       flash[:success] = "Pool '#{@pool.name}' was created successfully!"
       # Set the ownership in PoolMembership.owner
@@ -63,7 +67,7 @@ class PoolsController < ApplicationController
       redirect_to pools_path
     else
       @pools = @pool.users.paginate(:page => params[:page])
-      @week = @pool.weeks.last
+      @current_week = @pool.getCurrentWeek
     end
   end
 
@@ -108,7 +112,8 @@ class PoolsController < ApplicationController
   private
 
     def pool_params
-      params.require(:pool).permit(:name, :poolType, :isPublic, :password)
+      params.require(:pool).permit(:name, :poolType, :allowMulti, 
+                                   :isPublic, :password)
     end
 
     def authenticate

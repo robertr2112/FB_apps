@@ -1,8 +1,8 @@
-<% if week.checkStatePend %>
+<% if current_week.checkStatePend %>
 Pend
-<% elsif week.checkStateOpen %>
+<% elsif current_week.checkStateOpen %>
 Open
-<% elsif week.checkStateClosed %>
+<% elsif current_week.checkStateClosed %>
 Closed
 <% else %>
 Final

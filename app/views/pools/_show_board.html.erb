@@ -2,41 +2,57 @@
   <tr>
     <td></td>
     <% @pool.weeks.each do |week| %>
-      <td>
+      <td class="entry-header">
         <%= "Week #{week.weekNumber}" %> 
       </td>
     <% end %>
   </tr>
   <% teams = NflTeam.all %>
-  <% old_nickname = "" %>
-  <% entryNum = 1 %>
-  <% @pool.users.each do |user| %>
+  <% @pool.entries.each do |entry| %>
+    <% entryOut = false %>
     <tr>
-      <% nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0] %>
-      <% if nickname == old_nickname %>
-        <% nickname += entryNum %>
-        <% entryNum += 1 %>
+      <% if entry.entryStatusGood? %>
+        <td class="entry-name"><%= entry.name %></td>
+      <% else %>
+        <td class="entry-error"><%= entry.name %></td>
       <% end %>
-      <td class="entry_name"><%= nickname %></td>
-      <% old_nickname = nickname %>
       <% @pool.weeks.each do |week| %>
-        <% @entries = week.entries.where(user_id: user.id) %>
-        <% if @entries.empty? %>
-          <% if week.checkStateFinal %>
-            <td class="entry_out">Out</td>
+        <% @picks = week.picks.where(entry_id: entry.id) %>
+        <% if @picks.empty? %> 
+          <% if week.checkStateClosed || week.checkStateFinal ||
+                !entry.entryStatusGood? %>
+            <% if entryOut %>
+              <td class="entry-out">XXX</td>
+            <% else %>
+              <td class="entry-out">Out</td>
+              <% entryOut = true %>
+            <% end %>
           <% else %>
-            <td></td>
+            <td class="entry-blank"></td>
           <% end %>
         <% else %>
-          <% @entries.each do |entry| %>
-            <% game = entry.game_picks.first %>
-            <% team_nickname = teams[game.chosenTeamIndex-1].name.split(" ").last %>
-            <% if !@week.checkStateFinal %>
-              <td class="entry_base"><%= team_nickname %></td>
-            <% elsif entry.survivor_status %>
-              <td class="entry_success"><%= team_nickname %></td>
+          <% @picks.each do |pick| %>
+            <% game_pick = pick.game_picks.first %>
+            <% team_nickname = 
+                    teams[game_pick.chosenTeamIndex-1].name.split(" ").last %>
+            <% if week.checkStateOpen %>
+              <td></td>
             <% else %>
-              <td class="entry_error"><%= team_nickname %></td>
+              <% if !week.checkStateFinal %>
+                <td class="entry-base"><%= team_nickname %></td>
+              <% else %>
+                <% gameWon = false %>
+                <% week.games.each do |game| %>
+                  <% if game.wonGame?(game_pick.chosenTeamIndex) %>
+                    <% gameWon = true %>
+                  <% end %>
+                <% end %>
+                <% if gameWon %>
+                  <td class="entry-success"><%= team_nickname %></td>
+                <% else %>
+                  <td class="entry-error"><%= team_nickname %></td>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>

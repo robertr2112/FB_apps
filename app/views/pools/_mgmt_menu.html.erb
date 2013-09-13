@@ -1,66 +1,8 @@
-  <ul class="nav nav-pills">
-      <% if pool.isOwner?(current_user) %>
-        <li class="dropdown">
-          <a class="dropdown-toggle"
-             data-toggle="dropdown"
-            href="#" >
-            Pool Mgmt
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-              <li><%= link_to "Edit pool", edit_pool_path(pool) %></li>
-              <li>
-                <%= link_to "Delete pool", pool, :method => :delete, 
-                    :confirm => "Are you sure?", :title => "Delete#{pool.name}" %>
-              </li>
-          </ul>
-        </li>
-      <% else %>
-        <% if @pool.isMember?(current_user) %>
-          <li><%= link_to "Leave Pool", leave_path(pool.id), id: pool.id %></li>
-        <% else %>
-          <li><%= link_to "Join Pool", join_path(pool.id), id: pool.id %></li>
-        <% end %>
-      <%end %>
-    <% if pool.isOwner?(current_user) %>
-      <li class="dropdown">
-        <a class="dropdown-toggle"
-           data-toggle="dropdown"
-          href="#" >
-          Week Mgmt
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "Create week", new_pool_week_path(pool) %></li>
-          <% if !pool.weeks.empty? %>
-            <li><%= link_to "Edit week", edit_week_path(week) %></li>
-            <li>
-              <%= link_to "Delete week", week, :method => :delete, 
-                        :confirm => "Are you sure?", 
-                        :title => "Delete week #{week.weekNumber}" %>
-            </li>
-            <li class="divider"></li>
-            <li><%= link_to "Mark week open", open_path(week) %></li>
-            <li><%= link_to "Mark week closed", closed_path(week) %></li>
-            <li><%= link_to "Mark week final", final_path(week) %></li>
-          <% end %>
-        </ul>
-      </li>
-    <% end %>
-    <% if pool.isMember?(current_user) && !week.nil? %>
-      <li class="dropdown">
-        <a class="dropdown-toggle"
-           data-toggle="dropdown"
-          href="#" >
-          Entry Mgmt
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "Create entry", new_week_entry_path(week) %></li>
-          <li><%= link_to "Delete entry", "#" %></li>
-          <li><%= link_to "Entry Name", "#" %></li>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
+<ul class="nav nav-pills">
+  <%= render 'pool_mgmt_menu', pool: pool %>
+  <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
+    <%= render 'week_mgmt_menu', pool: pool, current_week: current_week %>
+    <%= render 'entry_mgmt_menu', pool: pool, current_week: current_week %>
+  <% end %>
+</ul>
 

@@ -1,9 +1,9 @@
 <% provide(:title, @pool.name) %>
 <div class = "row">
-  <%= render 'mgmt_menu', pool: @pool, week: @week %>
+  <%= render 'mgmt_menu', pool: @pool, current_week: @current_week %>
 </div>
 <div class="row">
-  <aside class="span8">
+  <aside class="span9">
     <section>
       <h1> <%= @pool.name %> </h1>
       <strong>Pool Type</strong> 
@@ -14,22 +14,27 @@
       <% else %>
         Private<br />
       <% end %>
-      <% if !@week.nil? %>
+      <% if !@current_week.nil? %>
         <strong>State</strong>
-        <%= render 'show_week_state', week: @week %>
+        <%= render 'show_week_state', current_week: @current_week %>
       <% end %>
     </section>
-
     <section>
       <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
         <h1>Current Board</h1>
-        <% if !@week.nil? %>
-          <%= render 'show_board', pool: @pool, week: @week %>
+        <% if !@current_week.nil? %>
+          <%= render 'show_board', pool: @pool, current_week: @current_week %>
         <% end %>
+      <% elsif @pool.poolType == Pool::POOL_TYPES[:SUP] %>
+        <p>Sorry but SUP based pools are not supported at this time.</p>
+      <% elsif @pool.poolType == Pool::POOL_TYPES[:PickEm] %>
+        <p>Sorry but PickEm based pools are not supported at this time.</p>
+      <% elsif @pool.poolType == Pool::POOL_TYPES[:PickEmSpread] %>
+        <p>Sorry but PickEmSpread based pools are not supported at this time.</p>
       <% end %>
     </section>
   </aside>
-  <div class="span4">
+  <div class="span3">
     <h3>Weeks</h3>
     <% if @pool.isOwner?(current_user) %>
     <% end %>

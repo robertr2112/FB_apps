@@ -3,7 +3,8 @@ class CreatePools < ActiveRecord::Migration
     create_table :pools do |t|
       t.string :name
       t.integer :poolType
-      t.boolean :isPublic, :default => true
+      t.boolean :allowMulti, default: false
+      t.boolean :isPublic, default: true
       t.string :password_digest
 
       t.timestamps

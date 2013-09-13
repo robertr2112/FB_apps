@@ -15,7 +15,7 @@ class Week < ActiveRecord::Base
 
   belongs_to :pool
   has_many   :games, dependent: :destroy
-  has_many   :entries, dependent: :destroy
+  has_many   :picks, dependent: :destroy
 
   accepts_nested_attributes_for :games
 
@@ -59,45 +59,14 @@ class Week < ActiveRecord::Base
     return select_teams
   end
 
-  def markUserEntries
-    winning_teams = self.getWinningTeams
-    entries = self.entries
-    entries.each do |entry|
-      game_pick = entry.game_picks.first
-      found_team = false
-      winning_teams.each do |team|
-        if game_pick.chosenTeamIndex == team 
-          found_team = true
-        end
-      end
-      if !found_team 
-        entry.update_attribute(:survivor_status, false)
-        entry.save
-      end
-    end
-    return true
-  end
-
-  def madeEntry?(user)
-    self.entries.each do |entry|
-      if entry.user_id == user.id
+  def madePicks?(entry)
+    picks = self.picks.where(entry_id: entry.id)
+    picks.each do |pick|
+      if (pick.entry_id == entry.id && pick.weekNumber == self.weekNumber)
         return true
       end
     end
     return false
-  end
-
-  def entryValid?(user)
-    entries = Entry.where(user_id: user.id)
-    if entries.empty? 
-      return false
-    end
-    entry = entries.last
-    if entry.survivor_status 
-      return true
-    else
-      return false
-    end
   end
 
   def getWinningTeams
@@ -115,5 +84,24 @@ class Week < ActiveRecord::Base
     return winning_teams
   end
 
-  private
+  def updateEntries
+    winning_teams = self.getWinningTeams
+    picks = self.picks
+    picks.each do |pick|
+      pick.game_picks.each do |game_pick|
+        found_team = false
+        winning_teams.each do |team|
+          if game_pick.chosenTeamIndex == team 
+            found_team = true
+          end
+        end
+        if !found_team 
+          entry = Entry.find(pick.entry_id)
+          entry.update_attribute(:survivorStatusIn, false)
+          entry.save
+        end
+      end
+    end
+    return true
+  end
 end

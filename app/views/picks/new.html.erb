@@ -1,0 +1,27 @@
+<% provide(:title, "Make Entry") %>
+<div class="row">
+  <h1>Make Entry for Week <%=@week.weekNumber%></h1>
+  <div class="span6 offset3">
+      <% @teams = NflTeam.all %>
+      <%= render 'shared/games', week: @week, games: @week.games %>
+    <br />
+    <%= form_for([@entry, @pick], html: { class: 'form-inline' }) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.fields_for :game_picks do |builder| %>
+        <fieldset>
+          <% @select_teams = @week.buildSelectTeams %>
+          <%= builder.label :homeTeamIndex, "Pick Team" %>
+          <%= builder.collection_select(:chosenTeamIndex,
+                                  @select_teams, :id, :name,
+                                  class: 'select') %>
+        </fieldset>
+      <% end %>
+      <div class="control-group">
+        <div class = "controls">
+          <%= f.submit "Submit Pick(s)", class: "btn btn-large btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

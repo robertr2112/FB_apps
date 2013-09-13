@@ -81,8 +81,9 @@ class WeeksController < ApplicationController
     @week = Week.find(params[:id])
     @pool = Pool.find(@week.pool_id)
     @week.setState(Week::STATES[:Final]) unless @week.nil?
-    @week.markUserEntries
-    flash[:notice] = "Week #{@week.weekNumber} is marked final!"
+    # Update the entries status/totals based on this weeks results
+    @week.updateEntries
+    flash[:notice] = "Week #{@week.weekNumber} is final!"
     redirect_to @pool
   end
 

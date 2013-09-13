@@ -5,22 +5,32 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Help", help_path %></li>
           <% if signed_in? %>
             <li><%= link_to "Users", users_path %></li>
-            <li id="fat-menu" class="dropdown">
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Pools <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "All Pools", pools_path %></li>
-                <li><%= link_to "My Pools", my_pools_path %></li>
+                <li class="dropdown-submenu">
+                  <a class="dropdown-toggle" data-toggle="dropdown"
+                    href="#" > My Pools <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "All", my_pools_path %></li>
+                    <li class="divider"></li>
+                    <% current_user.pools.each do |pool| %>
+                      <li><%= link_to "#{pool.name}", pool %></li>
+                    <% end %>
+                  </ul>
+                </li>
                 <li class="divider"></li>
                 <li><%= link_to "Create a pool", new_pool_path %></li>
                 <li><%= link_to "Join a pool", pools_path %></li>
               </ul>
             </li>
-            <li id="fat-menu" class="dropdown">
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
               </a>

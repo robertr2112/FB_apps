@@ -19,14 +19,16 @@ class Pool < ActiveRecord::Base
   has_many :users, through: :pool_memberships, dependent: :destroy
   has_many :pool_memberships, dependent: :destroy
   has_many :weeks, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   attr_accessor :password
 
   validates :name,     presence:   true,
-                       length:     { :maximum => 30 },
-                       uniqueness: { :case_sensitive => false }
-  validates :poolType, inclusion:  { in: 0..3 }
-  validates :isPublic, inclusion:  { in: [true, false] }
+                       length:      { :maximum => 30 },
+                       uniqueness:  { :case_sensitive => false }
+  validates :poolType, inclusion:   { in: 0..3 }
+  validates :allowMulti, inclusion: { in: [true, false] }
+  validates :isPublic, inclusion:   { in: [true, false] }
 
   def isMember?(user)
     self.pool_memberships.find_by_user_id(user.id)
@@ -48,14 +50,60 @@ class Pool < ActiveRecord::Base
   end
 
   def addUser(user)
+    # Add user to the pool and save 
     user.pools << self
     self.setOwner(user, false)
     user.save
+    # Create an entry in the pool for this user
+    entry_name = self.getEntryName(user)
+    new_entry_params = { name: entry_name }
+    self.entries.create(new_entry_params.merge(user_id: user.id))
   end
 
   def removeUser(user)
+    self.removeEntries(user)
     pool_membership = self.pool_memberships.find_by_user_id(user.id)
     pool_membership.destroy
+  end
+
+  def getEntryName(user)
+    entries = self.entries.where(user_id: user.id)
+    if entries && entries.count > 0
+      user_nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0]
+      user_nickname = user_nickname + "_#{entries.count}"
+    else
+      user_nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0]
+    end
+  end
+
+
+  def removeEntries(user)
+    entries = Entry.where({ pool_id: self.id, user_id: current_user.id })
+    entries.each do |entry|
+      picks = Pick.where(entry_id: entry.id)
+      picks.each do |pick|
+        pick.destroy
+      end
+      entry.destroy
+    end
+  end
+
+  def getCurrentWeek
+    #
+    # Search through the weeks to find the current week.  Loop through all weeks
+    # until you find a week that isn't marked final.  The first week not marked
+    # as final is the current week. If there are no weeks then return nil. If it
+    # goes through the whole list without finding a non-final week than the last
+    # week in the Pool is still the current week.
+    #
+    weeks = self.weeks
+    weeks.empty? { return nil }
+    weeks.each do |week|
+      if !week.checkStateFinal
+        return week
+      end
+    end
+    return self.weeks.last
   end
 
   private

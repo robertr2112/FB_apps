@@ -1,13 +1,13 @@
 class Entry < ActiveRecord::Base
+  belongs_to :pool
+  belongs_to :user
+  has_many   :picks, dependent: :destroy
 
-  belongs_to :week
-  has_many :game_picks, dependent: :destroy
-
-  accepts_nested_attributes_for :game_picks
-
-  def setUserId(user)
-    self.user_id = user.id
-    self.save
+  def entryStatusGood?
+    if self.survivorStatusIn 
+      return true
+    else
+      return false
+    end
   end
-
 end

@@ -76,7 +76,7 @@ print "Adding NFL teams...\n"
                                       imagePath: "nfl_teams/nfcw/sea.jpeg"
     NflTeam.create name: "St Louis Cardinals", 
                                       imagePath: "nfl_teams/nfcw/stl.jpeg"
-    NflTeam.create name: "Tampa Bay", 
+    NflTeam.create name: "Tampa Bay Buccaneers", 
                                       imagePath: "nfl_teams/nfcs/tb.jpeg"
     NflTeam.create name: "Tennessee Titans", 
                                       imagePath: "nfl_teams/afcs/ten.jpeg"

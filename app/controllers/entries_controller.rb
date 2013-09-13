@@ -3,81 +3,54 @@ class EntriesController < ApplicationController
   before_action :confirmed_user
 
   def new
-    @week = Week.find(params[:week_id])
-    if !@week.nil?
-      @pool = Pool.find(@week.pool_id)
-      if message = entryErrorCheck(@week)
-        flash[:error] = message
-        redirect_to @pool
+    @pool = Pool.find(params[:pool_id])
+    if !@pool.nil?
+      if @pool.allowMulti
+        @entry = @pool.entries.new
+        entry_name = @pool.getEntryName(current_user)
+        @entry.name = entry_name
       else
-        @entry = @week.entries.new
-        @game_pick = @entry.game_picks.new
+        flash[:error] = "This pool does not allow multiple entries for a user!"
+        redirect_to @pool
       end
-
-#      if @week.open?
-#        if @week.madeEntry?(current_user)
-#          flash[:error] = 
-#            "You have already made your entry for Week #{@week.weekNumber}!"
-#          redirect_to @pool
-#        else
-#          @entry = @week.entries.new
-#          @game_pick = @entry.game_picks.new
-#        end
-#      else
-#        if @week.closed?
-#          flash[:error] = 
-#            "You're too late! Week #{@week.weekNumber} is already closed!"
-#        else
-#          flash[:error] = 
-#            "Week #{@week.weekNumber} is not open for entries yet!"
-#        end
-#        redirect_to @pool
-#      end
     else
-      flash[:error] = 
-        "Cannot do your entry. Week with id:#{params[:week_id]} does not exist!"
-      redirect_to pools_path
+        flash[:error] = 
+          "Couldn't create entry. Pool with id: #{params[:pool_id]} doesn't exist!"
+        redirect_to pools_path
     end
   end
 
   def create
-    @week = Week.find(params[:week_id])
-    @entry = @week.entries.new(entry_params)
-    @pool = Pool.find(@week.pool_id)
-    if @entry.save
-      # Handle a successful save
-      flash[:success] = 
-          "Your entry for Week '#{@week.weekNumber}' was saved!"
-      @entry.setUserId(current_user)
+    @pool = Pool.find(params[:pool_id])
+    @entry = 
+      @pool.entries.create(entry_params.merge(user_id: current_user.id,
+                                             survivorStatusIn: true, 
+                                             supTotalPoints: 0))
+    if @entry.id
+      flash[:success] = "Entry: #{@entry.name} was created successfully!"
       redirect_to @pool
     else
       render 'new'
     end
   end
 
+  def edit
+    @entry = Entry.find(params[:id])
+  end
+
+  def update
+    @entry = Entry.find(params[:id])
+    @pool = Pool.find(@entry.pool_id)
+    if @entry.update_attributes(entry_params)
+      flash[:success] = "Entry updated"
+      redirect_to @pool
+    else
+      render 'edit'
+    end
+  end
+
   private
     def entry_params
-      params.require(:entry).permit(:user_id, :total_score, 
-                                   :survivor_status, :sup_points,
-                                   game_picks_attributes: [:id, :entry_id,
-                                                     :chosenTeamIndex] )
+      params.require(:entry).permit(:name, :survivorStatusIn, :supTotalPoints)
     end
-
-    def entryErrorCheck(week)
-      if week.open?
-        if week.madeEntry?(current_user)
-          message = 
-             "You have already made your entry for Week #{week.weekNumber}!"
-        elsif week.entryValid?(current_user)
-          message =
-            "You have been knocked out of the pool!"
-        end
-      elsif week.closed?
-        message = 
-             "You're too late! Week #{week.weekNumber} is already closed!"
-      else
-        message = "Week #{week.weekNumber} is not open for entries yet!"
-      end
-    end
-
 end
