@@ -37,6 +37,26 @@ class PicksController < ApplicationController
     end
   end
 
+  def edit
+    @pick = Pick.find(params[:id])
+    @week = Week.find(@pick.week_id)
+  end
+
+  def update
+    @pick = Pick.find(params[:id])
+    @week = Week.find(@pick.week_id)
+    @entry = Entry.find(@pick.entry_id)
+    @pool = Pool.find(@entry.pool_id)
+    if @pick.update_attributes(pick_params)
+      # Handle a successful save
+      flash[:success] = 
+          "Your pick(s) for Week '#{@week.weekNumber}' was changed!"
+      redirect_to @pool
+    else
+      render 'edit'
+    end
+  end
+
   private
     def pick_params
       params.require(:pick).permit(:week_id, :total_score, 
