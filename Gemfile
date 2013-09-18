@@ -10,10 +10,9 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'select2-rails'
+gem 'simple_form', '3.0.0.rc'
+gem 'cocoon'
 #gem 'select2-sass-bootstrap-rails'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'

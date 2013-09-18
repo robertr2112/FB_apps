@@ -6,7 +6,7 @@ class WeeksController < ApplicationController
     @pool = Pool.find(params[:pool_id])
     if !@pool.nil?
       @week = @pool.weeks.new
-      @game = @week.games.new
+      @game = @week.games.build
       @week.weekNumber = @pool.weeks.count + 1
     else
       flash[:error] = "Cannot create week. Pool with id:#{params[:pool_id]} does not exist!"
@@ -95,6 +95,7 @@ class WeeksController < ApplicationController
                                                      :awayTeamIndex, 
                                                      :spread, 
                                                      :homeTeamScore,
-                                                     :awayTeamScore] )
+                                                     :awayTeamScore,
+                                                     :_destroy] )
     end
 end

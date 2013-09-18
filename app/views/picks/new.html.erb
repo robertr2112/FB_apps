@@ -13,11 +13,12 @@
           <%= builder.label :homeTeamIndex, "Pick Team" %>
           <%= builder.collection_select(:chosenTeamIndex,
                                   @select_teams, :id, :name,
-                                  class: 'select') %>
+                                  {}, { id: "pick" }) %>
         </fieldset>
       <% end %>
       <div class="control-group">
         <div class = "controls">
+          <br />
           <%= f.submit "Submit Pick(s)", class: "btn btn-large btn-primary" %>
         </div>
       </div>
