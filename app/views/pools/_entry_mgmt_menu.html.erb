@@ -24,8 +24,8 @@
               <%= link_to "Delete entry", entry, :method => :delete, 
                   :confirm => "Are you sure?", :title => "Delete#{entry.name}" %>
             </li>
-            <% pick = entry.picks.where(week_id: current_week.id) %>
             <% if !current_week.nil? %>
+              <% pick = entry.picks.where(week_id: current_week.id) %>
               <% if pick.empty? %>
                 <li><%= link_to "Create picks", new_entry_pick_path(entry) %></li>
               <% else %>
