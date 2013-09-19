@@ -5,6 +5,5 @@
     <%= render 'game_fields', f: g %>
   <% end %>
   <%= link_to_add_association 'Add New Game', f, :games %><br /><br />
-  <%= f.button :submit, label: "Create week",
-               class: 'btn btn-large btn-primary' %>
+  <%= f.button :submit, label: "Create week", class: 'btn btn-large btn-primary' %>
 <% end %>
