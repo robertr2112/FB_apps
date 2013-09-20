@@ -1,4 +1,4 @@
-/* .simple_form {
+.simple_form {
   $indent: 120px;
   label {
     float: left;
@@ -19,15 +19,17 @@
       margin-right: 10px;
     }
   }
-  div.input {
+/*  div.input {
     margin-bottom: 10px;
   }
+*/
   input.radio_buttons, input.check_boxes {
     margin-right: 5px;
   }
-  .btn {
+/* .btn {
     margin-left: $indent;
   }
+*/
   .alert-error {
     color: #D00;
     margin-bottom: 10px;
@@ -45,4 +47,4 @@
     font-style: italic;
   }
 }
-  */
+
