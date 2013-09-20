@@ -40,15 +40,8 @@ ActiveRecord::Schema.define(version: 20130911180054) do
     t.integer  "week_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "homeTeamScore"
-    t.integer  "awayTeamScore"
-  end
-
-  create_table "nfl_teams", force: true do |t|
-    t.string   "name"
-    t.string   "imagePath"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "homeTeamScore", default: 0
+    t.integer  "awayTeamScore", default: 0
   end
 
   create_table "picks", force: true do |t|
@@ -76,6 +69,14 @@ ActiveRecord::Schema.define(version: 20130911180054) do
     t.boolean  "allowMulti",      default: false
     t.boolean  "isPublic",        default: true
     t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.boolean  "nfl"
+    t.string   "imagePath"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -2,7 +2,7 @@
 <div class="row">
   <h1>Make picks for Week <%=@week.weekNumber%></h1>
   <div class="span6 offset3">
-      <% @teams = NflTeam.all %>
+      <% @teams = Team.all.where(nfl: true) %>
       <%= render 'shared/games', week: @week, games: @week.games %>
     <br />
     <%= form_for([@entry, @pick], html: { class: 'form-inline' }) do |f| %>

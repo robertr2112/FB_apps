@@ -7,7 +7,7 @@
       </td>
     <% end %>
   </tr>
-  <% teams = NflTeam.all %>
+  <% teams = Team.all.where(nfl: true) %>
   <% @pool.entries.each do |entry| %>
     <% entryOut = false %>
     <tr>

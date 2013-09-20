@@ -18,67 +18,67 @@ end
 admin.save!
 
 print "Adding NFL teams...\n"
-    NflTeam.create name: "Arizona Cardinals", 
+    Team.create name: "Arizona Cardinals", nfl: 1,
                                       imagePath: "nfl_teams/nfcw/ari.jpeg"
-    NflTeam.create name: "Atlanta Falcons", 
+    Team.create name: "Atlanta Falcons", nfl: 1,
                                       imagePath: "nfl_teams/nfcs/atl.jpeg"
-    NflTeam.create name: "Baltimore Ravens", 
+    Team.create name: "Baltimore Ravens", nfl: 1,
                                       imagePath: "nfl_teams/afcn/bal.jpeg"
-    NflTeam.create name: "Buffalo Bills", 
+    Team.create name: "Buffalo Bills", nfl: 1,
                                       imagePath: "nfl_teams/afce/buf.jpeg"
-    NflTeam.create name: "Carolina Panthers", 
+    Team.create name: "Carolina Panthers", nfl: 1,
                                       imagePath: "nfl_teams/nfcs/car.jpeg"
-    NflTeam.create name: "Chicago Bears", 
+    Team.create name: "Chicago Bears", nfl: 1,
                                       imagePath: "nfl_teams/nfcn/chi.jpeg"
-    NflTeam.create name: "Cinncinatti Bengals", 
+    Team.create name: "Cinncinatti Bengals", nfl: 1,
                                       imagePath: "nfl_teams/afcn/cin.jpeg"
-    NflTeam.create name: "Cleveland Browns", 
+    Team.create name: "Cleveland Browns", nfl: 1,
                                       imagePath: "nfl_teams/afcn/cle.jpeg"
-    NflTeam.create name: "Dallas Cowboys", 
+    Team.create name: "Dallas Cowboys", nfl: 1,
                                       imagePath: "nfl_teams/nfce/dal.jpeg"
-    NflTeam.create name: "Denver Broncos", 
+    Team.create name: "Denver Broncos", nfl: 1,
                                       imagePath: "nfl_teams/afcw/den.jpeg"
-    NflTeam.create name: "Detroit Lions", 
+    Team.create name: "Detroit Lions", nfl: 1,
                                       imagePath: "nfl_teams/nfcn/det.jpeg"
-    NflTeam.create name: "Green Bay Packers", 
+    Team.create name: "Green Bay Packers", nfl: 1,
                                       imagePath: "nfl_teams/nfcn/gb.jpeg"
-    NflTeam.create name: "Houston Texans", 
+    Team.create name: "Houston Texans", nfl: 1,
                                       imagePath: "nfl_teams/afcs/hou.jpeg"
-    NflTeam.create name: "Indianapolis Colts", 
+    Team.create name: "Indianapolis Colts", nfl: 1,
                                       imagePath: "nfl_teams/afcs/ind.jpeg"
-    NflTeam.create name: "Jacksonville Jaguars", 
+    Team.create name: "Jacksonville Jaguars", nfl: 1,
                                       imagePath: "nfl_teams/afcs/jac.jpeg"
-    NflTeam.create name: "Kansas City Chiefs", 
+    Team.create name: "Kansas City Chiefs", nfl: 1,
                                       imagePath: "nfl_teams/afcw/kc.jpeg"
-    NflTeam.create name: "Minnesota Vikings", 
+    Team.create name: "Minnesota Vikings", nfl: 1,
                                        imagePath: "nfl_teams/nfcn/min.jpeg"
-    NflTeam.create name: "Miami Dolphins", 
+    Team.create name: "Miami Dolphins", nfl: 1,
                                       imagePath: "nfl_teams/afce/mia.jpeg"
-    NflTeam.create name: "New England Patriots", 
+    Team.create name: "New England Patriots", nfl: 1,
                                       imagePath: "nfl_teams/afce/ne.jpeg"
-    NflTeam.create name: "New Orleans Saints", 
+    Team.create name: "New Orleans Saints", nfl: 1,
                                       imagePath: "nfl_teams/nfcs/no.jpeg"
-    NflTeam.create name: "New York Giants", 
+    Team.create name: "New York Giants", nfl: 1,
                                       imagePath: "nfl_teams/nfce/nyg.jpeg"
-    NflTeam.create name: "New York Jets", 
+    Team.create name: "New York Jets", nfl: 1,
                                       imagePath: "nfl_teams/afce/nyj.jpeg"
-    NflTeam.create name: "Oakland Raiders", 
+    Team.create name: "Oakland Raiders", nfl: 1,
                                       imagePath: "nfl_teams/afcw/oak.jpeg"
-    NflTeam.create name: "Philadelphia Eagles", 
+    Team.create name: "Philadelphia Eagles", nfl: 1,
                                       imagePath: "nfl_teams/nfce/phi.jpeg"
-    NflTeam.create name: "Pittsburgh Steelers", 
+    Team.create name: "Pittsburgh Steelers", nfl: 1,
                                       imagePath: "nfl_teams/afcn/pit.jpeg"
-    NflTeam.create name: "San Francisco 49ers", 
+    Team.create name: "San Francisco 49ers", nfl: 1,
                                       imagePath: "nfl_teams/nfcw/sf.jpeg"
-    NflTeam.create name: "San Diego Chargers", 
+    Team.create name: "San Diego Chargers", nfl: 1,
                                       imagePath: "nfl_teams/afcw/sd.jpeg"
-    NflTeam.create name: "Seattle Seahawks", 
+    Team.create name: "Seattle Seahawks", nfl: 1,
                                       imagePath: "nfl_teams/nfcw/sea.jpeg"
-    NflTeam.create name: "St Louis Rams", 
+    Team.create name: "St Louis Rams", nfl: 1,
                                       imagePath: "nfl_teams/nfcw/stl.jpeg"
-    NflTeam.create name: "Tampa Bay Buccaneers", 
+    Team.create name: "Tampa Bay Buccaneers", nfl: 1,
                                       imagePath: "nfl_teams/nfcs/tb.jpeg"
-    NflTeam.create name: "Tennessee Titans", 
+    Team.create name: "Tennessee Titans", nfl: 1,
                                       imagePath: "nfl_teams/afcs/ten.jpeg"
-    NflTeam.create name: "Washington Redskins", 
+    Team.create name: "Washington Redskins", nfl: 1,
                                       imagePath: "nfl_teams/nfce/was.jpeg"

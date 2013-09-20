@@ -1,13 +1,13 @@
 <div class='nested-fields well'>
   <fieldset>
     <%= f.input :awayTeamIndex, label: false,
-                    collection: NflTeam.all, value_method: :id,
+                    collection: Team.all.where(nfl: true), value_method: :id,
                     label_method: :name,
                     placeholder: "Away Team",
                     include_blank: true, 
                     input_html: { id: "awayteam", class: 'span3' } %>
     <%= f.input :homeTeamIndex, label: false,
-                    collection: NflTeam.all, value_method: :id,
+                    collection: Team.all.where(nfl: true), value_method: :id,
                     label_method: :name,
                     placeholder: "Home Team",
                     include_blank: true,

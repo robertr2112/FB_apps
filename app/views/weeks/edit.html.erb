@@ -15,7 +15,7 @@
       <h1>Submit Scores Week <%= @week.weekNumber %></h1>
       <%= form_for(@week, html: { class: 'form-inline' }) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
-        <% @teams = NflTeam.all %>
+        <% @teams = Team.all.where(nfl: true) %>
         <%= f.fields_for :games do |builder| %>
           <%= render 'game_score_fields', f: builder, teams: @teams %>
         <% end %>

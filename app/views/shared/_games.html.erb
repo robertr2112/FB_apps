@@ -1,4 +1,4 @@
-<% teams = NflTeam.all %>
+<% teams = Team.all.where(nfl: true) %>
 <table class = "table table-condensed">
   <tbody>
     <% games.each do |game| %>

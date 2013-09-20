@@ -51,9 +51,9 @@ class Week < ActiveRecord::Base
   def buildSelectTeams
     select_teams = Array.new
     self.games.each do |game|
-      team = NflTeam.find(game.homeTeamIndex)
+      team = Team.find(game.homeTeamIndex)
       select_teams << team
-      team = NflTeam.find(game.awayTeamIndex)
+      team = Team.find(game.awayTeamIndex)
       select_teams << team
     end
     return select_teams
