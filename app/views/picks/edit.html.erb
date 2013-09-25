@@ -5,23 +5,20 @@
       <% @teams = Team.all.where(nfl: true) %>
       <%= render 'shared/games', week: @week, games: @week.games %>
     <br />
-    <%= form_for([@entry, @pick], html: { class: 'form-inline' }) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <%= f.fields_for :game_picks do |builder| %>
+    <%= simple_form_for(@pick, html: { class: 'form-inline' }) do |f| %>
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%#= f.error_notification %>
+      <%= f.simple_fields_for :game_picks do |gp| %>
         <fieldset>
           <% @select_teams = @week.buildSelectTeams %>
-          <%= builder.label :homeTeamIndex, "Pick Team" %>
-          <%= builder.collection_select(:chosenTeamIndex,
-                                  @select_teams, :id, :name,
-                                  {}, { id: "pick" }) %>
+          <%= gp.input :chosenTeamIndex, label: "Pick Team:",
+                      collection: @select_teams, value_method: :id,
+                      label_method: :name,
+                      input_html: { id: "pick", class: 'span3' } %>
         </fieldset>
       <% end %>
-      <div class="control-group">
-        <div class = "controls">
-          <br />
-          <%= f.submit "Submit Pick(s)", class: "btn btn-large btn-primary" %>
-        </div>
-      </div>
+      <br />
+      <%= f.button :submit, label: "Submit Pick(s)", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>

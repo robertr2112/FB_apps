@@ -2,32 +2,22 @@
 <% if @week.checkStatePend %>
   <h1>Edit Week <%= @week.weekNumber %></h1>
   <%= simple_form_for(@week, html: { class: 'form-inline' }) do |f| %>
+    <%= f.error_notification %>
     <%= f.simple_fields_for :games do |g| %>
       <%= render 'game_fields', f: g %>
     <% end %>
     <%= link_to_add_association 'Add New Game', f, :games %><br /><br />
-    <%= f.button :submit, label: "Create week",
-                 class: 'btn btn-large btn-primary' %>
+    <%= f.button :submit, label: "Edit week", class: 'btn btn-large btn-primary' %>
   <% end %>
 <% elsif @week.checkStateClosed || @week.checkStateOpen%>
-  <div class="row">
-    <div class="span6 offset2">
-      <h1>Submit Scores Week <%= @week.weekNumber %></h1>
-      <%= form_for(@week, html: { class: 'form-inline' }) do |f| %>
-        <%= render 'shared/error_messages', :object => f.object %>
-        <% @teams = Team.all.where(nfl: true) %>
-        <%= f.fields_for :games do |builder| %>
-          <%= render 'game_score_fields', f: builder, teams: @teams %>
-        <% end %>
-        <div class="control-group">
-          <div class = "controls">
-            <%= f.submit "Submit scores", 
-                            class: "btn btn-large btn-primary" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <h1>Submit Scores Week <%= @week.weekNumber %></h1>
+  <%= simple_form_for(@week, html: { class: 'form-horizontal form-inline' }) do |f| %>
+    <% @teams = Team.all.where(nfl: true) %>
+    <%= f.simple_fields_for :games do |builder| %>
+      <%= render 'game_score_fields', f: builder, teams: @teams %>
+    <% end %>
+    <%= f.button :submit, label: "Submit scores", class: 'btn btn-large btn-primary' %>
+  <% end %>
 <% else %>
   <p>Can't Edit the week once it has gone final!</p>
 <% end %>

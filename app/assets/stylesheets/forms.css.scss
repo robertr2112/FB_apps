@@ -19,17 +19,9 @@
       margin-right: 10px;
     }
   }
-/*  div.input {
-    margin-bottom: 10px;
-  }
-*/
   input.radio_buttons, input.check_boxes {
     margin-right: 5px;
   }
-/* .btn {
-    margin-left: $indent;
-  }
-*/
   .alert-error {
     color: #D00;
     margin-bottom: 10px;
@@ -48,3 +40,7 @@
   }
 }
 
+.id .gamescore {
+  padding: 0px;
+  display: inline-block;
+}

@@ -18,6 +18,8 @@ class Week < ActiveRecord::Base
   has_many   :picks, dependent: :destroy
 
   accepts_nested_attributes_for :games
+  #validates_associated :games
+  validate :gamesValid?
 
   def setState(state)
     self.state = state
@@ -74,10 +76,8 @@ class Week < ActiveRecord::Base
     games = self.games
     games.each do |game|
       if ((game.awayTeamScore-game.homeTeamScore) > 0)
-        puts "game.awayTeamIndex: #{game.awayTeamIndex}"
         winning_teams << game.awayTeamIndex
       else
-        puts "game.homeTeamIndex: #{game.homeTeamIndex}"
         winning_teams << game.homeTeamIndex
       end
     end
@@ -104,4 +104,30 @@ class Week < ActiveRecord::Base
     end
     return true
   end
+  
+  def gamesValid?
+    games_to_check = self.games
+    games_to_check.each do |current_game|
+      if current_game.homeTeamIndex == current_game.awayTeamIndex
+        errors[:base] << "Week #{self.weekNumber} has errors:"
+        current_game.errors[:homeTeamIndex] << "Home and Away Team can't be the same!"
+      end
+      games = games_to_check = self.games
+      games.each do |game|
+        if current_game != game
+          if current_game.homeTeamIndex == game.homeTeamIndex ||
+             current_game.homeTeamIndex == game.awayTeamIndex
+            errors[:base] << "Week #{self.weekNumber} has errors:"
+            current_game.errors[:homeTeamIndex] << "Team names can't be repeated!"
+          end
+          if current_game.awayTeamIndex == game.awayTeamIndex ||
+             current_game.awayTeamIndex == game.homeTeamIndex
+            errors[:base] << "Week #{self.weekNumber} has errors:"
+            current_game.errors[:awayTeamIndex] << "Team names can't be repeated!"
+          end
+        end
+      end
+    end
+  end
+  
 end

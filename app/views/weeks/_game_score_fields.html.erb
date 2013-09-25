@@ -1,7 +1,9 @@
 <fieldset>
-  <%= Team.find(f.object.send(:awayTeamIndex)).name %>
-  <%= f.number_field(:awayTeamScore, size: 2, class: 'number_field') %>
-  <%= Team.find(f.object.send(:homeTeamIndex)).name %>
-  <%= f.number_field(:homeTeamScore, size: 2, class: 'number_field') %>
+  <%= f.input :awayTeamScore,
+              label: Team.find(f.object.send(:awayTeamIndex)).name,
+              input_html: {id: "gamescore", class: 'span1'}  %>
+  <%= f.input :homeTeamScore,
+              label: Team.find(f.object.send(:homeTeamIndex)).name,
+              input_html: {id: "gamescore", class: 'span1'}  %>
 </fieldset>
 
