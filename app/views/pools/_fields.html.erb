@@ -7,17 +7,12 @@
       </div>
     </div>
 
-    <% if @pool_edit_flag %>
-      Pool Type:
-      <%= render 'show_type', :pool => @pool %> <br /><br />
-    <% else %>
     <div class="control-group">
       <%= f.label :poolType, "Pool Type", class: 'control-label' %>
       <div class = "controls">
         <%= f.select(:poolType, Pool::POOL_TYPES, class: 'select') %>
       </div>
     </div>
-    <% end %>
 
     <div class="control-group">
       <%= f.label :allowMulti, "Allow multiple entries", class: 'control-label' %>
@@ -29,6 +24,7 @@
       </div>
     </div>
 
+<% if false %>
     <div class="control-group">
       <%= f.label :isPublic, "Status", class: 'control-label' %>
       <div class = "controls">
@@ -45,3 +41,4 @@
         <%= f.text_field :password, class: 'password' %>
       </div>
     </div>
+<% end %>

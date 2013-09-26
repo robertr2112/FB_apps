@@ -12,7 +12,6 @@
 #
 
 class Pool < ActiveRecord::Base
-  #before_create   :pool_valid?
 
   POOL_TYPES = { PickEm: 0, PickEmSpread: 1, Survivor: 2, SUP: 3 }
 
@@ -20,6 +19,9 @@ class Pool < ActiveRecord::Base
   has_many :pool_memberships, dependent: :destroy
   has_many :weeks, dependent: :destroy
   has_many :entries, dependent: :destroy
+
+  # Make sure protected fields aren't updated after a week has been created on the pool
+  validate :checkUpdateFields, on: :update
 
   attr_accessor :password
 
@@ -106,6 +108,7 @@ class Pool < ActiveRecord::Base
     return self.weeks.last
   end
 
+
   private
 
     def pool_valid?
@@ -122,4 +125,11 @@ class Pool < ActiveRecord::Base
       return false
     end
 
+    def checkUpdateFields
+      if !self.weeks.empty?
+        if (self.changed & ["poolType", "allowMulti"]).any?
+          self.errors[:poolType] << "You can only change the Pool Name once a week has been created!"
+        end
+      end
+    end
 end

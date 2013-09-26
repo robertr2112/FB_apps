@@ -73,9 +73,7 @@ class PoolsController < ApplicationController
 
   def edit
     @pool = Pool.find(params[:id])
-    if @pool.isOwner?(current_user)
-      @pool_edit_flag = true
-    else
+    if !@pool.isOwner?(current_user)
       flash[:error] = "Only the owner can edit the pool!"
       redirect_to pools_path
     end
@@ -88,7 +86,6 @@ class PoolsController < ApplicationController
         flash[:success] = "Pool updated."
         redirect_to @pool
       else
-        @pool_edit_flag = true
         render 'edit'
       end
     else
