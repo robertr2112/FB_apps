@@ -5,10 +5,14 @@
       <h1> Week <%= @week.weekNumber %> Games</h1>
       <%= link_to "Pool Page", @pool %>
       <% if @pool.isOwner?(current_user) %>
-        <%= link_to "Edit week", edit_week_path(@week) %>
-        <%= link_to "Delete week", @week, :method => :delete, 
-                    :confirm => "Are you sure?", 
-                    :title => "Delete week #{@week.weekNumber}" %>
+        <% if !@week.checkStateFinal %>
+          <%= link_to "Edit week", edit_week_path(@week) %>
+        <% end %>
+        <% if @week.checkStatePend %>
+          <%= link_to "Delete week", @week, :method => :delete, 
+                      :confirm => "Are you sure?", 
+                      :title => "Delete week #{@week.weekNumber}" %>
+        <% end %>
       <% end %>
     </section>
 
