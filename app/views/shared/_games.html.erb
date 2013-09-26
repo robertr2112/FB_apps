@@ -1,4 +1,4 @@
-<% teams = Team.all.where(nfl: true) %>
+<% teams = Team.all.where(nfl: nflTeams) %>
 <table class = "table table-condensed">
   <tbody>
     <% games.each do |game| %>
@@ -6,15 +6,19 @@
         <% team = teams[game.awayTeamIndex-1] %>
         <td>
         <%= image_tag(team.imagePath, size: "40") %>
-        <% if week.checkStateFinal %>
-          <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
-          <% if awayTeamWon %>
+        <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
+        <% if showScores %>
+          <% if awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <strong><%= team.name %></strong>
-            &nbsp;&nbsp;<%= game.awayTeamScore %>
           <% else %>
             <%= team.name %>
-            &nbsp;&nbsp;<%= game.awayTeamScore %>
           <% end %>
+          <% spaceCount = 0 %>
+          <% while(spaceCount < (23 - team.name.length)) %>
+            &nbsp;
+            <% spaceCount += 1 %>
+          <% end %>
+          <%= game.awayTeamScore %>
         <% else %>
             <%= team.name %>
         <% end %>
@@ -23,14 +27,18 @@
         <% team = teams[game.homeTeamIndex-1] %>
         <td>
         <%= image_tag(team.imagePath, size: "40") %>
-        <% if week.checkStateFinal %>
-          <% if !awayTeamWon %>
+        <% if showScores %>
+          <% if !awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <strong><%= team.name %></strong>
-            &nbsp;&nbsp;<%= game.homeTeamScore %>
           <% else %>
             <%= team.name %>
-            &nbsp;&nbsp;<%= game.homeTeamScore %>
           <% end %>
+          <% spaceCount = 0 %>
+          <% while(spaceCount < (23 - team.name.length)) %>
+            &nbsp;
+            <% spaceCount += 1 %>
+          <% end %>
+          <%= game.homeTeamScore %>
         <% else %>
           <%= team.name %>
         <% end %>

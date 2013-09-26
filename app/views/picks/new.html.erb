@@ -3,7 +3,7 @@
   <h1>Make picks for Week <%=@week.weekNumber%></h1>
   <div class="span6 offset3">
       <% @teams = Team.all.where(nfl: true) %>
-      <%= render 'shared/games', week: @week, games: @week.games %>
+      <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
     <br />
     <%= simple_form_for([@entry, @pick], html: { class: 'form-inline' }) do |f| %>
       <%= f.error_notification %>

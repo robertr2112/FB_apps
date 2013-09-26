@@ -33,6 +33,14 @@ class WeeksController < ApplicationController
   def edit
     @week = Week.find(params[:id])
     @games = @week.games
+    if @week.checkStateOpen || @week.checkStateFinal
+      if @week.checkStateOpen 
+        flash[:notice] = "Can't Edit the scores for the week until it is in the Closed state!"
+      else
+        flash[:notice] = "Can't Edit the week once it is in the Final state!"
+      end
+      redirect_to Pool.find(@week.pool_id)
+    end
   end
 
   def update
@@ -66,25 +74,34 @@ class WeeksController < ApplicationController
   def open
     @week = Week.find(params[:id])
     @pool = Pool.find(@week.pool_id)
-    @week.setState(Week::STATES[:Open]) unless @week.nil?
+    if @week.games.empty?
+      flash[:error] = "Week #{@week.weekNumber} is not ready to be Open! You need to enter games for this week!"
+      redirect_to @pool
+    end
+    @week.setState(Week::STATES[:Open])
     redirect_to @pool
   end
 
   def closed
     @week = Week.find(params[:id])
     @pool = Pool.find(@week.pool_id)
-    @week.setState(Week::STATES[:Closed]) unless @week.nil?
+    @week.setState(Week::STATES[:Closed])
     redirect_to @pool
   end
 
   def final
     @week = Week.find(params[:id])
     @pool = Pool.find(@week.pool_id)
-    @week.setState(Week::STATES[:Final]) unless @week.nil?
-    # Update the entries status/totals based on this weeks results
-    @week.updateEntries
-    flash[:notice] = "Week #{@week.weekNumber} is final!"
-    redirect_to @pool
+    if weekFinalReady(@week)
+      @week.setState(Week::STATES[:Final])
+      # Update the entries status/totals based on this weeks results
+      @week.updateEntries
+      flash[:notice] = "Week #{@week.weekNumber} is final!"
+      redirect_to @pool
+    else
+      flash[:error] = "Week #{@week.weekNumber} is not ready to be Final.  Please ensure all scores have been entered."
+      redirect_to @pool
+    end
   end
 
   private
@@ -97,5 +114,14 @@ class WeeksController < ApplicationController
                                                      :homeTeamScore,
                                                      :awayTeamScore,
                                                      :_destroy] )
+    end
+
+    def weekFinalReady(week)
+      games = week.games
+      games.each do |game|
+        if game.homeTeamScore == 0 && game.awayTeamScore == 0
+          return false
+        end
+      end
     end
 end

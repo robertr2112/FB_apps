@@ -9,7 +9,7 @@
     <%= link_to_add_association 'Add New Game', f, :games %><br /><br />
     <%= f.button :submit, label: "Edit week", class: 'btn btn-large btn-primary' %>
   <% end %>
-<% elsif @week.checkStateClosed || @week.checkStateOpen%>
+<% elsif @week.checkStateClosed %>
   <h1>Submit Scores Week <%= @week.weekNumber %></h1>
   <%= simple_form_for(@week, html: { class: 'form-horizontal form-inline' }) do |f| %>
     <% @teams = Team.all.where(nfl: true) %>
@@ -18,7 +18,5 @@
     <% end %>
     <%= f.button :submit, label: "Submit scores", class: 'btn btn-large btn-primary' %>
   <% end %>
-<% else %>
-  <p>Can't Edit the week once it has gone final!</p>
 <% end %>
 

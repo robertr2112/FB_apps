@@ -3,10 +3,9 @@
   <h1>Edit picks for Week <%=@week.weekNumber%></h1>
   <div class="span6 offset3">
       <% @teams = Team.all.where(nfl: true) %>
-      <%= render 'shared/games', week: @week, games: @week.games %>
+      <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
     <br />
     <%= simple_form_for(@pick, html: { class: 'form-inline' }) do |f| %>
-      <%= render 'shared/error_messages', :object => f.object %>
       <%#= f.error_notification %>
       <%= f.simple_fields_for :game_picks do |gp| %>
         <fieldset>

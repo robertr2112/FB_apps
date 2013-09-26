@@ -3,7 +3,7 @@
     <a class="dropdown-toggle"
        data-toggle="dropdown"
       href="#" >
-      Week Mgmt
+      Manage Week
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
@@ -16,9 +16,15 @@
                     :title => "Delete week #{current_week.weekNumber}" %>
         </li>
         <li class="divider"></li>
-        <li><%= link_to "Mark week open", open_path(current_week) %></li>
-        <li><%= link_to "Mark week closed", closed_path(current_week) %></li>
-        <li><%= link_to "Mark week final", final_path(current_week) %></li>
+        <% if current_week.checkStatePend || current_week.checkStateClosed %>
+          <li><%= link_to "Mark week open", open_path(current_week) %></li>
+        <% end %> 
+        <% if current_week.checkStateOpen %>
+          <li><%= link_to "Mark week closed", closed_path(current_week) %></li>
+        <% end %>
+        <% if current_week.checkStateClosed %>
+          <li><%= link_to "Mark week final", final_path(current_week) %></li>
+        <% end %>
       <% end %>
     </ul>
   </li>
