@@ -70,17 +70,20 @@ class Pool < ActiveRecord::Base
 
   def getEntryName(user)
     entries = self.entries.where(user_id: user.id)
-    if entries && entries.count > 0
+    if user.name.split(" ").count > 1
       user_nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0]
-      user_nickname = user_nickname + "_#{entries.count}"
     else
-      user_nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0]
+      user_nickname = user.name
     end
+    if entries && entries.count > 0
+        user_nickname = user_nickname + "_#{entries.count}"
+    end
+    return user_nickname
   end
 
 
   def removeEntries(user)
-    entries = Entry.where({ pool_id: self.id, user_id: current_user.id })
+    entries = Entry.where({ pool_id: self.id, user_id: user.id })
     entries.each do |entry|
       picks = Pick.where(entry_id: entry.id)
       picks.each do |pick|
