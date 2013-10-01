@@ -15,7 +15,9 @@
         Private<br />
       <% end %>
       <% if !@current_week.nil? %>
-        <strong>State</strong>
+        <strong>Current Week</strong>
+        <%= @current_week.weekNumber %><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;<strong>State</strong>
         <%= render 'show_week_state', current_week: @current_week %>
       <% end %>
     </section>
@@ -40,7 +42,11 @@
     <% end %>
     <% week_number = 1 %>
     <% @pool.weeks.each do |week| %>
-      <%= link_to "Week #{week.weekNumber}", week_path(week) %>
+      <% if week == @current_week %>
+        <%= link_to "Week #{week.weekNumber}", week_path(week), { class: "current-week" } %>
+      <% else %>
+        <%= link_to "Week #{week.weekNumber}", week_path(week) %>
+      <% end %>
       <% if week.weekNumber % 3 == 0 %>
         <br />
       <% end %>
