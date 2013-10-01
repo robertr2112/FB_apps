@@ -15,13 +15,9 @@ module ApplicationHelper
     image_tag("logo.png", :alt => "Sample App", :class => "round")
   end
 
-  # Used to create dynamic complex forms (i.e. games within weeks)
-  def link_to_add_fields(name, f, association)
-    new_object = f.object.send(association).klass.new
-    id = new_object.object_id
-    fields = f.fields_for(association, new_object, child_index: id) do |builder|
-      render(association.to_s.singularize + "_fields", f: builder)
-    end
-    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+  # Set tab stops for a form
+  def tabindex
+    @tabindex ||= 0
+    @tabindex += 1
   end
 end
