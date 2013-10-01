@@ -1,14 +1,14 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="span4">
+  <div class="row">
+    <aside class="span4">
     <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
     </section>
-  </aside>
-</div>
+    </aside>
+  </div>
 <% if !current_user.confirmed? %>
 <div class="row">
   <div class="span6">
@@ -19,3 +19,46 @@
   </div>
 </div>
 <% end %>
+  <div class="row">
+    <aside class="span8">
+    <section>
+      <h1>My Pools</h1>
+      <ul id="my-pool">
+      <% @user.pools.each do |pool| %>
+        <li><%= link_to "#{pool.name}", pool %></li>
+        <% entries = Entry.where(user_id: @user.id, pool_id: pool.id) %>
+        <td id="my-pool">
+        <table class="table table-striped table-bordered table-condensed table-hover">
+          <tr>
+            <th>Entry</th>
+            <th>Survivor Status</th>
+            <th>Current Pick</th>
+          </tr>
+          <% entries.each do |entry| %>
+            <tr>
+              <td><%= "#{entry.name}" %></td>
+              <% if entry.survivorStatusIn %>
+                <td>In</td>
+              <% else %>
+                <td>Out</td>
+              <% end %>
+              <% picks = Pick.where(entry_id: entry.id, week_id: pool.getCurrentWeek.id) %>
+              <% if !picks.empty? %>
+                <% pick = picks.first %>
+                <% game_pick = picks.first.game_picks.first %>
+                <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, edit_pick_path(pick) %></td>
+              <% else %>
+                <% if entry.survivorStatusIn %>
+                  <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
+                <% else %>
+                  <td>XXX</td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+      </ul>
+    </section>
+    </aside>
+  </div>
