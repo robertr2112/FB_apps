@@ -72,7 +72,7 @@ class PicksController < ApplicationController
              "You have already made your pick(s) for entry: #{entry.name}!"
         elsif !entry.entryStatusGood?
           message =
-            "You have been knocked out of the pool!"
+            "This entry has been knocked out of the pool!"
         end
       elsif week.closed?
         message = 

@@ -16,7 +16,9 @@
   </li>
 <% else %>
   <% if @pool.isMember?(current_user) %>
-    <li><%= link_to "Leave Pool", leave_path(pool.id), id: pool.id %></li>
+    <% if @pool.weeks.empty? %>
+      <li><%= link_to "Leave Pool", leave_path(pool.id), id: pool.id %></li>
+    <% end %>
   <% else %>
     <li><%= link_to "Join Pool", join_path(pool.id), id: pool.id %></li>
   <% end %>

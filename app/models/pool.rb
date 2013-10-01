@@ -43,6 +43,14 @@ class Pool < ActiveRecord::Base
     end
   end
 
+  def isOpen?
+    if self.weeks.empty?
+      return true
+    else
+      return false
+    end
+  end
+
   def setOwner(user, flag)
     pool_membership = self.pool_memberships.find_by_user_id(user.id)
     if pool_membership

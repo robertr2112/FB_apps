@@ -7,7 +7,11 @@
       <td>Private</td>
     <% end %>
     <% if !pool.isMember?(current_user) %>
-      <td><%= link_to "Join", join_path(pool.id) %></td>
+      <% if pool.isOpen? %>
+        <td><%= link_to "Join", join_path(pool.id) %></td>
+      <% else %>
+        <td>Closed<td>
+      <% end %>
     <% elsif pool.isOwner?(current_user) %>
       <td>Owner</td>
     <% else %>

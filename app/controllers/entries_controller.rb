@@ -48,7 +48,18 @@ class EntriesController < ApplicationController
       render 'edit'
     end
   end
-
+  
+  def destroy
+    @entry = Entry.find(params[:id])
+    if @entry
+      @entry.destroy
+      flash[:success] = "Entry: #{@entry.name} was deleted successfully!"
+      redirect_to @pool
+    else
+      flash[:error] = "Could not find Entry with id: #{:id} !"
+    end
+  end
+    
   private
     def entry_params
       params.require(:entry).permit(:name, :survivorStatusIn, :supTotalPoints)

@@ -24,7 +24,7 @@ class WeeksController < ApplicationController
           "Week #{@week.weekNumber} for '#{@pool.name}' was created successfully!"
       # Set the state to Pend
       @week.setState(Week::STATES[:Pend])
-      redirect_to @pool
+      redirect_to @week
     else
       render 'new'
     end

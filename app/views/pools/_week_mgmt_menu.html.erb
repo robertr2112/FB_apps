@@ -7,23 +7,25 @@
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-      <li><%= link_to "Create week", new_pool_week_path(pool) %></li>
+      <li><%= link_to "Create new week", new_pool_week_path(pool) %></li>
       <% if !current_week.nil? %>
-        <li><%= link_to "Edit week", edit_week_path(current_week) %></li>
+        <li><%= link_to "Edit week #{current_week.weekNumber}", edit_week_path(current_week) %></li>
+        <% if false %>
         <li>
           <%= link_to "Delete week", current_week, :method => :delete, 
                     :confirm => "Are you sure?", 
                     :title => "Delete week #{current_week.weekNumber}" %>
         </li>
+        <% end %>
         <li class="divider"></li>
         <% if current_week.checkStatePend || current_week.checkStateClosed %>
-          <li><%= link_to "Mark week open", open_path(current_week) %></li>
+          <li><%= link_to "Mark week #{current_week.weekNumber} open", open_path(current_week) %></li>
         <% end %> 
         <% if current_week.checkStateOpen %>
-          <li><%= link_to "Mark week closed", closed_path(current_week) %></li>
+          <li><%= link_to "Mark week  #{current_week.weekNumber} closed", closed_path(current_week) %></li>
         <% end %>
         <% if current_week.checkStateClosed %>
-          <li><%= link_to "Mark week final", final_path(current_week) %></li>
+          <li><%= link_to "Mark week #{current_week.weekNumber} final", final_path(current_week) %></li>
         <% end %>
       <% end %>
     </ul>
