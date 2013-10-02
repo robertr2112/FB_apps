@@ -6,9 +6,14 @@ class EntriesController < ApplicationController
     @pool = Pool.find(params[:pool_id])
     if !@pool.nil?
       if @pool.allowMulti
-        @entry = @pool.entries.new
-        entry_name = @pool.getEntryName(current_user)
-        @entry.name = entry_name
+        if @pool.weeks.empty?
+          @entry = @pool.entries.new
+          entry_name = @pool.getEntryName(current_user)
+          @entry.name = entry_name
+        else
+          flash[:error] = "This pool is closed for new entries!"
+          redirect_to @pool
+        end
       else
         flash[:error] = "This pool does not allow multiple entries for a user!"
         redirect_to @pool
@@ -52,9 +57,13 @@ class EntriesController < ApplicationController
   def destroy
     @entry = Entry.find(params[:id])
     if @entry
-      @entry.destroy
-      flash[:success] = "Entry: #{@entry.name} was deleted successfully!"
-      redirect_to @pool
+      if @entry.picks.empty?
+        @entry.destroy
+        flash[:success] = "Entry: #{@entry.name} was deleted successfully!"
+        redirect_to @pool
+      else
+        flash[:error] = "Entry can't be deleted after picks have been made!"
+      end
     else
       flash[:error] = "Could not find Entry with id: #{:id} !"
     end
