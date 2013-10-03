@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-condensed table-hover">
   <tr>
     <td></td>
-    <% @pool.weeks.each do |week| %>
+    <% @pool.weeks.order("weekNumber ASC").each do |week| %>
       <td class="entry-header">
         <%= "Week #{week.weekNumber}" %> 
       </td>
