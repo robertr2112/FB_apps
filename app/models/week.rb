@@ -64,7 +64,7 @@ class Week < ActiveRecord::Base
   def madePicks?(entry)
     picks = self.picks.where(entry_id: entry.id)
     picks.each do |pick|
-      if (pick.entry_id == entry.id && pick.weekNumber == self.weekNumber)
+      if (pick.entry_id == entry.id && pick.weekNumber == self.week_number)
         return true
       end
     end
@@ -109,7 +109,7 @@ class Week < ActiveRecord::Base
     games_to_check = self.games
     games_to_check.each do |current_game|
       if current_game.homeTeamIndex == current_game.awayTeamIndex
-        errors[:base] << "Week #{self.weekNumber} has errors:"
+        errors[:base] << "Week #{self.week_number} has errors:"
         current_game.errors[:homeTeamIndex] << "Home and Away Team can't be the same!"
       end
       games = games_to_check = self.games
@@ -117,16 +117,24 @@ class Week < ActiveRecord::Base
         if current_game != game
           if current_game.homeTeamIndex == game.homeTeamIndex ||
              current_game.homeTeamIndex == game.awayTeamIndex
-            errors[:base] << "Week #{self.weekNumber} has errors:"
+            errors[:base] << "Week #{self.week_number} has errors:"
             current_game.errors[:homeTeamIndex] << "Team names can't be repeated!"
           end
           if current_game.awayTeamIndex == game.awayTeamIndex ||
              current_game.awayTeamIndex == game.homeTeamIndex
-            errors[:base] << "Week #{self.weekNumber} has errors:"
+            errors[:base] << "Week #{self.week_number} has errors:"
             current_game.errors[:awayTeamIndex] << "Team names can't be repeated!"
           end
         end
       end
+    end
+  end
+
+  def deleteSafe?(pool)
+    if (pool.weeks.order(:week_number).last == self)
+      return true
+    else
+      return false
     end
   end
   

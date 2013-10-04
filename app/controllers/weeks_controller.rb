@@ -7,7 +7,7 @@ class WeeksController < ApplicationController
     if !@pool.nil?
       @week = @pool.weeks.new
       @game = @week.games.build
-      @week.weekNumber = @pool.weeks.count + 1
+      @week.week_number = @pool.weeks.count + 1
     else
       flash[:error] = "Cannot create week. Pool with id:#{params[:pool_id]} does not exist!"
       redirect_to pools_path
@@ -17,11 +17,11 @@ class WeeksController < ApplicationController
   def create
     @pool = Pool.find(params[:pool_id])
     @week = @pool.weeks.new(week_params)
-    @week.weekNumber = @pool.weeks.count + 1
+    @week.week_number = @pool.weeks.count + 1
     if @week.save
       # Handle a successful save
       flash[:success] = 
-          "Week #{@week.weekNumber} for '#{@pool.name}' was created successfully!"
+          "Week #{@week.week_number} for '#{@pool.name}' was created successfully!"
       # Set the state to Pend
       @week.setState(Week::STATES[:Pend])
       redirect_to @week
@@ -46,7 +46,7 @@ class WeeksController < ApplicationController
   def update
     @week = Week.find(params[:id])
     if @week.update_attributes(week_params)
-      redirect_to @week, notice: "Successfully updated week #{@week.weekNumber}."
+      redirect_to @week, notice: "Successfully updated week #{@week.week_number}."
     else
       render :edit
     end
@@ -62,9 +62,14 @@ class WeeksController < ApplicationController
     @week = Week.find(params[:id])
     @pool = Pool.find(@week.pool_id)
     if @pool.isOwner?(current_user)
-      @week.destroy
-      flash[:success] = "Successfully deleted Week '#{@week.weekNumber}'!"
-      redirect_to pool_path(@pool)
+      if @week.deleteSafe?(@pool)
+        @week.destroy
+        flash[:success] = "Successfully deleted Week '#{@week.week_number}'!"
+        redirect_to pool_path(@pool)
+      else
+        flash[:error] = "Cannot delete Week '#{@week.week_number}' because it is not the last week!"
+        redirect_to @pool
+      end
     else
       flash[:error] = "Only the onwer of the pool can delete weeks!"
       redirect_to pools_path
@@ -75,7 +80,7 @@ class WeeksController < ApplicationController
     @week = Week.find(params[:id])
     @pool = Pool.find(@week.pool_id)
     if @week.games.empty?
-      flash[:error] = "Week #{@week.weekNumber} is not ready to be Open! You need to enter games for this week!"
+      flash[:error] = "Week #{@week.week_number} is not ready to be Open! You need to enter games for this week!"
       redirect_to @pool
     end
     @week.setState(Week::STATES[:Open])
@@ -96,17 +101,17 @@ class WeeksController < ApplicationController
       @week.setState(Week::STATES[:Final])
       # Update the entries status/totals based on this weeks results
       @week.updateEntries
-      flash[:notice] = "Week #{@week.weekNumber} is final!"
+      flash[:notice] = "Week #{@week.week_number} is final!"
       redirect_to @pool
     else
-      flash[:error] = "Week #{@week.weekNumber} is not ready to be Final.  Please ensure all scores have been entered."
+      flash[:error] = "Week #{@week.week_number} is not ready to be Final.  Please ensure all scores have been entered."
       redirect_to @pool
     end
   end
 
   private
     def week_params
-      params.require(:week).permit(:state, :pool_id, :weekNumber,
+      params.require(:week).permit(:state, :pool_id, :week_number,
                                    games_attributes: [:id, :week_id,
                                                      :homeTeamIndex, 
                                                      :awayTeamIndex, 

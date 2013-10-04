@@ -1,17 +1,19 @@
-<% provide(:title, "Week #{@week.weekNumber} Games") %>
+<% provide(:title, "Week #{@week.week_number} Games") %>
 <div class="row">
   <aside class="span8">
     <section>
-      <h1> Week <%= @week.weekNumber %> Games</h1>
+      <h1> Week <%= @week.week_number %> Games</h1>
       <%= link_to "Pool Page", @pool %>
       <% if @pool.isOwner?(current_user) %>
         <% if !@week.checkStateFinal %>
           <%= link_to "Edit week", edit_week_path(@week) %>
         <% end %>
         <% if @week.checkStatePend %>
-          <%= link_to "Delete week", @week, :method => :delete, 
-                      :confirm => "Are you sure?", 
-                      :title => "Delete week #{@week.weekNumber}" %>
+          <% if @week.deleteSafe?(@pool) %>
+            <%= link_to "Delete week", @week, :method => :delete, 
+                        :confirm => "Are you sure?", 
+                        :title => "Delete week #{@week.week_number}" %>
+          <% end %>
         <% end %>
       <% end %>
     </section>

@@ -1,5 +1,5 @@
-<% provide(:title, "Create Week #{@week.weekNumber}") %>
-<h1>Create Week <%= @week.weekNumber %></h1>
+<% provide(:title, "Create Week #{@week.week_number}") %>
+<h1>Create Week <%= @week.week_number %></h1>
 <%= simple_form_for([@pool, @week], html: { class: 'form-inline' }) do |f| %>
   <%= f.error_notification %>
   <%= f.simple_fields_for :games do |g| %>

@@ -1,6 +1,6 @@
-<% provide(:title, "Edit Week #{@week.weekNumber}") %>
+<% provide(:title, "Edit Week #{@week.week_number}") %>
 <% if @week.checkStatePend %>
-  <h1>Edit Week <%= @week.weekNumber %></h1>
+  <h1>Edit Week <%= @week.week_number %></h1>
   <%= simple_form_for(@week, html: { class: 'form-inline' }) do |f| %>
     <%= f.error_notification %>
     <%= f.simple_fields_for :games do |g| %>
@@ -10,7 +10,7 @@
     <%= f.button :submit, label: "Edit week", class: 'btn btn-large btn-primary' %>
   <% end %>
 <% elsif @week.checkStateClosed %>
-  <h1>Submit Scores Week <%= @week.weekNumber %></h1>
+  <h1>Submit Scores Week <%= @week.week_number %></h1>
   <%= simple_form_for(@week, html: { class: 'form-horizontal form-inline' }) do |f| %>
     <% @teams = Team.all.where(nfl: true) %>
     <%= f.simple_fields_for :games do |builder| %>

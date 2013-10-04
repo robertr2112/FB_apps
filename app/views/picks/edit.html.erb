@@ -1,6 +1,6 @@
 <% provide(:title, "Edit Picks") %>
 <div class="row">
-  <h1>Edit picks for Week <%=@week.weekNumber%></h1>
+  <h1>Edit picks for Week <%=@week.week_number%></h1>
   <div class="span6 offset3">
       <% @teams = Team.all.where(nfl: true) %>
       <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>

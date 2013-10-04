@@ -16,7 +16,7 @@
       <% end %>
       <% if !@current_week.nil? %>
         <strong>Current Week</strong>
-        <%= @current_week.weekNumber %><br />
+        <%= @current_week.week_number %><br />
         &nbsp;&nbsp;&nbsp;&nbsp;<strong>State</strong>
         <%= render 'show_week_state', current_week: @current_week %>
       <% end %>
@@ -40,13 +40,13 @@
     <h3>Weeks</h3>
     <% if @pool.isOwner?(current_user) %>
     <% end %>
-    <% @pool.weeks.each do |week| %>
+    <% @pool.weeks.order(:week_number).each do |week| %>
       <% if week == @current_week %>
-        <%= link_to "Week #{week.weekNumber}", week_path(week), { class: "current-week" } %>
+        <%= link_to "Week #{week.week_number}", week_path(week), { class: "current-week" } %>
       <% else %>
-        <%= link_to "Week #{week.weekNumber}", week_path(week) %>
+        <%= link_to "Week #{week.week_number}", week_path(week) %>
       <% end %>
-      <% if week.weekNumber % 3 == 0 %>
+      <% if week.week_number % 3 == 0 %>
         <br />
       <% end %>
     <% end %>

@@ -109,7 +109,7 @@ class Pool < ActiveRecord::Base
     # goes through the whole list without finding a non-final week than the last
     # week in the Pool is still the current week.
     #
-    weeks = self.weeks
+    weeks = self.weeks.order(:week_number)
     weeks.empty? { return nil }
     weeks.each do |week|
       if !week.checkStateFinal

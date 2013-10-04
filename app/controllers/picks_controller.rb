@@ -26,11 +26,11 @@ class PicksController < ApplicationController
     @pool = Pool.find(@entry.pool_id)
     @week = @pool.getCurrentWeek
     @pick = @entry.picks.new(pick_params.merge(week_id: @week.id,
-                                               weekNumber: @week.weekNumber))
+                                               weekNumber: @week.week_number))
     if @pick.save
       # Handle a successful save
       flash[:success] = 
-          "Your pick(s) for Week '#{@week.weekNumber}' was saved!"
+          "Your pick(s) for Week '#{@week.week_number}' was saved!"
       redirect_to @pool
     else
       render 'new'
@@ -50,7 +50,7 @@ class PicksController < ApplicationController
     if @pick.update_attributes(pick_params)
       # Handle a successful save
       flash[:success] = 
-          "Your pick(s) for Week '#{@week.weekNumber}' was changed!"
+          "Your pick(s) for Week '#{@week.week_number}' was changed!"
       redirect_to @pool
     else
       render 'edit'
@@ -76,9 +76,9 @@ class PicksController < ApplicationController
         end
       elsif week.closed?
         message = 
-             "You're too late! Week #{week.weekNumber} is already closed!"
+             "You're too late! Week #{week.week_number} is already closed!"
       else
-        message = "Week #{week.weekNumber} is not open for picks yet!"
+        message = "Week #{week.week_number} is not open for picks yet!"
       end
     end
 
