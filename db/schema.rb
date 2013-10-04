@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20130911180054) do
     t.datetime "updated_at"
   end
 
-  add_index "entries", ["pool_id"], name: "index_entries_on_pool_id"
-  add_index "entries", ["user_id"], name: "index_entries_on_user_id"
+  add_index "entries", ["pool_id"], name: "index_entries_on_pool_id", using: :btree
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "game_picks", force: true do |t|
     t.integer  "pick_id"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20130911180054) do
     t.datetime "updated_at"
   end
 
-  add_index "picks", ["entry_id"], name: "index_picks_on_entry_id"
+  add_index "picks", ["entry_id"], name: "index_picks_on_entry_id", using: :btree
 
   create_table "pool_memberships", force: true do |t|
     t.integer  "user_id"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20130911180054) do
     t.boolean  "confirmed",              default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "weeks", force: true do |t|
     t.integer  "state"
