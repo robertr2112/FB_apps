@@ -12,6 +12,7 @@
           <%= link_to "Delete pool", pool, :method => :delete, 
               :confirm => "Are you sure?", :title => "Delete#{pool.name}" %>
         </li>
+        <li><%= link_to "Send Group Message", new_pool_pool_message_path(pool) %>
     </ul>
   </li>
 <% else %>

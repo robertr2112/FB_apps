@@ -47,7 +47,12 @@ class Pool < ActiveRecord::Base
     if self.weeks.empty?
       return true
     else
-      return false
+      weeks = self.weeks.order(:week_number)
+      if weeks.first.checkStateClosed || weeks.first.checkStateFinal
+        return false
+      else
+        return true
+      end
     end
   end
 

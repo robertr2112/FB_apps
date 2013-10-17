@@ -26,6 +26,7 @@ FBApps::Application.routes.draw do
   resources :pools do
     resources :weeks, only: [:new, :create]
     resources :entries, only: [:new, :create]
+    resources :pool_messages, only: [:new, :create]
   end
   resources :entries, only: [:edit, :update, :destroy] do
     resources :picks, only: [:new, :create]

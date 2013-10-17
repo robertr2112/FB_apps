@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
     @pool = Pool.find(params[:pool_id])
     if !@pool.nil?
       if @pool.allowMulti
-        if @pool.weeks.empty?
+        if @pool.isOpen?
           @entry = @pool.entries.new
           entry_name = @pool.getEntryName(current_user)
           @entry.name = entry_name
