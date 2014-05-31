@@ -1,21 +1,29 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-#ruby-gemset=Rails4
+#ruby-gemset=Rails_fb
 
-gem 'rails','4.0.0'
-gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'rails','4.1.1'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'annotate'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
 gem 'select2-rails'
-gem 'simple_form'
+gem 'simple_form', '3.1.0.rc1'
 gem 'cocoon'
+
+#
+# Bootstrap support gems
+#
+gem 'bootstrap-sass', '~> 3.1.1.1'
+gem 'bootstrap-will_paginate', '0.0.9'
+gem 'font-awesome-sass'
+gem 'sass-rails', '~> 4.0.2'
 #gem 'select2-sass-bootstrap-rails'
 
+# Database.  Using the same database for production/development
+gem 'pg'
+
 group :development, :test do
-  gem 'pg'
   gem 'rspec-rails', '2.13.1'
   gem 'guard-rspec', '2.5.0'
   gem 'spork-rails', '4.0.0'
@@ -30,7 +38,6 @@ group :test do
   gem 'libnotify', '0.8.0'
 end
 
-gem 'sass-rails', '4.0.0'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.0'
 gem 'jquery-rails', '2.2.1'
@@ -43,7 +50,6 @@ group :doc do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor', '0.0.2'
 end
 
