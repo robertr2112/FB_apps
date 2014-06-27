@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
   <div class="row">
-    <aside class="span4">
+    <aside class="col-md-4">
     <section>
         <h1>
           <%= gravatar_for @user %>
@@ -11,7 +11,7 @@
   </div>
 <% if !current_user.confirmed? %>
 <div class="row">
-  <div class="span6">
+  <div class="col-md-6">
     <p>This user account needs to be confirmed before you can use this site.
        Please look for the email with the subject <i>"Confirm Registration" </i>from
        info@fbpm.com and click the Confirmation URL.  
@@ -20,7 +20,7 @@
 </div>
 <% end %>
   <div class="row">
-    <aside class="span8">
+    <aside class="col-md-8">
     <section>
       <h1>My Pools</h1>
       <ul id="my-pool">
@@ -42,11 +42,13 @@
               <% else %>
                 <td>Out</td>
               <% end %>
-              <% picks = Pick.where(entry_id: entry.id, week_id: pool.getCurrentWeek.id) %>
+              <% picks = Pick.where(entry_id: entry.id, 
+                                    week_id: pool.getCurrentWeek.id) %>
               <% if !picks.empty? %>
                 <% pick = picks.first %>
                 <% game_pick = picks.first.game_picks.first %>
-                <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, edit_pick_path(pick) %></td>
+                <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
+                                edit_pick_path(pick) %></td>
               <% else %>
                 <% if entry.survivorStatusIn %>
                   <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
