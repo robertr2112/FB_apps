@@ -14,7 +14,7 @@ gem 'cocoon'
 #
 # Bootstrap support gems
 #
-gem 'bootstrap-sass', '~> 3.1.1.1'
+gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'font-awesome-sass'
 gem 'sass-rails', '~> 4.0.2'

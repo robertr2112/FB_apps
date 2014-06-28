@@ -10,6 +10,16 @@ module ApplicationHelper
     end
   end
 
+  # Set the alert levels for styling
+  def flash_class(level)
+    case level
+        when "notice" then "alert alert-warning"
+        when "success" then "alert alert-success"
+        when "error" then "alert alert-error"
+        when "alert" then "alert alert-error"
+    end
+  end
+
   # Return the logo variable
   def logo
     image_tag("logo.png", :alt => "Sample App", :class => "round")
