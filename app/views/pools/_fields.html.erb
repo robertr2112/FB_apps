@@ -1,44 +1,13 @@
-  <%= render 'shared/error_messages', :object => f.object %>
+  <%= f.error_notification %>
 
-    <div class="control-group">
-      <%= f.label :name, class: 'control-label' %>
-      <div class = "controls">
-        <%= f.text_field :name, class: 'text_field' %>
-      </div>
-    </div>
+  <%= f.input :name, placeholder: 'Name' %>
 
-    <div class="control-group">
-      <%= f.label :poolType, "Pool Type", class: 'control-label' %>
-      <div class = "controls">
-        <%= f.select(:poolType, Pool::POOL_TYPES, class: 'select') %>
-      </div>
-    </div>
+  <%= f.input :poolType, label: 'Pool Type', placeholder: 'Pool Type', 
+              collection: Pool::POOL_TYPES %>
 
-    <div class="control-group">
-      <%= f.label :allowMulti, "Allow multiple entries", class: 'control-label' %>
-      <div class = "controls">
-        <%= f.radio_button :allowMulti, true, 
-                     class: 'radio' %>Yes&nbsp&nbsp
-        <%= f.radio_button :allowMulti, false, 
-                     class: 'radio' %>No
-      </div>
-    </div>
+  <%= f.input :allowMulti, label: 'Allow Multiple', 
+              hint: 'Allow multiple entries per user', as: :radio_buttons  %>
 
-<% if false %>
-    <div class="control-group">
-      <%= f.label :isPublic, "Status", class: 'control-label' %>
-      <div class = "controls">
-        <%= f.radio_button :isPublic, true, 
-                     class: 'radio' %>Public&nbsp&nbsp
-        <%= f.radio_button :isPublic, false, 
-                     class: 'radio' %>Private
-      </div>
-    </div>
+  <%= f.input :isPublic, label: 'Public', as: :radio_buttons %>
 
-    <div class="control-group">
-      <%= f.label :password, class: 'control-label' %>
-      <div class = "controls">
-        <%= f.text_field :password, class: 'password' %>
-      </div>
-    </div>
-<% end %>
+  <%= f.input :password, placeholder: 'Password' %>
