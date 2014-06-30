@@ -1,26 +1,16 @@
 <% if pool.isMember?(current_user) %>
-  <li class="dropdown">
-    <a class="dropdown-toggle"
-       data-toggle="dropdown"
-      href="#" >
-      Manage Entry
-      <b class="caret"></b>
-    </a>
+  <li class="menu-item dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" > Manage Entry <b class="caret"></b></a>
     <ul class="dropdown-menu">
       <li><%= link_to "Create entry", new_pool_entry_path(pool) %></li>
       <li class="divider"></li>
       <% entries = pool.entries.where(user_id: current_user.id) %>
       <% entries.each do |entry| %>
-        <li class="dropdown-submenu">
-          <a class="dropdown-toggle"
-            data-toggle="dropdown"
-            href="#" >
-            <%= entry.name %>
-            <b class="caret"></b>
-          </a>
+        <li class="menu-item dropdown dropdown-submenu">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" > <%= entry.name %> </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Edit entry", edit_entry_path(entry) %></li>
-            <li>
+            <li class=menu-item><%= link_to "Edit entry", edit_entry_path(entry) %></li>
+            <li class=menu-item>
               <%= link_to "Delete entry", entry, method: :delete,
                   confirm: "Are you sure?", title: "Delete#{entry.name}" %>
             </li>
@@ -30,7 +20,7 @@
                 <li><%= link_to "Create picks", new_entry_pick_path(entry) %></li>
               <% else %>
                 <% pick = pick[0] %>
-                <li><%= link_to "Edit picks", edit_pick_path(pick) %></li>
+                <li><%= link_to "Edit pick(s)", edit_pick_path(pick) %></li>
               <% end %>
             <% end %>
           </ul>

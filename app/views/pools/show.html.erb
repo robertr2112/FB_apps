@@ -3,7 +3,7 @@
   <%= render 'mgmt_menu', pool: @pool, current_week: @current_week %>
 </div>
 <div class="row">
-  <aside class="span9">
+  <aside class="col-md-8 col-md-offset-2">
     <section>
       <h1> <%= @pool.name %> </h1>
       <strong>Pool Type</strong> 
@@ -26,6 +26,8 @@
         <h1>Current Board</h1>
         <% if !@current_week.nil? %>
           <%= render 'show_board', pool: @pool, current_week: @current_week %>
+        <% else %>
+          <p>This pool has not been activated yet! </p>
         <% end %>
       <% elsif @pool.poolType == Pool::POOL_TYPES[:SUP] %>
         <p>Sorry but SUP based pools are not supported at this time.</p>
@@ -36,7 +38,7 @@
       <% end %>
     </section>
   </aside>
-  <div class="span3">
+  <div class="col-md-2">
     <h3>Weeks</h3>
     <% if @pool.isOwner?(current_user) %>
     <% end %>
@@ -53,12 +55,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="span6">
+  <div class="col-md-8 col-md-offset-2">
     <h3>Members</h3>
     <%= will_paginate %>
 
     <% for user in @pool.users %>
-      <ul class="pools">
+      <ul id="pool-members">
         <%= render 'pool_member', user: user, pool: @pool %>
       </ul>
     <% end %>

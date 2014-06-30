@@ -1,6 +1,6 @@
 <% provide(:title, "Week #{@week.week_number} Games") %>
 <div class="row">
-  <aside class="span8">
+  <aside class="col-md-8 col-md-offset-2">
     <section>
       <h1> Week <%= @week.week_number %> Games</h1>
       <%= link_to "Pool Page", @pool %>
@@ -27,6 +27,6 @@
         <%= render 'shared/games', week: @week, games: @games, nflTeams: true, showScores: showScores %>
     </section>
   </aside>
-  <div class="span4">
+  <div class="col-md-4">
   </div>
 </div>

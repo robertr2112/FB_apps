@@ -1,9 +1,11 @@
-<fieldset>
-  <%= f.input :awayTeamScore,
+<div class='nested-fields well'>
+  <fieldset>
+    <%= f.input :awayTeamScore,
               label: Team.find(f.object.send(:awayTeamIndex)).name,
-              input_html: {id: "gamescore", class: 'span1'}  %>
-  <%= f.input :homeTeamScore,
+              input_html: {id: "gamescore"}  %>
+    <%= f.input :homeTeamScore,
               label: Team.find(f.object.send(:homeTeamIndex)).name,
-              input_html: {id: "gamescore", class: 'span1'}  %>
-</fieldset>
+              input_html: {id: "gamescore"}  %>
+  </fieldset>
+</div>
 
