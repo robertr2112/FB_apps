@@ -1,24 +1,29 @@
 <% provide(:title, "Edit Picks") %>
 <div class="row">
   <h1>Edit picks for Week <%=@week.week_number%></h1>
-  <div class="span6 offset3">
-      <% @teams = Team.all.where(nfl: true) %>
-      <%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
-    <br />
-    <%= simple_form_for(@pick, html: { class: 'form-inline' }) do |f| %>
-      <%#= f.error_notification %>
-      <%= f.simple_fields_for :game_picks do |gp| %>
-        <fieldset>
-          <% @select_teams = @week.buildSelectTeams %>
-          <%= gp.input :chosenTeamIndex, label: "Pick Team:",
-                      collection: @select_teams, value_method: :id,
-                      label_method: :name,
-                      input_html: { id: "pick", class: 'span3' } %>
-        </fieldset>
-      <% end %>
-      <br />
-      <%= f.button :submit, label: "Submit Pick(s)", class: "btn btn-large btn-primary" %>
-    <% end %>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Make picks for week <%=@week.week_number%></div>
+      <div class="panel-body">
+	<% @teams = Team.all.where(nfl: true) %>
+	<%= render 'shared/games', week: @week, games: @week.games, nflTeams: true, showScores: false %>
+	<br />
+	<%= simple_form_for(@pick, html: { class: 'form-inline' }) do |f| %>
+	  <%#= f.error_notification %>
+	  <%= f.simple_fields_for :game_picks do |gp| %>
+	    <fieldset>
+	      <% @select_teams = @week.buildSelectTeams %>
+	      <%= gp.input :chosenTeamIndex, label: "Pick Team:",
+			  collection: @select_teams, value_method: :id,
+			  label_method: :name,
+			  input_html: { id: "pick", class: 'span3' } %>
+	    </fieldset>
+	  <% end %>
+	  <br />
+	  <%= f.button :submit, label: "Submit Pick(s)", class: "btn btn-large btn-primary" %>
+	<% end %>
+      </div>
+    </div>
   </div>
 </div>
 
