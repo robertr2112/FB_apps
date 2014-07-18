@@ -9,6 +9,8 @@
 #  week_id       :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  homeTeamScore :integer          default(0)
+#  awayTeamScore :integer          default(0)
 #
 
 class Game < ActiveRecord::Base

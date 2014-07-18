@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  poolType        :integer
+#  allowMulti      :boolean          default(FALSE)
 #  isPublic        :boolean          default(TRUE)
 #  password_digest :string(255)
 #  created_at      :datetime

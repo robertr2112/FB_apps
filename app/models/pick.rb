@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: picks
+#
+#  id         :integer          not null, primary key
+#  week_id    :integer
+#  entry_id   :integer
+#  weekNumber :integer
+#  totalScore :integer          default(0)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Pick < ActiveRecord::Base
 
   belongs_to :week

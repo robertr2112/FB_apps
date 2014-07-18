@@ -2,11 +2,12 @@
 #
 # Table name: weeks
 #
-#  id         :integer          not null, primary key
-#  state      :integer
-#  pool_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer          not null, primary key
+#  state       :integer
+#  pool_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  week_number :integer
 #
 
 class Week < ActiveRecord::Base
