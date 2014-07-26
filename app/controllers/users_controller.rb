@@ -74,6 +74,28 @@ class UsersController < ApplicationController
     end
     redirect_to users_url
   end
+  
+  def admin_add
+    if current_user.admin? 
+      user = User.find(params[:id])
+      user.update_attribute(:admin, '1')
+      flash[:success] = "Admin status has been granted to User: '#{user.name}!"
+    else
+      flash[:error] = "Only an Admin user can update admin status!"
+    end
+    redirect_to users_url
+  end
+  
+  def admin_del
+    if current_user.admin? 
+      user = User.find(params[:id])
+      user.update_attribute(:admin, '0')
+      flash[:success] = "Admin status has been removed from User: '#{user.name}!"
+    else
+      flash[:error] = "Only an Admin user can update admin status!"
+    end
+    redirect_to users_url
+  end
 
   private
 

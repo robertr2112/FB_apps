@@ -14,13 +14,17 @@ FBApps::Application.routes.draw do
   match 'pools/join/:id',   to: 'pools#join',    as: :join,     via: 'get'
   match 'pools/leave/:id',  to: 'pools#leave',   as: :leave,    via: 'get'
   match 'pools/my_pools',   to: 'pools#my_pools',as: :my_pools, via: 'get'
-  match 'users/confirm/:confirmation_token',
-                            to: 'users#confirm', as: :confirm,  via: 'get'
-  match 'users/resend_confirm/:id',  to: 'users#resend_confirm', 
-                       as: :resend_confirm,     via: 'get'
   match 'weeks/open/:id',   to: 'weeks#open',    as: :open,     via: 'get'
   match 'weeks/closed/:id', to: 'weeks#closed',  as: :closed,   via: 'get'
   match 'weeks/final/:id',  to: 'weeks#final',   as: :final,    via: 'get'
+  match 'users/confirm/:confirmation_token', to: 'users#confirm', 
+                       as: :confirm,  via: 'get'
+  match 'users/resend_confirm/:id',  to: 'users#resend_confirm', 
+                       as: :resend_confirm,     via: 'get'
+  match 'users/admin_add/:id', to: 'users#admin_add',    
+                       as: :admin_add,     via: 'get'
+  match 'users/admin_del/:id', to: 'users#admin_del',    
+                       as: :admin_del,     via: 'get'
 
 
   resources :pools do

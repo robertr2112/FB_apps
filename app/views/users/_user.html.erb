@@ -5,5 +5,14 @@
     | <%= link_to "delete", user, method: :delete,
           data: { confirm: "Are you sure?" },
           :title => "Delete #{user.name}" %>
+    <% if user.admin? %>
+      | <%= link_to "Delete Admin status", admin_del_path(user.id),
+            data: { confirm: "Are you sure?" },
+            title: "Delete #{user.name} admin status" %>
+    <% else %>
+      | <%= link_to "Add Admin status", admin_add_path(user.id),
+            data: { confirm: "Are you sure?" },
+            title: "Add #{user.name} admin status" %>
+    <% end %>
   <% end %>
 </li>
