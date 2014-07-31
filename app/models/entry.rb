@@ -24,4 +24,16 @@ class Entry < ActiveRecord::Base
       return false
     end
   end
+  
+  # !!!! Is this the right place for this routine?  If so, then need to modify this routine and update all views that call it.
+  def madePicks?(entry)
+    picks = self.picks.where(entry_id: entry.id)
+    picks.each do |pick|
+      if (pick.entry_id == entry.id && pick.weekNumber == self.week_number)
+        return true
+      end
+    end
+    return false
+  end
+
 end

@@ -10,9 +10,9 @@ admin = User.new do |u|
   u.name = "Admin"
   u.admin = true
   u.confirmed = true
-  u.email = "admin@example.com"
-  u.password = "password"
-  u.password_confirmation = "password"
+  u.email = "admin@fbpm.com"
+  u.password = "p8ssw0rd"
+  u.password_confirmation = "p8ssw0rd"
 end
 
 admin.save!

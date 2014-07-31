@@ -5,7 +5,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Enter Game Information </div>
         <div class="panel-body">
-	  <%= simple_form_for([@pool, @week], html: { class: 'form-inline' }) do |f| %>
+	  <%= simple_form_for([@season, @week], html: { class: 'form-inline' }) do |f| %>
 	    <%= f.error_notification %>
 	    <%= f.simple_fields_for :games do |g| %>
 	      <%= render 'game_fields', f: g %>

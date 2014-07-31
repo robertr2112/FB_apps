@@ -3,11 +3,12 @@
 # Table name: weeks
 #
 #  id          :integer          not null, primary key
+#  season_id   :integer
 #  state       :integer
 #  pool_id     :integer
+#  week_number :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  week_number :integer
 #
 
 require 'spec_helper'

@@ -47,6 +47,10 @@ module SessionsHelper
      redirect_to root_url unless current_user.confirmed?
   end
 
+  def admin_user
+     redirect_to root_url unless current_user.admin?
+  end
+
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)

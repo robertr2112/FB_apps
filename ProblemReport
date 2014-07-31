@@ -32,6 +32,8 @@ DESIGN CHANGES
 
 1) Update models to make WEEK model global (Need to add details)
 
+2) Add Year using year = Time.now.strftime("%Y")
+
 
 GENERAL ISSUES
 --------------

@@ -27,8 +27,10 @@ FBApps::Application.routes.draw do
                        as: :admin_del,     via: 'get'
 
 
-  resources :pools do
+  resources :seasons do
     resources :weeks, only: [:new, :create]
+  end
+  resources :pools do
     resources :entries, only: [:new, :create]
     resources :pool_messages, only: [:new, :create]
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004001339) do
+ActiveRecord::Schema.define(version: 20140731181932) do
 
   create_table "entries", force: true do |t|
     t.integer  "pool_id"
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 20131004001339) do
     t.integer  "awayTeamIndex"
     t.integer  "spread"
     t.integer  "week_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "homeTeamScore", default: 0
     t.integer  "awayTeamScore", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "picks", force: true do |t|
@@ -65,10 +65,20 @@ ActiveRecord::Schema.define(version: 20131004001339) do
 
   create_table "pools", force: true do |t|
     t.string   "name"
+    t.integer  "season_id"
     t.integer  "poolType"
     t.boolean  "allowMulti",      default: false
     t.boolean  "isPublic",        default: true
     t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seasons", force: true do |t|
+    t.string   "year"
+    t.boolean  "nfl_league"
+    t.integer  "number_of_weeks"
+    t.integer  "current_week"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -84,26 +94,27 @@ ActiveRecord::Schema.define(version: 20131004001339) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "password_digest"
     t.boolean  "admin",                  default: false
+    t.string   "password_digest"
     t.string   "remember_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.string   "confirmation_token"
     t.boolean  "confirmed",              default: false
+    t.string   "confirmation_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "weeks", force: true do |t|
+    t.integer  "season_id"
     t.integer  "state"
     t.integer  "pool_id"
+    t.integer  "week_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "week_number"
   end
 
 end

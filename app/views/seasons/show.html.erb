@@ -1,0 +1,23 @@
+<% provide(:title, "Season #{@season.year}") %>
+<%= render 'mgmt_navbar', season: @season, current_week: @season.current_week %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= "#{@season.year}" %> Season</div>
+      <div class="panel-body">
+        <ul class="list-group">
+	  <li class="list-group-item"><b>Type:</b>
+	    <% if @season.nfl_league %>
+	      NFL League
+	    <% else %>
+	      College League
+	    <% end  %>
+          </li>
+          <li class="list-group-item"><b>Number of Weeks: </b> <%= "#{@season.number_of_weeks}" %></li>
+          <li class="list-group-item"><b>Current Week: </b> <%= "#{@season.current_week}" %></li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

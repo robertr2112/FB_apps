@@ -5,6 +5,8 @@ class CreateGames < ActiveRecord::Migration
       t.integer :awayTeamIndex
       t.integer :spread
       t.integer :week_id
+      t.integer :homeTeamScore, default: 0
+      t.integer :awayTeamScore, default: 0
 
       t.timestamps
     end

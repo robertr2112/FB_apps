@@ -1,14 +1,14 @@
 <% provide(:title, @user.name) %>
-  <div class="row">
-    <aside class="col-md-4">
-    <section>
-        <h1>
-          <%= gravatar_for @user %>
-          <%= @user.name %>
-        </h1>
-    </section>
-    </aside>
-  </div>
+<div class="row">
+  <aside class="col-md-4">
+  <section>
+      <h1>
+	<%= gravatar_for @user %>
+	<%= @user.name %>
+      </h1>
+  </section>
+  </aside>
+</div>
 <% if !current_user.confirmed? %>
 <div class="row">
   <div class="col-md-6">
@@ -19,66 +19,64 @@
   </div>
 </div>
 <% end %>
-  <div class="row">
-    <div class="col-md-8">
-    <section>
-      <h1>My Pools</h1>
-      <ul id="my-pool">
-      <% if @user.pools.any? %>
-	<% @user.pools.each do |pool| %>
-	  <li><%= link_to "#{pool.name}", pool %></li>
-	  <% entries = Entry.where(user_id: @user.id, pool_id: pool.id) %>
-	  <div class = "table-responsive">
-	  <table class="table table-striped table-bordered table-condensed table-hover">
+<div class="row">
+  <div class="col-md-8">
+  <section>
+    <h1>My Pools</h1>
+    <ul id="my-pool">
+    <% if @user.pools.any? %>
+      <% @user.pools.each do |pool| %>
+	<li><%= link_to "#{pool.name}", pool %></li>
+	<% entries = Entry.where(user_id: @user.id, pool_id: pool.id) %>
+	<div class = "table-responsive">
+	<table class="table table-striped table-bordered table-condensed table-hover">
+	  <tr>
+	    <th>Entry</th>
+	    <th>Survivor Status</th>
+	    <th>Current Pick</th>
+	  </tr>
+	  <% entries.each do |entry| %>
 	    <tr>
-	      <th>Entry</th>
-	      <th>Survivor Status</th>
-	      <th>Current Pick</th>
-	    </tr>
-	    <% entries.each do |entry| %>
-	      <tr>
-		<td><%= "#{entry.name}" %></td>
+	      <td><%= "#{entry.name}" %></td>
+	      <% if entry.survivorStatusIn %>
+		<td>In</td>
+	      <% else %>
+		<td>Out</td>
+	      <% end %>
+	      <% if !pool.weeks.empty? %>
+		<% picks = Pick.where(entry_id: entry.id, 
+				      week_id: pool.getCurrentWeek.id) %>
+		<% if !picks.empty? %>
+		  <% pick = picks.first %>
+		  <% game_pick = picks.first.game_picks.first %>
+		<% else %>
+		  <% pick = nil %>
+		<% end %>
+	      <% end %>
+	      <% if pick %>
+		  <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
+				  edit_pick_path(pick) %></td>
+	      <% else %>
 		<% if entry.survivorStatusIn %>
-		  <td>In</td>
+		  <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
 		<% else %>
-		  <td>Out</td>
+		  <td>XXX</td>
 		<% end %>
-		<% if !pool.weeks.empty? %>
-		  <% picks = Pick.where(entry_id: entry.id, 
-					week_id: pool.getCurrentWeek.id) %>
-		  <% if !picks.empty? %>
-		    <% pick = picks.first %>
-		    <% game_pick = picks.first.game_picks.first %>
-		  <% else %>
-		    <% pick = nil %>
-		  <% end %>
-		<% end %>
-		<% if pick %>
-		    <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
-				    edit_pick_path(pick) %></td>
-		<% else %>
-		  <% if entry.survivorStatusIn %>
-		    <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
-		  <% else %>
-		    <td>XXX</td>
-		  <% end %>
-		<% end %> 
-	      </tr>
-	    <% end %>
-	  </table>
-	  </div>
-	<% end %>
-      <% else %>
-	<div class="col-md-6">
-          <p>You currently are not a member of any pool.  
-	  <%= link_to "Create", new_pool_path %>
-	  or
-	  <%= link_to "Join", pools_path %>
-          a pool.
-          </p>
-        </div
+	      <% end %> 
+	    </tr>
+	  <% end %>
+	</table>
+	</div>
       <% end %>
-      </ul>
-    </section>
-    </div>
+    <% else %>
+      <p>You currently are not a member of any pool.  
+	<%= link_to "Create", new_pool_path %>
+	or
+	<%= link_to "Join", pools_path %>
+	a pool.
+	</p>
+    <% end %>
+    </ul>
+  </section>
   </div>
+</div>

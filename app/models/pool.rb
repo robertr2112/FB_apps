@@ -4,6 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  name            :string(255)
+#  season_id       :integer
 #  poolType        :integer
 #  allowMulti      :boolean          default(FALSE)
 #  isPublic        :boolean          default(TRUE)
@@ -16,10 +17,11 @@ class Pool < ActiveRecord::Base
 
   POOL_TYPES = { PickEm: 0, PickEmSpread: 1, Survivor: 2, SUP: 3 }
 
-  has_many :users, through: :pool_memberships, dependent: :destroy
-  has_many :pool_memberships, dependent: :destroy
-  has_many :weeks, dependent: :destroy
-  has_many :entries, dependent: :destroy
+  has_many   :users, through: :pool_memberships, dependent: :destroy
+  has_many   :pool_memberships, dependent: :destroy
+  has_many   :weeks, dependent: :destroy
+  has_many   :entries, dependent: :destroy
+  belongs_to :season
 
   # Make sure protected fields aren't updated after a week has been created on the pool
   validate :checkUpdateFields, on: :update
@@ -95,7 +97,28 @@ class Pool < ActiveRecord::Base
     return user_nickname
   end
 
-
+  # !!!! Need to modify this routine to work and update all calls to it
+  def updateEntries
+    winning_teams = self.getWinningTeams
+    picks = self.picks
+    picks.each do |pick|
+      pick.game_picks.each do |game_pick|
+        found_team = false
+        winning_teams.each do |team|
+          if game_pick.chosenTeamIndex == team 
+            found_team = true
+          end
+        end
+        if !found_team 
+          entry = Entry.find(pick.entry_id)
+          entry.update_attribute(:survivorStatusIn, false)
+          entry.save
+        end
+      end
+    end
+    return true
+  end
+  
   def removeEntries(user)
     entries = Entry.where({ pool_id: self.id, user_id: user.id })
     entries.each do |entry|

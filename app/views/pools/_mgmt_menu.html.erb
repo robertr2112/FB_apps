@@ -1,7 +1,6 @@
 <ul class="nav nav-pills">
   <%= render 'pool_mgmt_menu', pool: pool %>
   <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
-    <%= render 'week_mgmt_menu', pool: pool, current_week: current_week %>
     <%= render 'entry_mgmt_menu', pool: pool, current_week: current_week %>
   <% end %>
 </ul>

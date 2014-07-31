@@ -3,20 +3,21 @@
 # Table name: weeks
 #
 #  id          :integer          not null, primary key
+#  season_id   :integer
 #  state       :integer
 #  pool_id     :integer
+#  week_number :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  week_number :integer
 #
 
 class Week < ActiveRecord::Base
 
   STATES = { Pend: 0, Open: 1, Closed: 2, Final: 3 }
 
+  belongs_to :season
   belongs_to :pool
   has_many   :games, dependent: :destroy
-  has_many   :picks, dependent: :destroy
 
   accepts_nested_attributes_for :games
   #validates_associated :games
@@ -62,16 +63,6 @@ class Week < ActiveRecord::Base
     return select_teams
   end
 
-  def madePicks?(entry)
-    picks = self.picks.where(entry_id: entry.id)
-    picks.each do |pick|
-      if (pick.entry_id == entry.id && pick.weekNumber == self.week_number)
-        return true
-      end
-    end
-    return false
-  end
-
   def getWinningTeams
     winning_teams = Array.new
     games = self.games
@@ -85,27 +76,6 @@ class Week < ActiveRecord::Base
     return winning_teams
   end
 
-  def updateEntries
-    winning_teams = self.getWinningTeams
-    picks = self.picks
-    picks.each do |pick|
-      pick.game_picks.each do |game_pick|
-        found_team = false
-        winning_teams.each do |team|
-          if game_pick.chosenTeamIndex == team 
-            found_team = true
-          end
-        end
-        if !found_team 
-          entry = Entry.find(pick.entry_id)
-          entry.update_attribute(:survivorStatusIn, false)
-          entry.save
-        end
-      end
-    end
-    return true
-  end
-  
   def gamesValid?
     games_to_check = self.games
     games_to_check.each do |current_game|
@@ -131,8 +101,9 @@ class Week < ActiveRecord::Base
     end
   end
 
-  def deleteSafe?(pool)
-    if (pool.weeks.order(:week_number).last == self)
+  # !!!! Need to rewrite this method for when it is safe to delete a week
+  def deleteSafe?(season)
+    if (season.weeks.order(:week_number).last == self)
       return true
     else
       return false

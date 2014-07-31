@@ -4,6 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  name            :string(255)
+#  season_id       :integer
 #  poolType        :integer
 #  allowMulti      :boolean          default(FALSE)
 #  isPublic        :boolean          default(TRUE)

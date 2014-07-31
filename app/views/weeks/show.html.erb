@@ -1,15 +1,14 @@
 <% provide(:title, "Week #{@week.week_number} Games") %>
 <div class="row">
-  <aside class="col-md-8 col-md-offset-2">
+  <div class="col-md-8 col-md-offset-2">
     <section>
       <h1> Week <%= @week.week_number %> Games</h1>
-      <%= link_to "Pool Page", @pool %>
-      <% if @pool.isOwner?(current_user) %>
+      <% if @current_user.admin? %>
         <% if !@week.checkStateFinal %>
           <%= link_to "Edit week", edit_week_path(@week) %>
         <% end %>
         <% if @week.checkStatePend %>
-          <% if @week.deleteSafe?(@pool) %>
+          <% if @week.deleteSafe?(@season) %>
             <%= link_to "Delete week", @week, :method => :delete, 
                         :confirm => "Are you sure?", 
                         :title => "Delete week #{@week.week_number}" %>
@@ -26,7 +25,5 @@
         <% end  %>
         <%= render 'shared/games', week: @week, games: @games, nflTeams: true, showScores: showScores %>
     </section>
-  </aside>
-  <div class="col-md-4">
   </div>
 </div>

@@ -1,0 +1,7 @@
+  <li><%= link_to "Create new week", new_season_week_path(season) %></li>
+  <li><%= link_to "Week:", "#" %></li>
+  <% if season.weeks.any? %>
+    <% season.weeks.order(:week_number).each do |week| %>
+      <li><%= link_to "#{week.week_number}", week_path(week) %></li>
+    <% end %>
+  <% end %>

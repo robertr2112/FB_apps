@@ -3,25 +3,29 @@ class WeeksController < ApplicationController
   before_action :confirmed_user
 
   def new
-    @pool = Pool.find(params[:pool_id])
-    if !@pool.nil?
-      @week = @pool.weeks.new
+    @season = Season.find(params[:season_id])
+    if !@season.nil?
+      @week = @season.weeks.new
       @game = @week.games.build
-      @week.week_number = @pool.weeks.count + 1
+      if @season.weeks.order(:week_number).last.blank?
+	@week.week_number = @season.current_week
+      else
+	@week.week_number = @season.weeks.order(:week_number).last.week_number + 1
+      end
     else
-      flash[:error] = "Cannot create week. Pool with id:#{params[:pool_id]} does not exist!"
-      redirect_to pools_path
+      flash[:error] = "Cannot create week. Season with id:#{params[:season_id]} does not exist!"
+      redirect_to seasons_path
     end
   end
 
   def create
-    @pool = Pool.find(params[:pool_id])
-    @week = @pool.weeks.new(week_params)
-    @week.week_number = @pool.weeks.count + 1
+    @season = Season.find(params[:season_id])
+    @week = @season.weeks.new(week_params)
+    @week.week_number = @season.current_week
     if @week.save
       # Handle a successful save
       flash[:success] = 
-          "Week #{@week.week_number} for '#{@pool.name}' was created successfully!"
+          "Week #{@week.week_number} for '#{@season.year}' was created successfully!"
       # Set the state to Pend
       @week.setState(Week::STATES[:Pend])
       redirect_to @week
@@ -54,7 +58,7 @@ class WeeksController < ApplicationController
 
   def show
     @week = Week.find(params[:id])
-    @pool = Pool.find(@week.pool_id)
+    @season = Season.find(@week.season_id)
     @games = @week.games
   end
 
