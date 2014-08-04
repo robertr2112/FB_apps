@@ -42,7 +42,7 @@
     <h3>Weeks</h3>
     <% if @pool.isOwner?(current_user) %>
     <% end %>
-    <% @pool.weeks.order(:week_number).each do |week| %>
+    <% @season.weeks.order(:week_number).each do |week| %>
       <% if week == @current_week %>
         <%= link_to "Week #{week.week_number}", week_path(week), { class: "current-week" } %>
       <% else %>

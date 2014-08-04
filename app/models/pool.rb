@@ -19,7 +19,6 @@ class Pool < ActiveRecord::Base
 
   has_many   :users, through: :pool_memberships, dependent: :destroy
   has_many   :pool_memberships, dependent: :destroy
-  has_many   :weeks, dependent: :destroy
   has_many   :entries, dependent: :destroy
   belongs_to :season
 
@@ -131,23 +130,9 @@ class Pool < ActiveRecord::Base
   end
 
   def getCurrentWeek
-    #
-    # Search through the weeks to find the current week.  Loop through all weeks
-    # until you find a week that isn't marked final.  The first week not marked
-    # as final is the current week. If there are no weeks then return nil. If it
-    # goes through the whole list without finding a non-final week than the last
-    # week in the Pool is still the current week.
-    #
-    weeks = self.weeks.order(:week_number)
-    weeks.empty? { return nil }
-    weeks.each do |week|
-      if !week.checkStateFinal
-        return week
-      end
-    end
-    return self.weeks.last
+    @season = Season.find(self.season_id)
+    current_week = @season.getCurrentWeek
   end
-
 
   private
 

@@ -3,7 +3,6 @@ class CreateWeeks < ActiveRecord::Migration
     create_table :weeks do |t|
       t.belongs_to :season
       t.integer    :state
-      t.integer    :pool_id
       t.integer    :week_number
 
       t.timestamps

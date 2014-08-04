@@ -61,12 +61,13 @@ class PoolsController < ApplicationController
   end
 
   def show
-    @pool = Pool.find_by_id(params[:id])
+    @pool = Pool.find(params[:id])
     if @pool.nil?
       flash[:notice] = 'The pool you tried to access does not exist'
       redirect_to pools_path
     else
       @pools = @pool.users.paginate(:page => params[:page])
+      @season = Season.find(@pool.season_id)
       @current_week = @pool.getCurrentWeek
     end
   end

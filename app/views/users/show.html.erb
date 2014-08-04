@@ -1,27 +1,25 @@
 <% provide(:title, @user.name) %>
+<%= render 'mgmt_nav', pool: nil %>
 <div class="row">
-  <aside class="col-md-4">
-  <section>
-      <h1>
-	<%= gravatar_for @user %>
-	<%= @user.name %>
-      </h1>
-  </section>
-  </aside>
-</div>
-<% if !current_user.confirmed? %>
-<div class="row">
-  <div class="col-md-6">
-    <p>This user account needs to be confirmed before you can use this site.
-       Please look for the email with the subject <i>"Confirm Registration" </i>from
-       info@fbpm.com and click the Confirmation URL.  
-    </p>
+  <div class="col-md-4">
+    <h1>
+      <%= gravatar_for @user %>
+      <%= @user.name %>
+    </h1>
   </div>
 </div>
+<% if !current_user.confirmed? %>
+  <div class="row">
+    <div class="col-md-6">
+      <p>This user account needs to be confirmed before you can use this site.
+	Please look for the email with the subject <i>"Confirm Registration" </i>from
+	info@fbpm.com and click the Confirmation URL.  
+      </p>
+    </div>
+  </div>
 <% end %>
 <div class="row">
   <div class="col-md-8">
-  <section>
     <h1>My Pools</h1>
     <ul id="my-pool">
     <% if @user.pools.any? %>
@@ -77,6 +75,5 @@
 	</p>
     <% end %>
     </ul>
-  </section>
   </div>
 </div>

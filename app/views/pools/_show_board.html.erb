@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-condensed table-hover">
   <tr>
     <td></td>
-    <% @pool.weeks.order(:week_number).each do |week| %>
+    <% @season.weeks.order(:week_number).each do |week| %>
       <td class="entry-header">
         <%= "Week #{week.week_number}" %>
       </td>
@@ -16,7 +16,7 @@
       <% else %>
         <td class="entry-error"><%= entry.name %></td>
       <% end %>
-      <% @pool.weeks.order(:week_number).each do |week| %>
+      <% @season.weeks.order(:week_number).each do |week| %>
         <% @picks = week.picks.where(entry_id: entry.id) %>
         <% if @picks.empty? %> 
           <% if week.checkStateClosed || week.checkStateFinal ||

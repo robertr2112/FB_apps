@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
 
   create_table "seasons", force: true do |t|
     t.string   "year"
+    t.integer  "state"
     t.boolean  "nfl_league"
     t.integer  "number_of_weeks"
     t.integer  "current_week"

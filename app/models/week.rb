@@ -16,7 +16,6 @@ class Week < ActiveRecord::Base
   STATES = { Pend: 0, Open: 1, Closed: 2, Final: 3 }
 
   belongs_to :season
-  belongs_to :pool
   has_many   :games, dependent: :destroy
 
   accepts_nested_attributes_for :games

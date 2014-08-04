@@ -1,0 +1,4 @@
+<ul class="nav nav-pills" role="tablist">
+  <li><%= link_to "Season #{@season.year}", season_path(season) %></li>
+  <%= render "mgmt_curweek_state_menu", season: season, current_week: @week %>
+</ul>

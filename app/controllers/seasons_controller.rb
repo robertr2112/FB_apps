@@ -54,6 +54,28 @@ class SeasonsController < ApplicationController
   def index
     @seasons = Season.paginate(page: params[:page])
   end
+  
+  def open
+    @season = Season.find(params[:id])
+    if @season.weeks.empty?
+      flash[:notice] = 'You cannot set the state to open until you have created at least the first week!'
+      redirect_to @season
+    else
+      @season.setState(Season::STATES[:Open])
+      redirect_to @season
+    end
+  end
+
+  def closed
+    @season = Season.find(params[:id])
+    if !@season.canBeClosed?
+      flash[:notice] = 'You cannot set the state to closed until all weeks have been marked final!'
+      redirect_to @season
+    else
+      @season.setState(Season::STATES[:Closed])
+      redirect_to @season
+    end
+  end
 
   private
 

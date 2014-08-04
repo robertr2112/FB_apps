@@ -1,4 +1,7 @@
 <% provide(:title, "Week #{@week.week_number} Games") %>
+<% if current_user.admin? %>
+  <%= render "mgmt_admin_nav", season: @season %>
+<% end %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <section>
