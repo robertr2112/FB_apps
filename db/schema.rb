@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140731181932) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "entries", force: true do |t|
     t.integer  "pool_id"
     t.integer  "user_id"
@@ -112,7 +115,6 @@ ActiveRecord::Schema.define(version: 20140731181932) do
   create_table "weeks", force: true do |t|
     t.integer  "season_id"
     t.integer  "state"
-    t.integer  "pool_id"
     t.integer  "week_number"
     t.datetime "created_at"
     t.datetime "updated_at"
