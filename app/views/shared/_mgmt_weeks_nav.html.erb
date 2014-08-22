@@ -1,6 +1,8 @@
 <div class="btn-group-sm">
-  <%= link_to "Create new week", new_season_week_path(season), :class => "btn btn-primary",
+  <% if season.weeks.count < season.number_of_weeks %>
+    <%= link_to "Create new week", new_season_week_path(season), :class => "btn btn-primary",
                    :role => "button" %>
+  <% end %>
   <%= link_to "Week:", "#", :class => "btn btn-primary",
                    :role => "button" %>
   <% if season.weeks.any? %>

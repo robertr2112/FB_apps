@@ -1,10 +1,10 @@
 <% provide(:title, "Season #{@season.year}") %>
 <%= render 'mgmt_navbar', season: @season, current_week: @season.current_week %>
-<% if @season.checkStatePend %>
+<% if @season.isPending? %>
   <% season_state = "Pending" %>
-<% elsif @season.checkStateOpen %>
+<% elsif @season.isOpen? %>
   <% season_state = "Open" %>
-<% elsif @season.checkStateClosed %>
+<% elsif @season.isClosed? %>
   <% season_state = "Closed" %>
 <% else %>
   <h3>State: Unknown</h3>

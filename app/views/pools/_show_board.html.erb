@@ -17,7 +17,7 @@
         <td class="entry-error"><%= entry.name %></td>
       <% end %>
       <% @season.weeks.order(:week_number).each do |week| %>
-        <% @picks = week.picks.where(entry_id: entry.id) %>
+        <% @picks = entry.picks.where(week_number: week.week_number) %>
         <% if @picks.empty? %> 
           <% if week.checkStateClosed || week.checkStateFinal ||
                 !entry.entryStatusGood? %>

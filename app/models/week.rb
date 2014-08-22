@@ -5,7 +5,6 @@
 #  id          :integer          not null, primary key
 #  season_id   :integer
 #  state       :integer
-#  pool_id     :integer
 #  week_number :integer
 #  created_at  :datetime
 #  updated_at  :datetime

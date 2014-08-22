@@ -30,7 +30,6 @@ FBApps::Application.routes.draw do
 
 
   resources :seasons, shallow: :true do
-    resources :pools
     resources :weeks
   end
   resources :pools do

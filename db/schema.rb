@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
 
   create_table "game_picks", force: true do |t|
     t.integer  "pick_id"
+    t.integer  "game_pick_id"
     t.integer  "chosenTeamIndex"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -50,8 +51,8 @@ ActiveRecord::Schema.define(version: 20140731181932) do
   create_table "picks", force: true do |t|
     t.integer  "week_id"
     t.integer  "entry_id"
-    t.integer  "weekNumber"
-    t.integer  "totalScore", default: 0
+    t.integer  "week_number"
+    t.integer  "totalScore",  default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

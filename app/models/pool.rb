@@ -34,6 +34,62 @@ class Pool < ActiveRecord::Base
   validates :allowMulti, inclusion: { in: [true, false] }
   validates :isPublic, inclusion:   { in: [true, false] }
 
+  def self.typeSUP?(type)
+    if type == POOL_TYPES[:SUP]
+      return true
+    end
+    return false
+  end
+  
+  def self.typePickEm?(type)
+    if type == POOL_TYPES[:PickEm]
+      return true
+    end
+    return false
+  end
+  
+  def self.typePickEmSpread?(type)
+    if type == POOL_TYPES[:PickEmSpread]
+      return true
+    end
+    return false
+  end
+  
+  def self.typeSurvivor?(type)
+    if type == POOL_TYPES[:Survivor]
+      return true
+    end
+    return false
+  end
+  
+  def typeSUP?
+    if self.type == POOL_TYPES[:SUP]
+      return true
+    end
+    return false
+  end
+  
+  def typePickEm?
+    if self.type == POOL_TYPES[:PickEm]
+      return true
+    end
+    return false
+  end
+  
+  def typePickEmSpread?
+    if self.type == POOL_TYPES[:PickEmSpread]
+      return true
+    end
+    return false
+  end
+  
+  def typeSurvivor?
+    if self.type == POOL_TYPES[:Survivor]
+      return true
+    end
+    return false
+  end
+  
   def isMember?(user)
     self.pool_memberships.find_by_user_id(user.id)
   end
@@ -130,8 +186,8 @@ class Pool < ActiveRecord::Base
   end
 
   def getCurrentWeek
-    @season = Season.find(self.season_id)
-    current_week = @season.getCurrentWeek
+    season = Season.find(self.season_id)
+    season.getCurrentWeek
   end
 
   private

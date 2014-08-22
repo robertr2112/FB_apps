@@ -3,24 +3,46 @@ class PoolsController < ApplicationController
   before_action :confirmed_user
 
   def new
-    @pool = current_user.pools.new
-    @pool_edit_flag = false
+    year = Time.now.strftime("%Y")
+    seasons = Season.where(year: year)
+    if seasons
+      @pool = current_user.pools.new
+      @pool_edit_flag = false
+    else
+      flash[:error] = "Cannot create a pool because the #{year} season is not ready for pools!"
+      redirect_to pools_path
+    end
   end
 
   def create
-    @pool = current_user.pools.create(pool_params)
-    if @pool.id
-      # create entry for owner of pool
-      entry_name = @pool.getEntryName(current_user)
-      new_entry_params = { name: entry_name }
-      @pool.entries.create(new_entry_params.merge(user_id: current_user.id))
-      # Handle a successful save
-      flash[:success] = "Pool '#{@pool.name}' was created successfully!"
-      # Set the ownership in PoolMembership.owner
-      @pool.setOwner(current_user, true)
-      redirect_to @pool
+    # Get either the NFL or college season
+    year = Time.now.strftime("%Y")
+    if Pool.typeSUP?(pool_params[:poolType])
+      season = Season.where(year: year, nfl_league: false).first
     else
-      render 'new'
+      season = Season.where(year: year, nfl_league: true).first
+    end
+    
+    if season && season.isOpen?
+      
+      # If the season is setup then create the pool.
+      @pool = current_user.pools.create(pool_params.merge(season_id: season.id))
+      if @pool.id
+        # create entry for owner of pool
+        entry_name = @pool.getEntryName(current_user)
+        new_entry_params = { name: entry_name }
+        @pool.entries.create(new_entry_params.merge(user_id: current_user.id))
+        # Handle a successful save
+        flash[:success] = "Pool '#{@pool.name}' was created successfully!"
+        # Set the ownership in PoolMembership.owner
+        @pool.setOwner(current_user, true)
+        redirect_to @pool
+      else
+        render 'new'
+      end
+    else
+      flash[:error] = "Cannot create a pool because the #{year} season is not ready for pools!"
+      redirect_to pools_path
     end
   end
 

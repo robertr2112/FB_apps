@@ -29,16 +29,16 @@ class Season < ActiveRecord::Base
     self.update_attribute(:state, new_state)
   end
 
-  def checkStatePend
-    self.state == Season::STATES[:Pend]
+  def isPending?
+    self.state == STATES[:Pend]
   end
 
-  def checkStateOpen
-    self.state == Season::STATES[:Open]
+  def isOpen?
+    self.state == STATES[:Open]
   end
 
-  def checkStateClosed
-    self.state == Season::STATES[:Closed]
+  def isClosed?
+    self.state == STATES[:Closed]
   end
   
   def canBeClosed?
@@ -50,22 +50,14 @@ class Season < ActiveRecord::Base
     end
     self.weeks.order(:week_number).each do
       if !week.checkStateFinal
-	return false
+        return false
       end
     end
     return true
   end
   
-  def open?
-    checkStateOpen
-  end
-
-  def closed?
-    checkStateClosed
-  end
-  
   def getCurrentWeek
-    current_week = self.weeks.where(week_number: self.current_week)
+    self.weeks.where(week_number: self.current_week).first
   end
 
 end

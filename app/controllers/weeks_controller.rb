@@ -8,10 +8,15 @@ class WeeksController < ApplicationController
       @week = @season.weeks.new
       @game = @week.games.build
       if @season.weeks.order(:week_number).last.blank?
-	@week.week_number = @season.current_week
+        @week.week_number = @season.current_week
       else
-	@week.week_number = @season.weeks.order(:week_number).last.week_number + 1
+        @week.week_number = @season.weeks.order(:week_number).last.week_number + 1
       end
+      if @week.week_number > @season.number_of_weeks
+        flash[:error] = "Cannot create week. This would exceed the number of weeks for this Season!"
+        redirect_to @season
+      end
+        
     else
       flash[:error] = "Cannot create week. Season with id:#{params[:season_id]} does not exist!"
       redirect_to seasons_path
@@ -20,17 +25,26 @@ class WeeksController < ApplicationController
 
   def create
     @season = Season.find(params[:season_id])
-    @week = @season.weeks.new(week_params)
-    @week.week_number = @season.current_week
-    if @week.save
-      # Handle a successful save
-      flash[:success] = 
-          "Week #{@week.week_number} for '#{@season.year}' was created successfully!"
-      # Set the state to Pend
-      @week.setState(Week::STATES[:Pend])
-      redirect_to @week
+    if !@season.nil?
+      @week = @season.weeks.new(week_params)
+      if @season.weeks.order(:week_number).last.blank?
+        @week.week_number = @season.current_week
+      else
+        @week.week_number = @season.weeks.order(:week_number).last.week_number + 1
+      end
+      if @week.save
+        # Handle a successful save
+        flash[:success] = 
+            "Week #{@week.week_number} for '#{@season.year}' was created successfully!"
+        # Set the state to Pend
+        @week.setState(Week::STATES[:Pend])
+        redirect_to @week
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      flash[:error] = "Cannot create week. Season with id:#{params[:season_id]} does not exist!"
+      redirect_to seasons_path
     end
   end
 
