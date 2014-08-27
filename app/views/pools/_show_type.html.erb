@@ -1,9 +1,9 @@
-<% if pool.poolType == Pool::POOL_TYPES[:PickEm] %>
+<% if pool.typePickEm? %>
   PickEm
-<% elsif pool.poolType == Pool::POOL_TYPES[:PickEmSpread] %>
+<% elsif pool.typePickEmSpread? %>
   PickEmSpread
-<% elsif pool.poolType == Pool::POOL_TYPES[:Survivor] %>
+<% elsif pool.typeSurvivor? %>
   Survivor
-<% elsif pool.poolType == Pool::POOL_TYPES[:SUP] %>
+<% elsif pool.typeSUP? %>
   SUP
 <% end %>

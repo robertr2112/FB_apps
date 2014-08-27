@@ -1,48 +1,35 @@
 <% teams = Team.all.where(nfl: nflTeams) %>
-<table class = "table table-condensed">
+<table class = "table table-condensede">
   <tbody>
     <% games.each do |game| %>
       <tr>
         <% team = teams[game.awayTeamIndex-1] %>
-        <td>
-        <%= image_tag(team.imagePath, size: "40") %>
-        <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
-        <% if showScores %>
+        <td width="30%">
+          <%= image_tag(team.imagePath, size: "40") %>
+          <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
           <% if awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <strong><%= team.name %></strong>
           <% else %>
             <%= team.name %>
           <% end %>
-          <% spaceCount = 0 %>
-          <% while(spaceCount < (23 - team.name.length)) %>
-            &nbsp;
-            <% spaceCount += 1 %>
-          <% end %>
-          <%= game.awayTeamScore %>
-        <% else %>
-            <%= team.name %>
-        <% end %>
         </td>
-        <td>AT</td>
-        <% team = teams[game.homeTeamIndex-1] %>
-        <td>
-        <%= image_tag(team.imagePath, size: "40") %>
         <% if showScores %>
-          <% if !awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
+          <td width="10%"><%= game.awayTeamScore %></td>
+        <% end %>
+        <td width="20%"><small>AT</small></td>
+        <td width="30%">
+          <% team = teams[game.homeTeamIndex-1] %>
+          <%= image_tag(team.imagePath, size: "40") %>
+          <% homeTeamWon = game.wonGame?(game.homeTeamIndex) %>
+          <% if homeTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <strong><%= team.name %></strong>
           <% else %>
             <%= team.name %>
           <% end %>
-          <% spaceCount = 0 %>
-          <% while(spaceCount < (23 - team.name.length)) %>
-            &nbsp;
-            <% spaceCount += 1 %>
-          <% end %>
-          <%= game.homeTeamScore %>
-        <% else %>
-          <%= team.name %>
-        <% end %>
         </td>
+        <% if showScores %>
+          <td width="10%"><%= game.homeTeamScore %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

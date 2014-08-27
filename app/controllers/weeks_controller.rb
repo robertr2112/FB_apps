@@ -57,7 +57,7 @@ class WeeksController < ApplicationController
       else
         flash[:notice] = "Can't Edit the week once it is in the Final state!"
       end
-      redirect_to Pool.find(@week.pool_id)
+      redirect_to @week
     end
   end
 
@@ -78,58 +78,55 @@ class WeeksController < ApplicationController
 
   def destroy
     @week = Week.find(params[:id])
-    @pool = Pool.find(@week.pool_id)
-    if @pool.isOwner?(current_user)
-      if @week.deleteSafe?(@pool)
+    if current_user.admin?
+      if @week.deleteSafe?
         @week.destroy
         flash[:success] = "Successfully deleted Week '#{@week.week_number}'!"
-        redirect_to pool_path(@pool)
+        redirect_to seasons_path
       else
         flash[:error] = "Cannot delete Week '#{@week.week_number}' because it is not the last week!"
-        redirect_to @pool
+        redirect_to @week
       end
     else
-      flash[:error] = "Only the onwer of the pool can delete weeks!"
-      redirect_to pools_path
+      flash[:error] = "Only an Admin user can delete weeks!"
+      redirect_to seasons_path
     end
   end
 
   def open
     @week = Week.find(params[:id])
-    @pool = Pool.find(@week.pool_id)
     if @week.games.empty?
       flash[:error] = "Week #{@week.week_number} is not ready to be Open! You need to enter games for this week!"
-      redirect_to @pool
+      redirect_to @week
     end
     @week.setState(Week::STATES[:Open])
-    redirect_to @pool
+    redirect_to @week
   end
 
   def closed
     @week = Week.find(params[:id])
-    @pool = Pool.find(@week.pool_id)
     @week.setState(Week::STATES[:Closed])
-    redirect_to @pool
+    redirect_to @week
   end
 
   def final
     @week = Week.find(params[:id])
-    @pool = Pool.find(@week.pool_id)
     if weekFinalReady(@week)
       @week.setState(Week::STATES[:Final])
       # Update the entries status/totals based on this weeks results
-      @week.updateEntries
+      @season = Season.find(@week.season_id)
+      @season.updatePools
       flash[:notice] = "Week #{@week.week_number} is final!"
-      redirect_to @pool
+      redirect_to @week
     else
       flash[:error] = "Week #{@week.week_number} is not ready to be Final.  Please ensure all scores have been entered."
-      redirect_to @pool
+      redirect_to @week
     end
   end
 
   private
     def week_params
-      params.require(:week).permit(:state, :pool_id, :week_number,
+      params.require(:week).permit(:state, :week_number,
                                    games_attributes: [:id, :week_id,
                                                      :homeTeamIndex, 
                                                      :awayTeamIndex, 

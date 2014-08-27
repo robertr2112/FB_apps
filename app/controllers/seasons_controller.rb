@@ -21,16 +21,16 @@ class SeasonsController < ApplicationController
   end
 
   def edit
-    @Season = Season.find(params[:id])
-    if @season.week_number > 1
-      flash[:error] = "Cannot edit the Season after it has started!"
+    @season = Season.find(params[:id])
+    if !@season.isPending?
+      flash[:error] = "Cannot edit the Season after it has been marked Open!"
       redirect_to @season
     end
   end
   
   def update
     @season = Season.find(params[:id])
-    if @season.week_number == 1
+    if !@season.isPending?
       if @season.update_attributes(season_params)
         flash[:success] = "Season updated."
         redirect_to @season
@@ -38,7 +38,7 @@ class SeasonsController < ApplicationController
         render 'edit'
       end
     else
-      flash[:error] = "Cannot edit the Season after it has started!"
+      flash[:error] = "Cannot edit the Season after it has been marked Open!"
       redirect_to @season
     end
   end
@@ -55,10 +55,35 @@ class SeasonsController < ApplicationController
     @seasons = Season.paginate(page: params[:page])
   end
   
+  def destroy
+    @season = Season.find(params[:id])
+    if current_user.admin?
+      # Before we recursively delete all children/grand-children of Season, we need to
+      # remove the pool_membership tables for each pool.
+      @season.pools.each do |pool|
+        pool.remove_memberships
+      end
+      @season.recurse_delete
+      if @season.nfl_league
+        league = "NFL"
+      else
+        league = "NCAA"
+      end
+      flash[:success] = "Successfully deleted #{league} Season for year '#{@season.year}'!"
+      redirect_to seasons_path
+    else
+      flash[:error] = "Only an Admin user can delete the season!"
+      redirect_to pools_path
+    end
+  end
+  
   def open
     @season = Season.find(params[:id])
     if @season.weeks.empty?
       flash[:notice] = 'You cannot set the state to open until you have created at least the first week!'
+      redirect_to @season
+    elsif @season.weeks.count < @season.number_of_weeks
+      flash[:notice] = 'You cannot set the state to open until you have created all of the weeks'
       redirect_to @season
     else
       @season.setState(Season::STATES[:Open])

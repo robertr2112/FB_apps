@@ -12,12 +12,16 @@
             <li class=menu-item><%= link_to "Edit entry", edit_entry_path(entry) %></li>
             <li class=menu-item>
               <%= link_to "Delete entry", entry, method: :delete,
-                  confirm: "Are you sure?", title: "Delete#{entry.name}" %>
+                  data: {confirm: "Are you sure?"}, title: "Delete#{entry.name}" %>
             </li>
             <% if !current_week.nil? %>
               <% pick = entry.picks.where(week_id: current_week.id) %>
               <% if pick.empty? %>
-                <li><%= link_to "Create picks", new_entry_pick_path(entry) %></li>
+                <% if entry.survivorStatusIn %>
+                  <li><%= link_to "Make pick(s)", new_entry_pick_path(entry) %></li>
+                <% else %>
+                  <li><%= link_to "Survivor Status:Out", "#" %></li>
+                <% end %>
               <% else %>
                 <% pick = pick[0] %>
                 <li><%= link_to "Edit pick(s)", edit_pick_path(pick) %></li>

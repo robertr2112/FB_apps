@@ -2,8 +2,10 @@ class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string   :name
+      t.string   :user_name
       t.string   :email
       t.boolean  :admin, default: false
+      t.boolean  :supervisor, default: false
       t.string   :password_digest
       t.string   :remember_token
       t.string   :password_reset_token

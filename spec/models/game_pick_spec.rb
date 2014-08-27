@@ -4,6 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  pick_id         :integer
+#  game_pick_id    :integer
 #  chosenTeamIndex :integer
 #  created_at      :datetime
 #  updated_at      :datetime

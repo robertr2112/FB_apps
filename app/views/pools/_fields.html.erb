@@ -3,11 +3,12 @@
   <%= f.input :name, placeholder: 'Name' %>
 
   <%= f.input :poolType, label: 'Pool Type', placeholder: 'Pool Type', 
-              collection: Pool::POOL_TYPES %>
+              collection: Pool::POOL_TYPES, selected: Pool::POOL_TYPES[:Survivor] %>
 
   <%= f.input :allowMulti, label: 'Allow Multiple', 
               hint: 'Allow multiple entries per user', as: :radio_buttons  %>
-
+<% if nil %>
   <%= f.input :isPublic, label: 'Public', as: :radio_buttons %>
 
   <%= f.input :password, placeholder: 'Password' %>
+<% end %>

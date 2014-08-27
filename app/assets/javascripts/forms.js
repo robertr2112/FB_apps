@@ -3,15 +3,18 @@ $(document).ready(function() {
 
   $('select#hometeam').select2({
     placeholder: "Home Team",
-    allowClear: true
+    allowClear: true,
+    width: '220px'
   });
 
   $('select#awayteam').select2({
     placeholder: "Away Team",
-    allowClear: true
+    allowClear: true,
+    width: '220px'
   });
 
-  $('select#pick').select2();
+  $('select#pick').select2({ width: '200px' });
+
 });
 
 /* setup cocoon nested forms insertion mode */
@@ -26,12 +29,14 @@ $(document).ready(function() {
     /* ... do something ... */
     $('select#awayteam').select2({
       placeholder: "Away Team",
-      allowClear: true
+      allowClear: true,
+      width: '220px'
     });
 
     $('select#hometeam').select2({
       placeholder: "Home Team",
-      allowClear: true
+      allowClear: true,
+      width: '220px'
     });
   });
 });

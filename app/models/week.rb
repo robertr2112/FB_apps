@@ -15,7 +15,7 @@ class Week < ActiveRecord::Base
   STATES = { Pend: 0, Open: 1, Closed: 2, Final: 3 }
 
   belongs_to :season
-  has_many   :games, dependent: :destroy
+  has_many   :games, dependent: :delete_all
 
   accepts_nested_attributes_for :games
   #validates_associated :games
@@ -65,10 +65,17 @@ class Week < ActiveRecord::Base
     winning_teams = Array.new
     games = self.games
     games.each do |game|
-      if ((game.awayTeamScore-game.homeTeamScore) > 0)
-        winning_teams << game.awayTeamIndex
+      spread = game.awayTeamScore-game.homeTeamScore
+      if spread != 0
+        if (spread > 0)
+          winning_teams << game.awayTeamIndex
+        else
+          winning_teams << game.homeTeamIndex
+        end
       else
-        winning_teams << game.homeTeamIndex
+        # in case of a tie add both teams to winning teams
+          winning_teams << game.awayTeamIndex
+          winning_teams << game.homeTeamIndex
       end
     end
     return winning_teams

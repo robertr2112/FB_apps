@@ -21,12 +21,18 @@ class Game < ActiveRecord::Base
   validates :awayTeamIndex, :inclusion => { :in => 0..100 }
 
   def wonGame?(teamIndex)
+    
     spread = self.awayTeamScore - self.homeTeamScore
-    if spread < 0
-      winTeamIndex = self.homeTeamIndex
+    if spread != 0
+      if spread < 0
+        winTeamIndex = self.homeTeamIndex
+      else
+        winTeamIndex = self.awayTeamIndex
+      end
+      teamIndex == winTeamIndex
     else
-      winTeamIndex = self.awayTeamIndex
+      # The case of a tie return true because both teams won
+      return true
     end
-    teamIndex == winTeamIndex
   end
 end

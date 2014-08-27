@@ -41,6 +41,7 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
+    @pool = Pool.find(@entry.pool_id)
   end
 
   def update
@@ -56,6 +57,7 @@ class EntriesController < ApplicationController
   
   def destroy
     @entry = Entry.find(params[:id])
+    @pool = Pool.find(@entry.pool_id)
     if @entry
       if @entry.picks.empty?
         @entry.destroy

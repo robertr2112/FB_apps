@@ -15,7 +15,7 @@
 class Entry < ActiveRecord::Base
   belongs_to :pool
   belongs_to :user
-  has_many   :picks, dependent: :destroy
+  has_many   :picks, dependent: :delete_all
 
   def entryStatusGood?
     if self.survivorStatusIn 
@@ -25,11 +25,10 @@ class Entry < ActiveRecord::Base
     end
   end
   
-  # !!!! Is this the right place for this routine?  If so, then need to modify this routine and update all views that call it.
-  def madePicks?(entry)
-    picks = self.picks.where(entry_id: entry.id)
+  def madePicks?(week)
+    picks = self.picks.where(week_id: week.id)
     picks.each do |pick|
-      if (pick.entry_id == entry.id && pick.weekNumber == self.week_number)
+      if (pick.entry_id == entry.id && pick.weekNumber == week.week_number)
         return true
       end
     end

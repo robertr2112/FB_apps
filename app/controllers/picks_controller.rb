@@ -26,7 +26,7 @@ class PicksController < ApplicationController
     @pool = Pool.find(@entry.pool_id)
     @week = @pool.getCurrentWeek
     @pick = @entry.picks.new(pick_params.merge(week_id: @week.id,
-                                               weekNumber: @week.week_number))
+                                               week_number: @week.week_number))
     if @pick.save
       # Handle a successful save
       flash[:success] = 
@@ -60,14 +60,14 @@ class PicksController < ApplicationController
   private
     def pick_params
       params.require(:pick).permit(:week_id, :total_score, 
-                                   :weekNumber, :sup_points,
+                                   :week_number, :sup_points,
                                    game_picks_attributes: [:id, :pick_id,
                                                      :chosenTeamIndex] )
     end
 
     def pickErrorCheck(week, entry)
       if week.open?
-        if week.madePicks?(entry)
+        if entry.madePicks?(week)
           message = 
              "You have already made your pick(s) for entry: #{entry.name}!"
         elsif !entry.entryStatusGood?

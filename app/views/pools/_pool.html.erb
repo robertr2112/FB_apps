@@ -10,7 +10,7 @@
       <% if pool.isOpen? %>
         <td><%= link_to "Join", join_path(pool.id) %></td>
       <% else %>
-        <td>Closed<td>
+        <td>Pool Closed<td>
       <% end %>
     <% elsif pool.isOwner?(current_user) %>
       <td>Owner</td>

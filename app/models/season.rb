@@ -22,8 +22,8 @@ class Season < ActiveRecord::Base
   
   STATES = { Pend: 0, Open: 1, Closed: 2 }
   
-  has_many :pools
-  has_many :weeks
+  has_many :pools, dependent: :delete_all
+  has_many :weeks, dependent: :delete_all
   
   def setState(new_state)
     self.update_attribute(:state, new_state)
@@ -55,9 +55,24 @@ class Season < ActiveRecord::Base
     end
     return true
   end
-  
+
+  #
+  # Return a link to the current_week record
+  #
   def getCurrentWeek
-    self.weeks.where(week_number: self.current_week).first
+    self.weeks.find_by_week_number(self.current_week)
+  end
+
+  #
+  # Have every pool update their entries. This is called after a week is marked 'final'
+  #
+  def updatePools
+    self.pools.each do |pool|
+      pool.updateEntries(self.getCurrentWeek)
+    end
+    if self.current_week < self.number_of_weeks
+      self.update_attribute(:current_week, self.current_week+1)
+    end
   end
 
 end

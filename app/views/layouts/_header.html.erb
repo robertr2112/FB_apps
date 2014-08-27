@@ -32,20 +32,19 @@
           </ul>
         </li>
       </ul>
-      </div>
     <% else %>
-        <%= form_tag(sessions_path, class: 'navbar-form navbar-right', 
+      <%= form_tag(sessions_path, class: 'navbar-form navbar-right', 
                      role: 'form') do %>
-          <div class="form-group">
-            <%= text_field_tag :email, params[:email],
+        <div class="form-group">
+          <%= text_field_tag :email, params[:email],
                 class: 'form-control', placeholder: "Email"%>
-          </div>
-          <div class="form-group">
-            <%= password_field_tag :password, nil,
+        </div>
+        <div class="form-group">
+          <%= password_field_tag :password, nil,
                 class: 'form-control', placeholder: "Password"%>
-          </div>
-          <%= submit_tag "Sign in", class: "btn btn-primary" %>
-        <% end %>
+        </div>
+        <%= submit_tag "Sign in", class: "btn btn-primary" %>
+      <% end %>
     <% end %>
     </div><!--/.navbar-collapse -->
   </div>

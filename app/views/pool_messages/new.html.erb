@@ -2,37 +2,42 @@
 <h1>Send Group Message</h1>
 
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_tag pool_pool_messages_path, method: :post, html: { class: 'form-horizontal' } do %>
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Create New Pool</div>
+      <div class="panel-body">
+        <%= form_tag pool_pool_messages_path, method: :post, html: { class: 'form-horizontal' } do %>
 
-      <div class="control-group">
-        <%= label_tag :subject, "Message Subject", class: 'control-label' %>
-        <div class="controls">
-          <%= text_field_tag :subject, params[:subject], size: 25 %>
-        </div>
-      </div>
-      
-      <div class="control-group">
-        <%= label_tag :msg, "Message Body", class: 'control-label' %>
-        <div class="controls">
-          <%= text_area_tag :msg, params[:msg], size: "25x10" %>
-        </div>
-      </div>
-        
-      <div class="control-group">
-        <%= label_tag :allMembers, "Send to", class: 'control-label' %>
-        <div class = "controls">
-          <%= radio_button_tag :allMembers, true, class: 'radio' %>All Members&nbsp&nbsp
-          <%= radio_button_tag :allMembers, false, class: 'radio' %>Surviving group
-        </div>
-      </div>
-      
-      <div class="control-group">
-        <div class = "controls">
-          <%= submit_tag "Send email", class: "btn btn-large btn-primary" %>
-        </div>
-      </div>
+          <div class="control-group">
+            <%= label_tag :subject, "Message Subject", class: 'control-label' %>
+            <div class="controls">
+              <%= text_field_tag :subject, params[:subject], size: 25 %>
+            </div>
+          </div>
 
-    <% end %>
+          <div class="control-group">
+            <%= label_tag :msg, "Message Body", class: 'control-label' %>
+            <div class="controls">
+              <%= text_area_tag :msg, params[:msg], size: "25x10" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= label_tag :allMembers, "Send to", class: 'control-label' %>
+            <div class = "controls">
+              <%= radio_button_tag :allMembers, true, class: 'radio' %>All Members&nbsp&nbsp
+              <%= radio_button_tag :allMembers, false, class: 'radio' %>Surviving group
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class = "controls">
+              <%= submit_tag "Send email", class: "btn btn-large btn-primary" %>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

@@ -35,6 +35,16 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def update
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      sign_in(@user, 0)
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+  
   def confirm
     @user = User.find_by_confirmation_token!(params[:confirmation_token])
     if @user
@@ -54,21 +64,19 @@ class UsersController < ApplicationController
       end
   end
 
-  def update
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      sign_in(@user, 0)
-      redirect_to @user
-    else
-      render 'edit'
-    end
-  end
-
   def destroy
     @user = User.find(params[:id])
     if current_user?(@user)
       flash[:notice] = "You cannot delete yourself!"
     else
+      #
+      # First we need to delete the pools owned by this user and associated
+      # pool memberships
+      #
+      @user.pools.each do |pool|
+        pool.remove_memberships
+        pool.recurse_delete
+      end
       @user.destroy
       flash[:success] = "User deleted."
     end
@@ -100,7 +108,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
+      params.require(:user).permit(:name, :user_name, :email, :password,
                                    :password_confirmation)
     end
 

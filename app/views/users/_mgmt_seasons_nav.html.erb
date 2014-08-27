@@ -1,6 +1,0 @@
-<% nfl_season = current_season(1) %>
-<% if nfl_season.nil? %>
-  <li><%= link_to "Create Current Season", new_season_path %></li>
-<% else %>
-  <li><%= link_to "Manage Current Season", season_path(current_season(true)) %></li>
-<% end %>

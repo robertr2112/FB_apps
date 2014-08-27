@@ -5,12 +5,12 @@ class PoolsController < ApplicationController
   def new
     year = Time.now.strftime("%Y")
     seasons = Season.where(year: year)
-    if seasons
+    if !seasons.empty?
       @pool = current_user.pools.new
       @pool_edit_flag = false
     else
       flash[:error] = "Cannot create a pool because the #{year} season is not ready for pools!"
-      redirect_to pools_path
+      redirect_to_back_or_default(pools_path)
     end
   end
 
@@ -24,7 +24,6 @@ class PoolsController < ApplicationController
     end
     
     if season && season.isOpen?
-      
       # If the season is setup then create the pool.
       @pool = current_user.pools.create(pool_params.merge(season_id: season.id))
       if @pool.id
@@ -120,7 +119,8 @@ class PoolsController < ApplicationController
   def destroy
     @pool = Pool.find(params[:id])
     if @pool.isOwner?(current_user)
-      @pool.destroy
+      @pool.remove_memberships
+      @pool.recurse_delete
       flash[:success] = "Successfully deleted Pool '#{@pool.name}'!"
       redirect_to pools_path
     else

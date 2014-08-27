@@ -1,7 +1,7 @@
 <% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-sm-8 col-sm-offset-2">
     <div class="panel panel-primary">
       <div class="panel-heading">Create User Account</div>
         <div class="panel-body">
@@ -14,7 +14,7 @@
               boolean: :horizontal_boolean
           } do |f| %>
  
-            <%= render 'fields', f: f %>
+            <%= render 'fields', f: f, edit: 0 %>
             <%= f.button :submit, 'Create my account', class: "btn btn-large btn-primary" %>
           <% end %>
         </div>

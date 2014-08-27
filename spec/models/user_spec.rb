@@ -4,16 +4,18 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)
+#  user_name              :string(255)
 #  email                  :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
-#  password_digest        :string(255)
 #  admin                  :boolean          default(FALSE)
+#  supervisor             :boolean          default(FALSE)
+#  password_digest        :string(255)
 #  remember_token         :string(255)
 #  password_reset_token   :string(255)
 #  password_reset_sent_at :datetime
-#  confirmation_token     :string(255)
 #  confirmed              :boolean          default(FALSE)
+#  confirmation_token     :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
 #
 
 require 'spec_helper'
