@@ -6,6 +6,7 @@
 #  name            :string(255)
 #  season_id       :integer
 #  poolType        :integer
+#  starting_week   :integer          default(1)
 #  allowMulti      :boolean          default(FALSE)
 #  isPublic        :boolean          default(TRUE)
 #  password_digest :string(255)

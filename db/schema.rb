@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
     t.string   "name"
     t.integer  "season_id"
     t.integer  "poolType"
+    t.integer  "starting_week",   default: 1
     t.boolean  "allowMulti",      default: false
     t.boolean  "isPublic",        default: true
     t.string   "password_digest"
