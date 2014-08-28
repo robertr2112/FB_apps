@@ -3,7 +3,8 @@
   <%= f.input :name, placeholder: 'Name' %>
 
   <%= f.input :poolType, label: 'Pool Type', placeholder: 'Pool Type', 
-              collection: Pool::POOL_TYPES, selected: Pool::POOL_TYPES[:Survivor] %>
+              collection: Pool::POOL_TYPES, selected: Pool::POOL_TYPES[:Survivor], disabled: true,
+              hint: 'At this time only Survivor pools are supported.' %>
 
   <%= f.input :allowMulti, label: 'Allow Multiple', 
               hint: 'Allow multiple entries per user', as: :radio_buttons  %>

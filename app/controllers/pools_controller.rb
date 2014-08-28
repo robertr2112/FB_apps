@@ -95,9 +95,22 @@ class PoolsController < ApplicationController
 
   def edit
     @pool = Pool.find(params[:id])
-    if !@pool.isOwner?(current_user)
-      flash[:error] = "Only the owner can edit the pool!"
-      redirect_to pools_path
+    if @pool
+      @season = Season.find(@pool.season.id)
+      if @season.getCurrentWeek.week_number > 1
+        @pool_edit_limited = true
+      else
+        @pool_edit_limited = false
+      end
+      @pool_edit_flag = true
+    
+      if !@pool.isOwner?(current_user)
+        flash[:error] = "Only the owner can edit the pool!"
+        redirect_to pools_path
+      end
+    else
+        flash[:error] = "Cannot find Pool with id #{params[:id]}!"
+        redirect_to pools_path
     end
   end
   

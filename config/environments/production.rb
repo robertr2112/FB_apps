@@ -80,7 +80,7 @@ FBApps::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Setup mailer
-  config.action_mailer.default_url_options = { host: "fb-pools.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "fbpm.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = { 
       address:              'smtp.sendgrid.net', 
