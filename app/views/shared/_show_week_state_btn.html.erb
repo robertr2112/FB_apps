@@ -1,0 +1,19 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-default btn-primary dropdown-toggle" data-toggle="dropdown">
+    <%= "Change Week: #{@season.current_week} State" %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <% if current_week %>
+      <% if current_week.checkStatePend || current_week.checkStateClosed %>
+        <li><%= link_to "Mark week open", open_path(current_week) %></li>
+      <% end %>
+      <% if current_week.checkStateOpen %>
+        <li><%= link_to "Mark week closed", closed_path(current_week) %></li>
+      <% end %>
+      <% if current_week.checkStateClosed %>
+        <li><%= link_to "Mark week final", final_path(current_week) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
