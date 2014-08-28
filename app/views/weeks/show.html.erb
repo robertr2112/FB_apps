@@ -25,7 +25,7 @@
           <% end %>
         <% end %>
 
-        <% if @week.checkStateClosed || !@week.checkStateFinal %>
+        <% if @week.checkStateClosed || @week.checkStateFinal %>
           <% showScores = true %>
         <% else %>
           <% showScores = false %>

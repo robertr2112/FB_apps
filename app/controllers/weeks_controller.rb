@@ -64,7 +64,8 @@ class WeeksController < ApplicationController
   def update
     @week = Week.find(params[:id])
     if @week.update_attributes(week_params)
-      redirect_to @week, notice: "Successfully updated week #{@week.week_number}."
+      flash[:success] = "Successfully updated week #{@week.week_number}."
+      redirect_to @week
     else
       render :edit
     end
