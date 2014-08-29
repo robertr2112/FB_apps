@@ -31,7 +31,10 @@ class Pool < ActiveRecord::Base
   validates :name,     presence:   true,
                        length:      { :maximum => 30 },
                        uniqueness:  { :case_sensitive => false }
+if nil
   validates :poolType, inclusion:   { in: 0..3 }
+end
+  validates :poolType, exclusion:   { in: [0,1,3] }
   validates :allowMulti, inclusion: { in: [true, false] }
   validates :isPublic, inclusion:   { in: [true, false] }
 
