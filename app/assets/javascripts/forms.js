@@ -4,16 +4,16 @@ $(document).ready(function() {
   $('select#hometeam').select2({
     placeholder: "Home Team",
     allowClear: true,
-    width: '220px'
+    width: '230px'
   });
 
   $('select#awayteam').select2({
     placeholder: "Away Team",
     allowClear: true,
-    width: '220px'
+    width: '230px'
   });
 
-  $('select#pick').select2({ width: '200px' });
+  $('select#pick').select2({ width: '230px' });
 
 });
 
@@ -30,13 +30,13 @@ $(document).ready(function() {
     $('select#awayteam').select2({
       placeholder: "Away Team",
       allowClear: true,
-      width: '220px'
+      width: '230px'
     });
 
     $('select#hometeam').select2({
       placeholder: "Home Team",
       allowClear: true,
-      width: '220px'
+      width: '230px'
     });
   });
 });

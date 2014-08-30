@@ -1,11 +1,9 @@
-<div id="survivor-board" class="table-responsive">
+<div id="survivor-board" class="table-responsive" style="overflow: auto">
 <table class="table table-striped table-bordered table-condensed table-hover">
   <tr>
-    <td></td>
+    <td class="survivor-board-name"></td>
     <% @season.weeks.order(:week_number).each do |week| %>
-      <td class="entry-header">
-        <%= "Week #{week.week_number}" %>
-      </td>
+      <td class="entry-header"><%= "Week #{week.week_number}" %></td>
     <% end %>
   </tr>
   <% teams = Team.all.where(nfl: true) %>
