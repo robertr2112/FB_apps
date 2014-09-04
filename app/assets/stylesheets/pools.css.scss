@@ -47,17 +47,16 @@ ul#pool-members {
   list-style-type: none;
 }
 
-.survivor-board {
-  max-height: 450px;
-  width: 100%;
-  margin: 0;
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
 .games-table {
   td {
     align: center;
   }
+}
+
+.survivor-board-table {
+  overflow: auto;
+  /* max-height:400px; !!! uncomment this to add vertical scroll bar */
+  width: 100%;
+  margin: 0;
 }
 
