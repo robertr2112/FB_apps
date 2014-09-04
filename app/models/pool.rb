@@ -255,19 +255,22 @@ end
       winning_teams = current_week.getWinningTeams
       self.entries.each do |entry|
         if entry.survivorStatusIn
+          found_team = false
           picks = entry.picks.where(week_number: current_week.week_number)
-          picks.each do |pick|
-            pick.game_picks.each do |game_pick|
-              found_team = false
-              winning_teams.each do |team|
-                if game_pick.chosenTeamIndex == team
-                  found_team = true
+          if picks
+            picks.each do |pick|
+              pick.game_picks.each do |game_pick|
+                winning_teams.each do |team|
+                  if game_pick.chosenTeamIndex == team
+                    found_team = true
+                  end
                 end
               end
-              if !found_team
-                entry.update_attribute(:survivorStatusIn, false)
-                entry.save
-              end
+            end
+            # if knocked out, update survivor status
+            if !found_team
+              entry.update_attribute(:survivorStatusIn, false)
+              entry.save
             end
           end
         end

@@ -12,6 +12,7 @@
 }
 
 .entry-name {
+  color: black;
   @include table-entry-width(250px);
 }
 

@@ -12,9 +12,9 @@
     <% entryOut = false %>
     <tr>
       <% if entry.entryStatusGood? %>
-        <td class="entry-name"><%= entry.name %></td>
+        <td class="entry-name"><%= link_to entry.name, user_path(entry.user_id), {class: "entry-name"} %></td>
       <% else %>
-        <td class="entry-error"><%= entry.name %></td>
+        <td class="entry-error"><%= link_to entry.name, user_path(entry.user_id), {class: "entry-name-out"} %></td>
       <% end %>
       <% @season.weeks.order(:week_number).each do |week| %>
         <% @picks = entry.picks.where(week_number: week.week_number) %>
