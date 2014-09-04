@@ -183,11 +183,7 @@ end
   #
   def getEntryName(user)
     entries = self.entries.where(user_id: user.id)
-    if user.name.split(" ").count > 1
-      user_nickname = user.name.split(" ")[0] + user.name.split(" ")[1][0]
-    else
-      user_nickname = user.name
-    end
+    user_nickname = user.user_name
     if entries && entries.count > 0
         user_nickname = user_nickname + "_#{entries.count}"
     end
