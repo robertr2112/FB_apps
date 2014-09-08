@@ -36,7 +36,11 @@
                   <small><%= link_to "[Edit Pick]", edit_pick_path(pick) %></small>
                 <% end %>
               <% else %>
-                <small><%= link_to "[Make Pick]", new_entry_pick_path(entry) %></small>
+                <% if entry.survivorStatusIn %>
+                  <small><%= link_to "[Make Pick]", new_entry_pick_path(entry) %></small>
+                <% else %>
+                  Survivor Status: Out of pool
+                <% end %>
               <% end %>
               <br />
             <% end %>

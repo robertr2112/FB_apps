@@ -40,6 +40,13 @@ class PicksController < ApplicationController
   def edit
     @pick = Pick.find(params[:id])
     @week = Week.find(@pick.week_id)
+    @entry = Entry.find(@pick.entry_id)
+    @pool = Pool.find(@entry.pool_id)
+    if !@week.checkStateOpen
+      flash[:success] =
+          "You cannot edit your pick(s) for Week '#{@week.week_number}'. The week is closed!"
+      redirect_to @pool
+    end
   end
 
   def update
@@ -49,8 +56,7 @@ class PicksController < ApplicationController
     @pool = Pool.find(@entry.pool_id)
     if @pick.update_attributes(pick_params)
       # Handle a successful save
-      flash[:success] = 
-          "Your pick(s) for Week '#{@week.week_number}' was changed!"
+      flash[:success] = "Your pick(s) for Week '#{@week.week_number}' was changed!"
       redirect_to @pool
     else
       render 'edit'

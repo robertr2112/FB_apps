@@ -25,8 +25,10 @@
                   <li><%= link_to "Survivor Status:Out", "#" %></li>
                 <% end %>
               <% else %>
-                <% pick = pick[0] %>
-                <li><%= link_to "Edit pick(s)", edit_pick_path(pick) %></li>
+                <% if current_week.checkStateOpen %>
+                  <% pick = pick[0] %>
+                  <li><%= link_to "Edit pick(s)", edit_pick_path(pick) %></li>
+                <% end %>
               <% end %>
             <% end %>
           </ul>

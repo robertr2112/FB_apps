@@ -8,7 +8,7 @@
   <div class="col-sm-8">
     <div class="panel panel-primary">
       <div class="panel-heading"><%= "Week #{@week.week_number}" %> &nbsp;-&nbsp;State:
-           <%= render "shared/show_week_state", current_week: @season.getCurrentWeek %>
+           <%= render "shared/show_week_state", current_week: @week %>
       </div>
       <div class="panel-body">
         <h1> Week <%= @week.week_number %> Games</h1>
