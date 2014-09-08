@@ -15,7 +15,9 @@ class PoolMailer < ActionMailer::Base
       end
     end
     subject_text = pool.name + "- " + subject
+    if nil
     attachments.inline['fbpm_logo.png'] = File.read(Rails.root + "app/assets/images/fbpm_logo.png")
+    end
     user = pool.getOwner
     if mail to: email_list, from: user.email, subject: subject_text
       puts "Successfully sent email"
