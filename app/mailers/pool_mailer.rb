@@ -1,5 +1,5 @@
 class PoolMailer < ActionMailer::Base
-  default from: "info@footballpoolmania.com"
+  default from: "fbpoolmania@gmail.com"
   
   def send_pool_message(pool, subject, msg, allMembers)
     @pool = pool
@@ -16,6 +16,7 @@ class PoolMailer < ActionMailer::Base
       end
     end
     subject_text = pool.name + "- " + subject
+    attachments.inline['fbpm_logo.png'] = File.read(Rails.root + "app/assets/images/fbpm_logo.png")
     if mail to: email_list, from: "fbpoolmania.gmail.com", subject: subject_text
       puts "Successfully sent email"
       return false
