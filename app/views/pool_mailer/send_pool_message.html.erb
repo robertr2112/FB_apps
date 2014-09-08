@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <%= image_tag("fbpm_logo.png", class: "img-rounded") %>
+    <h3>Message from Pool Administrator for Pool: <%= @pool.name %></h3>
+    <% paragraphs = @msg.split("\n") %>
+    <% paragraphs.each do |paragraph| %>
+      <p><%= paragraph %></p>
+    <% end %>
+    <p>Thanks, Pool Administrator</p>
+  </body>
+</html>
