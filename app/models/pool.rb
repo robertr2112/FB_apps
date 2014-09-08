@@ -115,6 +115,10 @@ end
     end
   end
 
+  def getOwner
+    pool_membership = self.pool_memberships.find_by_owner(true)
+    User.find(pool_membership.user_id)
+  end
   #
   # This is used to determine if users can join/leave the pool.  Once the pool is no longer open then
   # users cannot join or leave the pool.
