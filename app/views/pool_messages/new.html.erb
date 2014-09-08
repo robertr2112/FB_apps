@@ -1,37 +1,39 @@
 <% provide(:title, "Group Message") %>
-<h1>Send Group Message</h1>
+<h1>Send Group Pool Message</h1>
 
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="panel panel-primary">
-      <div class="panel-heading">Send Pool Message</div>
+      <div class="panel-heading">Send Group Pool Message</div>
       <div class="panel-body">
-        <%= form_tag pool_pool_messages_path, method: :post, html: { class: 'form-horizontal' } do %>
+        <%= form_tag pool_pool_messages_path, method: :post, class: 'form-horizontal', role: 'form' do %>
 
-          <div class="control-group">
-            <%= label_tag :subject, "Message Subject", class: 'control-label' %>
-            <div class="controls">
-              <%= text_field_tag :subject, params[:subject], size: 25 %>
+          <div class="form-group">
+            <%= label_tag :subject, "Message Subject", class: "col-sm-2 control-label" %>
+            <div class="col-sm-8">
+              <%= text_field_tag :subject, params[:subject], size: 20, class: "form-control" %>
             </div>
           </div>
 
-          <div class="control-group">
-            <%= label_tag :msg, "Message Body", class: 'control-label' %>
-            <div class="controls">
-              <%= text_area_tag :msg, params[:msg], size: "25x10" %>
+          <div class="form-group">
+            <%= label_tag :msg, "Message Body", class: "col-sm-2 control-label" %>
+            <div class="col-sm-8">
+              <%= text_area_tag :msg, params[:msg], rows: "10", class: "form-control" %>
             </div>
           </div>
 
-          <div class="control-group">
-            <%= label_tag :allMembers, "Send to", class: 'control-label' %>
-            <div class = "controls">
-              <%= radio_button_tag :allMembers, true, class: 'radio' %>All Members&nbsp&nbsp
-              <%= radio_button_tag :allMembers, false, class: 'radio' %>Surviving group
-            </div>
+          <div class="form-group radio-buttons">
+            <label class="radio_buttons optional col-sm-2 control-label">Send to:</label>
+            <label class="radio-inline">
+              <%= radio_button_tag :allMembers, true, true, class: 'radio' %>All Members
+            </label>
+            <label class="radio-inline">
+              <%= radio_button_tag :allMembers, false, false, class: 'radio' %>Surviving group
+            </label>
           </div>
 
-          <div class="control-group">
-            <div class = "controls">
+          <div class="form-group">
+            <div class="col-sm-10">
               <%= submit_tag "Send email", class: "btn btn-large btn-primary" %>
             </div>
           </div>

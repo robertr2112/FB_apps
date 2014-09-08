@@ -32,10 +32,12 @@ FBApps::Application.routes.draw do
   resources :seasons, shallow: :true do
     resources :weeks
   end
+  
   resources :pools do
     resources :entries, only: [:new, :create]
     resources :pool_messages, only: [:new, :create]
   end
+  
   resources :entries, only: [:edit, :update, :destroy] do
     resources :picks, only: [:new, :create]
   end
@@ -43,5 +45,9 @@ FBApps::Application.routes.draw do
   resources :weeks, only: [:edit, :update, :show, :destroy]
 
   resources :picks, only: [:edit, :update, :destroy]
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 
 end

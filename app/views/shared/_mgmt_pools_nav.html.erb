@@ -1,3 +1,13 @@
+<% if pool && pool.isOwner?(current_user) %>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown"
+      href="#" > Pool Messages <b class="caret"></b> </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to "Send group message", new_pool_pool_message_path(pool) %></li>
+  </ul>
+</li>
+<% end %>
+
 <li class="dropdown">
   <a class="dropdown-toggle" data-toggle="dropdown"
       href="#" > Manage Pool <b class="caret"></b> </a>

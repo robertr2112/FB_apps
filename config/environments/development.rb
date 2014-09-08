@@ -27,7 +27,7 @@ FBApps::Application.configure do
 
   # Setup mailer
   config.action_mailer.default_url_options = { host: "localhost:3000" }
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.sendmail_settings = {
     location: '/usr/sbin/exim4',
     arguments: '-i -t'

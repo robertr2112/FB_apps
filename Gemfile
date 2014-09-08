@@ -28,6 +28,7 @@ group :development, :test do
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
+  gem 'letter_opener_web', '~>1.2.0'
 end
 
 group :test do
