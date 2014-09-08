@@ -17,6 +17,10 @@ class UserMailer < ActionMailer::Base
 
   def confirm_registration(user)
     @user = user
+    attachments.inline['fbpm_logo.png'] = {
+                   data: File.read(Rails.root + "app/assets/images/fbpm_logo.png"),
+                   mime_type: "image/png"
+                }
     mail to: user.email, subject: "Confirm Registration"
   end
 end
