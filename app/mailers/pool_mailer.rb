@@ -1,5 +1,4 @@
 class PoolMailer < ActionMailer::Base
-  default from: "fbpoolmania@gmail.com"
   
   def send_pool_message(pool, subject, msg, allMembers)
     @pool = pool
