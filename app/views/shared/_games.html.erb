@@ -1,7 +1,7 @@
 <% teams = Team.all.where(nfl: nflTeams) %>
 <table class = "table table-condensede">
   <tbody>
-    <% games.each do |game| %>
+    <% games.order('created_at').each do |game| %>
       <tr>
         <% team = teams[game.awayTeamIndex-1] %>
         <td width="30%">
