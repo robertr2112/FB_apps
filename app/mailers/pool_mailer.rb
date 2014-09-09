@@ -16,6 +16,10 @@ class PoolMailer < ActionMailer::Base
     end
     subject_text = pool.name + "- " + subject
     user = pool.getOwner
+    attachments.inline['fbpm_logo.png'] = {
+                   data: File.read(Rails.root + "app/assets/images/fbpm_logo.png"),
+                   mime_type: "image/png"
+                }
     if mail to: email_list, from: "fbpoolmania@gmail.com", subject: subject_text
       puts "Successfully sent email"
       return false
