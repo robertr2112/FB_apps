@@ -33,8 +33,10 @@
         <% else %>
           <% @picks.each do |pick| %>
             <% game_pick = pick.game_picks.first %>
-            <% team_nickname = 
-                    teams[game_pick.chosenTeamIndex-1].name.split(" ").last %>
+            <% if game_pick %>
+              <% team_nickname = 
+                      teams[game_pick.chosenTeamIndex-1].name.split(" ").last %>
+            <% end %>
             <% if week.checkStateOpen %>
               <td></td>
             <% else %>
