@@ -19,10 +19,9 @@
                 <% game_pick = pick.game_picks.first %>
                 <% if game_pick %>
                   <li><%= "game pick: #{game_pick}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %>
-                      <% if game_pick.chosenTeamIndex != nil %>
-                        <% type = "Integer" %>
-                      <% else %>
-                        <% type = "nil" %>
+                      <% if game_pick.chosenTeamIndex == nil %>
+                        <% game_pick.chosenTeamIndex = 26 %>
+                        <% game_pick.save! %>
                       <% end %>
                       <%= "chosenTeamIndex type integer: #{type}" %>
                       <!--% index = game_pick.chosenTeamIndex - 1 %-->
