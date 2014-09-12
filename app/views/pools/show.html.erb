@@ -20,31 +20,7 @@
         <% if !@current_week.nil? %>
           <strong>Current Week</strong>
           <%= @current_week.week_number %><br />
-          <!-- &nbsp;&nbsp;&nbsp;&nbsp;<strong>State</strong> -->
-          <!-- %= render 'shared/show_week_state', current_week: @current_week % -->
           <% if @pool.poolType == Pool::POOL_TYPES[:Survivor] %>
-            <h4><u>Picks for week: <%= "#{@current_week.week_number}" %></u></h4>
-            <% entries = @pool.entries.where(user_id: current_user.id) %>
-            <% entries.each do |entry| %>
-              <b><%= "#{entry.name}:" %></b>&nbsp;
-              <% pick = entry.picks.where(entry_id: entry.id, week_id: @current_week.id).first %>
-              <% if !pick.nil? %>
-                <% game_pick = pick.game_picks.where(pick_id: pick.id).first %>
-                <% team_name = Team.find(game_pick.chosenTeamIndex).name %>
-                <%= "#{team_name}" %>
-                <% if @current_week.open? %>
-                  <small><%= link_to "[Edit Pick]", edit_pick_path(pick) %></small>
-                <% end %>
-              <% else %>
-                <% if entry.survivorStatusIn %>
-                  <small><%= link_to "[Make Pick]", new_entry_pick_path(entry) %></small>
-                <% else %>
-                  Survivor Status: Out of pool
-                <% end %>
-              <% end %>
-              <br />
-            <% end %>
-            <h3>Current Board</h3>
             <%= render 'show_survivor_board', pool: @pool, current_week: @current_week %>
           <% elsif @pool.poolType == Pool::POOL_TYPES[:SUP] %>
             <p>Sorry but SUP based pools are not supported at this time.</p>

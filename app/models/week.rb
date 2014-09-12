@@ -106,7 +106,6 @@ class Week < ActiveRecord::Base
     end
   end
 
-  # !!!! Need to rewrite this method for when it is safe to delete a week
   def deleteSafe?(season)
     if (season.weeks.order(:week_number).last == self)
       return true

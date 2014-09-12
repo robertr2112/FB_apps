@@ -79,8 +79,9 @@ class WeeksController < ApplicationController
 
   def destroy
     @week = Week.find(params[:id])
+    @season = Season.find(@week.season_id)
     if current_user.admin?
-      if @week.deleteSafe?
+      if @week.deleteSafe?(@season)
         @week.destroy
         flash[:success] = "Successfully deleted Week '#{@week.week_number}'!"
         redirect_to seasons_path
