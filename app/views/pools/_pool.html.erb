@@ -17,4 +17,7 @@
     <% else %>
       <td>Member</td>
     <% end %>
+    <% if current_user.admin? %>
+      <td><%= link_to "Diagnostics", diagnostics_path(pool), id:pool.id %></td>
+    <% end %>
   </tr>

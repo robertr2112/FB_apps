@@ -13,6 +13,7 @@ FBApps::Application.routes.draw do
   match '/contact',           to: 'static_pages#contact',         via: 'get'
   match 'pools/join/:id',     to: 'pools#join',    as: :join,     via: 'get'
   match 'pools/leave/:id',    to: 'pools#leave',   as: :leave,    via: 'get'
+  match 'pools/diagnostics/:id',    to: 'pools#diagnostics',   as: :diagnostics,    via: 'get'
   match 'pools/my_pools',     to: 'pools#my_pools',as: :my_pools, via: 'get'
   match 'weeks/open/:id',     to: 'weeks#open',    as: :open,     via: 'get'
   match 'weeks/closed/:id',   to: 'weeks#closed',  as: :closed,   via: 'get'

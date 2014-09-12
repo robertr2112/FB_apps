@@ -20,6 +20,9 @@
                 <th>Type</th>
                 <th>Status</th>
                 <th>Membership</th>
+                <% if current_user.admin? %>
+                  <th>Diagnostics</th>
+                <% end %>
               </tr>
             </thead>
             <tbody>

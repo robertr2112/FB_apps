@@ -141,6 +141,16 @@ class PoolsController < ApplicationController
       redirect_to pools_path
     end
   end
+
+  def diagnostics
+    @pool = Pool.find(params[:id])
+    if @pool
+      @season = Season.find(@pool.season.id)
+    else
+      flash[:error] = "Cannot find Pool with id #{params[:id]}!"
+      redirect_to pools_path
+    end
+  end
   
   private
 
