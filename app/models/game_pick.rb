@@ -13,5 +13,7 @@
 class GamePick < ActiveRecord::Base
 
   belongs_to :pick
+  
+  validates :chosenTeamIndex, presence: true
 
 end

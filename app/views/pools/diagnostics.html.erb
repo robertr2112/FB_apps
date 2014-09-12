@@ -10,12 +10,6 @@
         <% @picks = entry.picks.where(week_number: week.week_number) %>
         <ul>
           <li><%= "picks count: #{@picks.count}"%></li>
-          <% if @picks.count > 1 %>
-            <% @picks[1].game_picks.first.destroy %>
-            <% @picks[1].destroy %>
-            <% @picks[2].game_picks.first.destroy %>
-            <% @picks[2].destroy %>
-          <% end %>
           <% if @picks.empty? %>
             <li> no picks</li>
           <% else %>
@@ -24,15 +18,7 @@
                 <li><%= "pick: #{pick}" %></li>
                 <% game_pick = pick.game_picks.first %>
                 <% if game_pick %>
-                  <li><%= "game pick: #{game_pick}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %>
-                      <% if game_pick.chosenTeamIndex == nil %>
-                        <% game_pick.chosenTeamIndex = 26 %>
-                        <% game_pick.save! %>
-                      <% end %>
-                      <!--% index = game_pick.chosenTeamIndex - 1 %-->
-                      <!--% team_nickname = teams[index].name.split(" ").last %-->
-                    <!--%= "Team: #{team_nickname}" %-->
-                  </li>
+                  <li><%= "game pick: #{game_pick}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %> </li>
                 <% end %>
               </ul>
             <% end %>
