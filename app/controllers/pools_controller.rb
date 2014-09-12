@@ -25,8 +25,14 @@ class PoolsController < ApplicationController
     
     if season && season.isOpen?
       # If the season is setup then create the pool.
+      current_week = season.getCurrentWeek
+      if current_week.checkStateClosed || current_week.checkStateFinal
+        starting_week = current_week.week_number + 1
+      else
+        starting_week = current_week.week_number
+      end
       @pool = current_user.pools.create(pool_params.merge(season_id: season.id,
-                                                          starting_week: season.current_week))
+                                                          starting_week: starting_week))
       if @pool.id
         # create entry for owner of pool
         entry_name = @pool.getEntryName(current_user)

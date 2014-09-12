@@ -64,10 +64,14 @@
                             <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
                                     edit_pick_path(pick) %></td>
                           <% else %>
-                            <% if entry.survivorStatusIn %>
-                              <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
-                            <% else %>
-                              <td>XXX</td>
+                            <% if pool.getCurrentWeek.week_number < pool.starting_week %>
+                              <td><%= link_to "Pool has not started yet!", "#" %></td>
+                            <% else %> 
+                              <% if entry.survivorStatusIn %>
+                                <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
+                              <% else %>
+                                <td>XXX</td>
+                              <% end %>
                             <% end %>
                           <% end %>
                         <% end %>

@@ -68,7 +68,9 @@ class Season < ActiveRecord::Base
   #
   def updatePools
     self.pools.each do |pool|
-      pool.updateEntries(self.getCurrentWeek)
+      if self.getCurrentWeek.week_number >= pool.starting_week
+        pool.updateEntries(self.getCurrentWeek)
+      end
     end
     if self.current_week < self.number_of_weeks
       self.update_attribute(:current_week, self.current_week+1)
