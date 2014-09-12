@@ -54,19 +54,23 @@
                         <td align="center">Out</td>
                       <% end %>
                       <% if @user == current_user %>
-                        <% pick = Pick.where(entry_id: entry.id,
-                            week_id: pool.getCurrentWeek.id).first %>
-                        <% if pick %>
-                          <% game_pick = pick.game_picks.first %>
-                          <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
-                                  edit_pick_path(pick) %></td>
+                        <% if pool.haveSurvivorWinner? %>
+                          <td><%= link_to "Pool is done!", "#" %></td>
                         <% else %>
-                          <% if entry.survivorStatusIn %>
-                            <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
+                          <% pick = Pick.where(entry_id: entry.id,
+                              week_id: pool.getCurrentWeek.id).first %>
+                          <% if pick %>
+                            <% game_pick = pick.game_picks.first %>
+                            <td><%= link_to Team.find(game_pick.chosenTeamIndex).name, 
+                                    edit_pick_path(pick) %></td>
                           <% else %>
-                            <td>XXX</td>
+                            <% if entry.survivorStatusIn %>
+                              <td><%= link_to "Make picks", new_entry_pick_path(entry) %></td>
+                            <% else %>
+                              <td>XXX</td>
+                            <% end %>
                           <% end %>
-                        <% end %> 
+                        <% end %>
                       <% end %> 
                     </tr>
                   <% end %>

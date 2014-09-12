@@ -20,7 +20,11 @@
               <% pick = entry.picks.where(week_id: current_week.id) %>
               <% if pick.empty? %>
                 <% if entry.survivorStatusIn %>
-                  <li><%= link_to "Make pick(s)", new_entry_pick_path(entry) %></li>
+                  <% if !pool.getSurvivorWinner %>
+                    <li><%= link_to "Make pick(s)", new_entry_pick_path(entry) %></li>
+                  <% else %>
+                    <li><%= link_to "Pool is done!", "#" %></li>
+                  <% end %>
                 <% else %>
                   <li><%= link_to "Survivor Status:Out", "#" %></li>
                 <% end %>

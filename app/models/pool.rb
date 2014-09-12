@@ -125,7 +125,7 @@ end
   #
   def isOpen?
     season = Season.find(self.season_id)
-    first_week = season.weeks.find_by_week_number(1)
+    first_week = season.weeks.find_by_week_number(self.starting_week)
     if self.typeSurvivor?
       if first_week.checkStateClosed || first_week.checkStateFinal
         return false
@@ -199,7 +199,7 @@ end
   # for each entry.  It is called after a week is marked final.
   def updateEntries(current_week)
     if self.typeSurvivor?
-      updateSurvivor(current_week)
+      updateSurvivor(current_week) if !haveSurvivorWinner?
     elsif self.typeSUP?
       updateSUP(current_week)
     elsif self.typePickEm?
@@ -222,12 +222,57 @@ end
   end
 
   #
+  # Determine if their are winners to the pool. If there are then return the entry.id's
+  # of the winner(s). Returns FALSE if there are no winners yet.
+  #
+  def haveSurvivorWinner?
+    getSurvivorWinner
+  end
+  
+  def getSurvivorWinner
+    season = Season.find(self.season_id)
+    current_week = self.getCurrentWeek
+    previous_week = Week.find_by_week_number(current_week.week_number-1)
+    entries = self.entries.where(survivorStatusIn: true)
+    if entries.count == 0
+        return determineSurvivorWinners
+    else
+      if ((current_week.week_number == season.number_of_weeks) &&
+          current_week.checkStateFinal)
+         return entries
+      elsif (entries.count == 1 &&
+             (current_week.week_number != self.starting_week))
+        return entries
+      end
+    end
+    return false
+  end
+
+  #
   # Used to get the current week.  It calls season.getCurrentWeek.
   def getCurrentWeek
     season = Season.find(self.season_id)
     season.getCurrentWeek
   end
 
+  #
+  #  This finds winners if they all happened to get knocked out the same week.
+  #
+  def determineSurvivorWinners
+    # Find all picks from season.week_number - 1 and self.id (not sure easiest way to do it.)
+    season = Season.find(self.season_id)
+    current_week = season.getCurrentWeek
+    previous_week = Week.find_by_week_number(current_week.week_number - 1)
+    winners = Array.new
+    self.entries.each do |entry|
+      picks = entry.picks.where(week_number: previous_week.week_number)
+      if !picks.empty?
+        winners << entry
+      end
+    end
+    return winners
+  end
+  
   private
 
     def pool_valid?
@@ -271,7 +316,10 @@ end
                 end
               end
             end
+            #
             # if knocked out, update survivor status
+            # !!! - May need to change this to build an array in order to determine if all entries
+            #       get knocked out at same time.
             if !found_team
               entry.update_attribute(:survivorStatusIn, false)
               entry.save
