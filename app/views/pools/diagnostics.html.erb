@@ -19,8 +19,14 @@
                 <% game_pick = pick.game_picks.first %>
                 <% if game_pick %>
                   <li><%= "game pick: #{game_pick}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %>
-                      <% index = game_pick.chosenTeamIndex - 1 %>
-                      <% team_nickname = teams[index].name.split(" ").last %>
+                      <% if game_pick.chosenTeamIndex.type?(integer) %>
+                        <% type = "Integer" %>
+                      <% else %>
+                        <% type = "unknown" %>
+                      <% end %>
+                      <%= "chosenTeamIndex type integer: #{type}" %>
+                      <!--% index = game_pick.chosenTeamIndex - 1 %-->
+                      <!--% team_nickname = teams[index].name.split(" ").last %-->
                     <%= "Team: #{team_nickname}" %>
                   </li>
                 <% end %>
