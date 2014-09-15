@@ -12,18 +12,18 @@
       <small><%= link_to "[Edit Pick]", edit_pick_path(pick) %></small>
     <% end %>
   <% else %>
-    <% if entry.survivorStatusIn %>
-      <% if pool.haveSurvivorWinner? %>
-        <%= link_to "Pool is done!", "#" %>
-      <% else %>
+    <% if !pool.haveSurvivorWinner? %>
+      <% if entry.survivorStatusIn %>
         <% if pool.getCurrentWeek.week_number < pool.starting_week %>
           <%= link_to "Pool has not started yet!", "#" %>
         <% else %> 
           <small><%= link_to "[Make Pick]", new_entry_pick_path(entry) %></small>
         <% end %>
+      <% else %>
+        Survivor Status: Out of pool
       <% end %>
     <% else %>
-      Survivor Status: Out of pool
+      Pool is done!
     <% end %>
   <% end %>
   <br />
