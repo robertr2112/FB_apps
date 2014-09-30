@@ -111,22 +111,23 @@ class SeasonsController < ApplicationController
   end
 
   def season_diag_chg
-    @season = Season.find(params[:id])
-    if @season.nil?
+    season = Season.find(params[:id])
+    if season.nil?
       flash[:notice] = 'The season you tried to access does not exist'
       redirect_to seasons_path
     end
 
     # Change the current week
     if params[:cur_week]
-      if params[:chg_up]
-        chg_week = @season.current_week + 1
-      elsif params[:chg_dwn]
-        chg_week = @season.current_week - 1
-      end
-      @season.update_attribute(:current_week, chg_week)
-      @season.save
+      season.update_attribute(:current_week, params[:number])
+      season.save
     end
+    if params[:chg_week_state]
+      week = Week.find(params[:week])
+      week.update_attribute(:state, params[:state])
+      week.save
+    end
+    redirect_to season_diagnostics_path(season)
   end
   
   private
