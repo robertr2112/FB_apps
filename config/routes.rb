@@ -13,7 +13,6 @@ FBApps::Application.routes.draw do
   match '/contact',           to: 'static_pages#contact',         via: 'get'
   match 'pools/join/:id',     to: 'pools#join',    as: :join,     via: 'get'
   match 'pools/leave/:id',    to: 'pools#leave',   as: :leave,    via: 'get'
-  match 'pools/diagnostics/:id',    to: 'pools#diagnostics',   as: :diagnostics,    via: 'get'
   match 'pools/my_pools',     to: 'pools#my_pools',as: :my_pools, via: 'get'
   match 'weeks/open/:id',     to: 'weeks#open',    as: :open,     via: 'get'
   match 'weeks/closed/:id',   to: 'weeks#closed',  as: :closed,   via: 'get'
@@ -30,6 +29,12 @@ FBApps::Application.routes.draw do
                        as: :admin_del,     via: 'get'
 
 
+  # Diagnostics paths
+  match 'pools/diagnostics/:id',   to: 'pools#pool_diagnostics',   as: :pool_diagnostics,    via: 'get'
+  match 'pools/diag_chg/:id',      to: 'pools#pool_diag_chg', as: :pool_diag_chg,    via: 'get'
+  match 'seasons/diagnostics/:id', to: 'seasons#season_diagnostics',   as: :season_diagnostics,    via: 'get'
+  match 'seasons/diag_chg/:id',    to: 'seasons#season_diag_chg', as: :season_diag_chg,    via: 'get'
+  
   resources :seasons, shallow: :true do
     resources :weeks
   end

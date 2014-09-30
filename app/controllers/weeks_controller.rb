@@ -1,6 +1,7 @@
 class WeeksController < ApplicationController
   before_action :signed_in_user
   before_action :confirmed_user
+  before_action :admin_user, only: [:new, :edit, :destroy, :open, :closed, :final ]
 
   def new
     @season = Season.find(params[:season_id])
@@ -146,4 +147,10 @@ class WeeksController < ApplicationController
         end
       end
     end
+    
+    # Before filters
+    def admin_user
+      redirect_to current_user, notice: "Only an Admin User can access that page!" unless current_user.admin?
+    end
+    
 end

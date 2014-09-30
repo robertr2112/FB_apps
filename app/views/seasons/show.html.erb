@@ -9,13 +9,13 @@
 <% elsif @season.isClosed? %>
   <% season_state = "Closed" %>
 <% else %>
-  <h3>State: Unknown</h3>
+  <% season_state ="Unknown" %>
 <% end %>
 <div class="row">
   <%= render 'shared/sidebar_nav', pool: nil %>
   <div class="col-sm-8">
     <div class="panel panel-primary">
-      <div class="panel-heading"><%= "#{@season.year}" %> &nbsp;-&nbsp;Season: <%= season_state %>
+      <div class="panel-heading"> <%= "#{@season.year}" %> &nbsp;-&nbsp;Season: <%= season_state %>
       </div>
       <div class="panel-body">
         <% current_week = @season.getCurrentWeek %>
@@ -23,6 +23,9 @@
           <%= link_to "[edit]", edit_season_path(@season) %>
           <%= link_to "[Delete]", @season, method: :delete,
             data: {confirm: "Are you sure?"}, title: "Delete Season #{@season.year}" %>
+          <% if current_user.admin? %>
+            <%= link_to "[Diagnostics]", season_diagnostics_path(@season), id: @season.id %>
+          <% end %>
         <% end %>
         <ul class="list-group">
           <li class="list-group-item"><b>Type:</b>
@@ -36,7 +39,7 @@
           <li class="list-group-item">
             <% if current_week %>
               <b>Current Week: </b> <%= "#{current_week.week_number} " %>
-              <b>State: </b> <%= render 'shared/show_week_state', current_week: current_week %>
+              <b>State: </b> <%= render 'shared/show_week_state', week: current_week %>
               <small><%= link_to "[edit]", edit_week_path(current_week) %></small>
             <% else %>
               <b>Current Week: </b> <%= "No weeks created yet" %>
@@ -54,7 +57,7 @@
           </ul>
         </div>
         <% if current_week && !current_week.checkStateFinal %>
-          <%= render "shared/show_week_state_btn", current_week: current_week %>
+          <%= render "shared/show_week_state_btn", week: current_week %>
         <% end %>
       </div>
     </div>

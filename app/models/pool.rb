@@ -33,8 +33,9 @@ class Pool < ActiveRecord::Base
                        uniqueness:  { :case_sensitive => false }
 if nil
   validates :poolType, inclusion:   { in: 0..3 }
-end
+else
   validates :poolType, exclusion:   { in: [0,1,3] }
+end
   validates :allowMulti, inclusion: { in: [true, false] }
   validates :isPublic, inclusion:   { in: [true, false] }
 

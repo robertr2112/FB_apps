@@ -18,6 +18,6 @@
       <td>Member</td>
     <% end %>
     <% if current_user.admin? %>
-      <td><%= link_to "Diagnostics", diagnostics_path(pool), id:pool.id %></td>
+      <td><%= link_to "Diagnostics", pool_diagnostics_path(pool), id: pool.id %></td>
     <% end %>
   </tr>

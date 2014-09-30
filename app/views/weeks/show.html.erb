@@ -8,7 +8,7 @@
   <div class="col-sm-8">
     <div class="panel panel-primary">
       <div class="panel-heading"><%= "Week #{@week.week_number}" %> &nbsp;-&nbsp;State:
-           <%= render "shared/show_week_state", current_week: @week %>
+           <%= render "shared/show_week_state", week: @week %>
       </div>
       <div class="panel-body">
         <h1> Week <%= @week.week_number %> Games</h1>
@@ -33,7 +33,7 @@
         <%= render 'shared/games', week: @week, games: @games, nflTeams: true, showScores: showScores %>
         <br />
         <% if current_user.admin? && !@week.checkStateFinal%>
-          <%= render "shared/show_week_state_btn", current_week: @week %>
+          <%= render "shared/show_week_state_btn", week: @week %>
         <% end %>
       </div>
     </div>

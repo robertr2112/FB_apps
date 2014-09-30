@@ -1,6 +1,7 @@
 class PoolsController < ApplicationController
   before_action :signed_in_user
   before_action :confirmed_user
+  before_action :admin_user, only: [:pool_diagnostics, :pool_diag_chg ]
 
   def new
     year = Time.now.strftime("%Y")
@@ -149,7 +150,7 @@ class PoolsController < ApplicationController
     end
   end
 
-  def diagnostics
+  def pool_diagnostics
     @pool = Pool.find(params[:id])
     if @pool
       @season = Season.find(@pool.season.id)
@@ -157,6 +158,22 @@ class PoolsController < ApplicationController
       flash[:error] = "Cannot find Pool with id #{params[:id]}!"
       redirect_to pools_path
     end
+  end
+
+  # This action receives multiple args.  The first is the pool, and the second is the action to do.
+  def pool_diag_chg
+    if params[:surv]
+      entry = Entry.find(params[:entry_id])
+      pool = Pool.find(entry.pool_id)
+      if entry.survivorStatusIn
+        value = false
+      else
+        value = true
+      end
+      entry.update_attribute(:survivorStatusIn, value)
+      entry.save
+    end
+    redirect_to pool_diagnostics_path(pool)
   end
   
   private
@@ -168,6 +185,11 @@ class PoolsController < ApplicationController
 
     def authenticate
       deny_access unless signed_in?
+    end
+
+    # Before filters
+    def admin_user
+      redirect_to current_user, notice: "Only an Admin User can access that page!" unless current_user.admin?
     end
 
 end

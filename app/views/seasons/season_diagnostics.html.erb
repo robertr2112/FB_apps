@@ -1,0 +1,20 @@
+
+<h2> <%= "Season Diagnostics: #{@season.year}" %>
+  <small><%= link_to "[edit]", edit_season_path(@season) %></small>
+</h2>
+<h4> <%= "State: #{@season.state}" %></h4>
+<h4> <%= "Number of Weeks: #{@season.number_of_weeks}" %></h4>
+<h4>
+  <%= "Current Week: #{@season.current_week}" %>
+  <small><%= link_to "<Change up>", season_diag_chg_path(@season, cur_week: true, week_up: true) %></small>
+  <small><%= link_to "<Change down>", season_diag_chg_path(@season, cur_week: true, week_dwn: true) %></small>
+</h4>
+<% @season.weeks.order(:week_number).each do |week| %>
+  <ul>
+    <li>
+      <%= "Week: #{week.week_number} State: " %>
+      <%= render "shared/show_week_state", week: week %>
+      <%= render "shared/show_week_state_btn", week: week %>
+    </li>
+  </ul>
+<% end %>
