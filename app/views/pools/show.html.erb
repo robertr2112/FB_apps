@@ -9,6 +9,15 @@
     <div class="panel panel-primary">
       <div class="panel-heading"><%= @pool.name %></div>
       <div class="panel-body">
+
+        <% if @pool.isOwner?(current_user) %>
+          <div class="btn-group btn-group-xs">
+            <%= link_to "Invite people to join", invite_path(@pool.id), :class => "btn btn-primary",
+                             :role => "button" %>
+          </div>
+          </br></br>
+        <% end %>
+
         <strong>Pool Type</strong>
         <%= render 'show_type', pool: @pool %><br />
         <strong>Status</strong>

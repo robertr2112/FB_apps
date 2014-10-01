@@ -28,7 +28,8 @@
             <%= label_tag :emailPoolList, "Select Pool", class: "col-sm-2 control-label" %>
             <div class="col-sm-6">
               <%= select_tag :emailPoolList, options_from_collection_for_select(@pool_list, "id", "name"),
-                              { class: 'form-control select optional', id: 'emailPoolList' } %>
+                              { include_blank: true, class: 'form-control select optional',
+                                id: 'emailPoolList' } %>
               <p class="help-block">Adds email addresses from selected pool</p>
             </div>
           </div>

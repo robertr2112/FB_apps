@@ -38,13 +38,21 @@ class PoolMessagesController < ApplicationController
 
   # Send invite message after form
   def send_invite
-    pool = Pool.find(params[:id])
-    if pool.nil?
-      redirect_to pool, notice: "Email not sent. Could not find pool!"
+    @pool = Pool.find(params[:id])
+    if @pool.nil?
+      redirect_to @pool, notice: "Email not sent. Could not find pool!"
+    end
+    @pool_list = Array.new
+    current_user.pools.each do |pool|
+      if pool.isOwner?(current_user)
+        @pool_list << pool
+      end
     end
     @email_addr_errors = Array.new
     email_addrs = Array.new
-    emailPool = Pool.find(params[:emailPoolList])
+    if !params[:emailPoolList].blank?
+      emailPool = Pool.find(params[:emailPoolList])
+    end
     if emailPool
       emailPool.users.each do |user|
         email_addrs << user.email
@@ -59,11 +67,14 @@ class PoolMessagesController < ApplicationController
         email_addrs << emailAddr
       end
     end
+    if email_addrs.empty?
+      @email_addr_errors << "You need to add email addresses to send this message!"
+    end
     if @email_addr_errors.empty?
-      if PoolMailer.send_pool_invite(pool, params[:subject], params[:msg], email_addrs).deliver
-        redirect_to pool, notice: "Email sent!"
+      if PoolMailer.send_pool_invite(@pool, params[:subject], params[:msg], email_addrs).deliver
+        redirect_to @pool, notice: "Email sent!"
       else
-        redirect_to pool, notice: "Email not sent. There was a problem with the mailer!"
+        redirect_to @pool, notice: "Email not sent. There was a problem with the mailer!"
       end
     else
       flash[:error] = "There were errors with the form!"
