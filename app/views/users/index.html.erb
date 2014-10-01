@@ -14,7 +14,7 @@
         <%= will_paginate %>
   
         <ul class="users">
-          <%= render @users.sort_by {|u| u.name} %>
+          <%= render @users.sort_by {|u| u.name.downcase} %>
         </ul>
 
         <%= will_paginate %>

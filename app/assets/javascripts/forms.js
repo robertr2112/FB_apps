@@ -14,7 +14,9 @@ $(document).ready(function() {
   });
 
   $('select#pick').select2({ width: '230px' });
-
+  
+  $("select#emailPoolList").select2({ allowClear: true });
+  
 });
 
 /* setup cocoon nested forms insertion mode */
