@@ -18,7 +18,7 @@
           <%= f.simple_fields_for :game_picks do |gp| %>
             <fieldset>
               <%= gp.error_notification %>
-              <% @select_teams = @week.buildSelectTeams %>
+              <% @select_teams = @pick.buildSelectTeams(@week) %>
               <%= gp.input :chosenTeamIndex, label: "Pick Team:",
                     collection: @select_teams, value_method: :id,
                     label_method: :name,

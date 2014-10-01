@@ -33,5 +33,32 @@ class Pick < ActiveRecord::Base
       end
     end
   end
+
+  # Build list of available teams to choose for a survivor pool
+  def buildSelectTeams(week)
+    # Get all available teams for the current week
+    all_teams = week.buildSelectTeams
+
+    # Now remove the teams that this user has already picked
+    avail_teams = Array.new
+    entry = Entry.find(self.entry_id)
+    all_teams.each do |team|
+      used_team = false
+      entry.picks.each do |pick|
+        game_pick = pick.game_picks.first
+        if pick.week_id != week.id && game_pick
+          if team.id == game_pick.chosenTeamIndex
+            used_team = true
+          end
+        end
+      end
+      if !used_team
+        avail_teams << team
+      end
+    end
+    
+    return avail_teams
+      
+  end
   
 end
