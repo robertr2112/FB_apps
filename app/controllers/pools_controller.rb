@@ -4,7 +4,7 @@ class PoolsController < ApplicationController
   before_action :admin_user, only: [:pool_diagnostics, :pool_diag_chg ]
 
   def new
-    year = Time.now.strftime("%Y")
+    year = Season.getSeasonYear
     seasons = Season.where(year: year)
     if !seasons.empty?
       @pool = current_user.pools.new
@@ -17,7 +17,7 @@ class PoolsController < ApplicationController
 
   def create
     # Get either the NFL or college season
-    year = Time.now.strftime("%Y")
+    year = Season.getSeasonYear
     if Pool.typeSUP?(pool_params[:poolType])
       season = Season.where(year: year, nfl_league: false).first
     else

@@ -24,7 +24,16 @@ class Season < ActiveRecord::Base
   
   has_many :pools, dependent: :delete_all
   has_many :weeks, dependent: :delete_all
-  
+
+  def self.getSeasonYear
+    year = Time.now.strftime("%Y").to_i
+    month = Time.now.strftime("%m").to_i
+    if (month >= 1) && (month <= 4)
+      year = year - 1
+    end
+    return year.to_s
+  end
+
   def setState(new_state)
     self.update_attribute(:state, new_state)
   end

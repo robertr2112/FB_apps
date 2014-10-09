@@ -5,7 +5,7 @@ class SeasonsController < ApplicationController
 
   def new
     @season = Season.new
-    @season.year = Time.now.strftime("%Y")
+    @season.year = @season.getSeasonYear
     @season.current_week = 1
   end
 
