@@ -200,7 +200,10 @@ end
   # for each entry.  It is called after a week is marked final.
   def updateEntries(current_week)
     if self.typeSurvivor?
-      updateSurvivor(current_week) if !haveSurvivorWinner?
+      if !haveSurvivorWinner? || ((current_week.week_number == season.number_of_weeks) &&
+          current_week.checkStateFinal)
+        updateSurvivor(current_week)
+      end
     elsif self.typeSUP?
       updateSUP(current_week)
     elsif self.typePickEm?
@@ -279,27 +282,27 @@ end
       end
     end
 
-  #
-  #  This finds winners if they all happened to get knocked out the same week.
-  #
-  def determineSurvivorWinners
-    # Find all picks from season.week_number - 1 and self.id (not sure easiest way to do it.)
-    season = Season.find(self.season_id)
-    current_week = season.getCurrentWeek
-    previous_week = Week.find_by_week_number(current_week.week_number - 1)
-    winners = Array.new
-    while winners.count == 0
-      self.entries.each do |entry|
-        picks = entry.picks.where(week_number: previous_week.week_number)
-        if !picks.empty?
-          winners << entry
+    #
+    #  This finds winners if they all happened to get knocked out the same week.
+    #
+    def determineSurvivorWinners
+      # Find all picks from season.week_number - 1 and self.id (not sure easiest way to do it.)
+      season = Season.find(self.season_id)
+      current_week = season.getCurrentWeek
+      previous_week = Week.find_by_week_number(current_week.week_number - 1)
+      winners = Array.new
+      while winners.count == 0
+        self.entries.each do |entry|
+          picks = entry.picks.where(week_number: previous_week.week_number)
+          if !picks.empty?
+            winners << entry
+          end
         end
+        week_number = previous_week.week_number - 1
+        previous_week = Week.find_by_week_number(week_number)
       end
-       week_number = previous_week.week_number - 1
-       previous_week = Week.find_by_week_number(week_number)
-     end
-    return winners
-  end
+      return winners
+    end
 
     #
     # Updates the survivor status of each surviving entry in the pool
@@ -321,20 +324,22 @@ end
                 end
               end
             end
-            #
-            # if knocked out, update survivor status
-            # !!! - May need to change this to build an array in order to determine if all entries
-            #       get knocked out at same time.
+            # Add this entry to the knocked_out list
             if !found_team
               knocked_out_entries << entry
-              entry.update_attribute(:survivorStatusIn, false)
-              entry.save
             end
           end
         end
       end
-      # !!! - Move updating survivor status to here.  Add a pool option to determine what to do
-      #       if all entries are knocked out at the same time.  Reinstate or split winners
+      
+      #
+      # if knocked out, update survivor status
+      if knocked_out_entries
+        knocked_out_entries.each do |entry|
+          entry.update_attribute(:survivorStatusIn, false)
+          entry.save
+        end
+      end
       return true
     end
 
