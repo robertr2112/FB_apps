@@ -29,6 +29,8 @@
       <li><%= link_to "Leave Pool", leave_path(pool.id), id: pool.id %></li>
     <% end %>
   <% else %>
-    <li><%= link_to "Join Pool", join_path(pool.id), id: pool.id %></li>
+    <% if pool.isOpen? %>
+      <li><%= link_to "Join Pool", join_path(pool.id), id: pool.id %></li>
+    <% end %>
   <% end %>
 <% end %>

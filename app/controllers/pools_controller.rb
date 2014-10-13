@@ -60,9 +60,14 @@ class PoolsController < ApplicationController
       flash[:notice] = "Already a member of Pool '#{@pool.name}'!"
       redirect_to @pool
     else
-      @pool.addUser(current_user)
-      flash[:success] = "Successfully added to Pool '#{@pool.name}'!"
-      redirect_to @pool
+      if @pool.isOpen?
+        @pool.addUser(current_user)
+        flash[:success] = "Successfully added to Pool '#{@pool.name}'!"
+        redirect_to @pool
+      else
+        flash[:error] = "Sorry, but the pool is closed. Couldn't be added to Pool '#{@pool.name}'!"
+        redirect_to @pool
+      end
     end
   end
 
@@ -75,9 +80,14 @@ class PoolsController < ApplicationController
       flash[:error] = "Not a member of Pool '#{@pool.name}'!"
       redirect_to pools_path
     else
-      @pool.removeUser(current_user)
-      flash[:success] = "Successfully removed from Pool '#{@pool.name}'!"
-      redirect_to pools_path
+      if @pool.isOpen?
+        @pool.removeUser(current_user)
+        flash[:success] = "Successfully removed from Pool '#{@pool.name}'!"
+        redirect_to pools_path
+      else
+        flash[:error] = "Sorry, but the pool is closed. Cannot be removed from Pool '#{@pool.name}'!"
+        redirect_to @pool
+      end
     end
   end
 
