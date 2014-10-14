@@ -27,18 +27,20 @@
                 <% if game_pick %>
                   <li>
                     <%= "pick: #{pick.id} game pick: #{game_pick.id}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %>
-                    <% gameWon = false %>
-                    <% week.games.each do |game| %>
-                      <%= "#{game.awayTeamScore}, #{game.homeTeamScore}" %>
-                      <% if game.wonGame?(game_pick.chosenTeamIndex) %>
-                        <%= "Won Game" %>
-                        <% gameWon = true %>
+                    <% if week.checkStateFinal %>
+                      <% gameWon = false %>
+                      <% week.games.each do |game| %>
+                        <% if game.wonGame?(game_pick.chosenTeamIndex) %>
+                          <% gameWon = true %>
+                        <% end %>
                       <% end %>
-                    <% end %>
-                    <% if gameWon %>
-                      <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}(W)))" %> </small>
+                      <% if gameWon %>
+                        <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}(W)))" %> </small>
+                      <% else %>
+                        <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}(L)))" %> </small>
+                      <% end %>
                     <% else %>
-                      <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}(L)))" %> </small>
+                      <small><%= "(#{teams[game_pick.chosenTeamIndex-1].name}))" %> </small>
                     <% end %>
                   </li>
                 <% end %>
