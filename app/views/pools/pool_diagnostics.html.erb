@@ -29,7 +29,9 @@
                     <%= "pick: #{pick.id} game pick: #{game_pick.id}, chosenTeamIndex: #{game_pick.chosenTeamIndex}" %>
                     <% gameWon = false %>
                     <% week.games.each do |game| %>
+                      <%= "#{game.awayTeamScore}, #{game.homeTeamScore}" %>
                       <% if game.wonGame?(game_pick.chosenTeamIndex) %>
+                        <%= "Won Game" %>
                         <% gameWon = true %>
                       <% end %>
                     <% end %>
