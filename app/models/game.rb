@@ -32,7 +32,11 @@ class Game < ActiveRecord::Base
       teamIndex == winTeamIndex
     else
       # The case of a tie return true because both teams won
-      return true
+      if teamIndex == self.homeTeamIndex || teamIndex == self.awayTeamIndex
+        return true
+      else
+        return false
+      end
     end
   end
 end
