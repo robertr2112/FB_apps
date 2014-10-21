@@ -1,7 +1,7 @@
 class WeeksController < ApplicationController
   before_action :signed_in_user
   before_action :confirmed_user
-  before_action :admin_user, only: [:new, :edit, :destroy, :open, :closed, :final ]
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :open, :closed, :final ]
 
   def new
     @season = Season.find(params[:season_id])
@@ -114,16 +114,21 @@ class WeeksController < ApplicationController
 
   def final
     @week = Week.find(params[:id])
-    if weekFinalReady(@week)
-      @week.setState(Week::STATES[:Final])
-      # Update the entries status/totals based on this weeks results
-      @season = Season.find(@week.season_id)
-      @season.updatePools
-      flash[:notice] = "Week #{@week.week_number} is final!"
-      redirect_to @week
+    if @week.checkStateFinal
+        flash[:error] = "Week #{@week.week_number} is already Final!"
+        redirect_to @week
     else
-      flash[:error] = "Week #{@week.week_number} is not ready to be Final.  Please ensure all scores have been entered."
-      redirect_to @week
+      if weekFinalReady(@week)
+        @week.setState(Week::STATES[:Final])
+        # Update the entries status/totals based on this weeks results
+        @season = Season.find(@week.season_id)
+        @season.updatePools
+        flash[:notice] = "Week #{@week.week_number} is final!"
+        redirect_to @week
+      else
+        flash[:error] = "Week #{@week.week_number} is not ready to be Final.  Please ensure all scores have been entered."
+        redirect_to @week
+      end
     end
   end
 
