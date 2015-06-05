@@ -17,14 +17,14 @@ class Game < ActiveRecord::Base
 
   belongs_to :week
 
-  validates :homeTeamIndex, :inclusion => { :in => 0..100 }
-  validates :awayTeamIndex, :inclusion => { :in => 0..100 }
+  validates :homeTeamIndex, inclusion: { :in => 0..100 }
+  validates :awayTeamIndex, inclusion: { :in => 0..100 }
 
   def wonGame?(teamIndex)
     
-    spread = self.awayTeamScore - self.homeTeamScore
-    if spread != 0
-      if spread < 0
+    score_spread = self.awayTeamScore - self.homeTeamScore
+    if score_spread != 0
+      if score_spread < 0
         winTeamIndex = self.homeTeamIndex
       else
         winTeamIndex = self.awayTeamIndex

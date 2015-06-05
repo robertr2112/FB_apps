@@ -21,6 +21,7 @@ class Pick < ActiveRecord::Base
   validate :pickValid?
 
 
+  # prevents user from repicking a team in a survivor pool
   def pickValid?
     current_game_pick = self.game_picks.first
     entry = Entry.find(self.entry_id)

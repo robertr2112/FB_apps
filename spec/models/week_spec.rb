@@ -10,42 +10,66 @@
 #  updated_at  :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Week do
+  
+  let(:season) { FactoryGirl.create(:season) }
+  
   before(:each) do
-    @user_attr = {
-      :name => "Example User",
-      :email => "user@example.com",
-      :password => "foobar",
-      :password_confirmation => "foobar"
-    }
-    @pool_attr = { :name => "Pool 1", :poolType => 2, :isPublic => true }
-    @user = User.create(@user_attr)
-    @pool = @user.pools.create(@pool_attr)
-    @week = @pool.weeks.create!(:state => Week::STATES[:Pend])
+    @week = season.weeks.build(state: Week::STATES[:Pend], week_number: 1)
   end
 
   subject {@week}
 
   it { should respond_to(:state) }
-  it { should respond_to(:pool_id) }
+  it { should respond_to(:season_id) }
+  it { should respond_to(:week_number) }
   it { should respond_to(:games) }
+  it { should respond_to(:setState) }
+  it { should respond_to(:checkStateOpen) }
+  it { should respond_to(:checkStatePend) }
+  it { should respond_to(:checkStateClosed) }
+  it { should respond_to(:checkStateFinal) }
+  it { should respond_to(:open?) }
+  it { should respond_to(:closed?) }
+  it { should respond_to(:buildSelectTeams) }
+  it { should respond_to(:getWinningTeams) }
+  it { should respond_to(:gamesValid?) }
+  it { should respond_to(:deleteSafe?) }
 
   it { should be_valid }
 
-  describe "pool associations" do
-
-    it "should have the right associated pool_id" do
-      @pool_id = @week.pool_id
-      expect(@pool_id).to eq @pool.id
-    end
+  it "should have the right associated season_id" do
+    @season_id = @week.season_id
+    expect(@season_id).to eq season.id
   end
 
   describe "validations" do
     describe "should reject an invalid state" do
-      before { @week.state = 3}
+      before { @week.state = 4}
+      it { should_not be_valid }
+    end
+    
+    describe "should reject an invalid week_number < 1" do
+      before { @week.week_number = 0}
+      it { should_not be_valid }
+    end
+    
+    describe "should reject an invalid week_number > 17" do
+      before { @week.week_number = 18}
+      it { should_not be_valid }
+    end
+    
+    describe "should reject an invalid week_number == nil" do
+      before { @week.week_number = nil}
       it { should_not be_valid }
     end
   end
+  
+  it "should test buildSelectTeams"
+  it "should test getWinningTeams"
+  it "should test gamesValid?"
+  it "should test deleteSafe?"
+  
 end

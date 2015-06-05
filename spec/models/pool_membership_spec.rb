@@ -10,23 +10,19 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe PoolMembership do
+  
+  let(:user1) { FactoryGirl.create(:user) }
+  let(:user2) { FactoryGirl.create(:user) }
+  let(:season) { FactoryGirl.create(:season_with_weeks) }
 
   before do
-    @user_attr = {
-      :name => "Example User",
-      :email => "user@example.com",
-      :password => "foobar",
-      :password_confirmation => "foobar"
-    }
-    @pool_attr = { :name => "Pool 1", :poolType => 2, :isPublic => true }
-    @user1 = User.create(@user_attr)
-    @user2 = User.create(@user_attr.merge(:name => "Example User2",
-                                          :email => "user2@example.com"))
-    @pool1 = @user1.pools.create(@pool_attr)
-    @pool_membership = @user1.pool_memberships.last
+    @pool_attr = { :name => "Pool 1", :poolType => 2, :isPublic => true, 
+                   season_id: season.id, starting_week: 1 }
+    @pool1 = user1.pools.create(@pool_attr)
+    @pool_membership = user1.pool_memberships.find_by_pool_id(@pool1)
   end
 
   subject {@pool_membership}
@@ -46,26 +42,29 @@ describe PoolMembership do
     end
   end
 
+  # !!!! Need to update this later to support other added poolType(s)
   describe "joining a pool" do
     before do
-      @pool2 = @user1.pools.create(@pool_attr.merge(:name => "Pool 2",
-                                                    :poolType => 0))
-      @user2.pools << @pool2
+      @pool2 = user1.pools.create(@pool_attr.merge(:name => "Pool 2",
+                                                    :poolType => 2))
+      user2.pools << @pool1
     end
 
     it "should not add a new pool entry" do
       expect do
-        @user2.pools << @pool2
+        user2.pools << @pool2
       end.not_to change(Pool, :count)
     end
 
     it "should add an entry in pool_memberships" do
-      @pool_membership = @user2.pool_memberships.last
-      expect(@pool_membership.pool_id).to eq @pool2.id
+      expect do
+        user2.pools << @pool2
+      end.to change { user2.pool_memberships.count }.by(1)
     end
 
     it "should have the correct pool Id" do
-      @pool_membership = @user2.pool_memberships.last
+      user2.pools << @pool2
+      @pool_membership = user2.pool_memberships.find_by_pool_id(@pool2)
       expect(@pool_membership.pool_id).to eq @pool2.id
     end
   end
@@ -73,19 +72,16 @@ describe PoolMembership do
   describe "set_owner method" do
 
     it "should be able to set owner flag to true" do
-      @pool_membership = @user1.pool_memberships.last
       @pool_membership.owner = true
-
       expect(@pool_membership.owner).to eq true
     end
   end
 
   describe "when deleting a pool" do
     it "should remove an entry from pool_memberships" do
-      @pool1.destroy
-      @pool_membership = PoolMembership.last
-
-      expect(@pool_membership).to eq nil
+      expect do
+        @pool1.destroy
+      end.to change(PoolMembership, :count).by(-1)
     end
   end
 end

@@ -18,7 +18,11 @@ class Week < ActiveRecord::Base
   has_many   :games, dependent: :delete_all
 
   accepts_nested_attributes_for :games
+  
   #validates_associated :games
+  validates :state, inclusion:   { in: 0..3 }
+  validates :week_number, numericality: { only_integer: true, greater_than: 0, 
+                                          less_than_or_equal_to: 17} 
   validate :gamesValid?
 
   def setState(state)

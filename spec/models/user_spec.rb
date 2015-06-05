@@ -18,18 +18,19 @@
 #  updated_at             :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
  
   before do 
-    @user = User.new(name: "Example User", email: "user@example.com",
+    @user = User.new(name: "Example User", user_name: "user1", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar")
   end
 
   subject { @user }
 
   it { should respond_to(:name) }
+  it { should respond_to(:user_name) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
@@ -37,6 +38,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
+  it { should respond_to(:supervisor) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -120,7 +122,7 @@ describe User do
     it "should be saved as all lower-case" do
       @user.email = mixed_case_email
       @user.save
-      expect(@user.reload.email).to eq mixed_case_email.downcase
+      expect(subject.reload.email).to eq mixed_case_email.downcase
     end
   end
 
@@ -136,12 +138,16 @@ describe User do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
       it { should_not eq user_for_invalid_password }
-      specify { expect(user_for_invalid_password).to be_false }
+      it "should be false" do
+        expect(user_for_invalid_password).to be false
+      end
     end
   end
 
   describe "remember token" do
     before { @user.save }
-    its(:remember_token) { should_not be_blank }
+    it "should not be blank" do
+      expect(subject.remember_token).not_to be_blank 
+    end
   end
 end

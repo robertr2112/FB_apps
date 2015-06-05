@@ -21,7 +21,7 @@
 class User < ActiveRecord::Base
   has_many :pools, through: :pool_memberships, dependent: :destroy
   has_many :pool_memberships, dependent: :destroy
-  has_many :entries, dependent: :destroy
+  has_many :entries, dependent: :delete_all
 
   before_save { email.downcase! }
   before_create :create_remember_token

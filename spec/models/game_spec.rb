@@ -13,23 +13,16 @@
 #  awayTeamScore :integer          default(0)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Game do
 
+  let(:season) { FactoryGirl.create(:season) }
+  let(:week)   { FactoryGirl.create(:week) }
+  
   before(:each) do
-    @user_attr = {
-      :name => "Example User",
-      :email => "user@example.com",
-      :password => "foobar",
-      :password_confirmation => "foobar"
-    }
-    @pool_attr = { :name => "Pool 1", :poolType => 2, :isPublic => true }
-    @user = User.create(@user_attr)
-    @pool = @user.pools.create(@pool_attr)
-    @week = @pool.weeks.create(:state => Week::STATES[:Pend])
-    @game= @week.games.create(:homeTeamIndex => 0, :awayTeamIndex => 1,
-                              :spread => -3.5)
+    @game= week.games.create(homeTeamIndex: 0, awayTeamIndex: 1,
+                              spread: 3.5)
   end
 
   subject {@game}
@@ -40,6 +33,7 @@ describe Game do
   it { should respond_to(:spread) }
   it { should respond_to(:homeTeamScore) }
   it { should respond_to(:awayTeamScore) }
+  it { should respond_to(:wonGame?) }
 
   it { should be_valid }
 
@@ -47,19 +41,82 @@ describe Game do
 
     it "should have the right associated week id" do
       @week_id = @game.week_id
-      expect(@week_id).to eq @week.id
+      expect(@week_id).to eq week.id
     end
   end
 
   describe "validations" do
-    describe "should reject an invalid homeTeamIndex" do
+    describe "should reject an invalid homeTeamIndex > 100" do
       before { @game.homeTeamIndex = 101}
       it { should_not be_valid }
     end
 
-    describe "should reject an invalid awayTeamIndex" do
+    describe "should reject an invalid homeTeamIndex < 0" do
+      before { @game.homeTeamIndex = -1}
+      it { should_not be_valid }
+    end
+
+    describe "should reject an invalid awayTeamIndex > 100" do
       before { @game.awayTeamIndex = 101}
       it { should_not be_valid }
+    end
+    
+    describe "should reject an invalid awayTeamIndex < 0" do
+      before { @game.awayTeamIndex = -1}
+      it { should_not be_valid }
+    end
+  end
+  
+  describe "wonGame?" do
+    describe "when homeTeamIndex has higher score" do
+      before do
+        @game.homeTeamScore = 30
+        @game.awayTeamScore = 20
+      end
+      
+      it "should say homeTeamIndex is true" do
+	winner = @game.wonGame?(@game.homeTeamIndex)
+        expect(winner).to eq true
+      end
+      
+      it "should say awayTeamIndex is false" do
+	winner = @game.wonGame?(@game.awayTeamIndex)
+        expect(winner).to eq false
+      end
+    end
+    
+    describe "when awayTeamIndex has higher score" do
+      before do
+        @game.homeTeamScore = 20
+        @game.awayTeamScore = 30
+      end
+      
+      it "should say homeTeamIndex is false" do
+	winner = @game.wonGame?(@game.homeTeamIndex)
+        expect(winner).to eq false
+      end
+      
+      it "should say awayTeamIndex is true" do
+	winner = @game.wonGame?(@game.awayTeamIndex)
+        expect(winner).to eq true
+      end
+    end
+    
+    describe "when homeTeamIndex == awayTeamsIndex" do
+      before do
+        @game.homeTeamScore = 30
+        @game.awayTeamScore = 30
+      end
+      
+      it "should say homeTeamIndex is true" do
+	winner = @game.wonGame?(@game.homeTeamIndex)
+        expect(winner).to eq true
+      end
+      
+      it "should say awayTeamIndex is true" do
+	winner = @game.wonGame?(@game.awayTeamIndex)
+        expect(winner).to eq true
+      end
     end
   end
 end

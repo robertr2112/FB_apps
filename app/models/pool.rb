@@ -19,7 +19,7 @@ class Pool < ActiveRecord::Base
   POOL_TYPES = { PickEm: 0, PickEmSpread: 1, Survivor: 2, SUP: 3 }
 
   has_many   :users, through: :pool_memberships
-  has_many   :pool_memberships
+  has_many   :pool_memberships, dependent: :destroy
   has_many   :entries, dependent: :delete_all
   belongs_to :season
 
@@ -34,7 +34,7 @@ class Pool < ActiveRecord::Base
 if nil
   validates :poolType, inclusion:   { in: 0..3 }
 else
-  validates :poolType, exclusion:   { in: [0,1,3] }
+  validates :poolType, exclusion:   { in: [0,1,3,4] }
 end
   validates :allowMulti, inclusion: { in: [true, false] }
   validates :isPublic, inclusion:   { in: [true, false] }
@@ -217,10 +217,8 @@ end
   # Used to remove all entries for a user from the pool.  It is called when a user leaves
   # the pool
   def removeEntries(user)
-    puts "pool.id: #{self.id},user.id: #{user.id}"
     entries = Entry.where({ pool_id: self.id, user_id: user.id })
     entries.each do |entry|
-      puts "entry.id: #{entry.id}"
       entry.recurse_delete
     end
   end

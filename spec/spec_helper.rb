@@ -39,7 +39,6 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'rspec/autorun'
 
   # Requires supporting files with custom matchers and macros, etc,
   # in ./support/ and its subdirectories
@@ -80,6 +79,7 @@ Spork.prefork do
     # the seed, which is printed after each run.
     #     --seed 1234
     config.order = "random"
+    
     # Include the Capybara DSL so that specs in spec/requests still work.
     config.include Capybara::DSL
 
