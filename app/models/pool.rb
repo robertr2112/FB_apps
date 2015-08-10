@@ -128,7 +128,7 @@ end
     season = Season.find(self.season_id)
     first_week = season.weeks.find_by_week_number(self.starting_week)
     if self.typeSurvivor?
-      if first_week.checkStateClosed || first_week.checkStateFinal
+      if first_week && (first_week.checkStateClosed || first_week.checkStateFinal)
         return false
       else
         return true

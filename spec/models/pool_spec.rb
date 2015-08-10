@@ -19,7 +19,8 @@ require 'rails_helper'
 describe Pool do
   
   let(:user) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season_with_weeks) }
+  let(:season) { FactoryGirl.create(:season) }
+  let(:season_with_weeks) { FactoryGirl.create(:season_with_weeks) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 
@@ -77,6 +78,11 @@ describe Pool do
     @pool_membership = @pool.isMember?(user)
     expect(@pool_membership.user_id).to eq user.id
   end
+  
+  it "should allow a user to update the pool" do
+    @pool.update_attributes(name: "new name")
+    @pool.save
+  end
    
   it "when pool name is already taken" do
     @pool.save
@@ -133,6 +139,7 @@ describe Pool do
   describe "membership" do
     let(:user1) { FactoryGirl.create(:user) }
     before {
+			user.save
       @pool.addUser(user1)
     }
      
@@ -140,6 +147,10 @@ describe Pool do
       @pool_membership = @pool.isMember?(user1)
       expect(@pool_membership.user_id).to eq user1.id
     end
+		
+		it "should have a users count of 2 after adding a 2nd user" do
+			expect(@pool.users.count).to eq 2
+		end
      
     it "should allow removing a user" do
       @pool.removeUser(user1)
@@ -147,14 +158,54 @@ describe Pool do
       expect(@pool_membership).to eq nil
     end
     
-    it "should test removeMemberships"
+    it "should test remove_memberships" do
+			expect do
+				@pool.remove_memberships
+			end.to change(@pool.users, :count).by(-2)
+		end
   end
   
   # !!!!! Not sure if these tests should go here or somewhere else....TBD
   describe "entries" do
-    it "should test getEntryName?"
-    it "should allow a new entry"
-    it "should allow removal of an entry"
+    let(:user1) { FactoryGirl.create(:user) }
+    before {
+      @pool.addUser(user1)
+    }
+     
+    it "should verify getEntryName == user.<user_name> for first entry" do
+		  entry = Entry.where(user_id: user1.id, pool_id: @pool.id).first	
+			expect(entry.name).to eq user1.user_name
+		end
+		
+    it "should allow a new entry" do
+		  expect do
+        @pool.entries.create(name: @pool.getEntryName(user1), user_id: user1.id,
+                             survivorStatusIn: true, supTotalPoints: 0)
+      end.to change(@pool.entries, :count).by(1)
+		end
+
+    it "should verify getEntryName == user.<user_name>_1 for second entry" do
+ 	    entry_name = @pool.getEntryName(user1)
+ 	    expect(entry_name).to eq "#{user1.user_name}_1"
+  	end
+		
+		it "should allow user to change entry name" do
+		  entry = Entry.where(user_id: user1.id, pool_id: @pool.id).first	
+			new_name = "test name 1"
+      entry.update_attributes(name: new_name)
+ 	    expect(entry.name).to eq new_name
+		end
+		
+    it "should allow removal of an entry" do
+      new_entry = @pool.entries.create(name: @pool.getEntryName(user1), user_id: user1.id,
+                           survivorStatusIn: true, supTotalPoints: 0)
+		  expect do
+				new_entry.destroy
+      end.to change(@pool.entries, :count).by(-1)
+		end
+  end
+	
+	describe "pool.survivor" do
     it "should update all entries at end of week"
     it "should determine if there is a survivor winner"
     it "should show the survivor winner(s)"
