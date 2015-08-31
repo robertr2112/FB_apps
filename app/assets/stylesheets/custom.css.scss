@@ -10,6 +10,15 @@ $grayMediumLight: #eaeaea;
   box-sizing: border-box;
 }
 
+/* Font Awesome */
+@font-face {
+  font-family: 'FontAwesome';
+  src: asset-url('fontawesome-webfont.eot');
+  src: asset-url('fontawesome-webfont.eot?#iefix') format('embedded-opentype'), asset-url('fontawesome-webfont.woff') format('woff'), asset-url('fontawesome-webfont.ttf') format('truetype'), asset-url('fontawesome-webfont.svg#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* universal */
 
 html {
