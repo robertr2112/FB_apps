@@ -15,7 +15,7 @@
               My Pools <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <% current_user.pools.each do |pool| %>
+              <% user_pools.each do |pool| %>
                 <% if pool.id %>
                   <li><%= link_to "#{pool.name}", pool_path(pool) %></li>
                 <% end %>
