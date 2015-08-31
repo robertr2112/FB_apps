@@ -13,10 +13,6 @@ FBApps::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 	
-	# Update paths for Font-Awesome
-	config.assets.paths << Rails.root.join(‘app’, ‘assets’, ‘fonts’)
-  config.assets.precompile += %w(.svg .eot .woff .ttf)
-
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
 

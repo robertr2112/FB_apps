@@ -33,12 +33,12 @@ class WeeksController < ApplicationController
       else
         @week.week_number = @season.weeks.order(:week_number).last.week_number + 1
       end
+      @week.setState(Week::STATES[:Pend])
       if @week.save
         # Handle a successful save
         flash[:success] = 
             "Week #{@week.week_number} for '#{@season.year}' was created successfully!"
         # Set the state to Pend
-        @week.setState(Week::STATES[:Pend])
         redirect_to @week
       else
         render 'new'
