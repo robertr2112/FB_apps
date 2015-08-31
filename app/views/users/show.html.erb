@@ -30,8 +30,11 @@
         <div class="panel-body">
           <h3>My Pools</h3>
           <ul id="my-pool">
-            <% if @user.pools.any? && current_season(1) %>
-              <% @user.pools.each do |pool| %>
+            <% if current_season(1) %>
+              <% user_pools = @user.pools.where(season_id: current_season(1).id) %>
+            <% end %>
+            <% if user_pools && user_pools.any? %>
+              <% user_pools.each do |pool| %>
                 <li><%= link_to "#{pool.name}", pool %></li>
                 <% entries = Entry.where(user_id: @user.id, pool_id: pool.id) %>
                 <div class = "table-responsive">

@@ -6,7 +6,10 @@
       <ul class="nav nav-pills nav-stacked">
         <li><%= link_to '<i class="fa fa-user fa-fw"></i>All Users'.html_safe, users_path %></li>
         <li><%= link_to '<i class="fa fa-user fa-fw"></i>Profile'.html_safe, current_user %></li>
-        <% if current_user.pools.count >= 1 %>
+        <% if current_season(1) %>
+          <% user_pools = current_user.pools.where(season_id: current_season(1).id) %>
+        <% end %>
+        <% if user_pools && user_pools.any? %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               My Pools <span class="caret"></span>
