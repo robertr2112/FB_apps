@@ -25,9 +25,9 @@ FactoryGirl.define  do
   end
   
   factory :week do
-    season
     state        0
     week_number  1
+    season
   end
   
   factory :season do
@@ -38,13 +38,13 @@ FactoryGirl.define  do
     number_of_weeks  1
     factory :season_with_weeks do
       
-      transient do
-        number_of_weeks  1
+      ignore do
+        num_weeks  1
       end
       
       after(:create) do |season, evaluator|
-       create_list(:week, evaluator.number_of_weeks, season: season)
-       season.number_of_weeks = evaluator.number_of_weeks
+       create_list(:week, evaluator.num_weeks, season: season)
+       season.number_of_weeks = evaluator.num_weeks
       end
     end
   end
