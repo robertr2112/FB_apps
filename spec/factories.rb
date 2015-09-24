@@ -5,16 +5,21 @@ FactoryGirl.define  do
     sequence(:email)     { |n| "person-#{n}@example.com" }
     password              "foobar"
     password_confirmation "foobar"
+		confirmed             true
 
     factory :admin do
       admin true
     end
+		
+		factory :unconfirmed_user do
+			confirmed false
+		end
   end
 
   factory :pool do
     sequence(:name) { |n| "Pool-#{n}" }
     poolType              "0"
-    isPublic              "t"
+    isPublic              true
     password              "foobar"
   end
 

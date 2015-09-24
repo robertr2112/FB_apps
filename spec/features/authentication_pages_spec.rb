@@ -8,27 +8,27 @@ feature "Authentication" do
     before { visit signin_path }
 
     feature "with invalid information" do
-      before { click_button "Sign in" }
+      before { click_button 'signin_button' }
 
       scenario { should have_title('Sign in') }
-      scenario { should have_selector('div.alert.alert-error', text: 'Invalid') }
+      scenario { should have_selector('div.alert.alert-danger', text: 'Invalid') }
 
       feature "after visiting another page" do
-        before { click_link "Home" }
-        scenario { should_not have_selector('div.alert.alert-error') }
+        before { click_link 'Football Pool Mania' }
+        scenario { should_not have_selector('div.alert.alert-danger') }
       end
     end
 
     feature "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       before do
-        fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
+        fill_in 'signin_email',    with: user.email.upcase
+        fill_in 'signin_password', with: user.password
+        click_button 'signin_button'
       end
 
       scenario { should have_title(user.name) }
-      scenario { should have_link('Users',       href: users_path) }
+      scenario { should have_link('All Users',   href: users_path) }
       scenario { should have_link('Profile',     href: user_path(user)) }
       scenario { should have_link('Settings',    href: edit_user_path(user)) }
       scenario { should have_link('Sign out',    href: signout_path) }
@@ -49,9 +49,9 @@ feature "Authentication" do
       feature "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
-          fill_in "Email",    with: user.email
-          fill_in "Password", with: user.password
-          click_button "Sign in"
+          fill_in 'signin_email',    with: user.email.upcase
+          fill_in 'signin_password', with: user.password
+          click_button 'signin_button'
         end
 
         feature "after signing in" do
@@ -72,6 +72,7 @@ feature "Authentication" do
         feature "submitting to the update action" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
+          it { should_not have_selector('div.alert.alert-notice', text: 'Need to be logged in') }
         end
 
         feature "visiting the user index" do
