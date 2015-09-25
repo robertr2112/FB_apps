@@ -41,7 +41,7 @@ feature "Authentication" do
     end
   end
 
-  feature "authorization" do
+  feature "authorization", type: :request do
 
     feature "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
@@ -94,7 +94,7 @@ feature "Authentication" do
 
       feature "submitting a PATCH request to the Users#update action" do
         before { patch user_path(wrong_user) }
-        specify { expect(response).to redirect_to(root_url) }
+        specify { expect(response).to redirect_to(root_path) }
       end
     end
 
@@ -106,7 +106,7 @@ feature "Authentication" do
 
       feature "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
-        specify { expect(response).to redirect_to(root_url) }
+        specify { expect(response).to redirect_to(root_path) }
       end
     end
   end

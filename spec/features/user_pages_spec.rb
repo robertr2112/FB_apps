@@ -8,7 +8,7 @@ feature "User pages" do
     let (:user){ FactoryGirl.create(:user) }
 
     before do
-      signin_login user
+      sign_in user
       visit users_path
     end
 
@@ -34,10 +34,10 @@ feature "User pages" do
 
       scenario { expect(page).not_to have_link('delete', href: user_path(user2)) }
 
-      feature "as an admin user" do
-        let(:admin) { FactoryGirl.create(:admin) }
+      feature "as a supervisor user" do
+        let(:supervisor) { FactoryGirl.create(:supervisor) }
         before do
-          signin_login admin
+          sign_in supervisor
           visit users_path
         end
 
@@ -47,14 +47,14 @@ feature "User pages" do
             click_link('delete', match: :first)
           end.to change(User, :count).by(-1)
         end
-        scenario { should_not have_link('delete', href: user_path(admin)) }
+        scenario { should_not have_link('delete', href: user_path(supervisor)) }
       end
     end
   end
 
   feature "index" do
     before do
-      signin_login FactoryGirl.create(:user)
+      sign_in FactoryGirl.create(:user)
       FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
       FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
       visit users_path
@@ -72,9 +72,17 @@ feature "User pages" do
 
   feature "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+    before do 
+      sign_in user
+      visit user_path(user)
+    end
 
-    scenario { should have_content(user.name) }
+    scenario { 
+      
+ #save_and_open_page
+ #puts current_url
+ #pry
+      should have_content(user.name) }
     scenario { should have_title(user.name) }
   end
 
@@ -128,7 +136,7 @@ feature "User pages" do
   feature "edit" do
     let(:user) { FactoryGirl.create(:user) }
     before do
-      signin_login(user)
+      sign_in(user)
       visit edit_user_path(user)
     end
 

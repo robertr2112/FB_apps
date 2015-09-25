@@ -7,6 +7,11 @@ FactoryGirl.define  do
     password_confirmation "foobar"
 		confirmed             true
 
+    factory :supervisor do
+      supervisor true
+      admin      true
+    end
+    
     factory :admin do
       admin true
     end
