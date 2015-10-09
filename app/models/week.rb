@@ -87,10 +87,12 @@ class Week < ActiveRecord::Base
 
   def gamesValid?
     games_to_check = self.games
+    ret_code = true
     games_to_check.each do |current_game|
       if current_game.homeTeamIndex == current_game.awayTeamIndex
         errors[:base] << "Week #{self.week_number} has errors:"
         current_game.errors[:homeTeamIndex] << "Home and Away Team can't be the same!"
+        ret_code = false
       end
       games = games_to_check = self.games
       games.each do |game|
@@ -99,15 +101,18 @@ class Week < ActiveRecord::Base
              current_game.homeTeamIndex == game.awayTeamIndex
             errors[:base] << "Week #{self.week_number} has errors:"
             current_game.errors[:homeTeamIndex] << "Team names can't be repeated!"
+            ret_code = false
           end
           if current_game.awayTeamIndex == game.awayTeamIndex ||
              current_game.awayTeamIndex == game.homeTeamIndex
             errors[:base] << "Week #{self.week_number} has errors:"
             current_game.errors[:awayTeamIndex] << "Team names can't be repeated!"
+            ret_code = false
           end
         end
       end
     end
+    return ret_code
   end
 
   def deleteSafe?(season)

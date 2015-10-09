@@ -52,7 +52,22 @@ describe Entry do
     expect(@pool_id).to eq @pool.id
   end
 
-  it "should test entryStatusGood?"
+  describe "survivorStatusIn is true then entryStatusGood?" do
+    let(:entry) { FactoryGirl.create(:entry, survivorStatusIn: true) }
+    
+    it "should be true" do
+      expect(entry.entryStatusGood?).to be true
+    end
+  end
+  
+  describe "survivorStatusIn is false then entryStatusGood?" do
+    let(:entry) { FactoryGirl.create(:entry, survivorStatusIn: false) }
+    
+    it "should be false" do
+      expect(entry.entryStatusGood?).to be false
+    end
+  end
+  
   it "should test madePicks?"
   
 end

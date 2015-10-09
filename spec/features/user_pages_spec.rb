@@ -107,16 +107,17 @@ feature "User pages" do
         before { click_button submit }
 
         scenario { should have_title('Sign up') }
-        scenario { should have_content('error') }
+        scenario { should have_content('can\'t be blank') }
       end
     end
 
     feature "with valid information" do
       before do
-        fill_in "Name",             with: "Example User"
-        fill_in "Email",            with: "user@example.com"
-        fill_in "Password",         with: "foobar"
-        fill_in "Confirm Password", with: "foobar"
+        fill_in 'user_name',                  with: "Example User"
+        fill_in 'user_user_name',             with: "User1"
+        fill_in 'user_email',                 with: "user1@example.com"
+        fill_in 'user_password',              with: "foobar"
+        fill_in 'user_password_confirmation', with: "foobar"
       end
 
       scenario "should create a user" do
@@ -125,7 +126,7 @@ feature "User pages" do
 
       feature "after saving the user" do
         before { click_button submit }
-        let(:user) { User.find_by(email: 'user@example.com') }
+        let(:user) { User.find_by(email: 'user1@example.com') }
 
         scenario { should have_title(user.name) }
         scenario { should have_selector('div.alert.alert-success', text: 'Welcome') }
@@ -146,21 +147,63 @@ feature "User pages" do
       scenario { should have_link('change', href: 'http://gravatar.com/emails') }
     end
 
-    feature "with invalid information" do
-      before { click_button "Save changes" }
-
-      scenario { should have_content('error') }
+    feature "with invalid Name" do
+      before do 
+        fill_in 'user_name', with: ""
+        click_button "Update Profile" 
+      end
+ 
+      scenario { should have_content('can\'t be blank') }
     end
 
+    feature "with invalid Name" do
+      before do 
+        fill_in 'user_user_name', with: ""
+        click_button "Update Profile" 
+      end
+ 
+      scenario { should have_content('can\'t be blank') }
+    end
+ 
+    feature "with invalid Email" do
+      before do 
+        fill_in 'user_email', with: ""
+        click_button "Update Profile" 
+      end
+ 
+      scenario { should have_content('can\'t be blank') }
+    end
+ 
+    feature "with invalid Password" do
+      before do 
+        fill_in 'user_password', with: ""
+        click_button "Update Profile" 
+      end
+ 
+      scenario { should have_content('is too short') }
+    end
+    
+    feature "with invalid Password Confirmation" do
+      before do 
+        fill_in 'user_password_confirmation', with: ""
+        click_button "Update Profile" 
+      end
+ 
+      scenario { should have_content('is too short') }
+    
+    end
+    
     feature "with valid information" do
       let(:new_name)  { "New Name" }
+      let(:new_user_name)  { "Name1" }
       let(:new_email) { "new@example.com" }
       before do
-        fill_in "Name",             with: new_name
-        fill_in "Email",            with: new_email
-        fill_in "Password",         with: user.password
-        fill_in "Confirm Password", with: user.password
-        click_button "Save changes"
+        fill_in 'user_name',                  with: new_name
+        fill_in 'user_user_name',             with: new_user_name
+        fill_in 'user_email',                 with: new_email
+        fill_in 'user_password',              with: user.password
+        fill_in 'user_password_confirmation', with: user.password
+        click_button "Update Profile"
       end
 
       scenario { should have_title(new_name) }
@@ -171,4 +214,5 @@ feature "User pages" do
     end
   end
 end
+
 
