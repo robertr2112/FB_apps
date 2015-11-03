@@ -165,7 +165,6 @@ describe Pool do
 		end
   end
   
-  # !!!!! Not sure if these tests should go here or somewhere else....TBD
   describe "entries" do
     let(:user1) { FactoryGirl.create(:user) }
     before {
@@ -205,10 +204,19 @@ describe Pool do
 		end
   end
 	
-	describe "pool.survivor" do
-    it "should update all entries at end of week"
-    it "should determine if there is a survivor winner"
-    it "should show the survivor winner(s)"
+	describe "with type survivor" do
+    
+    describe "updateEntries" do
+      it "should update all entries survivor status"
+    end
+    
+    describe "haveSurvivorWinner" do
+      it "should determine if there is a survivor winner"
+    end
+    
+    describe "getSurvivorWinner" do
+      it "should show the survivor winner(s)"
+    end
   end
   
 end

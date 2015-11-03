@@ -31,8 +31,10 @@ class Pick < ActiveRecord::Base
           old_game_pick.chosenTeamIndex == current_game_pick.chosenTeamIndex)
         errors[:base] << "You have already picked this team!  Please choose another team."
         current_game_pick.errors[:chosenTeamIndex] << "You have already picked this team!  Please choose another team."
+        return false
       end
     end
+    return true
   end
 
   # Build list of available teams to choose for a survivor pool

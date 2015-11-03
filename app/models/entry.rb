@@ -28,7 +28,7 @@ class Entry < ActiveRecord::Base
   def madePicks?(week)
     picks = self.picks.where(week_id: week.id)
     picks.each do |pick|
-      if (pick.entry_id == entry.id && pick.weekNumber == week.week_number)
+      if (pick.entry_id == self.id && pick.week_number == week.week_number)
         return true
       end
     end

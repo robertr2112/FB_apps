@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-print "Adding Admin user...\n"
 admin = User.new do |u|
   u.name = "Admin"
   u.user_name = "Admin"
@@ -19,7 +18,6 @@ end
 
 admin.save!
 
-print "Adding NFL teams...\n"
 Team.create name: "Arizona Cardinals", nfl: 1,
                                   imagePath: "nfl_teams/nfcw/ari.jpeg"
 Team.create name: "Atlanta Falcons", nfl: 1,

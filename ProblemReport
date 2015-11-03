@@ -26,6 +26,10 @@ PROBLEMS
 
 9) Add a admin page to add additional admin users
 
+10) GamePick model contains unnecessary attribute game_pick_id
+
+11) Need to change the routine name in Pick model from buildSelectTeams to buildAvailTeams.
+
 
 DESIGN CHANGES
 --------------
@@ -33,6 +37,13 @@ DESIGN CHANGES
 1) Update models to make WEEK model global (Need to add details)
 
 2) Add Year using year = Time.now.strftime("%Y")
+
+3) Move the choose pick drop down box to before list of games
+
+4) Add a date_time stamp for game starts and also check it for picks to allow games to
+   be skipped and still choose later games.
+
+5) Change default behaviour for forgetting to pick to pick home team from last game.
 
 
 GENERAL ISSUES

@@ -24,6 +24,9 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails', '~>3.0'
+  gem 'factory_girl_rails', '4.4.0'
+  gem 'capybara', '2.4.0'
+  gem 'database_cleaner'
   gem 'guard-rspec', '~> 4.2'
   gem 'spork-rails'
   gem 'guard-spork'
@@ -34,10 +37,7 @@ end
 group :test do
 	gem 'pry'
   gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.4.0'
-  gem 'factory_girl_rails', '4.4.0'
   gem 'libnotify', '0.8.0'
-  gem 'database_cleaner'
 end
 
 gem 'uglifier', '2.1.1'

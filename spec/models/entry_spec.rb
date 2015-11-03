@@ -17,7 +17,7 @@ require 'rails_helper'
 describe Entry do
   
   let(:user) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season_with_weeks) }
+  let(:season) { FactoryGirl.create(:season_with_weeks, num_weeks: 4) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 
@@ -68,6 +68,26 @@ describe Entry do
     end
   end
   
-  it "should test madePicks?"
-  
+  describe "madePicks?" do
+    describe "For a survivor pool" do
+      before do
+         3.times do |n|
+           week = season.weeks[n]
+           @entry.picks.create(week_id: week.id, week_number: week.week_number)
+         end
+      end
+    
+      it "should be true when there is a pick.weekNumber that matches week.week_number" do
+        week = season.weeks[2]
+        expect(@entry.madePicks?(week)).to be true
+      end
+              
+      it "should be false when there is not a pick.weekNumber that matches week.week_number" do
+        week = season.weeks[3]
+        expect(@entry.madePicks?(week)).to be false
+      end
+        
+    end
+    
+  end
 end
