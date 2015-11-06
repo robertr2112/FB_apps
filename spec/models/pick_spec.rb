@@ -65,12 +65,11 @@ describe Pick do
     
     describe "buildSelectTeams" do
     
-      it "buildSelectTeams should not include chosenTeamIndex == @first_team_picked" do
+      it "should not include teams already picked" do
         teams = @pick.buildSelectTeams(@week)
         expect(teams.include?(@first_team_picked)).to eq false
       end
     end
-    
   end
   
 end

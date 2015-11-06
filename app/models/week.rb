@@ -89,6 +89,7 @@ class Week < ActiveRecord::Base
     games_to_check = self.games
     ret_code = true
     games_to_check.each do |current_game|
+      # Check to make sure the current_game team isn't the same for both teams
       if current_game.homeTeamIndex == current_game.awayTeamIndex
         errors[:base] << "Week #{self.week_number} has errors:"
         current_game.errors[:homeTeamIndex] << "Home and Away Team can't be the same!"
@@ -96,15 +97,14 @@ class Week < ActiveRecord::Base
       end
       games = games_to_check = self.games
       games.each do |game|
+        # check that the current_game teams are not repeated in the other games
         if current_game != game
-          if current_game.homeTeamIndex == game.homeTeamIndex ||
-             current_game.homeTeamIndex == game.awayTeamIndex
+          if current_game.homeTeamIndex == game.homeTeamIndex || current_game.homeTeamIndex == game.awayTeamIndex
             errors[:base] << "Week #{self.week_number} has errors:"
             current_game.errors[:homeTeamIndex] << "Team names can't be repeated!"
             ret_code = false
           end
-          if current_game.awayTeamIndex == game.awayTeamIndex ||
-             current_game.awayTeamIndex == game.homeTeamIndex
+          if current_game.awayTeamIndex == game.awayTeamIndex || current_game.awayTeamIndex == game.homeTeamIndex
             errors[:base] << "Week #{self.week_number} has errors:"
             current_game.errors[:awayTeamIndex] << "Team names can't be repeated!"
             ret_code = false
@@ -115,8 +115,9 @@ class Week < ActiveRecord::Base
     return ret_code
   end
 
+  # !!!! Should this be moved to season model ??
   def deleteSafe?(season)
-    if (season.weeks.order(:week_number).last == self)
+    if  self.checkStatePend  && (season.weeks.order(:week_number).last == self) 
       return true
     else
       return false

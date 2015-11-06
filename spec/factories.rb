@@ -75,7 +75,7 @@ FactoryGirl.define  do
     state            0
     nfl_league       1
     current_week     1
-    number_of_weeks  1
+    number_of_weeks  0
     
       ignore do
         num_weeks  1

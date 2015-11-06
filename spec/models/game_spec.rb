@@ -75,12 +75,12 @@ describe Game do
       end
       
       it "should say homeTeamIndex is true" do
-	winner = @game.wonGame?(@game.homeTeamIndex)
+        winner = @game.wonGame?(@game.homeTeamIndex)
         expect(winner).to eq true
       end
       
       it "should say awayTeamIndex is false" do
-	winner = @game.wonGame?(@game.awayTeamIndex)
+        winner = @game.wonGame?(@game.awayTeamIndex)
         expect(winner).to eq false
       end
     end
@@ -92,29 +92,29 @@ describe Game do
       end
       
       it "should say homeTeamIndex is false" do
-	winner = @game.wonGame?(@game.homeTeamIndex)
+        winner = @game.wonGame?(@game.homeTeamIndex)
         expect(winner).to eq false
       end
       
       it "should say awayTeamIndex is true" do
-	winner = @game.wonGame?(@game.awayTeamIndex)
+        winner = @game.wonGame?(@game.awayTeamIndex)
         expect(winner).to eq true
       end
     end
     
-    describe "when homeTeamIndex == awayTeamsIndex" do
+    describe "when homeTeamScore == awayTeamsScore" do
       before do
         @game.homeTeamScore = 30
         @game.awayTeamScore = 30
       end
       
       it "should say homeTeamIndex is true" do
-	winner = @game.wonGame?(@game.homeTeamIndex)
+        winner = @game.wonGame?(@game.homeTeamIndex)
         expect(winner).to eq true
       end
       
       it "should say awayTeamIndex is true" do
-	winner = @game.wonGame?(@game.awayTeamIndex)
+        winner = @game.wonGame?(@game.awayTeamIndex)
         expect(winner).to eq true
       end
     end

@@ -138,6 +138,7 @@ describe User do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
       it { should_not eq user_for_invalid_password }
+      
       it "should be false" do
         expect(user_for_invalid_password).to be false
       end

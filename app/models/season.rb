@@ -57,7 +57,7 @@ class Season < ActiveRecord::Base
     if self.weeks.count != self.number_of_weeks
       return false
     end
-    self.weeks.order(:week_number).each do
+    self.weeks.order(:week_number).each do |week|
       if !week.checkStateFinal
         return false
       end
