@@ -20,12 +20,64 @@ FactoryGirl.define  do
       confirmed false
     end
   end
-
+  
+  factory :user_with_pool, parent: :user do
+    
+    ignore do
+      season   1
+      pool     nil
+    end
+    
+    after(:create) do |user, evaluator|
+      if evaluator.pool.nil? 
+        pool= create(:pool, season: evaluator.season)
+        user.admin = true
+      else
+        pool = evaluator.pool
+      end
+      user.pools <<  pool
+    end
+  end
+  
+  factory :user_with_pool_and_entry, parent: :user do
+    
+    ignore do
+      season       1
+      num_entries  1
+      pool         nil
+    end
+    
+    after(:create) do |user, evaluator|
+      if evaluator.pool.nil? 
+        user.admin = true
+        pool = create(:pool_with_entries, user: user, num_entries: 1, season: evaluator.season)
+      else
+        pool = evaluator.pool
+        pool.entries << create(:entry, user: user, pool: pool)
+      end
+      user.pools << pool
+    end
+  end
+  
   factory :pool do
     sequence(:name) { |n| "Pool-#{n}" }
     poolType              2
     isPublic              true
     password              "foobar"
+    
+    ignore do
+      week_id      1
+      num_entries  1
+      user         nil
+    end
+    
+    factory :pool_with_entries do
+      after (:create) do |pool, evaluator|
+        1.upto(evaluator.num_entries) do |n|
+          create(:entry, pool: pool, user: evaluator.user)
+        end
+      end
+    end
   end
 
   # join table factory - :feature
@@ -38,14 +90,22 @@ FactoryGirl.define  do
     homeTeamIndex 1
     awayTeamIndex 17
     week
-    
   end
   
   factory :entry do
-    name              "entry 1"
+    sequence(:name)   { |n| "Entry #{n}" }
     survivorStatusIn  true
     supTotalPoints    0
-
+    user
+    pool
+    
+#   ignore do
+#     pool  nil
+#   end
+    
+#   after(:create) do |entry, evaluator|
+#     entry.pool_id = pool.id
+#   end
   end
   
   factory :week do

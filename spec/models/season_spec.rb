@@ -94,4 +94,29 @@ describe Season do
     end
   end
   
+  describe "updatePools" do
+    before (:each) do
+      @current_week = season.current_week
+    end
+    
+    it "should update the current_week by one" do
+      season.updatePools
+      expect(season.current_week).to eq (@current_week + 1)
+    end
+    it "should not update the week if current_week == season.number_of_weeks" do
+      season.current_week = season.number_of_weeks
+      season.updatePools
+      expect(season.current_week).to eq season.number_of_weeks
+      
+    end
+    
+    it "should call pool.updateEntries" do
+      week = season.weeks.find(season.current_week)
+      
+    end
+    
+    it "should not call pool.updateEntries when current_week < pool.starting_week"
+    
+  end
+  
 end

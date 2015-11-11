@@ -204,18 +204,53 @@ describe Pool do
 		end
   end
 	
-	describe "with type survivor" do
-    
+	describe "of type survivor" do
     describe "updateEntries" do
-      it "should update all entries survivor status"
-    end
-    
-    describe "haveSurvivorWinner" do
-      it "should determine if there is a survivor winner"
+      describe "after first week marked final" do
+        describe "shows x remaining entries where x = entries_left - entries_who_picked_wrong_team" do
+          it "should show 4 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 1"
+          it "should show 3 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 2"
+          it "should show 2 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 3"
+          it "should show 1 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 4"
+          it "should show 0 remaining entries if all picked wrong team"
+        end
+        describe "shows x remaining entries where x = entries_left - entries_who_forgot_to_pick" do
+          it "should show 4 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 1"
+        end
+      end
+      
+      describe "after final week marked final" do
+        describe "shows x remaining entries where x = 5 entries_left - entries_who_picked_wrong_team" do
+          it "should show 4 remaining entries when entries_who_picked_wrong_team = 1"
+          it "should show 3 remaining entries when entries_who_picked_wrong_team = 2"
+          it "should show 2 remaining entries when entries_who_picked_wrong_team = 3"
+          it "should show 1 remaining entriy  when entries_who_picked_wrong_team = 4"
+          it "should show 0 remaining entries if all picked wrong team"
+        end
+        describe "shows x remaining entries where x = 5 entries_left - entries_who_forgot_to_pick" do
+          it "should show 4 remaining entries when entries_who_forgot_to_pick = 1"
+        end
+      end
+      
+      describe "two weeks after got down to one remaining entry" do
+          it "should show 1 remaining entriy"
+      end
     end
     
     describe "getSurvivorWinner" do
-      it "should show the survivor winner(s)"
+      describe "when all entries are knocked out of pool" do
+        it "should show all remaining entries from previous week as winners"
+      end
+      
+      describe "when current_week == season.number_of_weeks and is final" do
+        it "should show all remaining entries as winners"
+      end
+      
+      describe "when one user remains" do
+        it "should show that user as winner"
+        it "should not show a winner when the pool.starting_week is not final"
+        
+      end
     end
   end
   
