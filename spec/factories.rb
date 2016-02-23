@@ -99,13 +99,6 @@ FactoryGirl.define  do
     user
     pool
     
-#   ignore do
-#     pool  nil
-#   end
-    
-#   after(:create) do |entry, evaluator|
-#     entry.pool_id = pool.id
-#   end
   end
   
   factory :week do

@@ -111,7 +111,9 @@ describe Season do
     end
     
     it "should call pool.updateEntries" do
-      week = season.weeks.find(season.current_week)
+      week = season.weeks.find_by_week_number(season.current_week)
+      #week = season.weeks.find(season.current_week)
+      puts "season.current_week = #{season.current_week} week.id = #{week.id}"
       
     end
     
