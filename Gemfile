@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.2.4'
 #ruby-gemset=Rails_fb
 
-gem 'rails','4.1.1'
-gem 'bcrypt-ruby', '3.1.2'
+gem 'rails','4.2.5'
+gem 'bcrypt-ruby', '3.1.5'
 gem 'annotate'
-gem 'faker', '1.1.2'
+gem 'faker', '1.6.3'
 gem 'select2-rails'
 gem 'simple_form', '3.1.1'
 gem 'cocoon'
@@ -14,9 +14,9 @@ gem 'cocoon'
 # Bootstrap support gems
 #
 gem 'bootstrap-sass'
-gem 'bootstrap-will_paginate', '0.0.9'
-gem 'font-awesome-sass', '4.1.0'
-gem 'sass-rails', '~> 4.0.2'
+gem 'bootstrap-will_paginate', '0.0.10'
+gem 'font-awesome-sass', '4.6.2'
+gem 'sass-rails', '~> 5.0.4'
 #gem 'select2-sass-bootstrap-rails'
 
 # Database.  Using the same database for production/development
@@ -24,35 +24,35 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails', '~>3.0'
-  gem 'factory_girl_rails', '4.4.0'
-  gem 'capybara', '2.4.0'
+  gem 'factory_girl_rails', '4.7.0'
+  gem 'capybara', '2.7.1'
   gem 'database_cleaner'
   gem 'guard-rspec', '~> 4.2'
   gem 'spork-rails'
   gem 'guard-spork'
-  gem 'childprocess', '0.3.6'
+  gem 'childprocess', '0.5.8'
   gem 'letter_opener_web', '~>1.2.0'
 end
 
 group :test do
 	gem 'pry'
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'libnotify', '0.8.0'
+  gem 'selenium-webdriver', '2.53.0'
+  gem 'libnotify', '0.9.1'
 end
 
-gem 'uglifier', '2.1.1'
-gem 'coffee-rails', '4.0.0'
-gem 'jquery-rails', '2.2.1'
-gem 'jquery-turbolinks', '2.0.1'
-gem 'turbolinks', '1.1.1'
-gem 'jbuilder', '1.0.2'
+gem 'uglifier', '2.7.2'
+gem 'coffee-rails', '4.1.1'
+gem 'jquery-rails', '3.1.4'
+gem 'jquery-turbolinks', '2.1.0'
+gem 'turbolinks', '2.5.3'
+gem 'jbuilder', '2.4.1'
 
 group :doc do
-  gem 'sdoc', '0.3.20', require: false
+  gem 'sdoc', '0.4.1', require: false
 end
 
 group :production do
-  gem 'rails_12factor', '0.0.2'
+  gem 'rails_12factor', '0.0.3'
 end
 
 # To use debugger

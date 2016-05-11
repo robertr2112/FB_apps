@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   def send_user_confirm
     self.update_attribute(:confirmation_token, create_token)
-    UserMailer.confirm_registration(self).deliver
+    UserMailer.confirm_registration(self).deliver_now
   end
 
   def send_password_reset

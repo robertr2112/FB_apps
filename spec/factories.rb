@@ -23,7 +23,7 @@ FactoryGirl.define  do
   
   factory :user_with_pool, parent: :user do
     
-    ignore do
+    transient do
       season   1
       pool     nil
     end
@@ -41,7 +41,7 @@ FactoryGirl.define  do
   
   factory :user_with_pool_and_entry, parent: :user do
     
-    ignore do
+    transient do
       season       1
       num_entries  1
       pool         nil
@@ -65,7 +65,7 @@ FactoryGirl.define  do
     isPublic              true
     password              "foobar"
     
-    ignore do
+    transient do
       week_id      1
       num_entries  1
       user         nil
@@ -106,7 +106,7 @@ FactoryGirl.define  do
     week_number  1
     season
     
-    ignore do
+    transient do
       num_games  5
     end
     
@@ -130,7 +130,7 @@ FactoryGirl.define  do
     current_week     1
     number_of_weeks  0
     
-      ignore do
+      transient do
         num_weeks  1
         num_games  1
       end
