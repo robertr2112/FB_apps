@@ -3,7 +3,7 @@ ruby '2.2.4'
 #ruby-gemset=Rails_fb
 
 gem 'rails','4.2.5'
-gem 'bcrypt-ruby', '3.1.5'
+gem 'bcrypt', '3.1.11'
 gem 'annotate'
 gem 'faker', '1.6.3'
 gem 'select2-rails'
