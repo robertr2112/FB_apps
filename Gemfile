@@ -16,6 +16,7 @@ gem 'cocoon'
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'font-awesome-sass', '4.6.2'
+gem 'font-awesome-rails'
 gem 'sass-rails', '~> 5.0.4'
 #gem 'select2-sass-bootstrap-rails'
 
