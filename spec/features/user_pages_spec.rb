@@ -79,6 +79,7 @@ feature "User pages" do
 
     scenario { 
       
+ # Open a debug window to monitor state
  #save_and_open_page
  #puts current_url
  #pry
