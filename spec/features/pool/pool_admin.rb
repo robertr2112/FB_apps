@@ -28,41 +28,46 @@ feature "Pool Admin" do
   # Given Definitions
   
   def given_I_am_a_logged_in_user
-    @user) =  FactoryGirl.create(:user)}
-    sign_in user
+#    @user =  FactoryGirl.create(:user)
+    @user =  FactoryGirl.create(:admin)
+    sign_in @user
   end
   
   # And Definitions
   
-  def and_a_season_has_been_created do
-    @season = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
+  def and_a_season_has_been_created
+    @season = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 4)
+    @season.setState(Season::STATES[:Open])
   end
   
-  def and_I_have_created_a_pool do
+  def and_I_have_created_a_pool
   end
   
   # When Definitions
   
-  def when_I_create_a_pool do
+  def when_I_create_a_pool
     visit new_pool_path
+    fill_in 'pool_name',       with: "Test Pool"
+    click_button 'Create pool'
+    save_and_open_page
     
   end
   
-  def when_I_update_the_pool_name do
+  def when_I_update_the_pool_name
   end
   
-  def when_I_delete_a_pool do
+  def when_I_delete_a_pool
   end
   
   # Then Definitions
   
-  def then_the_pool_should_show_up_in_my_profile do
+  def then_the_pool_should_show_up_in_my_profile
   end
   
-  def then_the_new_pool_name_should_be_in_my_profile do
+  def then_the_new_pool_name_should_be_in_my_profile
   end
   
-  def then_the_pool_should_not_appear_in_my_profile do
+  def then_the_pool_should_not_appear_in_my_profile
   end
   
 end
