@@ -139,7 +139,7 @@ describe Pool do
   describe "membership" do
     let(:user1) { FactoryGirl.create(:user) }
     before {
-			user.save
+      user.save
       @pool.addUser(user1)
     }
      
@@ -147,10 +147,10 @@ describe Pool do
       @pool_membership = @pool.isMember?(user1)
       expect(@pool_membership.user_id).to eq user1.id
     end
-		
-		it "should have a users count of 2 after adding a 2nd user" do
-			expect(@pool.users.count).to eq 2
-		end
+
+    it "should have a users count of 2 after adding a 2nd user" do
+      expect(@pool.users.count).to eq 2
+    end
      
     it "should allow removing a user" do
       @pool.removeUser(user1)
@@ -159,10 +159,10 @@ describe Pool do
     end
     
     it "should test remove_memberships" do
-			expect do
-				@pool.remove_memberships
-			end.to change(@pool.users, :count).by(-2)
-		end
+      expect do
+        @pool.remove_memberships
+      end.to change(@pool.users, :count).by(-2)
+    end
   end
   
   describe "entries" do
@@ -172,39 +172,42 @@ describe Pool do
     }
      
     it "should verify getEntryName == user.<user_name> for first entry" do
-		  entry = Entry.where(user_id: user1.id, pool_id: @pool.id).first	
-			expect(entry.name).to eq user1.user_name
-		end
-		
+      entry = Entry.where(user_id: user1.id, pool_id: @pool.id).first	
+      expect(entry.name).to eq user1.user_name
+    end
+
     it "should allow a new entry" do
-		  expect do
+      expect do
         @pool.entries.create(name: @pool.getEntryName(user1), user_id: user1.id,
                              survivorStatusIn: true, supTotalPoints: 0)
       end.to change(@pool.entries, :count).by(1)
-		end
+    end
 
     it "should verify getEntryName == user.<user_name>_1 for second entry" do
- 	    entry_name = @pool.getEntryName(user1)
- 	    expect(entry_name).to eq "#{user1.user_name}_1"
-  	end
-		
-		it "should allow user to change entry name" do
-		  entry = Entry.where(user_id: user1.id, pool_id: @pool.id).first	
-			new_name = "test name 1"
+      entry_name = @pool.getEntryName(user1)
+      expect(entry_name).to eq "#{user1.user_name}_1"
+    end
+
+    it "should allow user to change entry name" do
+      entry = Entry.where(user_id: user1.id, pool_id: @pool.id).first	
+      new_name = "test name 1"
       entry.update_attributes(name: new_name)
- 	    expect(entry.name).to eq new_name
-		end
-		
+      expect(entry.name).to eq new_name
+    end
+
     it "should allow removal of an entry" do
       new_entry = @pool.entries.create(name: @pool.getEntryName(user1), user_id: user1.id,
                            survivorStatusIn: true, supTotalPoints: 0)
-		  expect do
-				new_entry.destroy
+      expect do
+        new_entry.destroy
       end.to change(@pool.entries, :count).by(-1)
-		end
+    end
   end
-	
-	describe "of type survivor" do
+
+  #
+  # Survivor pool tests
+  #
+  describe "of type survivor" do
     describe "updateEntries" do
       describe "after first week marked final" do
         describe "shows x remaining entries where x = entries_left - entries_who_picked_wrong_team" do
