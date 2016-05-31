@@ -182,7 +182,6 @@ describe Pool do
                              survivorStatusIn: true, supTotalPoints: 0)
       end.to change(@pool.entries, :count).by(1)
     end
-
     it "should verify getEntryName == user.<user_name>_1 for second entry" do
       entry_name = @pool.getEntryName(user1)
       expect(entry_name).to eq "#{user1.user_name}_1"
@@ -208,14 +207,84 @@ describe Pool do
   # Survivor pool tests
   #
   describe "of type survivor" do
-    describe "updateEntries" do
+    describe "running updateEntries" do
+      let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
+      before {
+        # add scores for all games and all weeks in the season, where all home teams win (for simplicity)
+        # for each week, but leave current week as 1 and don't mark any weeks as final
+        add_season_games_scores(season)
+      
+        # create pool with 5 users and 1 entry per user
+        @users = setup_pool_with_users_and_entries(season, 5, 1)
+  puts "@users.count: #{@users.count}"
+        @pool = @users[0].pools.first
+      }
+        
       describe "after first week marked final" do
         describe "shows x remaining entries where x = entries_left - entries_who_picked_wrong_team" do
-          it "should show 4 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 1"
-          it "should show 3 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 2"
-          it "should show 2 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 3"
-          it "should show 1 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 4"
-          it "should show 0 remaining entries if all picked wrong team"
+          it "should show 4 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 1" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            week = season.weeks.order(:week_number)[0]
+            users_pick_winning_team(week, @pool, @users, 4)
+  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
+  1.upto(5) do |n|
+    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
+    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
+  end
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+                   
+          end
+          
+          it "should show 3 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 2" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            week = season.weeks.order(:week_number)[0]
+            users_pick_winning_team(week, @pool, @users, 3)
+  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
+  1.upto(5) do |n|
+    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
+    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
+  end
+          end
+          
+          it "should show 2 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 3" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            week = season.weeks.order(:week_number)[0]
+            users_pick_winning_team(week, @pool, @users, 2)
+  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
+  1.upto(5) do |n|
+    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
+    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
+  end
+          end
+          
+          it "should show 1 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 4" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            week = season.weeks.order(:week_number)[0]
+            users_pick_winning_team(week, @pool, @users, 1)
+  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
+  1.upto(5) do |n|
+    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
+    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
+  end
+          end
+          
+          it "should show 0 remaining entries if all picked wrong team" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            week = season.weeks.order(:week_number)[0]
+            users_pick_winning_team(week, @pool, @users, 0)
+  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
+  1.upto(5) do |n|
+    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
+    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
+  end
+          end
         end
         describe "shows x remaining entries where x = entries_left - entries_who_forgot_to_pick" do
           it "should show 4 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 1"

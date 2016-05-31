@@ -92,6 +92,29 @@ FactoryGirl.define  do
     week
   end
   
+  factory :game_pick do
+    chosenTeamIndex  0
+    pick
+    
+  end
+  
+  factory :pick do
+    week_number 1
+    week_id     nil
+    entry
+    
+    transient do
+      teamIndex 0
+    end
+    
+    factory :pick_with_game_pick do
+      after (:create) do |pick, evaluator|
+        pick.game_picks << create(:game_pick, pick: pick, chosenTeamIndex: evaluator.teamIndex)
+      end
+    end
+
+  end
+  
   factory :entry do
     sequence(:name)   { |n| "Entry #{n}" }
     survivorStatusIn  true
