@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731181932) do
+ActiveRecord::Schema.define(version: 20160908075606) do
 
-  create_table "entries", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
     t.integer  "pool_id"
     t.integer  "user_id"
-    t.string   "name"
-    t.boolean  "survivorStatusIn", default: true
-    t.integer  "supTotalPoints",   default: 0
+    t.string   "name",             limit: 255
+    t.boolean  "survivorStatusIn",             default: true
+    t.integer  "supTotalPoints",               default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
   add_index "entries", ["pool_id"], name: "index_entries_on_pool_id", using: :btree
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
-  create_table "game_picks", force: true do |t|
+  create_table "game_picks", force: :cascade do |t|
     t.integer  "pick_id"
     t.integer  "game_pick_id"
     t.integer  "chosenTeamIndex"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
     t.datetime "updated_at"
   end
 
-  create_table "games", force: true do |t|
+  create_table "games", force: :cascade do |t|
     t.integer  "homeTeamIndex"
     t.integer  "awayTeamIndex"
     t.integer  "spread"
@@ -43,9 +46,10 @@ ActiveRecord::Schema.define(version: 20140731181932) do
     t.integer  "awayTeamScore", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "game_date"
   end
 
-  create_table "picks", force: true do |t|
+  create_table "picks", force: :cascade do |t|
     t.integer  "week_id"
     t.integer  "entry_id"
     t.integer  "week_number"
@@ -56,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
 
   add_index "picks", ["entry_id"], name: "index_picks_on_entry_id", using: :btree
 
-  create_table "pool_memberships", force: true do |t|
+  create_table "pool_memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "pool_id"
     t.boolean  "owner",      default: false, null: false
@@ -64,20 +68,20 @@ ActiveRecord::Schema.define(version: 20140731181932) do
     t.datetime "updated_at"
   end
 
-  create_table "pools", force: true do |t|
-    t.string   "name"
+  create_table "pools", force: :cascade do |t|
+    t.string   "name",            limit: 255
     t.integer  "season_id"
     t.integer  "poolType"
-    t.integer  "starting_week",   default: 1
-    t.boolean  "allowMulti",      default: false
-    t.boolean  "isPublic",        default: true
-    t.string   "password_digest"
+    t.integer  "starting_week",               default: 1
+    t.boolean  "allowMulti",                  default: false
+    t.boolean  "isPublic",                    default: true
+    t.string   "password_digest", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "seasons", force: true do |t|
-    t.string   "year"
+  create_table "seasons", force: :cascade do |t|
+    t.string   "year",            limit: 255
     t.integer  "state"
     t.boolean  "nfl_league"
     t.integer  "number_of_weeks"
@@ -86,26 +90,26 @@ ActiveRecord::Schema.define(version: 20140731181932) do
     t.datetime "updated_at"
   end
 
-  create_table "teams", force: true do |t|
-    t.string   "name"
+  create_table "teams", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.boolean  "nfl"
-    t.string   "imagePath"
+    t.string   "imagePath",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "user_name"
-    t.string   "email"
-    t.boolean  "admin",                  default: false
-    t.boolean  "supervisor",             default: false
-    t.string   "password_digest"
-    t.string   "remember_token"
-    t.string   "password_reset_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                   limit: 255
+    t.string   "user_name",              limit: 255
+    t.string   "email",                  limit: 255
+    t.boolean  "admin",                              default: false
+    t.boolean  "supervisor",                         default: false
+    t.string   "password_digest",        limit: 255
+    t.string   "remember_token",         limit: 255
+    t.string   "password_reset_token",   limit: 255
     t.datetime "password_reset_sent_at"
-    t.boolean  "confirmed",              default: false
-    t.string   "confirmation_token"
+    t.boolean  "confirmed",                          default: false
+    t.string   "confirmation_token",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,7 +117,7 @@ ActiveRecord::Schema.define(version: 20140731181932) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
-  create_table "weeks", force: true do |t|
+  create_table "weeks", force: :cascade do |t|
     t.integer  "season_id"
     t.integer  "state"
     t.integer  "week_number"

@@ -59,14 +59,14 @@ class Week < ActiveRecord::Base
     # Generate NFL schedule for a specified week
   def create_nfl_week
     nfl_games = get_nfl_sched(self.week_number)
-    puts "Building auto week week_number: #{self.week_number}"
     nfl_games.each do |nfl_game|
       away_team = Team.find_by_name(nfl_game[:away_team])
       home_team = Team.find_by_name(nfl_game[:home_team])
-      puts "away_team id: #{away_team.id}"
-      puts "home_team id: #{home_team.id}"
+      # Create the time string
+      game_date_time = DateTime.parse(nfl_game[:date] + " ,2016 " + nfl_game[:time] + " EDT")
       game = Game.create(week_id: self.id, awayTeamIndex: away_team.id,
-                         homeTeamIndex: home_team.id)
+                         homeTeamIndex: home_team.id, 
+                         game_date: game_date_time)
       self.games << game
     end
     self.save
@@ -143,7 +143,7 @@ class Week < ActiveRecord::Base
     end
   end
   
- private
+  private
   
   # Parse the schedule for specified week from nfl.com. Returns
   # an array of game information(:date, :time, :away_team, :home_team)
@@ -161,7 +161,6 @@ class Week < ActiveRecord::Base
     start_dates = Array.new
     start_dates_list.each do |strt_date|
       start_dates << strt_date.text.sub( /^( formattedDate:)\s+/, '').strip
-      puts "date = #{strt_date.text.sub( /^( formattedDate:)\s+/, '').strip}"
     end
    
     # Find all start times
@@ -169,7 +168,6 @@ class Week < ActiveRecord::Base
     start_times = Array.new
     start_times_list.each do |strt_time|
       start_times << strt_time.text.sub( /^( formattedTime:)\s+/, '').strip
-      puts "strt_time = #{strt_time.text.sub( /^( formattedTime:)\s+/, '').strip}"
     end
 
     # Get home teams (gets duplicates and the first game is repeated twice)
@@ -189,23 +187,15 @@ class Week < ActiveRecord::Base
       away_teams << away_team_cities[n].text.sub( /^( awayCityName:)\s+/, '').strip + " " +
                     away_team_names[n].text.sub( /^( awayName:)\s+/, '').strip
       
-      puts "away team = #{away_teams.last}"
     end
   
     home_teams = Array.new
     home_team_names.count.times do |n|
       home_teams << home_team_cities[n].text.sub( /^( homeCityName:)\s+/, '').strip + " " +
                     home_team_names[n].text.sub( /^( homeName:)\s+/, '').strip
-      puts "home team = #{home_teams.last}"
     end
     
     away_teams.count.times do |gameNum|
-      puts "gameNum = #{gameNum}"
-      puts "date: start_dates[gameNum] = #{start_dates[gameNum]}"
-      puts "time: start_times[gameNum] = #{start_times[gameNum]}"
-      puts "away team = #{away_teams[gameNum-1]}"
-      puts "home team = #{home_teams[gameNum-1]}"
-      
       # Add the information to the games array (add 1 to index for date and time because the 
       # first game is added twice on the NFL site.
       games[gameNum] = {:date => start_dates[gameNum+1], :time => start_times[gameNum+1], 
@@ -219,11 +209,9 @@ class Week < ActiveRecord::Base
   def update_nfl_team_names
     
     record = Team.find_by_name("Cinncinatti Bengals")
-    puts "#{record.name}"
     record.name = "Cincinnati Bengals"
     record.save!
     record = Team.find_by_name("St Louis Rams")
-    puts "#{record.name}"
     record.name = "Los Angeles Rams"
     record.save!
     
