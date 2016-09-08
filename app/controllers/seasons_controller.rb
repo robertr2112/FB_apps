@@ -127,6 +127,22 @@ class SeasonsController < ApplicationController
       week.update_attribute(:state, params[:state])
       week.save
     end
+    if params[:update_nfl_team_info]
+      # Need to update the Cincinnati info, and change St Louis to Los Angeles
+    
+      record = Team.find_by_name("Cinncinatti Bengals")
+      if record
+        record.name = "Cincinnati Bengals"
+        record.save!
+      end
+      record = Team.find_by_name("St Louis Rams")
+      if record
+        record.name = "Los Angeles Rams"
+        record.save!
+      end
+      
+    end
+
     redirect_to season_diagnostics_path(season)
   end
   

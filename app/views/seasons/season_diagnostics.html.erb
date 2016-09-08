@@ -1,5 +1,8 @@
 
 <h2> <%= "Season Diagnostics: #{@season.year}" %> </h2>
+
+<small><%= link_to "<Update NFL Team info in Database>",
+              season_diag_chg_path(@season, update_nfl_team_info: true) %></small>
 <h4> <%= "State: #{@season.state}" %></h4>
 <h4> <%= "Number of Weeks: #{@season.number_of_weeks}" %></h4>
 <h4>

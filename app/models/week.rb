@@ -206,16 +206,5 @@ class Week < ActiveRecord::Base
     
   end
   
-  def update_nfl_team_names
-    
-    record = Team.find_by_name("Cinncinatti Bengals")
-    record.name = "Cincinnati Bengals"
-    record.save!
-    record = Team.find_by_name("St Louis Rams")
-    record.name = "Los Angeles Rams"
-    record.save!
-    
-  end
- 
   
 end
