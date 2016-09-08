@@ -29,11 +29,12 @@ FBApps::Application.routes.draw do
   match 'seasons/diag_chg/:id',    to: 'seasons#season_diag_chg', as: :season_diag_chg,    via: 'get'
   
   # Seasons and weeks paths
-  match 'weeks/open/:id',     to: 'weeks#open',    as: :open,     via: 'get'
-  match 'weeks/closed/:id',   to: 'weeks#closed',  as: :closed,   via: 'get'
-  match 'weeks/final/:id',    to: 'weeks#final',   as: :final,    via: 'get'
-  match 'seasons/open/:id',   to: 'seasons#open',    as: :season_open,   via: 'get'
-  match 'seasons/closed/:id', to: 'seasons#closed',  as: :season_closed, via: 'get'
+  match 'weeks/open/:id',     to: 'weeks#open',        as: :open,          via: 'get'
+  match 'weeks/closed/:id',   to: 'weeks#closed',      as: :closed,        via: 'get'
+  match 'weeks/final/:id',    to: 'weeks#final',       as: :final,         via: 'get'
+  match 'weeks/auto_create',  to: 'weeks#auto_create', as: :auto_create,   via: 'get'
+  match 'seasons/open/:id',   to: 'seasons#open',      as: :season_open,   via: 'get'
+  match 'seasons/closed/:id', to: 'seasons#closed',    as: :season_closed, via: 'get'
   resources :seasons, shallow: :true do
     resources :weeks
   end

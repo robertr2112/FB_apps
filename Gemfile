@@ -20,6 +20,10 @@ gem 'font-awesome-rails'
 gem 'sass-rails', '~> 5.0.4'
 #gem 'select2-sass-bootstrap-rails'
 
+# The following Gem is used to parse the NFL page for schedules to build
+# a season.
+gem 'nokogiri'
+
 # Database.  Using the same database for production/development
 gem 'pg'
 

@@ -8,5 +8,5 @@ module SeasonsHelper
       Season.where(year: current_year, nfl_league: false).first
     end
   end
-
+  
 end

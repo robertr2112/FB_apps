@@ -1,9 +1,8 @@
-<% teams = Team.all.where(nfl: nflTeams) %>
 <table class = "table table-condensed">
   <tbody>
     <% games.order('created_at').each do |game| %>
       <tr>
-        <% team = teams[game.awayTeamIndex-1] %>
+          <% team = Team.find(game.awayTeamIndex) %>
           <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
           <% if awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <td class="awayTeamWon">
@@ -25,7 +24,7 @@
         <% if !showScores %>
           <td class="gameDescriptor"><small>AT</small></td>
         <% end %>
-          <% team = teams[game.homeTeamIndex-1] %>
+          <% team = Team.find(game.homeTeamIndex) %>
           <% homeTeamWon = game.wonGame?(game.homeTeamIndex) %>
           <% if homeTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <% if showScores %>

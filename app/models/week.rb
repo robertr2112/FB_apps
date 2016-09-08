@@ -9,6 +9,8 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #
+require 'open-uri'
+require 'nokogiri'
 
 class Week < ActiveRecord::Base
 
@@ -52,6 +54,23 @@ class Week < ActiveRecord::Base
 
   def closed?
     checkStateClosed
+  end
+
+    # Generate NFL schedule for a specified week
+  def create_nfl_week
+    nfl_games = get_nfl_sched(self.week_number)
+    puts "Building auto week week_number: #{self.week_number}"
+    nfl_games.each do |nfl_game|
+      away_team = Team.find_by_name(nfl_game[:away_team])
+      home_team = Team.find_by_name(nfl_game[:home_team])
+      puts "away_team id: #{away_team.id}"
+      puts "home_team id: #{home_team.id}"
+      game = Game.create(week_id: self.id, awayTeamIndex: away_team.id,
+                         homeTeamIndex: home_team.id)
+      self.games << game
+    end
+    self.save
+    
   end
 
   def buildSelectTeams
@@ -123,5 +142,92 @@ class Week < ActiveRecord::Base
       return false
     end
   end
+  
+ private
+  
+  # Parse the schedule for specified week from nfl.com. Returns
+  # an array of game information(:date, :time, :away_team, :home_team)
+  def get_nfl_sched(weekNum)
+  
+    # Open the schedule home page
+    url_path = "http://www.nfl.com/schedules/2016/REG" + weekNum.to_s
+    doc = Nokogiri::HTML(open(url_path))
+                       
+    # Get games information
+    games = Array.new
+                       
+    # Find all start dates
+    start_dates_list = doc.search("//comment()[contains(.,'formattedDate')]")
+    start_dates = Array.new
+    start_dates_list.each do |strt_date|
+      start_dates << strt_date.text.sub( /^( formattedDate:)\s+/, '').strip
+      puts "date = #{strt_date.text.sub( /^( formattedDate:)\s+/, '').strip}"
+    end
+   
+    # Find all start times
+    start_times_list = doc.search("//comment()[contains(.,'formattedTime')]")
+    start_times = Array.new
+    start_times_list.each do |strt_time|
+      start_times << strt_time.text.sub( /^( formattedTime:)\s+/, '').strip
+      puts "strt_time = #{strt_time.text.sub( /^( formattedTime:)\s+/, '').strip}"
+    end
+
+    # Get home teams (gets duplicates and the first game is repeated twice)
+    away_team_names = doc.search("//comment()[contains(.,'awayName')]")
+    away_team_names.shift
+    away_team_cities = doc.search("//comment()[contains(.,'awayCityName')]")
+    away_team_cities.shift
+    home_team_names = doc.search("//comment()[contains(.,'homeName')]")
+    home_team_names.shift
+    home_team_cities = doc.search("//comment()[contains(.,'homeCityName')]")
+    home_team_cities.shift
+  
+    # Remove duplicate teams from list (this is due to the way we parse the data from the NFL site)
+    # and strip off the everything but the team ID
+    away_teams = Array.new
+    away_team_names.count.times do |n|
+      away_teams << away_team_cities[n].text.sub( /^( awayCityName:)\s+/, '').strip + " " +
+                    away_team_names[n].text.sub( /^( awayName:)\s+/, '').strip
+      
+      puts "away team = #{away_teams.last}"
+    end
+  
+    home_teams = Array.new
+    home_team_names.count.times do |n|
+      home_teams << home_team_cities[n].text.sub( /^( homeCityName:)\s+/, '').strip + " " +
+                    home_team_names[n].text.sub( /^( homeName:)\s+/, '').strip
+      puts "home team = #{home_teams.last}"
+    end
+    
+    away_teams.count.times do |gameNum|
+      puts "gameNum = #{gameNum}"
+      puts "date: start_dates[gameNum] = #{start_dates[gameNum]}"
+      puts "time: start_times[gameNum] = #{start_times[gameNum]}"
+      puts "away team = #{away_teams[gameNum-1]}"
+      puts "home team = #{home_teams[gameNum-1]}"
+      
+      # Add the information to the games array (add 1 to index for date and time because the 
+      # first game is added twice on the NFL site.
+      games[gameNum] = {:date => start_dates[gameNum+1], :time => start_times[gameNum+1], 
+                   :away_team => away_teams[gameNum], :home_team => home_teams[gameNum]}
+    end
+    
+    return games
+    
+  end
+  
+  def update_nfl_team_names
+    
+    record = Team.find_by_name("Cinncinatti Bengals")
+    puts "#{record.name}"
+    record.name = "Cincinnati Bengals"
+    record.save!
+    record = Team.find_by_name("St Louis Rams")
+    puts "#{record.name}"
+    record.name = "Los Angeles Rams"
+    record.save!
+    
+  end
+ 
   
 end

@@ -18,6 +18,7 @@
           <%= link_to_add_association 'Add New Game', f, :games, { tabindex: 70 } %>
           <br /><br />
           <%= f.button :submit, label: "Create week", class: 'btn btn-large btn-primary' %>
+          <small><%= link_to "Auto create?", auto_create_path(@week.id) %></small>
         <% end %>
       </div>
     </div>

@@ -49,6 +49,32 @@ class WeeksController < ApplicationController
     end
   end
 
+  def auto_create
+    season = Season.find_by_year(Time.now.year)
+    if !season.nil?
+      @week = season.weeks.create
+      @week.setState(Week::STATES[:Pend])
+      if season.weeks.order(:week_number).last.blank?
+        @week.week_number = season.current_week
+      else
+        @week.week_number = season.weeks.order(:week_number).last.week_number + 1
+      end
+      if @week.week_number > season.number_of_weeks
+        flash[:error] = "Cannot create week. This would exceed the number of weeks for this Season!"
+        redirect_to season
+      end
+        
+    else
+      flash[:error] = "Cannot create week. Season with id:#{params[:season_id]} does not exist!"
+      redirect_to seasons_path
+    end
+    
+    @week.save
+    @week.create_nfl_week
+    @week.save!
+    redirect_to @week
+  end
+
   def edit
     @week = Week.find(params[:id])
     @games = @week.games

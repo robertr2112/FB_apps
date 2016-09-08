@@ -292,6 +292,7 @@ DEPENDENCIES
   jquery-turbolinks (= 2.1.0)
   letter_opener_web (~> 1.2.0)
   libnotify (= 0.9.1)
+  nokogiri
   pg
   pry
   rails (= 4.2.5)
