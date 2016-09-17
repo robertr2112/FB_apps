@@ -14,14 +14,17 @@
         <h1> Week <%= @week.week_number %> Games</h1>
         <% if current_user.admin? %>
           <% if !@week.checkStateFinal %>
-            <%= link_to "Edit week", edit_week_path(@week) %>
+            <%= link_to "Edit week?", edit_week_path(@week) %>
           <% end %>
           <% if @week.checkStatePend %>
             <% if @week.deleteSafe?(@season) %>
-              <%= link_to "Delete week", @week, method: :delete,
+              <%= link_to "Delete week?", @week, method: :delete,
                           data: {confirm: "Are you sure?"},
                           title: "Delete week #{@week.week_number}" %>
             <% end %>
+          <% end %>
+          <% if @week.checkStateClosed %>
+            <%= link_to "  Update scores?", add_scores_path(@week) %>
           <% end %>
         <% end %>
 

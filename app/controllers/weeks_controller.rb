@@ -71,10 +71,26 @@ class WeeksController < ApplicationController
     
     @week.save
     @week.create_nfl_week
-    @week.save!
+    if @week.save
+      # Handle a successful save
+      flash[:success] = 
+            "Week #{@week.week_number} for '#{season.year}' was created successfully!"
+      redirect_to @week
+    else
+      render 'new'
+    end
+  end
+
+  def add_scores
+    @week = Week.find(params[:id])
+    season = Season.find(@week.season_id)
+    
+    @week.add_scores_nfl_week
+    
     redirect_to @week
   end
 
+  
   def edit
     @week = Week.find(params[:id])
     @games = @week.games

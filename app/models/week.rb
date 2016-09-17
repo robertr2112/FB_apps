@@ -11,6 +11,7 @@
 #
 require 'open-uri'
 require 'nokogiri'
+require 'pp'
 
 class Week < ActiveRecord::Base
 
@@ -56,19 +57,67 @@ class Week < ActiveRecord::Base
     checkStateClosed
   end
 
-    # Generate NFL schedule for a specified week
+  # Generate NFL schedule for a specified week
   def create_nfl_week
     nfl_games = get_nfl_sched(self.week_number)
     nfl_games.each do |nfl_game|
-      away_team = Team.find_by_name(nfl_game[:away_team])
-      home_team = Team.find_by_name(nfl_game[:home_team])
+      home_team_name  = '%'+nfl_game[:home_team]+'%'
+      home_team       = Team.where('name LIKE ?', home_team_name).first
+      away_team_name  = '%'+nfl_game[:away_team]+'%'
+      away_team       = Team.where('name LIKE ?', away_team_name).first
       # Create the time string
-      game_date_time = DateTime.parse(nfl_game[:date] + " ,2016 " + nfl_game[:time] + " EDT")
+      if nfl_game[:date] && nfl_game[:time]
+        game_date_time = DateTime.parse(nfl_game[:date] + " ,2016 " + nfl_game[:time] + " EDT")
+      else
+        game_date_time = nil
+      end
       game = Game.create(week_id: self.id, awayTeamIndex: away_team.id,
                          homeTeamIndex: home_team.id, 
                          game_date: game_date_time)
       self.games << game
+      
+      self.save
+      
     end
+  end
+  
+  # Update the week with the nfl week final scores
+  def add_scores_nfl_week
+    
+    # Get all of the games/scores from NFL.com
+    nfl_games = get_nfl_scores(self.week_number)
+    
+    #cycle through each game
+    nfl_games.each do |nfl_game|
+      
+      # Get the Team records for this game
+      home_team_name  = '%'+nfl_game[:home_team]+'%'
+      home_team = Team.where('name LIKE ?', home_team_name).first
+      away_team_name  = '%'+nfl_game[:away_team]+'%'
+      away_team = Team.where('name LIKE ?', away_team_name).first
+      
+      
+      # Check to make sure this NFL game is final
+      if nfl_game[:final] == "FINAL"
+      
+        # sift through all of the games for the week
+        self.games.each do |game|
+        
+          # Find the matching game
+          if ((game.awayTeamIndex == away_team.id) &&
+              (game.homeTeamIndex == home_team.id))
+          
+            # Update the scores
+            game.awayTeamScore = nfl_game[:away_score]
+            game.homeTeamScore = nfl_game[:home_score]
+          
+            game.save
+          
+          end
+        end #self.games.each
+      end # if FINAL
+    end # nfl_games.each
+    
     self.save
     
   end
@@ -171,28 +220,25 @@ class Week < ActiveRecord::Base
     end
 
     # Get home teams (gets duplicates and the first game is repeated twice)
-    away_team_names = doc.search("//comment()[contains(.,'awayName')]")
-    away_team_names.shift
-    away_team_cities = doc.search("//comment()[contains(.,'awayCityName')]")
-    away_team_cities.shift
-    home_team_names = doc.search("//comment()[contains(.,'homeName')]")
-    home_team_names.shift
-    home_team_cities = doc.search("//comment()[contains(.,'homeCityName')]")
-    home_team_cities.shift
+    away_team_names = doc.css('span.team-name.away')
+    home_team_names = doc.css('span.team-name.home')
   
-    # Remove duplicate teams from list (this is due to the way we parse the data from the NFL site)
-    # and strip off the everything but the team ID
+    # Remove duplicate game from list (quirk of NFL.com)
+    start_dates_list.shift
+    start_times_list.shift
+    away_team_names.shift
+    home_team_names.shift
+    
+    # strip off the everything but the team ID
     away_teams = Array.new
     away_team_names.count.times do |n|
-      away_teams << away_team_cities[n].text.sub( /^( awayCityName:)\s+/, '').strip + " " +
-                    away_team_names[n].text.sub( /^( awayName:)\s+/, '').strip
+      away_teams << away_team_names[n].text
       
     end
   
     home_teams = Array.new
     home_team_names.count.times do |n|
-      home_teams << home_team_cities[n].text.sub( /^( homeCityName:)\s+/, '').strip + " " +
-                    home_team_names[n].text.sub( /^( homeName:)\s+/, '').strip
+      home_teams << home_team_names[n].text
     end
     
     away_teams.count.times do |gameNum|
@@ -206,5 +252,39 @@ class Week < ActiveRecord::Base
     
   end
   
+  # Get the final scores for an NFL week
+  def get_nfl_scores(weekNum)
   
+    # Open the schedule home page
+    url_path = "http://www.nfl.com/schedules/2016/REG" + weekNum.to_s
+    doc = Nokogiri::HTML(open(url_path))
+                       
+    # Get games information
+    games = Array.new
+  
+    gameNum = 0
+    events = doc.css("li.schedules-list-matchup").map do |eventnode|
+      away_team  = eventnode.at_css("span.team-name.away").text.strip
+      home_team  = eventnode.at_css("span.team-name.home").text.strip
+      game_final = eventnode.at_css("span.time").text.strip
+      if game_final == "FINAL"
+        away_score = eventnode.at_css("span.team-score.away").text.strip.to_i
+        home_score = eventnode.at_css("span.team-score.home").text.strip.to_i
+      else 
+        game_final = nil
+        away_score = nil
+        home_score = nil
+      end
+        
+      games[gameNum] = {:away_team => away_team, :away_score => away_score,
+                        :home_team => home_team, :home_score => home_score,
+                        :final => game_final}
+      
+      gameNum = gameNum + 1
+      
+    end
+    
+    return games
+      
+  end
 end
