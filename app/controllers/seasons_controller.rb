@@ -30,7 +30,7 @@ class SeasonsController < ApplicationController
   
   def update
     @season = Season.find(params[:id])
-    if !@season.isPending?
+    if @season.isPending?
       if @season.update_attributes(season_params)
         flash[:success] = "Season updated."
         redirect_to @season

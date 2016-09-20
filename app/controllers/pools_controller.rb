@@ -5,10 +5,18 @@ class PoolsController < ApplicationController
 
   def new
     year = Season.getSeasonYear
-    seasons = Season.where(year: year)
-    if !seasons.empty?
+    
+    # !!!! This code breaks once the college pools are added
+    season = Season.where(year: year, nfl_league: true).first
+    if season
       @pool = current_user.pools.new
       @pool_edit_flag = false
+      current_week = season.getCurrentWeek
+      if current_week.checkStateClosed || current_week.checkStateFinal
+        @pool.starting_week = current_week.week_number + 1
+      else
+        @pool.starting_week = current_week.week_number
+      end
     else
       flash[:error] = "Cannot create a pool because the #{year} season is not ready for pools!"
       redirect_to_back_or_default(pools_path)
@@ -27,13 +35,7 @@ class PoolsController < ApplicationController
     if season && season.isOpen?
       # If the season is setup then create the pool.
       current_week = season.getCurrentWeek
-      if current_week.checkStateClosed || current_week.checkStateFinal
-        starting_week = current_week.week_number + 1
-      else
-        starting_week = current_week.week_number
-      end
-      @pool = current_user.pools.create(pool_params.merge(season_id: season.id,
-                                                          starting_week: starting_week))
+      @pool = current_user.pools.create(pool_params.merge(season_id: season.id))
       if @pool.id
         # create entry for owner of pool
         entry_name = @pool.getEntryName(current_user)
@@ -190,7 +192,7 @@ class PoolsController < ApplicationController
 
     def pool_params
       params.require(:pool).permit(:name, :poolType, :allowMulti, 
-                                   :isPublic, :password)
+                                   :isPublic, :starting_week, :password)
     end
 
     def authenticate
