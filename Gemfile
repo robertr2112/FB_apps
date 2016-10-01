@@ -24,6 +24,9 @@ gem 'sass-rails', '~> 5.0.4'
 # a season.
 gem 'nokogiri'
 
+# Mail support
+gem 'email_validator'
+
 # Database.  Using the same database for production/development
 gem 'pg'
 
