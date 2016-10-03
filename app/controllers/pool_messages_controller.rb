@@ -1,4 +1,7 @@
 class PoolMessagesController < ApplicationController
+  before_action :signed_in_user
+  before_action :confirmed_user
+  
   def new
     @pool = Pool.find(params[:pool_id])
   end
