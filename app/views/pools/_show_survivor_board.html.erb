@@ -57,7 +57,7 @@
       <% end %>
     <% end %>
   </tr>
-  <% teams = Team.all.where(nfl: true) %>
+  <% teams = Team.all.where(nfl: true).order('id ASC') %>
   <% entries = @pool.entries.sort_by {|entry| [entry[:survivorStatusIn] ? 0 : 1,entry[:name]] } %>
   <% entries.each do |entry| %>
     <% entryOut = false %>

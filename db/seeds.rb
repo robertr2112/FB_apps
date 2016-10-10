@@ -30,7 +30,7 @@ Team.create name: "Carolina Panthers", nfl: 1,
                                   imagePath: "nfl_teams/nfcs/car.jpeg"
 Team.create name: "Chicago Bears", nfl: 1,
                                   imagePath: "nfl_teams/nfcn/chi.jpeg"
-Team.create name: "Cinncinatti Bengals", nfl: 1,
+Team.create name: "Cincinnati Bengals", nfl: 1,
                                   imagePath: "nfl_teams/afcn/cin.jpeg"
 Team.create name: "Cleveland Browns", nfl: 1,
                                   imagePath: "nfl_teams/afcn/cle.jpeg"
@@ -74,7 +74,7 @@ Team.create name: "San Diego Chargers", nfl: 1,
                                   imagePath: "nfl_teams/afcw/sd.jpeg"
 Team.create name: "Seattle Seahawks", nfl: 1,
                                   imagePath: "nfl_teams/nfcw/sea.jpeg"
-Team.create name: "St Louis Rams", nfl: 1,
+Team.create name: "Los Angeles Rams", nfl: 1,
                                   imagePath: "nfl_teams/nfcw/stl.jpeg"
 Team.create name: "Tampa Bay Buccaneers", nfl: 1,
                                   imagePath: "nfl_teams/nfcs/tb.jpeg"

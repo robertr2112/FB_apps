@@ -1,7 +1,7 @@
 
 <h2> <%= "Pool Diagnostics: #{@pool.name}" %> </h2>
 
-<% teams = Team.all.where(nfl: true) %>
+<% teams = Team.all.where(nfl: true).order('id ASC') %>
 <% entries = @pool.entries.sort_by {|entry| [entry[:survivorStatusIn] ? 0 : 1,entry[:name]] } %>
 <% entries.each do |entry| %>
   <h4>
