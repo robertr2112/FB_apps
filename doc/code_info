@@ -1,0 +1,25 @@
+
+Managing Datetime 
+
+  - adding number of days to a datetime.
+    * Time.now + 5.days (or months, weeks, years)
+
+Determining the day of the week
+  - today = Time.now
+  - today.wday (displays day number, ie: 2 for Tuesday)
+
+Determining next Sunday of week
+  - today = Time.now
+  - sunday = today + (7 - today.wday).days
+
+Set a certain date/time
+  - day = Time.local(2016, 11, 10, 12, 00)
+      * Returns day = Thu, 10 Nov 2016 12:00:00 -0600
+
+Printing Datetime
+  - today = Time.now
+  - today.strftime(%A %B %d %Z) 
+     * displays "Tuesday October 11"
+     * use today.day.ordinalize for 3rd, 4th, etc, so you could do
+       today.strftime("%A %B ") + today.day.ordinalize
+     * displays "Tuesday October 11th"

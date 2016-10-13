@@ -21,8 +21,7 @@ class Pick < ActiveRecord::Base
   validate :pickValid?
 
 
-  # prevents user from repicking a team in a survivor pool and
-  # also that they don't pick a game that has already started
+  # prevents user from repicking a team in a survivor pool
   def pickValid?
     
     # Verify this team hasn't already been picked in this pool
@@ -38,7 +37,17 @@ class Pick < ActiveRecord::Base
       end
     end
     
-    # verify the time is before start of game
+    if current_game_pick
+      week = Week.find(self.week_id)
+      game = week.find_game(current_game_pick.chosenTeamIndex)
+      if game.game_started?
+        errors[:base] << 
+                       "This game has started!  Please choose another team."
+        current_game_pick.errors[:chosenTeamIndex] << 
+                       "This game has started!  Please choose another team."
+        return false
+      end
+    end
     
     return true
   end

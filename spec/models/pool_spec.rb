@@ -248,6 +248,9 @@ describe Pool do
     puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
     puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
   end
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
           end
           
           it "should show 2 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 3" do
@@ -260,6 +263,9 @@ describe Pool do
     puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
     puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
   end
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
           end
           
           it "should show 1 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 4" do
@@ -272,6 +278,9 @@ describe Pool do
     puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
     puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
   end
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
           end
           
           it "should show 0 remaining entries if all picked wrong team" do
@@ -285,7 +294,11 @@ describe Pool do
     puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
   end
           end
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
         end
+        
         describe "shows x remaining entries where x = entries_left - entries_who_forgot_to_pick" do
           it "should show 4 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 1"
         end

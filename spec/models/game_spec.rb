@@ -7,10 +7,11 @@
 #  awayTeamIndex :integer
 #  spread        :integer
 #  week_id       :integer
-#  created_at    :datetime
-#  updated_at    :datetime
 #  homeTeamScore :integer          default(0)
 #  awayTeamScore :integer          default(0)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  game_date     :datetime
 #
 
 require 'rails_helper'

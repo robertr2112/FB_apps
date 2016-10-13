@@ -89,6 +89,7 @@ FactoryGirl.define  do
   factory :game do
     homeTeamIndex 1
     awayTeamIndex 17
+    game_date Time.zone.now
     week
   end
   

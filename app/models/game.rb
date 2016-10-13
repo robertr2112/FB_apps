@@ -7,10 +7,11 @@
 #  awayTeamIndex :integer
 #  spread        :integer
 #  week_id       :integer
-#  created_at    :datetime
-#  updated_at    :datetime
 #  homeTeamScore :integer          default(0)
 #  awayTeamScore :integer          default(0)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  game_date     :datetime
 #
 
 class Game < ActiveRecord::Base
@@ -20,6 +21,7 @@ class Game < ActiveRecord::Base
   validates :homeTeamIndex, inclusion: { :in => 0..100 }
   validates :awayTeamIndex, inclusion: { :in => 0..100 }
 
+  # determine if <teamIndex> was the winner of the game
   def wonGame?(teamIndex)
     
     score_spread = self.awayTeamScore - self.homeTeamScore
@@ -38,5 +40,15 @@ class Game < ActiveRecord::Base
         return false
       end
     end
+  end
+  
+  # Determine if the game has already started
+  def game_started?
+    cur_time = Time.zone.now 
+    if cur_time > self.game_date
+      return true
+    end
+    
+    return false
   end
 end

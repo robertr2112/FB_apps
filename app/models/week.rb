@@ -57,6 +57,16 @@ class Week < ActiveRecord::Base
     checkStateClosed
   end
 
+  # Find the game for this week from the team index
+  def find_game(chosenTeamIndex)
+    self.games.each do |game|
+      if game.homeTeamIndex == chosenTeamIndex || 
+         game.awayTeamIndex == chosenTeamIndex
+        return game
+      end
+    end
+  end
+  
   # Generate NFL schedule for a specified week
   def create_nfl_week
     nfl_games = get_nfl_sched(self.week_number)
