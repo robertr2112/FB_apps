@@ -65,6 +65,7 @@ class Week < ActiveRecord::Base
         return game
       end
     end
+    return nil
   end
   
   # Generate NFL schedule for a specified week

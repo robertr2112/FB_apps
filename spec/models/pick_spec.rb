@@ -15,7 +15,7 @@ require 'rails_helper'
 
 describe Pick do
   let(:user) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 5) }
+  let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 16) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 
@@ -50,6 +50,7 @@ describe Pick do
     describe "pickValid?" do
       it "should be false when duplicate team picked" do
         week = season.weeks[1]
+        games = week.games
         new_pick = @entry.picks.build(week_id: week.id, week_number: week.week_number)
         new_game_pick = new_pick.game_picks.build(chosenTeamIndex: @first_team_picked)
         new_game_pick.save
@@ -76,7 +77,8 @@ describe Pick do
       it "should not allow the pick" do
         week = season.weeks[1]
         games = week.games
-        games[0].game_date = @games[0].game_date - 5.minutes
+        games[0].game_date = @games[0].game_date - 15.minutes
+        games[0].save
         new_pick = @entry.picks.build(week_id: week.id, week_number: week.week_number)
         new_game_pick = new_pick.game_picks.build(chosenTeamIndex: games[0].homeTeamIndex)
         new_game_pick.save

@@ -39,6 +39,7 @@ class Pick < ActiveRecord::Base
     
     if current_game_pick
       week = Week.find(self.week_id)
+      
       game = week.find_game(current_game_pick.chosenTeamIndex)
       if game.game_started?
         errors[:base] << 
