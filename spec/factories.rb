@@ -87,8 +87,10 @@ FactoryGirl.define  do
   end
   
   factory :game do
-    homeTeamIndex 1
-    awayTeamIndex 17
+#   homeTeamIndex 1
+#   awayTeamIndex 17
+    sequence(:homeTeamIndex, (1..16).cycle) { |n| n }
+    sequence(:awayTeamIndex, (17..32).cycle) { |n| n }
     game_date Time.zone.now + 10.minutes
     week
   end
@@ -140,8 +142,9 @@ FactoryGirl.define  do
         home_games = (1..16).sort_by{rand}
         away_games = (17..32).sort_by{rand}
         1.upto(evaluator.num_games) do |n|
-          create(:game, week: week, homeTeamIndex: home_games[n-1],
-                                    awayTeamIndex: away_games[n-1])
+          create(:game, week: week)
+#         create(:game, week: week, homeTeamIndex: home_games[n-1],
+#                                   awayTeamIndex: away_games[n-1])
         end
       end
     end
