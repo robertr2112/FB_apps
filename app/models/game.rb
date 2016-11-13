@@ -45,7 +45,13 @@ class Game < ActiveRecord::Base
   # Determine if the game has already started
   def game_started?
     cur_time = Time.zone.now 
-    if cur_time > self.game_date
+    if cur_time.dst? 
+      game_date = self.game_date
+    else
+      game_date = self.game_date + 1.hour
+    end
+    
+    if cur_time > game_date
       return true
     end
     
