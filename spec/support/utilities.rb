@@ -68,7 +68,6 @@ module AuthenticationHelper
     
     num_entries = 0
     pool.entries.each do |entry|
-      entry.reload # make sure to get latest value from the database
 #puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatusIn: #{entry.survivorStatusIn}"
       if entry.survivorStatusIn then
         num_entries += 1

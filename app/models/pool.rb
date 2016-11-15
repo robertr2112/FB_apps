@@ -12,6 +12,7 @@
 #  password_digest :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  pool_done       :boolean          default(FALSE)
 #
 
 class Pool < ActiveRecord::Base
@@ -200,9 +201,11 @@ end
   # for each entry.  It is called after a week is marked final.
   def updateEntries(current_week)
     if self.typeSurvivor?
-      if !haveSurvivorWinner? || ((current_week.week_number == season.number_of_weeks) &&
-          current_week.checkStateFinal)
+      if !self.pool_done
+        # Update all entries survivorStatus
         updateSurvivor(current_week)
+        # Check to see if their is a winner and mark pool done if there is a winner
+        haveSurvivorWinner?
       end
     elsif self.typeSUP?
       updateSUP(current_week)
@@ -236,13 +239,16 @@ end
     current_week = self.getCurrentWeek
     entries = self.entries.where(survivorStatusIn: true)
     if entries.count == 0
-        return determineSurvivorWinners
+      self.update_attribute(:pool_done, true)
+      return determineSurvivorWinners
     else
       if ((current_week.week_number == season.number_of_weeks) &&
-          current_week.checkStateFinal)
-         return entries
+        current_week.checkStateFinal)
+        self.update_attribute(:pool_done, true)
+        return entries
       elsif (entries.count == 1 &&
-             (current_week.week_number > self.starting_week))
+             (current_week.week_number >= self.starting_week))
+        self.update_attribute(:pool_done, true)
         return entries
       end
     end
@@ -288,16 +294,23 @@ end
       season = Season.find(self.season_id)
       current_week = season.getCurrentWeek
       previous_week = Week.find_by_week_number(current_week.week_number - 1)
-      winners = Array.new
-      while winners.count == 0
-        self.entries.each do |entry|
-          picks = entry.picks.where(week_number: previous_week.week_number)
-          if !picks.empty?
-            winners << entry
+      if !previous_week
+        # If it's the first week then return all entries
+        winners = self.entries
+      else
+        # If it's not the first week then determine everyone who was left the previous
+        # week and return those entries
+        winners = Array.new
+        while winners.count == 0
+          self.entries.each do |entry|
+            picks = entry.picks.where(week_number: previous_week.week_number)
+            if !picks.empty?
+              winners << entry
+            end
           end
+          week_number = previous_week.week_number - 1
+          previous_week = Week.find_by_week_number(week_number)
         end
-        week_number = previous_week.week_number - 1
-        previous_week = Week.find_by_week_number(week_number)
       end
       return winners
     end
@@ -306,8 +319,11 @@ end
     # Updates the survivor status of each surviving entry in the pool
     #
     def updateSurvivor(current_week)
-      winning_teams = current_week.getWinningTeams
+      
       knocked_out_entries = Array.new
+      winning_teams = current_week.getWinningTeams
+      
+      # Go through all entries and find those who picked a losing team
       self.entries.each do |entry|
         if entry.survivorStatusIn
           found_team = false
@@ -331,7 +347,7 @@ end
       end
       
       #
-      # if knocked out, update survivor status
+      # if knocked out, update survivor status to false
       if knocked_out_entries
         knocked_out_entries.each do |entry|
           entry.update_attribute(:survivorStatusIn, false)
