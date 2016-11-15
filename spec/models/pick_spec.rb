@@ -77,7 +77,16 @@ describe Pick do
       it "should not allow the pick" do
         week = season.weeks[1]
         games = week.games
-        games[0].game_date = @games[0].game_date - 15.minutes
+        # Have a weird scenario, games are usually setup during DST so when DST ends
+        # the games have the wrong time by 1 hour. They don't automatically adjust. SO,
+        # the code adds an hour when not DST to keep it at the same time.  Have to also
+        # handle that in the test.
+        # !!!! Really need to find a more elegant solution to manage this!
+        if Time.zone.now.dst?
+          games[0].game_date = @games[0].game_date - 15.minutes
+        else
+          games[0].game_date = @games[0].game_date - 75.minutes
+        end
         games[0].save
         new_pick = @entry.picks.build(week_id: week.id, week_number: week.week_number)
         new_game_pick = new_pick.game_picks.build(chosenTeamIndex: games[0].homeTeamIndex)

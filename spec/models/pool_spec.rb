@@ -676,7 +676,7 @@ end
       describe "in the first week of pool" do
         describe "when one user remains" do
           it "should show that user as winner" do
-            winning_entry = @pool.entries[4]
+            winning_entry = @pool.entries.where(user_id: @users[0].id)[0]
             week = season.getCurrentWeek
             users_pick_winning_team(week, @pool, @users, 1)
             week.setState(Week::STATES[:Final])
