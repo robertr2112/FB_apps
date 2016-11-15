@@ -207,35 +207,34 @@ describe Pool do
   # Survivor pool tests
   #
   describe "of type survivor" do
-    describe "running updateEntries" do
-      let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
-      before {
-        # add scores for all games and all weeks in the season, where all home teams win (for simplicity)
-        # for each week, but leave current week as 1 and don't mark any weeks as final
-        add_season_games_scores(season)
+    let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
+    before {
+      # add scores for all games and all weeks in the season, where all home teams win (for simplicity)
+      # for each week, but leave current week as 1 and don't mark any weeks as final
+      add_season_games_scores(season)
       
-        # create pool with 5 users and 1 entry per user
-        @users = setup_pool_with_users_and_entries(season, 5, 1)
-  puts "@users.count: #{@users.count}"
-        @pool = @users[0].pools.first
-      }
+      # create pool with 5 users and 1 entry per user
+      @users = setup_pool_with_users_and_entries(season, 5, 1)
+      @pool = @users[0].pools.first
+    }
         
+    describe "running updateEntries" do
+      #
+      # First week cases
+      #
       describe "after first week marked final" do
+        #
+        # picked wrong team cases
+        #
         describe "shows x remaining entries where x = entries_left - entries_who_picked_wrong_team" do
           it "should show 4 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 1" do
             # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
             # team
             week = season.weeks.order(:week_number)[0]
             users_pick_winning_team(week, @pool, @users, 4)
-  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
-  1.upto(5) do |n|
-    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
-    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
-  end
             week.setState(Week::STATES[:Final])
             @pool.updateEntries(season.getCurrentWeek)
             expect(numberRemainingSurvivorEntries(@pool)).to eq 4
-                   
           end
           
           it "should show 3 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 2" do
@@ -243,14 +242,9 @@ describe Pool do
             # team
             week = season.weeks.order(:week_number)[0]
             users_pick_winning_team(week, @pool, @users, 3)
-  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
-  1.upto(5) do |n|
-    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
-    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
-  end
             week.setState(Week::STATES[:Final])
             @pool.updateEntries(season.getCurrentWeek)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 3
           end
           
           it "should show 2 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 3" do
@@ -258,14 +252,9 @@ describe Pool do
             # team
             week = season.weeks.order(:week_number)[0]
             users_pick_winning_team(week, @pool, @users, 2)
-  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
-  1.upto(5) do |n|
-    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
-    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
-  end
             week.setState(Week::STATES[:Final])
             @pool.updateEntries(season.getCurrentWeek)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 2
           end
           
           it "should show 1 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 4" do
@@ -273,14 +262,9 @@ describe Pool do
             # team
             week = season.weeks.order(:week_number)[0]
             users_pick_winning_team(week, @pool, @users, 1)
-  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
-  1.upto(5) do |n|
-    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
-    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
-  end
             week.setState(Week::STATES[:Final])
             @pool.updateEntries(season.getCurrentWeek)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 1
           end
           
           it "should show 0 remaining entries if all picked wrong team" do
@@ -288,55 +272,546 @@ describe Pool do
             # team
             week = season.weeks.order(:week_number)[0]
             users_pick_winning_team(week, @pool, @users, 0)
-  puts "@pool.entries[0].picks.count: #{@pool.entries[0].picks.count}" 
-  1.upto(5) do |n|
-    puts "entry[#{n-1}].user_id: #{@pool.entries[n-1].user_id}"
-    puts "entry[#{n-1}].chosenTeamIndex: #{@pool.entries[n-1].picks[0].game_picks[0].chosenTeamIndex}"
-  end
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
           end
+        end # Picked wrong team
+        
+        #
+        # Forgot to pick cases
+        #
+        describe "shows x remaining entries where x = entries_left - entries_who_forgot_to_pick" do
+          it "should show 4 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 1" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            week = season.weeks.order(:week_number)[0]
+            new_users = @users
+            new_users.shift
+            users_pick_winning_team(week, @pool, new_users, 4)
             week.setState(Week::STATES[:Final])
             @pool.updateEntries(season.getCurrentWeek)
             expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+          end
+          
+          it "should show 3 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 2" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            week = season.weeks.order(:week_number)[0]
+            new_users = @users
+            2.times do
+              new_users.shift
+            end
+            users_pick_winning_team(week, @pool, new_users, 3)
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 3
+          end
+          
+          it "should show 2 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 3" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            week = season.weeks.order(:week_number)[0]
+            new_users = @users
+            3.times do
+              new_users.shift
+            end
+            users_pick_winning_team(week, @pool, new_users, 2)
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 2
+          end
+          
+          it "should show 1 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 4" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            week = season.weeks.order(:week_number)[0]
+            new_users = @users
+            4.times do
+              new_users.shift
+            end
+            users_pick_winning_team(week, @pool, new_users, 1)
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 1
+          end 
+          
+          it "should show 0 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 5" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            week = season.weeks.order(:week_number)[0]
+            # Don't call users_pick_winning_team for this case, shows them as all forgot to pick
+            week.setState(Week::STATES[:Final])
+            @pool.updateEntries(season.getCurrentWeek)
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+          end 
+        end # Forgot to pick
+      end # after first week marked final
+      
+      #
+      # Last week cases (updateEntries is called through season.updatePools, this allows the season to
+      #                  update the current_week properly. This is done instead of rebuilding all the mock
+      #                  data with different current weeks set in pool.) !!!! May change this later.
+      #
+      describe "after final week marked final" do
+        #
+        # Picked wrong team cases
+        #
+        describe "shows x remaining entries where x = 5 entries_left - entries_who_picked_wrong_team" do
+          it "should show 4 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 1" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 4)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+                   
+          end
+          it "should show 3 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 2" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 3)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 3
+          end
+          
+          it "should show 2 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 3" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 2)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 2
+          end
+          
+          it "should show 1 remaining entries when entries_left = 5 and entries_who_picked_wrong_team = 4" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 1)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 1
+          end
+          
+          it "should show 0 remaining entries if all picked wrong team" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
+            # team
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 0)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+          end
+        end # Picked wrong team
+        
+        #
+        # Forgot to pick cases (last week)
+        #
+        describe "shows x remaining entries where x = 5 entries_left - entries_who_forgot_to_pick" do
+          it "should show 4 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 1" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            new_users = @users
+            new_users.shift
+            users_pick_winning_team(week, @pool, new_users, 4)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+          end
+          
+          it "should show 3 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 2" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            new_users = @users
+            2.times do
+              new_users.shift
+            end
+            users_pick_winning_team(week, @pool, new_users, 3)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 3
+          end
+          
+          it "should show 2 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 3" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            new_users = @users
+            3.times do
+              new_users.shift
+            end
+            users_pick_winning_team(week, @pool, new_users, 2)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 2
+          end
+          
+          it "should show 1 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 4" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            new_users = @users
+            4.times do
+              new_users.shift
+            end
+            users_pick_winning_team(week, @pool, new_users, 1)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 1
+          end 
+          
+          it "should show 0 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 5" do
+            # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
+            # pick
+            
+            # week 1
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools 
+            
+            # week 2
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 5)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            # week 3 (final)
+            week = season.getCurrentWeek
+            # Don't call users_pick_winning_team for this case, shows them as all forgot to pick
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+          end 
+        end # Forgot to pick
+      end # Final week marked final
+    end  # running season.updatePools
+      
+    describe "getSurvivorWinner" do
+      describe "two weeks after got down to one remaining entry" do
+        it "should show 1 remaining entry" do
+           
+          # Down to 1 winner
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 1)
+          week.setState(Week::STATES[:Final])
+puts "calling updatePools..."
+          season.updatePools
+@pool.entries.each do |entry|
+  puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatus: #{entry.survivorStatusIn}"
+end
+            
+         # week 2
+          week = season.getCurrentWeek
+          week.setState(Week::STATES[:Final])
+puts "calling updatePools..."
+          season.updatePools
+@pool.entries.each do |entry|
+  puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatus: #{entry.survivorStatusIn}"
+end
+            
+         # week 3
+          week = season.getCurrentWeek
+          week.setState(Week::STATES[:Final])
+puts "calling updatePools..."
+          season.updatePools
+@pool.entries.each do |entry|
+  puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatus: #{entry.survivorStatusIn}"
+end
+          winning_entries = @pool.getSurvivorWinner
+puts "after call getSurvivorWinner... entries.count: #{winning_entries.count}"
+winning_entries.each do |entry|
+  entry.reload
+  puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatus: #{entry.survivorStatusIn}"
+end
+            
+          expect(winning_entries.count).to eq 1
+            
+        end
+      end
+      
+      describe "in the first week of pool" do
+        describe "when one user remains" do
+          it "should show that user as winner" do
+            winning_entry = @pool.entries[4]
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 1)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            winning_entries = @pool.getSurvivorWinner
+              
+            expect(winning_entries.first.id).to eq winning_entry.id
+          end
         end
         
-        describe "shows x remaining entries where x = entries_left - entries_who_forgot_to_pick" do
-          it "should show 4 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 1"
+        describe "when more than one user remains" do
+          it "should show no winners" do
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 3)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            winning_entries = @pool.getSurvivorWinner
+              
+            expect(winning_entries).to be false 
+          end
         end
-      end
-      
-      describe "after final week marked final" do
-        describe "shows x remaining entries where x = 5 entries_left - entries_who_picked_wrong_team" do
-          it "should show 4 remaining entries when entries_who_picked_wrong_team = 1"
-          it "should show 3 remaining entries when entries_who_picked_wrong_team = 2"
-          it "should show 2 remaining entries when entries_who_picked_wrong_team = 3"
-          it "should show 1 remaining entriy  when entries_who_picked_wrong_team = 4"
-          it "should show 0 remaining entries if all picked wrong team"
+        
+        describe "when all 5 entries are knocked out of pool" do
+          it "should show 5 remaining entries from previous week as winners" do
+            # Down to 1 winner
+            week = season.getCurrentWeek
+            users_pick_winning_team(week, @pool, @users, 0)
+            week.setState(Week::STATES[:Final])
+            season.updatePools
+            winning_entries = @pool.getSurvivorWinner
+            
+            expect(winning_entries.count).to eq 5
+          end
         end
-        describe "shows x remaining entries where x = 5 entries_left - entries_who_forgot_to_pick" do
-          it "should show 4 remaining entries when entries_who_forgot_to_pick = 1"
-        end
-      end
-      
-      describe "two weeks after got down to one remaining entry" do
-          it "should show 1 remaining entriy"
-      end
-    end
-    
-    describe "getSurvivorWinner" do
-      describe "when all entries are knocked out of pool" do
-        it "should show all remaining entries from previous week as winners"
       end
       
       describe "when current_week == season.number_of_weeks and is final" do
-        it "should show all remaining entries as winners"
+        it "should show 4 remaining entries as winners when 4 are still in pool" do
+          # Down to 4 entries
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 5)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 2
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 5)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 3
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 4)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+          winning_entries = @pool.getSurvivorWinner
+            
+          expect(winning_entries.count).to eq 4
+
+        end
+        
+        it "should show 3 remaining entries as winners when 3 are still in pool" do
+          # Down to 3 entries
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 3)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 2
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 3)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 3
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 3)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+          winning_entries = @pool.getSurvivorWinner
+            
+          expect(winning_entries.count).to eq 3
+
+        end
+        
+        it "should show 2 remaining entries as winners when 2 are still in pool" do
+          # Down to 2 entries
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 2)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 2
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 2)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 3
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 2)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+          winning_entries = @pool.getSurvivorWinner
+            
+          expect(winning_entries.count).to eq 2
+
+        end
+        
+        it "should show 1 remaining entries as winners when 1 are still in pool" do
+          # Down to 1 entries
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 1)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 2
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 1)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+            
+          # week 3
+          week = season.getCurrentWeek
+          users_pick_winning_team(week, @pool, @users, 1)
+          week.setState(Week::STATES[:Final])
+          season.updatePools
+          winning_entries = @pool.getSurvivorWinner
+            
+          expect(winning_entries.count).to eq 1
+
+        end
       end
       
-      describe "when one user remains" do
-        it "should show that user as winner"
-        it "should not show a winner when the pool.starting_week is not final"
-        
-      end
-    end
-  end
+    end # getSurvivorWinner
+  end # of type Survivor
   
 end

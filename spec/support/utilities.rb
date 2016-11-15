@@ -20,12 +20,13 @@ module AuthenticationHelper
   # for each week, but leave current week as 1 and don't mark any weeks as final
   def add_season_games_scores(season)
     season.weeks.each do |week|
-      puts "week number: #{week.week_number}"
+#puts "week number: #{week.week_number}"
       week.games.each do |game|
         game.homeTeamScore = rand(18...42)
         game.awayTeamScore = rand(0...17)
-        puts "game.id: #{game.id}, homeTeamScore: #{game.homeTeamScore}, awayTeamScore: #{game.awayTeamScore}"
-        puts "homeTeam: #{game.homeTeamIndex}, awayTeam: #{game.awayTeamIndex}"
+        game.save
+#puts "game.id: #{game.id}, homeTeamScore: #{game.homeTeamScore}, awayTeamScore: #{game.awayTeamScore}"
+#puts "homeTeam: #{game.homeTeamIndex}, awayTeam: #{game.awayTeamIndex}"
       end
     end
   end
@@ -53,8 +54,12 @@ module AuthenticationHelper
       else
         team_index = week.games[0].awayTeamIndex
       end
-      pick = FactoryGirl.create(:pick_with_game_pick, entry: entry,  week_id: week.id, 
-                                 week_number: week.week_number, teamIndex: team_index)
+      
+      new_pick = entry.picks.build(week_id: week.id, week_number: week.week_number)
+      new_game_pick = new_pick.game_picks.build(chosenTeamIndex: team_index)
+      new_game_pick.save
+      new_pick.save
+      
       user_count += 1
     end
   end
@@ -63,12 +68,13 @@ module AuthenticationHelper
     
     num_entries = 0
     pool.entries.each do |entry|
-      puts "entry.id: #{entry.id}, survivorStatusIn: #{entry.survivorStatusIn}"
+      entry.reload # make sure to get latest value from the database
+#puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatusIn: #{entry.survivorStatusIn}"
       if entry.survivorStatusIn then
         num_entries += 1
       end
     end
-    puts "num_entries: #{num_entries}"
+#puts "num_entries: #{num_entries}"
     return num_entries
   end
  

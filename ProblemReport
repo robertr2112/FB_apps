@@ -9,41 +9,32 @@ PROBLEMS
    to either figure out how to use the rescue_from function or rewrite code to
    use find_by_id() and check for NULL fields.
 
-3) Fix main page header and footer to be FB_app specific.(DONE!)
-
-4) Add a pool/new link somewhere on main page.
-
-5) Update Week/Game models to validate the parent Id's are present.
-
-6) Change the tests for testing parent Id is set properly using the its
-   method as shown in chapter 10.
-
-7) Change the confirm and password_reset emails to not send the encrypted token.
+3) Change the confirm and password_reset emails to not send the encrypted token.
    Instead send the unencrypted token and convert it in the code.
 
-8) Add all of the testing needed to test the password_reset, remember_me, and
+4) Add a admin page to add additional admin users
+
+5) GamePick model contains unnecessary attribute game_pick_id
+
+6) Need to change the routine name in Pick model from buildSelectTeams to buildAvailTeams.
+
+TESTING ISSUES
+--------------
+1) Need to test for case of pool not updating before starting_week is final
+
+2) Add all of the testing needed to test the password_reset, remember_me, and
    user_confirmations.
 
-9) Add a admin page to add additional admin users
-
-10) GamePick model contains unnecessary attribute game_pick_id
-
-11) Need to change the routine name in Pick model from buildSelectTeams to buildAvailTeams.
+3) Change the tests for testing parent Id is set properly using the its
+   method as shown in chapter 10.
 
 
 DESIGN CHANGES
 --------------
 
-1) Update models to make WEEK model global (Need to add details)
+1) Move the choose pick drop down box to before list of games
 
-2) Add Year using year = Time.now.strftime("%Y")
-
-3) Move the choose pick drop down box to before list of games
-
-4) Add a date_time stamp for game starts and also check it for picks to allow games to
-   be skipped and still choose later games.
-
-5) Change default behaviour for forgetting to pick to pick home team from last game.
+2) Change default behaviour for forgetting to pick to pick home team from last game.
 
 
 GENERAL ISSUES
