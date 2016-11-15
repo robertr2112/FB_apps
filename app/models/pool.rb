@@ -348,6 +348,7 @@ end
       
       #
       # if knocked out, update survivor status to false
+      #
       if knocked_out_entries
         knocked_out_entries.each do |entry|
           entry.update_attribute(:survivorStatusIn, false)
