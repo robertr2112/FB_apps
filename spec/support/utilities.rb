@@ -20,13 +20,10 @@ module AuthenticationHelper
   # for each week, but leave current week as 1 and don't mark any weeks as final
   def add_season_games_scores(season)
     season.weeks.each do |week|
-#puts "week number: #{week.week_number}"
       week.games.each do |game|
         game.homeTeamScore = rand(18...42)
         game.awayTeamScore = rand(0...17)
         game.save
-#puts "game.id: #{game.id}, homeTeamScore: #{game.homeTeamScore}, awayTeamScore: #{game.awayTeamScore}"
-#puts "homeTeam: #{game.homeTeamIndex}, awayTeam: #{game.awayTeamIndex}"
       end
     end
   end
@@ -43,6 +40,36 @@ module AuthenticationHelper
     return users
   end
  
+  #
+  # This routine is used to make specified picks/forgot to picks for a given week, and
+  # then finalize the week and update the pool with the results.  It takes a number of 
+  # arguments:
+  #             season          - This is the current season under test
+  #             pool            - The pool under test
+  #             users           - Array of users in the pool
+  #             numUsersCorrect - The number of users to pick correctly for this week
+  #             numUsersForgot  - The number of users to have forget to pick for this week
+  #
+  def pool_update_survivor_users(season, pool, users, numUsersCorrect, numUsersForgot)
+    
+    week = season.getCurrentWeek
+    new_users = users
+    numUsersForgot.times do
+      new_users.shift
+    end
+    users_pick_winning_team(week, pool, new_users, numUsersCorrect)
+    week.setState(Week::STATES[:Final])
+    
+    # Call season.updatePools instead of directly calling pool.updateEntries directly so
+    # we can share code with the tests that are testing out multiple week behavior.  This 
+    # routine just calls pool.updateEntries and updates the current week of the season.  We
+    # could do that separately in test code but it seems uncessary.
+    #
+    season.updatePools
+    pool.reload
+            
+  end
+  
   # Have num_users number of users pick the winning home team and the rest pick the away team
   def users_pick_winning_team(week, pool, users, num_users)
     
@@ -68,12 +95,10 @@ module AuthenticationHelper
     
     num_entries = 0
     pool.entries.each do |entry|
-#puts "entry: #{entry}, entry.id: #{entry.id}, survivorStatusIn: #{entry.survivorStatusIn}"
       if entry.survivorStatusIn then
         num_entries += 1
       end
     end
-#puts "num_entries: #{num_entries}"
     return num_entries
   end
  
