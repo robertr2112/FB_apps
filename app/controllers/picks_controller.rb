@@ -39,13 +39,19 @@ class PicksController < ApplicationController
 
   def edit
     @pick = Pick.find(params[:id])
-    @week = Week.find(@pick.week_id)
-    @entry = Entry.find(@pick.entry_id)
-    @pool = Pool.find(@entry.pool_id)
-    if !@week.checkStateOpen
-      flash[:success] =
-          "You cannot edit your pick(s) for Week '#{@week.week_number}'. The week is closed!"
-      redirect_to @pool
+    if @pick.pickLocked?
+      flash[:error] = 
+        "This pick cannot be changed. The game has already started!"
+        redirect_to @pool
+    else
+      @week = Week.find(@pick.week_id)
+      @entry = Entry.find(@pick.entry_id)
+      @pool = Pool.find(@entry.pool_id)
+      if !@week.checkStateOpen
+        flash[:success] =
+            "You cannot edit your pick(s) for Week '#{@week.week_number}'. The week is closed!"
+        redirect_to @pool
+      end
     end
   end
 

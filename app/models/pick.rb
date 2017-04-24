@@ -21,7 +21,30 @@ class Pick < ActiveRecord::Base
   validate :pickValid?
 
 
+  # Used before a pick can be modified. It checks to see if the currently picked 
+  # team's game has started. If it has already started then the current pick cannot be modified.
+  # This is done to prevent someone from picking a different team AFTER the picked team's game is
+  # over.  This is necessary in leagues that don't lock the league but use game start times to 
+  # determine when a user can make their pick.  
+  #
+  #  CALLED FROM: Picks_controller.c
+  #
+  def pickLocked?
+    current_game_pick = self.game_picks.first
+    week = Week.find(self.week_id)
+      
+    game = week.find_game(current_game_pick .chosenTeamIndex)
+    if game.game_started?
+        return true
+    else
+       return false
+    end
+  end
+  
   # prevents user from repicking a team in a survivor pool
+  #
+  # CALLED FROM: ActiveRecord validate
+  #
   def pickValid?
     
     # Verify this team hasn't already been picked in this pool
@@ -54,6 +77,9 @@ class Pick < ActiveRecord::Base
   end
 
   # Build list of available teams to choose for a survivor pool
+  #
+  # CALLED FROM: Edit & New views for Picks
+  #
   def buildSelectTeams(week)
     # Get all available teams for the current week
     all_teams = week.buildSelectTeams

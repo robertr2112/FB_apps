@@ -42,6 +42,7 @@ describe Pick do
   it { should respond_to(:entry_id) }
   it { should respond_to(:week_number) }
   it { should respond_to(:totalScore) }
+  it { should respond_to(:pickLocked?) }
   it { should respond_to(:pickValid?) }
   it { should respond_to(:buildSelectTeams) }
   
@@ -94,6 +95,29 @@ describe Pick do
         expect do
           new_pick.save
         end.not_to change(Pick, :count)
+      end
+      
+      it "should not allow the pick to be changed" do
+        week = season.weeks[1]
+        games = week.games
+        
+        # Make initial pick while time is before start
+        games[0].save
+        new_pick = @entry.picks.build(week_id: week.id, week_number: week.week_number)
+        new_game_pick = new_pick.game_picks.build(chosenTeamIndex: games[0].homeTeamIndex)
+        new_game_pick.save
+        new_pick.save
+        
+        # update game start time
+        if Time.zone.now.dst?
+          games[0].game_date = @games[0].game_date - 15.minutes
+        else
+          games[0].game_date = @games[0].game_date - 75.minutes
+        end
+        games[0].save
+        
+        # pick.pickLocked? should show the pick as locked and not able to be updated.
+        expect(new_pick.pickLocked?).to eq true
       end
     end
   end
