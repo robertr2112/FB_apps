@@ -1,6 +1,7 @@
 FBApps::Application.routes.draw do
   get "password_resets/new"
   resources :users
+  resources :teams, only: [:edit, :update, :index, :show]
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets
 
