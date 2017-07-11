@@ -64,3 +64,19 @@ class PoolMembership < ActiveRecord::Base
   attr_accessible :owner
 end
 
+
+PickEm Design Notes
+-------------------
+Convert the spread to a floating number 
+      <spread = "3.5".to_f>
+Convert even spreads (ie. 3 vs 3.5) spreads to an integer
+      <spread.to_i if (spread % 1) == 0>
+Check to see if spread is a half point or full point (Integer vs Float)
+      <spread.kind_of? Float>
+Check if spread is negative or positive
+      <if spread < 0> Negative
+      <if spread > 0> Positive
+Convert negative number to positive
+      <spread.abs>
+Convert number to string
+      <spread.to_s>
