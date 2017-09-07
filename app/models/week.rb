@@ -78,7 +78,7 @@ class Week < ActiveRecord::Base
       away_team       = Team.where('name LIKE ?', away_team_name).first
       # Create the time string
       if nfl_game[:date] && nfl_game[:time]
-        game_date_time = DateTime.parse(nfl_game[:date] + " ,2016 " + nfl_game[:time] + " EDT")
+        game_date_time = DateTime.parse(nfl_game[:date] + " ,2017 " + nfl_game[:time] + " EDT")
       else
         game_date_time = nil
       end
