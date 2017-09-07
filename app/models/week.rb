@@ -253,9 +253,8 @@ class Week < ActiveRecord::Base
     end
     
     away_teams.count.times do |gameNum|
-      # Add the information to the games array (add 1 to index for date and time because the 
-      # first game is added twice on the NFL site.
-      games[gameNum] = {:date => start_dates[gameNum+1], :time => start_times[gameNum+1], 
+      # Add the information to the games array 
+      games[gameNum] = {:date => start_dates[gameNum], :time => start_times[gameNum], 
                    :away_team => away_teams[gameNum], :home_team => home_teams[gameNum]}
     end
     
