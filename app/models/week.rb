@@ -78,7 +78,7 @@ class Week < ActiveRecord::Base
       away_team       = Team.where('name LIKE ?', away_team_name).first
       # Create the time string
       if nfl_game[:date] && nfl_game[:time]
-        game_date_time = DateTime.parse(nfl_game[:date] + " ,2017 " + nfl_game[:time] + " EDT")
+        game_date_time = DateTime.parse(nfl_game[:date] + " ," + Season.getSeasonYear + " " + nfl_game[:time] + " EDT")
       else
         game_date_time = nil
       end
@@ -210,7 +210,7 @@ class Week < ActiveRecord::Base
   def get_nfl_sched(weekNum)
   
     # Open the schedule home page
-    url_path = "http://www.nfl.com/schedules/2017/REG" + weekNum.to_s
+    url_path = "http://www.nfl.com/schedules/" + Season.getSeasonYear + "/REG" + weekNum.to_s
     doc = Nokogiri::HTML(open(url_path))
                        
     # Get games information
@@ -234,7 +234,8 @@ class Week < ActiveRecord::Base
     away_team_names = doc.css('span.team-name.away')
     home_team_names = doc.css('span.team-name.home')
   
-    # Remove duplicate game from list (quirk of NFL.com)
+    # Remove duplicate game from list (quirk of NFL.com) 
+    # NOTE: They fixed this in 2017
 #    start_dates_list.shift
 #    start_times_list.shift
 #    away_team_names.shift
@@ -254,6 +255,8 @@ class Week < ActiveRecord::Base
     
     away_teams.count.times do |gameNum|
       # Add the information to the games array 
+      # NOTE: Prior to 2017 the first game was listed twice, if this appears again just
+      #       add a +1 to gameNum for start_dates and start_times indices.
       games[gameNum] = {:date => start_dates[gameNum], :time => start_times[gameNum], 
                    :away_team => away_teams[gameNum], :home_team => home_teams[gameNum]}
     end
@@ -266,7 +269,7 @@ class Week < ActiveRecord::Base
   def get_nfl_scores(weekNum)
   
     # Open the schedule home page
-    url_path = "http://www.nfl.com/schedules/2016/REG" + weekNum.to_s
+    url_path = "http://www.nfl.com/schedules/" + Season.getSeasonYear + "/REG" + weekNum.to_s
     doc = Nokogiri::HTML(open(url_path))
                        
     # Get games information
