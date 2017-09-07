@@ -210,7 +210,7 @@ class Week < ActiveRecord::Base
   def get_nfl_sched(weekNum)
   
     # Open the schedule home page
-    url_path = "http://www.nfl.com/schedules/2016/REG" + weekNum.to_s
+    url_path = "http://www.nfl.com/schedules/2017/REG" + weekNum.to_s
     doc = Nokogiri::HTML(open(url_path))
                        
     # Get games information
@@ -235,10 +235,10 @@ class Week < ActiveRecord::Base
     home_team_names = doc.css('span.team-name.home')
   
     # Remove duplicate game from list (quirk of NFL.com)
-    start_dates_list.shift
-    start_times_list.shift
-    away_team_names.shift
-    home_team_names.shift
+#    start_dates_list.shift
+#    start_times_list.shift
+#    away_team_names.shift
+#    home_team_names.shift
     
     # strip off the everything but the team ID
     away_teams = Array.new
