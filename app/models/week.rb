@@ -255,7 +255,7 @@ class Week < ActiveRecord::Base
     
     away_teams.count.times do |gameNum|
       # Add the information to the games array 
-      # NOTE: Prior to 2017 the first game was listed twice, if this appears again just
+      # NOTE: Prior to 2017 the first game was listed twice, if this happens again just
       #       add a +1 to gameNum for start_dates and start_times indices.
       games[gameNum] = {:date => start_dates[gameNum], :time => start_times[gameNum], 
                    :away_team => away_teams[gameNum], :home_team => home_teams[gameNum]}

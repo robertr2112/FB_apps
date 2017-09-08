@@ -202,6 +202,7 @@ end
   def updateEntries(current_week)
     if self.typeSurvivor?
       if !self.pool_done
+        
         # Update all entries survivorStatus
         updateSurvivor(current_week)
         # Check to see if their is a winner and mark pool done if there is a winner
@@ -238,7 +239,9 @@ end
     season = Season.find(self.season_id)
     current_week = self.getCurrentWeek
     entries = self.entries.where(survivorStatusIn: true)
-    if entries.count == 0
+    if self.pool_done
+      return entries
+    elsif entries.count == 0
       self.update_attribute(:pool_done, true)
       return determineSurvivorWinners
     else
@@ -247,7 +250,7 @@ end
         self.update_attribute(:pool_done, true)
         return entries
       elsif (entries.count == 1 &&
-             (current_week.week_number >= self.starting_week))
+             (current_week.week_number > self.starting_week))
         self.update_attribute(:pool_done, true)
         return entries
       end
