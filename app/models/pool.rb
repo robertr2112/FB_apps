@@ -248,7 +248,7 @@ end
         self.update_attribute(:pool_done, true)
         return entries
       elsif (entries.count == 1 &&
-             (current_week.week_number >= self.starting_week))
+             (current_week.week_number > self.starting_week))
         self.update_attribute(:pool_done, true)
         return entries
       end
