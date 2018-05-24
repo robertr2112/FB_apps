@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.2.5'
 #ruby-gemset=Rails_fb
 
 gem 'rails','4.2.5'
@@ -28,7 +28,7 @@ gem 'nokogiri'
 gem 'email_validator'
 
 # Database.  Using the same database for production/development
-gem 'pg'
+gem 'pg', '~> 0.18'
 
 group :development, :test do
   gem 'rspec-rails', '~>3.0'

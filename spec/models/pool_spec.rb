@@ -477,15 +477,23 @@ describe Pool do
       describe "two weeks after got down to one remaining entry" do
         it "should show 1 remaining entry" do
           # Down to 1 winner
+puts "pool_spec: before 1st pool_update_survivor_users"
           pool_update_survivor_users(season, @pool, @users, 1, 0)
+puts "pool_spec: after 1st pool_update_survivor_users"
             
          # week 2
+puts "pool_spec: before 2nd pool_update_survivor_users"
           pool_update_survivor_users(season, @pool, @users, 0, 0)
+puts "pool_spec: after 2nd pool_update_survivor_users"
             
          # week 3
+puts "pool_spec: before 3rd pool_update_survivor_users"
           pool_update_survivor_users(season, @pool, @users, 0, 0)
+puts "pool_spec: after 3rd pool_update_survivor_users"
             
+puts "pool_spec: before getSurvivorWinner"
           winning_entries = @pool.getSurvivorWinner
+puts "pool_spec: after getSurvivorWinner"
           expect(winning_entries.count).to eq 1
             
         end

@@ -95,26 +95,42 @@ describe Season do
   end
   
   describe "updatePools" do
-    before (:each) do
-      @current_week = season.current_week
-    end
+    let(:season3) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
     
+    before {
+      # add scores for all games and all weeks in the season, where all home teams win (for simplicity)
+      # for each week, but leave current week as 1 and don't mark any weeks as final
+      add_season_games_scores(season3)
+      
+      # create pool with 5 users and 1 entry per user
+      @users = setup_pool_with_users_and_entries(season3, 5, 1)
+      @pool = @users[0].pools.first
+      @current_week = season3.current_week
+    }
+        
     it "should update the current_week by one" do
-      season.updatePools
-      expect(season.current_week).to eq (@current_week + 1)
+      season3.updatePools
+      expect(season3.current_week).to eq (@current_week + 1)
     end
+    
     it "should not update the week if current_week == season.number_of_weeks" do
-      season.current_week = season.number_of_weeks
-      season.updatePools
-      expect(season.current_week).to eq season.number_of_weeks
-      
+      season3.current_week = season3.number_of_weeks
+      season3.updatePools
+      expect(season3.current_week).to eq season3.number_of_weeks
     end
     
-    it "should call pool.updateEntries"
-      #week = season.weeks.find_by_week_number(season.current_week)
+    it "should call pool.updateEntries" do
+      pool_update_survivor_users(season3, @pool, @users, 4, 0)
+      expect(numberRemainingSurvivorEntries(@pool)).to eq 4
+    end
       
     
-    it "should not call pool.updateEntries when current_week < pool.starting_week"
+    it "should not call pool.updateEntries when current_week < pool.starting_week" do
+      @pool.starting_week = 2
+      @pool.save
+      pool_update_survivor_users(season3, @pool, @users, 4, 0)
+      expect(numberRemainingSurvivorEntries(@pool)).to eq 5
+    end
     
   end
   
