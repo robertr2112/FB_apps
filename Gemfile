@@ -28,7 +28,7 @@ gem 'nokogiri'
 gem 'email_validator'
 
 # Database.  Using the same database for production/development
-gem 'pg', '~> 0.18'
+gem 'pg', '0.20'
 
 group :development, :test do
   gem 'rspec-rails', '~>3.0'

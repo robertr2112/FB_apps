@@ -32,12 +32,19 @@ TESTING ISSUES
 DESIGN CHANGES
 --------------
 
-1) Move the choose pick drop down box to before list of games
+1) Change default behaviour for forgetting to pick to pick home team from last game.
 
-2) Change default behaviour for forgetting to pick to pick home team from last game.
+2) Add flag to determine what to do with all users getting knocked out at same time 
+   during a non-last week.  Option A, they all win.  Option B, they all get reinstated
+   and pool goes on. 
 
 
 GENERAL ISSUES
 --------------
 
 1) Add testing to test out entire application
+2) Sass-rails is being deprecated.  Need to use sassc-rails instead.  See 
+   the following documentation:
+       http://sass.logdown.com/posts/7081811
+       https://github.com/sass/sassc-ruby#readme
+

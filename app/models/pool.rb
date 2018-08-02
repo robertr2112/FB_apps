@@ -239,20 +239,22 @@ end
     season = Season.find(self.season_id)
     current_week = self.getCurrentWeek
     entries = self.entries.where(survivorStatusIn: true)
-    if entries.count == 0
+    if self.pool_done
+      return entries
+    elsif entries.count == 0
       self.update_attribute(:pool_done, true)
       return determineSurvivorWinners
-    else
-      if ((current_week.week_number == season.number_of_weeks) &&
+    elsif ((current_week.week_number == season.number_of_weeks) &&
         current_week.checkStateFinal)
-        self.update_attribute(:pool_done, true)
-        return entries
-      elsif (entries.count == 1 &&
-             (current_week.week_number > self.starting_week))
-        self.update_attribute(:pool_done, true)
-        return entries
-      end
+      self.update_attribute(:pool_done, true)
+      return entries
+    elsif (entries.count == 1 &&
+             ((current_week.week_number >= self.starting_week) &&
+              current_week.checkStateFinal))
+      self.update_attribute(:pool_done, true)
+      return entries
     end
+    
     return false
   end
 
@@ -311,6 +313,15 @@ end
           end
           week_number = previous_week.week_number - 1
           previous_week = Week.find_by_week_number(week_number)
+        end
+      end
+      # Now that we have determined the survivor winners let's mark the
+      # SurvivorStatusIn back to true so getSurvivorWinner can return
+      # the correct winners without calling this routine again.
+      if winners
+        winners.each do |entry|
+          entry.update_attribute(:survivorStatusIn, true)
+          entry.save
         end
       end
       return winners

@@ -57,7 +57,6 @@ module AuthenticationHelper
     numUsersForgot.times do
       new_users.shift
     end
-puts "pool_update_survivor_users: pool.pool_done: #{pool.pool_done}"
     users_pick_winning_team(week, pool, new_users, numUsersCorrect) unless pool.pool_done
     week.setState(Week::STATES[:Final])
     

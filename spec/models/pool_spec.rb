@@ -256,11 +256,11 @@ describe Pool do
             expect(numberRemainingSurvivorEntries(@pool)).to eq 1
           end
           
-          it "should show 0 remaining entries if all picked wrong team" do
+          it "should show 5 remaining entries if all picked wrong team" do
             # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
             # team
             pool_update_survivor_users(season, @pool, @users, 0, 0)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 5
           end
         end # Picked wrong team
         
@@ -296,11 +296,11 @@ describe Pool do
             expect(numberRemainingSurvivorEntries(@pool)).to eq 1
           end 
           
-          it "should show 0 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 5" do
+          it "should show 5 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 5" do
             # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
             # pick
             pool_update_survivor_users(season, @pool, @users, 0, 5)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 5
           end 
         end # Forgot to pick
       end # after first week marked final
@@ -375,7 +375,7 @@ describe Pool do
             expect(numberRemainingSurvivorEntries(@pool)).to eq 1
           end
           
-          it "should show 0 remaining entries if all picked wrong team" do
+          it "should show 5 remaining entries if all picked wrong team" do
             # has <n> users pick homeTeam in first game which is always a winner, remainder pick losing away
             # team
             
@@ -387,7 +387,7 @@ describe Pool do
             
             # week 3 (final)
             pool_update_survivor_users(season, @pool, @users, 0, 0)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 5
           end
         end # Picked wrong team
         
@@ -455,7 +455,7 @@ describe Pool do
             expect(numberRemainingSurvivorEntries(@pool)).to eq 1
           end 
           
-          it "should show 0 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 5" do
+          it "should show 5 remaining entries when entries_left = 5 and entries_who_forgot_to_pick = 5" do
             # has <n> users pick homeTeam in first game which is always a winner, remainder forgot to  
             # pick
             
@@ -467,7 +467,7 @@ describe Pool do
             
             # week 3 (final)
             pool_update_survivor_users(season, @pool, @users, 0, 5)
-            expect(numberRemainingSurvivorEntries(@pool)).to eq 0
+            expect(numberRemainingSurvivorEntries(@pool)).to eq 5
           end 
         end # Forgot to pick
       end # Final week marked final
@@ -477,23 +477,15 @@ describe Pool do
       describe "two weeks after got down to one remaining entry" do
         it "should show 1 remaining entry" do
           # Down to 1 winner
-puts "pool_spec: before 1st pool_update_survivor_users"
           pool_update_survivor_users(season, @pool, @users, 1, 0)
-puts "pool_spec: after 1st pool_update_survivor_users"
             
          # week 2
-puts "pool_spec: before 2nd pool_update_survivor_users"
           pool_update_survivor_users(season, @pool, @users, 0, 0)
-puts "pool_spec: after 2nd pool_update_survivor_users"
             
          # week 3
-puts "pool_spec: before 3rd pool_update_survivor_users"
           pool_update_survivor_users(season, @pool, @users, 0, 0)
-puts "pool_spec: after 3rd pool_update_survivor_users"
             
-puts "pool_spec: before getSurvivorWinner"
           winning_entries = @pool.getSurvivorWinner
-puts "pool_spec: after getSurvivorWinner"
           expect(winning_entries.count).to eq 1
             
         end
