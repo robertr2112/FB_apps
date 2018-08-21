@@ -204,7 +204,7 @@ class Week < ActiveRecord::Base
   end
   
   private
-  
+ 
   # Parse the schedule for specified week from nfl.com. Returns
   # an array of game information(:date, :time, :away_team, :home_team)
   def get_nfl_sched(weekNum)
@@ -234,13 +234,6 @@ class Week < ActiveRecord::Base
     away_team_names = doc.css('span.team-name.away')
     home_team_names = doc.css('span.team-name.home')
   
-    # Remove duplicate game from list (quirk of NFL.com) 
-    # NOTE: They fixed this in 2017
-#    start_dates_list.shift
-#    start_times_list.shift
-#    away_team_names.shift
-#    home_team_names.shift
-    
     # strip off the everything but the team ID
     away_teams = Array.new
     away_team_names.count.times do |n|
@@ -253,10 +246,21 @@ class Week < ActiveRecord::Base
       home_teams << home_team_names[n].text
     end
     
+    # Remove duplicate game from list (quirk of NFL.com) 
+    # NOTE: Some years the first game is listed twice and other 
+    #       years it isn't, so added a check to see if the first two games are the same.
+    #       If they are then adjust the arrays to remove the first game.
+    if (away_teams[0] == away_teams[1]) &&
+       (home_teams[0] == home_teams[1])
+        
+      start_dates_list.shift
+      start_times_list.shift
+      away_teams.shift
+      home_teams.shift
+    end
+    
     away_teams.count.times do |gameNum|
       # Add the information to the games array 
-      # NOTE: Prior to 2017 the first game was listed twice, if this happens again just
-      #       add a +1 to gameNum for start_dates and start_times indices.
       games[gameNum] = {:date => start_dates[gameNum], :time => start_times[gameNum], 
                    :away_team => away_teams[gameNum], :home_team => home_teams[gameNum]}
     end
@@ -264,7 +268,7 @@ class Week < ActiveRecord::Base
     return games
     
   end
-  
+
   # Get the final scores for an NFL week
   def get_nfl_scores(weekNum)
   
