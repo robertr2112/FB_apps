@@ -39,7 +39,7 @@ group :development, :test do
   gem 'spork-rails'
   gem 'guard-spork'
   gem 'childprocess', '0.5.8'
-  gem 'letter_opener_web', '~>1.2.0'
+  gem 'letter_opener_web', '~>1.3.2'
 end
 
 group :test do

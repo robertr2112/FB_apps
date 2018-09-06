@@ -10,7 +10,8 @@
                            :role => "button" %>
           <% end %>
         <% else %>
-          <button class="btn btn-default btn-primary" href="#">Season 2014</button>
+          <%= link_to "Season #{season.year}", "#", :class => "btn btn-primary",
+                           :role => "button" %>
         <% end %>
         <%= link_to "Week:", "#", :class => "btn btn-primary",
                          :role => "button" %>
