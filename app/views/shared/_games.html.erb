@@ -6,16 +6,16 @@
           <% awayTeamWon = game.wonGame?(game.awayTeamIndex) %>
           <% if awayTeamWon && !(game.awayTeamScore == 0 && game.homeTeamScore == 0) %>
             <td class="awayTeamWon">
-              <b><%= team.name %></b>
-              <%= image_tag(asset_path(team.imagePath), size: "40") %>
+              <b><%= team.name.split(' ').last.upcase %></b>
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
             </td>
             <% if showScores %>
               <td class="awayScoreWon"><b><%= game.awayTeamScore %></b></td>
             <% end %>
           <% else %>
             <td class="awayTeamLost">
-              <%= team.name %>
-              <%= image_tag(asset_path(team.imagePath), size: "40") %>
+              <%= team.name.split(' ').last.upcase %>
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
             </td>
             <% if showScores %>
               <td class="awayScoreLost"><%= game.awayTeamScore %></td>
@@ -31,16 +31,16 @@
               <td class="homeScoreWon"><b><%= game.homeTeamScore %></b></td>
             <% end %>
             <td class="homeTeamWon">
-              <%= image_tag(asset_path(team.imagePath), size: "40") %>
-              <b><%= team.name %></b>
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
+              <b><%= team.name.split(' ').last.upcase %></b>
             </td>
           <% else %>
             <% if showScores %>
               <td class="homeScoreLost"><%= game.homeTeamScore %></td>
             <% end %>
             <td class="homeTeamLost">
-              <%= image_tag(asset_path(team.imagePath), size: "40") %>
-              <%= team.name %>
+              <%= image_tag(asset_path(team.imagePath), size: "40x30") %>
+              <%= team.name.split(' ').last.upcase %>
             </td>
           <% end %>
       </tr>

@@ -50,6 +50,10 @@ Team.create name: "Jacksonville Jaguars", nfl: 1,
                                   imagePath: "nfl_teams/afcs/jac.jpeg"
 Team.create name: "Kansas City Chiefs", nfl: 1,
                                   imagePath: "nfl_teams/afcw/kc.jpeg"
+Team.create name: "Los Angeles Chargers", nfl: 1,
+                                  imagePath: "nfl_teams/afcw/lac.jpeg"
+Team.create name: "Los Angeles Rams", nfl: 1,
+                                  imagePath: "nfl_teams/nfcw/lar.jpeg"
 Team.create name: "Minnesota Vikings", nfl: 1,
                                    imagePath: "nfl_teams/nfcn/min.jpeg"
 Team.create name: "Miami Dolphins", nfl: 1,
@@ -70,12 +74,8 @@ Team.create name: "Pittsburgh Steelers", nfl: 1,
                                   imagePath: "nfl_teams/afcn/pit.jpeg"
 Team.create name: "San Francisco 49ers", nfl: 1,
                                   imagePath: "nfl_teams/nfcw/sf.jpeg"
-Team.create name: "San Diego Chargers", nfl: 1,
-                                  imagePath: "nfl_teams/afcw/sd.jpeg"
 Team.create name: "Seattle Seahawks", nfl: 1,
                                   imagePath: "nfl_teams/nfcw/sea.jpeg"
-Team.create name: "Los Angeles Rams", nfl: 1,
-                                  imagePath: "nfl_teams/nfcw/stl.jpeg"
 Team.create name: "Tampa Bay Buccaneers", nfl: 1,
                                   imagePath: "nfl_teams/nfcs/tb.jpeg"
 Team.create name: "Tennessee Titans", nfl: 1,
