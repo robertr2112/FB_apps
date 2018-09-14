@@ -6,7 +6,7 @@
 }
 
 .awayScoreWon {
-  width: "15%";
+  width: "10%";
   text-align: right;
   font-size: 14px;
 }
@@ -18,7 +18,7 @@
 }
 
 .awayScoreLost {
-  width: "15%";
+  width: "10%";
   text-align: right;
   font-size: 14px;
 }
@@ -30,7 +30,7 @@
 }
 
 .homeScoreWon {
-  width: "15%";
+  width: "10%";
   text-align: left;
   font-size: 14px;
 }
@@ -42,7 +42,7 @@
 }
 
 .homeScoreLost {
-  width: "15%";
+  width: "10%";
   text-align: left;
   font-size: 14px;
 }
@@ -50,5 +50,18 @@
 .gameDescriptor {
   width: "20%";
   text-align: center;
-  font-size: 8px
+  font-size: 8px;
+}
+
+.gameDate {
+  width: "5%";
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.gameTime {
+  width: "5%";
+  text-align: left;
+  font-size: 10px;
 }
