@@ -2,11 +2,11 @@
   <tbody>
     <% prev_game = nil %>
     <% games.order(:game_date).each do |game| %>
-      <% gameDate = game.game_date.strftime("%A, %B %d - ") %>
+      <% gameDate = game.game_date.strftime("%A, %B %d") %>
       <% gameTime = game.game_date.strftime("%l:%M %p %Z") %>
       <% if (!prev_game || (game.game_date != prev_game.game_date)) %>
-        <tr> <td> <span class="gameDate"><%= gameDate %> </span>
-             <span class="gameTime"> <%= gameTime %> </span > </td> </tr>
+        <tr> <td class="gameDate"><%= gameDate %> </td>
+             <td class="gameTime"> <%= gameTime %> </td> </tr>
       <% end %>
       <tr>
           <% team = Team.find(game.awayTeamIndex) %>
