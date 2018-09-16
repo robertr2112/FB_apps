@@ -78,5 +78,13 @@ Check if spread is negative or positive
       <if spread > 0> Positive
 Convert negative number to positive
       <spread.abs>
-Convert number to string
+Convert number to stringi
       <spread.to_s>
+
+DateTime Formatting
+-------------------
+General information - See https://apidock.com/ruby/DateTime/strftime
+
+Date format - game.game_date.strftime("%A, %B %d")
+Time format - game.game_date.strftime("%l:%M %p %Z")
+

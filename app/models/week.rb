@@ -253,8 +253,8 @@ class Week < ActiveRecord::Base
     if (away_teams[0] == away_teams[1]) &&
        (home_teams[0] == home_teams[1])
         
-      start_dates_list.shift
-      start_times_list.shift
+      start_dates.shift
+      start_times.shift
       away_teams.shift
       home_teams.shift
     end
