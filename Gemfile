@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.5'
 #ruby-gemset=Rails_fb
 
-gem 'rails','4.2.5'
+gem 'rails','4.2.7.1'
 gem 'bcrypt', '3.1.11'
 gem 'annotate'
 gem 'faker', '1.6.3'
