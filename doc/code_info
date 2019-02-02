@@ -1,4 +1,7 @@
 
+Debugging Code
+  - Install pry-rails gem for development/test
+  - Put binding.pry where you want to debug the code
 Managing Datetime 
 
   - adding number of days to a datetime.

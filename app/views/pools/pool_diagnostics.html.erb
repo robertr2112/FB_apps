@@ -1,5 +1,14 @@
 
 <h2> <%= "Pool Diagnostics: #{@pool.name}" %> </h2>
+  <h4>
+    <b>Pool Status: </b>
+    <% if @pool.pool_done %>
+      Done
+    <% else %>
+      Active
+    <% end %>
+    <small><%= link_to "<Change Pool Status>", pool_diag_chg_path(@pool, pool_status: true, pool_id: @pool.id) %></small>
+  </h4>
 
 <% teams = Team.all.where(nfl: true).order('id ASC') %>
 <% entries = @pool.entries.sort_by {|entry| [entry[:survivorStatusIn] ? 0 : 1,entry[:name]] } %>

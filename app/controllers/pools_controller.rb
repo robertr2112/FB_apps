@@ -172,7 +172,7 @@ class PoolsController < ApplicationController
     end
   end
 
-  # This action receives multiple args.  The first is the pool, and the second is the action to do.
+  # This action receives multiple args.  The first is the pool, and the second is the action to do, the third is any other pertinent info
   def pool_diag_chg
     if params[:surv]
       entry = Entry.find(params[:entry_id])
@@ -184,6 +184,15 @@ class PoolsController < ApplicationController
       end
       entry.update_attribute(:survivorStatusIn, value)
       entry.save
+    elsif params[:pool_status]
+      pool = Pool.find(params[:pool_id])
+      if pool.pool_done
+        pool_done = false
+      else
+        pool_done = true
+      end
+      pool.update_attribute(:pool_done, pool_done)
+      pool.save
     end
     redirect_to pool_diagnostics_path(pool)
   end

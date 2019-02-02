@@ -40,10 +40,10 @@ group :development, :test do
   gem 'guard-spork'
   gem 'childprocess', '0.5.8'
   gem 'letter_opener_web', '~>1.3.2'
+  gem 'pry-rails'
 end
 
 group :test do
-	gem 'pry'
   gem 'selenium-webdriver', '2.53.0'
   gem 'libnotify', '0.9.1'
 end
