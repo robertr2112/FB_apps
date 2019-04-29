@@ -1,0 +1,20 @@
+Creating a VMware setup
+-----------------------
+1) Download the the latest Debian(x64) ISO image for net install or the first full CD image
+2) Create the Virtual Machine with 4 processor cores and 4GB memory and 20GB HD
+3) Change the boot disk to the downloaded ISO and run the virtual machine.
+4) Follow the directions for installing. 
+5) Change the boot image back to /dev/sda1
+6) After installing edit /etc/apt/sources.list and remove the line about using /media/cdrom0
+7) Run sudo apt-get update
+8) Install the open-vm-tools and open-vm-tools-desktop using sudo apt-get install open-vmware-tools open-vmware-tools-desktop
+9) Mount VMware_tools using Player->reinstall VMware_tools
+10) Extract the package using file viewer and then run ./vmware-install.pl
+11) May have to reinstall open-vm-tools to get it all running right. sudo apt-get install --reinstall open-vm-tools. Getting the auto screen size sometimes can be fixed using this method.
+12) Install kernel headers using the following commands: sudo apt-get install linux-headers-$(uname -r), sudo apt-get update && sudo apt-get upgrade.
+
+Installing RVM and ruby
+-----------------------
+1) Go to https://rvm.io/rvm/install but you have to use the install script like follows: \curl -sSL https://get.rvm.io | sudo bash -s stable 
+2) Login as root su -.  Then add user to rvm group. usermod -a -G rvm robertr
+3) Copy bashrc from doc to ~/.bashrc

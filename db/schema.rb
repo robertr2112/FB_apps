@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20161115045622) do
   create_table "entries", force: :cascade do |t|
     t.integer  "pool_id"
     t.integer  "user_id"
-    t.string   "name",             limit: 255
-    t.boolean  "survivorStatusIn",             default: true
-    t.integer  "supTotalPoints",               default: 0
+    t.string   "name"
+    t.boolean  "survivorStatusIn", default: true
+    t.integer  "supTotalPoints",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,20 +69,20 @@ ActiveRecord::Schema.define(version: 20161115045622) do
   end
 
   create_table "pools", force: :cascade do |t|
-    t.string   "name",            limit: 255
+    t.string   "name"
     t.integer  "season_id"
     t.integer  "poolType"
-    t.integer  "starting_week",               default: 1
-    t.boolean  "allowMulti",                  default: false
-    t.boolean  "isPublic",                    default: true
-    t.string   "password_digest", limit: 255
+    t.integer  "starting_week",   default: 1
+    t.boolean  "allowMulti",      default: false
+    t.boolean  "isPublic",        default: true
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "pool_done",                   default: false
+    t.boolean  "pool_done",       default: false
   end
 
   create_table "seasons", force: :cascade do |t|
-    t.string   "year",            limit: 255
+    t.string   "year"
     t.integer  "state"
     t.boolean  "nfl_league"
     t.integer  "number_of_weeks"
@@ -92,25 +92,25 @@ ActiveRecord::Schema.define(version: 20161115045622) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.boolean  "nfl"
-    t.string   "imagePath",  limit: 255
+    t.string   "imagePath"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.string   "user_name",              limit: 255
-    t.string   "email",                  limit: 255
-    t.boolean  "admin",                              default: false
-    t.boolean  "supervisor",                         default: false
-    t.string   "password_digest",        limit: 255
-    t.string   "remember_token",         limit: 255
-    t.string   "password_reset_token",   limit: 255
+    t.string   "name"
+    t.string   "user_name"
+    t.string   "email"
+    t.boolean  "admin",                  default: false
+    t.boolean  "supervisor",             default: false
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.boolean  "confirmed",                          default: false
-    t.string   "confirmation_token",     limit: 255
+    t.boolean  "confirmed",              default: false
+    t.string   "confirmation_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

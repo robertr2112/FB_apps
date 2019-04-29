@@ -1,4 +1,16 @@
 
+GENERAL ISSUES
+--------------
+
+1) Add testing to test out entire application
+
+CRITICAL ISSUES
+---------------
+1) Sass-rails is being deprecated.  Need to use sassc-rails instead.  See 
+   the following documentation:
+       http://sass.logdown.com/posts/7081811
+       https://github.com/sass/sassc-ruby#readme
+
 PROBLEMS
 --------
 
@@ -16,17 +28,23 @@ PROBLEMS
 
 5) GamePick model contains unnecessary attribute game_pick_id
 
-6) Need to change the routine name in Pick model from buildSelectTeams to buildAvailTeams.
+6) Need to change the routine name in Pick model from buildSelectTeams to       
+   buildAvailTeams.
 
 TESTING ISSUES
 --------------
 1) Need to test for case of pool not updating before starting_week is final
 
 2) Add all of the testing needed to test the password_reset, remember_me, and
-   user_confirmations.
+   user_confirmations emails.
 
 3) Change the tests for testing parent Id is set properly using the its
    method as shown in chapter 10.
+   
+4) Change use from FactoryGirl to FactoryBot gem.  It's the same gem with a name change.    
+   look into using FactoryGirlRails gem for auto-generating factories.
+   
+5) Add using Guard and Spring(or Spork?) to speed up tests.
 
 
 DESIGN CHANGES
@@ -38,13 +56,4 @@ DESIGN CHANGES
    during a non-last week.  Option A, they all win.  Option B, they all get reinstated
    and pool goes on. 
 
-
-GENERAL ISSUES
---------------
-
-1) Add testing to test out entire application
-2) Sass-rails is being deprecated.  Need to use sassc-rails instead.  See 
-   the following documentation:
-       http://sass.logdown.com/posts/7081811
-       https://github.com/sass/sassc-ruby#readme
 
