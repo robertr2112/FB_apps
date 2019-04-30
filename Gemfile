@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.3.0'
 #ruby-gemset=Rails_fb
 
-gem 'rails','4.2.7.1'
+gem 'rails','4.2.11.1'
 gem 'bcrypt', '3.1.11'
 gem 'annotate'
 gem 'faker', '1.6.3'
@@ -33,7 +33,6 @@ gem 'pg', '0.20'
 group :development, :test do
   gem 'rspec-rails', '~>3.0'
   gem 'factory_girl_rails', '4.7.0'
-  gem 'capybara', '2.7.1'
   gem 'database_cleaner'
   gem 'guard-rspec', '~> 4.2'
   gem 'spork-rails'
@@ -44,7 +43,9 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara', '2.7.1'
   gem 'selenium-webdriver', '2.53.0'
+  gem 'launchy'
   gem 'libnotify', '0.9.1'
 end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User pages" do
+RSpec.feature "User pages", type: :feature do
 
   subject { page }
 
