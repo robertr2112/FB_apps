@@ -16,7 +16,7 @@ require 'rails_helper'
 
 describe Season do
   
-  let(:season) { FactoryGirl.create(:season_with_weeks, num_weeks: 4) }
+  let(:season) { FactoryBot.create(:season_with_weeks, num_weeks: 4) }
  
   subject { season }
 
@@ -82,20 +82,20 @@ describe Season do
     end
     
     it "should be false when no weeks are created" do
-      season2 = FactoryGirl.create(:season)
+      season2 = FactoryBot.create(:season)
       expect(season2.canBeClosed?).to eq false
     end
     
     it "should be false when the number of weeks < number_of_weeks" do
-      season2 = FactoryGirl.create(:season)
+      season2 = FactoryBot.create(:season)
       season2.number_of_weeks = 2
-      season2.weeks << FactoryGirl.create(:week)
+      season2.weeks << FactoryBot.create(:week)
       expect(season2.canBeClosed?).to eq false
     end
   end
   
   describe "updatePools" do
-    let(:season3) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
+    let(:season3) { FactoryBot.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
     
     before {
       # add scores for all games and all weeks in the season, where all home teams win (for simplicity)

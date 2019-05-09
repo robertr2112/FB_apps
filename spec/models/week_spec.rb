@@ -14,7 +14,7 @@ require 'rails_helper'
 
 describe Week do
   
-  let(:season) { FactoryGirl.create(:season_with_weeks, num_weeks: 1) }
+  let(:season) { FactoryBot.create(:season_with_weeks, num_weeks: 1) }
   
   before(:each) do
     @week = season.weeks.first
@@ -108,7 +108,7 @@ describe Week do
 
   describe "buildSelectTeams" do
     before(:each) do
-      @season2 = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
+      @season2 = FactoryBot.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
       @week = @season2.weeks.first
     end
     
@@ -127,7 +127,7 @@ describe Week do
   
   describe "getWinningTeams" do
     before(:each) do
-      @season2 = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
+      @season2 = FactoryBot.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
       @week = @season2.weeks.first
       
       # just to keep it interesting set odd games to homeTeam wins and even to awayTeam wins
@@ -184,7 +184,7 @@ describe Week do
   end
   describe "gamesValid?" do
     before(:each) do
-      @season2 = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
+      @season2 = FactoryBot.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
       @week = @season2.weeks.first
     end
     
@@ -214,7 +214,7 @@ describe Week do
   
   describe "deleteSafe?" do
     before(:each) do
-      @season2 = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
+      @season2 = FactoryBot.create(:season_with_weeks_and_games, num_weeks: 1, num_games: 4)
     end
     
     it "should return false when state is Open" do

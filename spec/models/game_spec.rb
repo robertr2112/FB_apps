@@ -18,8 +18,8 @@ require 'rails_helper'
 
 describe Game do
 
-  let(:season) { FactoryGirl.create(:season) }
-  let(:week)   { FactoryGirl.create(:week) }
+  let(:season) { FactoryBot.create(:season) }
+  let(:week)   { FactoryBot.create(:week) }
   
   before(:each) do
     @game= week.games.create(homeTeamIndex: 0, awayTeamIndex: 1,

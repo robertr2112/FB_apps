@@ -1,31 +1,31 @@
-FactoryGirl.define  do
+FactoryBot.define  do
   factory :user do
-    sequence(:name)      { |n| "Person #{n}" }
-    sequence(:user_name) { |n| "Nickname #{n}" }
-    sequence(:email)     { |n| "person-#{n}@example.com" }
-    password              "foobar"
-    password_confirmation "foobar"
-    confirmed             true
+    sequence(:name)       { |n| "Person #{n}" }
+    sequence(:user_name)  { |n| "Nickname #{n}" }
+    sequence(:email)      { |n| "person-#{n}@example.com" }
+    password              { "foobar" }
+    password_confirmation { "foobar" }
+    confirmed             { true }
 
     factory :supervisor do
-      supervisor true
-      admin      true
+      supervisor { true }
+      admin      { true }
     end
     
     factory :admin do
-      admin true
+      admin { true }
     end
 
     factory :unconfirmed_user do
-      confirmed false
+      confirmed { false }
     end
   end
   
   factory :user_with_pool, parent: :user do
     
     transient do
-      season   1
-      pool     nil
+      season   { 1 }
+      pool     { nil }
     end
     
     after(:create) do |user, evaluator|
@@ -42,9 +42,9 @@ FactoryGirl.define  do
   factory :user_with_pool_and_entry, parent: :user do
     
     transient do
-      season       1
-      num_entries  1
-      pool         nil
+      season       { 1 }
+      num_entries  { 1 }
+      pool         { nil }
     end
     
     after(:create) do |user, evaluator|
@@ -61,14 +61,14 @@ FactoryGirl.define  do
   
   factory :pool do
     sequence(:name) { |n| "Pool-#{n}" }
-    poolType              2
-    isPublic              true
-    password              "foobar"
+    poolType              { 2 }
+    isPublic              { true }
+    password              { "foobar" }
     
     transient do
-      week_id      1
-      num_entries  1
-      user         nil
+      week_id      { 1 }
+      num_entries  { 1 }
+      user         { nil }
     end
     
     factory :pool_with_entries do
@@ -91,23 +91,23 @@ FactoryGirl.define  do
 #   awayTeamIndex 17
     sequence(:homeTeamIndex, (1..16).cycle) { |n| n }
     sequence(:awayTeamIndex, (17..32).cycle) { |n| n }
-    game_date Time.zone.now + 10.minutes
+    game_date { Time.zone.now + 10.minutes }
     week
   end
   
   factory :game_pick do
-    chosenTeamIndex  0
+    chosenTeamIndex  { 0 }
     pick
     
   end
   
   factory :pick do
-    week_number 1
-    week_id     nil
+    week_number { 1 }
+    week_id     { nil }
     entry
     
     transient do
-      teamIndex 0
+      teamIndex { 0 }
     end
     
     factory :pick_with_game_pick do
@@ -120,20 +120,20 @@ FactoryGirl.define  do
   
   factory :entry do
     sequence(:name)   { |n| "Entry #{n}" }
-    survivorStatusIn  true
-    supTotalPoints    0
+    survivorStatusIn  { true }
+    supTotalPoints    { 0 }
     user
     pool
     
   end
   
   factory :week do
-    state        0
-    week_number  1
+    state        { 0 }
+    week_number  { 1 }
     season
     
     transient do
-      num_games  5
+      num_games  { 5 }
     end
     
     factory :week_with_games do
@@ -151,15 +151,15 @@ FactoryGirl.define  do
   end
   
   factory :season do
-    year             "2015"
-    state            0
-    nfl_league       1
-    current_week     1
-    number_of_weeks  0
+    year             { "2015" }
+    state            { 0 }
+    nfl_league       { 1 }
+    current_week     { 1 }
+    number_of_weeks  { 0 }
     
       transient do
-        num_weeks  1
-        num_games  1
+        num_weeks  { 1 }
+        num_games  { 1 }
       end
       
     factory :season_with_weeks do

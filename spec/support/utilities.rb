@@ -32,10 +32,10 @@ module AuthenticationHelper
   # entries per user in entered season
   def setup_pool_with_users_and_entries(season, num_users, num_entries)
     users = Array.new
-    users[0] = FactoryGirl.create(:user_with_pool_and_entry, season: season)
+    users[0] = FactoryBot.create(:user_with_pool_and_entry, season: season)
     pool = users[0].pools.first
     1.upto(4) do |n|
-      users[n] = FactoryGirl.create(:user_with_pool_and_entry, season: season, pool: pool)
+      users[n] = FactoryBot.create(:user_with_pool_and_entry, season: season, pool: pool)
     end
     return users
   end

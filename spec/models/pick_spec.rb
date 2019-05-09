@@ -14,8 +14,8 @@
 require 'rails_helper'
 
 describe Pick do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 16) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:season) { FactoryBot.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 16) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 

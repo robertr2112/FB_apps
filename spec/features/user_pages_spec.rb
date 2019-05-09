@@ -5,7 +5,8 @@ RSpec.feature "User pages", type: :feature do
   subject { page }
 
   feature "index" do
-    let (:user){ FactoryGirl.create(:user) }
+    let (:user){ 
+      FactoryBot.create(:user) }
 
     before do
       sign_in user
@@ -17,7 +18,7 @@ RSpec.feature "User pages", type: :feature do
 
     feature "pagination" do
 
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      before(:all) { 30.times { FactoryBot.create(:user) } }
       after(:all)  { User.delete_all }
 
       scenario { should have_selector('div.pagination') }
@@ -30,12 +31,12 @@ RSpec.feature "User pages", type: :feature do
     end
 
     feature "delete links" do
-      let (:user2) { FactoryGirl.create(:user) }
+      let (:user2) { FactoryBot.create(:user) }
 
       scenario { expect(page).not_to have_link('delete', href: user_path(user2)) }
 
       feature "as a supervisor user" do
-        let(:supervisor) { FactoryGirl.create(:supervisor) }
+        let(:supervisor) { FactoryBot.create(:supervisor) }
         before do
           sign_in supervisor
           visit users_path
@@ -54,9 +55,9 @@ RSpec.feature "User pages", type: :feature do
 
   feature "index" do
     before do
-      sign_in FactoryGirl.create(:user)
-      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
-      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      sign_in FactoryBot.create(:user)
+      FactoryBot.create(:user, name: "Bob", email: "bob@example.com")
+      FactoryBot.create(:user, name: "Ben", email: "ben@example.com")
       visit users_path
     end
 
@@ -71,7 +72,7 @@ RSpec.feature "User pages", type: :feature do
   end
 
   feature "profile page" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     before do 
       sign_in user
       visit user_path(user)
@@ -136,7 +137,7 @@ RSpec.feature "User pages", type: :feature do
   end
 
   feature "edit" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     before do
       sign_in(user)
       visit edit_user_path(user)

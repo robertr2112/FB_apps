@@ -19,9 +19,9 @@ require 'rails_helper'
 
 describe Pool do
   
-  let(:user) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season) }
-  let(:season_with_weeks) { FactoryGirl.create(:season_with_weeks) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:season) { FactoryBot.create(:season) }
+  let(:season_with_weeks) { FactoryBot.create(:season_with_weeks) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 
@@ -138,7 +138,7 @@ describe Pool do
   end
    
   describe "membership" do
-    let(:user1) { FactoryGirl.create(:user) }
+    let(:user1) { FactoryBot.create(:user) }
     before {
       user.save
       @pool.addUser(user1)
@@ -167,7 +167,7 @@ describe Pool do
   end
   
   describe "entries" do
-    let(:user1) { FactoryGirl.create(:user) }
+    let(:user1) { FactoryBot.create(:user) }
     before {
       @pool.addUser(user1)
     }
@@ -208,7 +208,7 @@ describe Pool do
   # Survivor pool tests
   #
   describe "of type survivor" do
-    let(:season) { FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
+    let(:season) { FactoryBot.create(:season_with_weeks_and_games, num_weeks: 3, num_games: 1) }
     before {
       # add scores for all games and all weeks in the season, where all home teams win (for simplicity)
       # for each week, but leave current week as 1 and don't mark any weeks as final

@@ -14,9 +14,9 @@ require 'rails_helper'
 
 describe PoolMembership do
   
-  let(:user1) { FactoryGirl.create(:user) }
-  let(:user2) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season_with_weeks) }
+  let(:user1) { FactoryBot.create(:user) }
+  let(:user2) { FactoryBot.create(:user) }
+  let(:season) { FactoryBot.create(:season_with_weeks) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, :isPublic => true, 

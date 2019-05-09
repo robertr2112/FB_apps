@@ -28,7 +28,7 @@ class Season < ActiveRecord::Base
   def self.getSeasonYear
     year = Time.now.strftime("%Y").to_i
     month = Time.now.strftime("%m").to_i
-    if (month >= 1) && (month <= 4)
+    if (month >= 1) && (month <= 3)
       year = year - 1
     end
     return year.to_s

@@ -20,7 +20,7 @@ feature "Authentication" do
     end
 
     feature "with valid information" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
       before do
         fill_in 'signin_email',    with: user.email.upcase
         fill_in 'signin_password', with: user.password
@@ -44,7 +44,7 @@ feature "Authentication" do
   feature "authorization", type: :request do
 
     feature "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
 
       feature "when attempting to visit a protected page" do
         before do
@@ -83,8 +83,8 @@ feature "Authentication" do
     end
 
     feature "as wrong user" do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+      let(:user) { FactoryBot.create(:user) }
+      let(:wrong_user) { FactoryBot.create(:user, email: "wrong@example.com") }
       before { sign_in user, no_capybara: true }
 
       feature "visiting Users#edit page" do
@@ -99,8 +99,8 @@ feature "Authentication" do
     end
 
     feature "as non-admin user" do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:non_admin) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
+      let(:non_admin) { FactoryBot.create(:user) }
 
       before { sign_in non_admin, no_capybara: true }
 

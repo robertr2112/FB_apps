@@ -16,8 +16,8 @@ require 'rails_helper'
 
 describe Entry do
   
-  let(:user) { FactoryGirl.create(:user) }
-  let(:season) { FactoryGirl.create(:season_with_weeks, num_weeks: 4) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:season) { FactoryBot.create(:season_with_weeks, num_weeks: 4) }
 
   before do
     @pool_attr = { :name => "Pool 1", :poolType => 2, 
@@ -53,7 +53,7 @@ describe Entry do
   end
 
   describe "survivorStatusIn is true then entryStatusGood?" do
-    let(:entry) { FactoryGirl.create(:entry, survivorStatusIn: true) }
+    let(:entry) { FactoryBot.create(:entry, survivorStatusIn: true) }
     
     it "should be true" do
       expect(entry.entryStatusGood?).to be true
@@ -61,7 +61,7 @@ describe Entry do
   end
   
   describe "survivorStatusIn is false then entryStatusGood?" do
-    let(:entry) { FactoryGirl.create(:entry, survivorStatusIn: false) }
+    let(:entry) { FactoryBot.create(:entry, survivorStatusIn: false) }
     
     it "should be false" do
       expect(entry.entryStatusGood?).to be false
