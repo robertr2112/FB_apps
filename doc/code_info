@@ -2,8 +2,8 @@
 Debugging Code
   - Install pry-rails gem for development/test
   - Put binding.pry where you want to debug the code
+  
 Managing Datetime 
-
   - adding number of days to a datetime.
     * Time.now + 5.days (or months, weeks, years)
 
@@ -26,3 +26,17 @@ Printing Datetime
      * use today.day.ordinalize for 3rd, 4th, etc, so you could do
        today.strftime("%A %B ") + today.day.ordinalize
      * displays "Tuesday October 11th"
+
+Capybara Info
+
+  - If you are trying to test the attribute values you would do
+    
+      have_selector('input[id="email"][placeholder="Email"]')
+    
+    or better yet since you're using CSS
+
+      have_css('input[id="email"][placeholder="Email"]')
+     
+    or you could use Capybaras built-in :field selector type and do
+
+      have_field(id: 'email', placeholder: 'Email')

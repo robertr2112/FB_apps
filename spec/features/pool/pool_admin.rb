@@ -29,14 +29,14 @@ feature "Pool Admin" do
   
   def given_I_am_a_logged_in_user
 #    @user =  FactoryGirl.create(:user)
-    @user =  FactoryGirl.create(:admin)
+    @user =  FactoryBot.create(:admin)
     sign_in @user
   end
   
   # And Definitions
   
   def and_a_season_has_been_created
-    @season = FactoryGirl.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 4)
+    @season = FactoryBot.create(:season_with_weeks_and_games, num_weeks: 4, num_games: 4)
     @season.setState(Season::STATES[:Open])
   end
   

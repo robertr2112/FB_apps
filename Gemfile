@@ -40,6 +40,7 @@ end
 
 group :test do
   gem 'capybara', '2.15.2'
+  gem 'simplecov', require: false, group: :test
   gem 'launchy'
   gem 'libnotify', '0.9.4'
   gem 'rubocop-rspec'

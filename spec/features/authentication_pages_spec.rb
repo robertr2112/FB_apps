@@ -1,25 +1,25 @@
 require 'rails_helper'
 
-feature "Authentication" do
+RSpec.feature "Authentication", type: :feature do
 
   subject { page }
 
-  feature "signin page" do
+  context "signin page" do
     before { visit signin_path }
 
-    feature "with invalid information" do
+    context "with invalid information" do
       before { click_button 'signin_button' }
 
       scenario { should have_title('Sign in') }
       scenario { should have_selector('div.alert.alert-danger', text: 'Invalid') }
 
-      feature "after visiting another page" do
+      context "after visiting another page" do
         before { click_link 'Football Pool Mania' }
         scenario { should_not have_selector('div.alert.alert-danger') }
       end
     end
 
-    feature "with valid information" do
+    context "with valid information" do
       let(:user) { FactoryBot.create(:user) }
       before do
         fill_in 'signin_email',    with: user.email.upcase
@@ -34,7 +34,7 @@ feature "Authentication" do
       scenario { should have_link('Sign out',    href: signout_path) }
       scenario { should_not have_link('Sign in', href: signin_path) }
 
-      feature "followed by signout" do
+      context "followed by signout" do
         before { click_link "Sign out" }
         scenario { should have_link('Sign in') }
       end
@@ -43,68 +43,74 @@ feature "Authentication" do
 
   feature "authorization", type: :request do
 
-    feature "for non-signed-in users" do
+    context "for non-signed-in users" do
       let(:user) { FactoryBot.create(:user) }
 
-      feature "when attempting to visit a protected page" do
+      context "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
-          fill_in 'signin_email',    with: user.email.upcase
-          fill_in 'signin_password', with: user.password
-          click_button 'signin_button'
+          end
+        scenario "should get the sign in page" do
+          expect(page).to have_title('Sign in')
         end
 
-        feature "after signing in" do
-
+        context "after signing in" do
+          before do
+            visit edit_user_path(user)
+            fill_in 'signin_email',    with: user.email.upcase
+            fill_in 'signin_password', with: user.password
+            click_button 'signin_button'
+          end
+          
           scenario "should render the desired protected page" do
             expect(page).to have_title('Edit user')
           end
         end
       end
 
-      feature "in the Users controller" do
+      context "in the Users controller" do
 
-        feature "visiting the edit page" do
+        context "visiting the edit page" do
           before { visit edit_user_path(user) }
           scenario { should have_title('Sign in') }
         end
 
-        feature "submitting to the update action" do
+        context "submitting to the update action" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
           it { should_not have_selector('div.alert.alert-notice', text: 'Need to be logged in') }
         end
 
-        feature "visiting the user index" do
+        context "visiting the user index" do
           before { visit users_path }
           scenario { should have_title('Sign in') }
         end
       end
     end
 
-    feature "as wrong user" do
+    context "as wrong user" do
       let(:user) { FactoryBot.create(:user) }
       let(:wrong_user) { FactoryBot.create(:user, email: "wrong@example.com") }
       before { sign_in user, no_capybara: true }
 
-      feature "visiting Users#edit page" do
+      context "visiting Users#edit page" do
         before { visit edit_user_path(wrong_user) }
         scenario { should_not have_title(full_title('Edit user')) }
       end
 
-      feature "submitting a PATCH request to the Users#update action" do
+      context "submitting a PATCH request to the Users#update action" do
         before { patch user_path(wrong_user) }
         specify { expect(response).to redirect_to(root_path) }
       end
     end
 
-    feature "as non-admin user" do
+    context "as non-admin user" do
       let(:user) { FactoryBot.create(:user) }
       let(:non_admin) { FactoryBot.create(:user) }
 
       before { sign_in non_admin, no_capybara: true }
 
-      feature "submitting a DELETE request to the Users#destroy action" do
+      context "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
         specify { expect(response).to redirect_to(root_path) }
       end
