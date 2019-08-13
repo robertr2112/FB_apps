@@ -3,6 +3,10 @@ Debugging Code
   - Install pry-rails gem for development/test
   - Put binding.pry where you want to debug the code
   
+     # Open a debug window to monitor state
+     #save_and_open_page - opens page in browser at current state
+     #pry - opens pry console at current state
+  
 Managing Datetime 
   - adding number of days to a datetime.
     * Time.now + 5.days (or months, weeks, years)

@@ -39,7 +39,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '2.15.2'
+  gem 'capybara', '2.18.0'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false, group: :test
   gem 'launchy'
   gem 'libnotify', '0.9.4'
